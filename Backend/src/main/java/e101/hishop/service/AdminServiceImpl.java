@@ -28,11 +28,13 @@ public class AdminServiceImpl implements AdminService {
     private final BranchJPARepository branchJPARepository;
 
     @Override
-    public Long savePay(Pay pays, Long userId) {
+    public Long savePay(Pay pays, Long userId, Long paymentId) {
         User user = userJPARepository.findById(userId)
                 .orElseThrow(() -> new CommonException(2, "User객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
+        Card cards = adminRepository.findPaymentById(paymentId);
         //TODO setter 삭제하고 의도있게 작성
         pays.setUsersAndPay(user);
+        pays.setPaymentAndPay(cards);
         return adminRepository.savePay(pays);
     }
 
@@ -81,4 +83,12 @@ public class AdminServiceImpl implements AdminService {
         return adminRepository.saveKiosk(kiosk);
     }
 
+    @Override
+    public Long saveShopping(Shopping shopping, Long kioskId, Long productId) {
+        Kiosk kiosk = adminRepository.findKioskById(kioskId);
+        Product product = adminRepository.findProductById(productId);
+        shopping.setKioskAndShopping(kiosk);
+        shopping.setProductAndShopping(product);
+        return adminRepository.saveShopping(shopping);
+    }
 }

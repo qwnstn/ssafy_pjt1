@@ -8,7 +8,6 @@ import java.util.List;
 public interface UserRepository {
 
     Long saveCard(Card cards);
-    Card findCardById(Long id);
 
     Boolean deleteCard(Long cardId);
 

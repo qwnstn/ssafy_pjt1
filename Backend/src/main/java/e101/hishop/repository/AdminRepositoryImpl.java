@@ -72,5 +72,9 @@ public class AdminRepositoryImpl implements AdminRepository {
         return em.find(Kiosk.class, id);
     }
 
+    public Long saveShopping(Shopping shopping) {
+        em.persist(shopping);
+        return shopping.getId();
+    }
 
 }

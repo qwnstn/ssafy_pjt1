@@ -1,15 +1,7 @@
 package e101.hishop.controller;
 
-import e101.hishop.domain.dto.request.BarcodeReqDto;
-import e101.hishop.domain.dto.request.CardSaveReqDto;
-import e101.hishop.domain.dto.request.RfidReqDto;
-import e101.hishop.service.IotService;
-import e101.hishop.service.UserService;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -17,21 +9,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 @RestController
 @RequestMapping("/api/iot")
-@RequiredArgsConstructor
 public class IotController {
-    private final IotService iotService;
 
     @PostMapping("/rfid")
-    public ResponseEntity<String> rfidRead(@RequestBody RfidReqDto dto) {
-        return new ResponseEntity<>("장바구니 생성 완료", HttpStatus.OK);
+    public String rfidRead() {
+        return "OK";
     }
 
     @PostMapping("/barcode")
-    public ResponseEntity<String> barcodeRead(@RequestBody BarcodeReqDto dto) {
-        return new ResponseEntity<>("장바구니 추가 완료", HttpStatus.OK);
+    public String barcodeRead() {
+        return "OK";
     }
 
     @GetMapping("/shopping/{kioskId}")

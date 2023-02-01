@@ -25,6 +25,11 @@ public class Pay {
     @JsonIgnore
     private User user;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "card_id")
+    @JsonIgnore
+    private Card card;
+
     @NotBlank
     private String userName;
 
@@ -42,6 +47,10 @@ public class Pay {
         user.getPays().add(this);
     }
 
+    public void setPaymentAndPay(Card card) {
+        this.card = card;
+        card.getPays().add(this);
+    }
 
     @JsonIgnore
 //    @Builder.Default
