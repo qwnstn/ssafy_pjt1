@@ -42,7 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //        http.authorizeRequests().antMatchers(HttpMethod.OPTIONS,"/**/*").permitAll();
         //TODO 개발용 추후 삭제
 //        http.authorizeRequests().anyRequest().permitAll();
-        http.authorizeRequests().antMatchers("/api/login/**", "/api/refresh_token/**", "/api/logout/**", "/api/sign-up").permitAll();
+        http.authorizeRequests().antMatchers("/api/login/**", "/api/refresh-token/**", "/api/logout/**", "/api/sign-up").permitAll();
         http.authorizeRequests().antMatchers("*").permitAll();
         http.authorizeRequests().antMatchers("/api/user/**").hasAnyRole("USER", "ADMIN");
         http.authorizeRequests().antMatchers("/api/admin/**").hasAnyRole("ADMIN");
