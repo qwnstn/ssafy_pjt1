@@ -12,6 +12,7 @@ import e101.hishop.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -47,7 +48,7 @@ public class AuthController {
     }
 
     @PostMapping("/refresh-token")
-    public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public ResponseEntity<String> refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String authorizationHeader = request.getHeader(AUTHORIZATION);
 
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
@@ -66,7 +67,7 @@ public class AuthController {
                         .withIssuer(request.getRequestURL().toString())
                         //TODO 추후 User auth 객체로 변경
                         .withClaim("roles", roles)
-                        .withClaim("user-id",id)
+                        .withClaim("user-id", id)
                         .sign(algorithm);
 
                 response.setHeader("access-token", accessToken);
@@ -81,5 +82,6 @@ public class AuthController {
             throw new RuntimeException("refresh token is missing");
 
         }
+        return new ResponseEntity<>("발급완료", HttpStatus.OK);
     }
 }
