@@ -4,7 +4,6 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import e101.hishop.domain.dto.request.SignUpReqDto;
 import e101.hishop.domain.entity.User;
 import e101.hishop.global.common.CommonResponse;
@@ -29,7 +28,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequiredArgsConstructor
@@ -62,7 +60,7 @@ public class AuthController {
                 User users = userJPARepository.findByLoginId(logindId).orElseThrow(() -> new EntityNotFoundException("Employee not found with id:" + logindId));
                 String accessToken = JWT.create()
                         .withSubject(users.getLoginId())
-                        .withExpiresAt(new Date(System.currentTimeMillis() + 10 * 60 * 1000))
+                        .withExpiresAt(new Date(System.currentTimeMillis() + 500 * 60 * 1000))
                         .withIssuer(request.getRequestURL().toString())
                         //TODO 추후 User auth 객체로 변경
                         .withClaim("roles", users.getLoginId())
@@ -71,19 +69,14 @@ public class AuthController {
                 Map<String, String> tokens = new HashMap<>();
                 tokens.put("access-token", accessToken);
                 tokens.put("refresh-token", refreshToken);
-                response.setContentType(APPLICATION_JSON_VALUE);
-                new ObjectMapper().writeValue(response.getOutputStream(), tokens);
+
+                response.setHeader("access-token", accessToken);
+                response.setHeader("refresh-token", refreshToken);
             } catch (Exception e) {
                 //TODO 적합한 예외처리 클래스 구현
-                log.error("Error loggin in: {} ", e.getMessage());
-                response.setHeader("error", e.getMessage());
-                response.setStatus(HttpStatus.FORBIDDEN.value());
-//                    response.sendError(HttpStatus.FORBIDDEN.value());
-
-                Map<String, String> error = new HashMap<>();
-                error.put("error", e.getMessage());
-                response.setContentType(APPLICATION_JSON_VALUE);
-                new ObjectMapper().writeValue(response.getOutputStream(), error);
+                log.error("Error login in: {} ", "refrsh fail");
+                response.setHeader("error", "refresh fail");
+                response.setStatus(HttpStatus.BAD_REQUEST.value());
             }
         } else {
             throw new RuntimeException("refresh token is missing");
