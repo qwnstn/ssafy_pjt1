@@ -61,12 +61,11 @@ const SignIn = () => {
     await axios
       .post(API_URI, formData)
       .then((response) => {
-        localStorage.setItem("refreshtoken", response.headers["refresh-token"]);
-        localStorage.setItem("access-token", response.headers["access-token"]);
+        localStorage.setItem("accesstoken", response.headers["accesstoken"]);
 
         axios.defaults.headers.common[
           "Authorization"
-        ] = `Bearer ${response.headers["access-token"]}`;
+        ] = `Bearer ${response.headers["accesstoken"]}`;
         
         movePage("/app")
         setLoginError("");

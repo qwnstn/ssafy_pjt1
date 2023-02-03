@@ -105,7 +105,7 @@ export default function ItemList() {
         alignItems: "center",
       }}
     >
-      <Box>
+      <Box sx={{maxWidth: 720, minHeight: 1280}}>
         <Card
           sx={{
             fontSize: 40,
