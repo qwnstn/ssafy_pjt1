@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
@@ -57,18 +57,17 @@ public class AuthController {
                 JWTVerifier verifier = JWT.require(algorithm).build();
                 DecodedJWT decodedJWT = verifier.verify(refreshToken);
                 String logindId = decodedJWT.getSubject();
+                List<String> roles = decodedJWT.getClaim("roles").asList(String.class);
+                Long id = decodedJWT.getClaim("user-id").asLong();
                 User users = userJPARepository.findByLoginId(logindId).orElseThrow(() -> new EntityNotFoundException("Employee not found with id:" + logindId));
                 String accessToken = JWT.create()
-                        .withSubject(users.getLoginId())
-                        .withExpiresAt(new Date(System.currentTimeMillis() + 500 * 60 * 1000))
+                        .withSubject(logindId)
+                        .withExpiresAt(new Date(System.currentTimeMillis() + 1 * 60 * 1000))
                         .withIssuer(request.getRequestURL().toString())
                         //TODO 추후 User auth 객체로 변경
-                        .withClaim("roles", users.getLoginId())
+                        .withClaim("roles", roles)
+                        .withClaim("user-id",id)
                         .sign(algorithm);
-
-                Map<String, String> tokens = new HashMap<>();
-                tokens.put("access-token", accessToken);
-                tokens.put("refresh-token", refreshToken);
 
                 response.setHeader("access-token", accessToken);
                 response.setHeader("refresh-token", refreshToken);
