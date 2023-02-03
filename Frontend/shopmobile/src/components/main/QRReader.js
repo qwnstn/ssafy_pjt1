@@ -1,6 +1,6 @@
-import React from "react";
+import React, {useState} from "react";
 import QrReader from "modern-react-qr-reader";
-import { Box, Card } from "@mui/material";
+import { Box, Card, Button } from "@mui/material";
 import { Grid } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import axios from "axios";
@@ -10,6 +10,11 @@ import { useNavigate } from "react-router-dom";
 
 const QRReader = (props) => {
   const navigate = useNavigate();
+
+  // 화면 전환 버튼
+  const [cameraMode, setCameraMode] = useState("environment");
+
+
 
   
   // 값 받아와야함
@@ -43,8 +48,6 @@ const QRReader = (props) => {
           })
           .catch((error) => {
             console.error(error);
-            alert("다시 찍어주세요");
-
           });
       }
     }
@@ -74,10 +77,14 @@ const QRReader = (props) => {
           <Card sx={{ border: 1, padding: 1 }}>
             <QrReader
               delay={500}
-              facingMode={"environment"}
+              // 기본은 user모드
+              facingMode={cameraMode}
               onError={handleError}
               onScan={handleScan}
             />
+            <Button onClick={() => setCameraMode(cameraMode === "environment" ? "user" : "environment")}>
+    화면 전환
+  </Button>
           </Card>
         </Grid>
       </Grid>

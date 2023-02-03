@@ -12,7 +12,6 @@ import { useNavigate } from "react-router-dom";
 export default function KioskMain() {
   const navigate = useNavigate();
 
-
   const [value, setValue] = useState(`kioskId/${Date.now()}`);
 
   useEffect(() => {
