@@ -55,8 +55,6 @@ public class DataLoader {
                 .validDate("0121")
                 .build(), 1L);
 
-
-
         userService.cardLoad(Card.builder()
                 .cardNo("555121211111111")
                 .name("국민")

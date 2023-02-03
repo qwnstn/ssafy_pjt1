@@ -11,7 +11,9 @@ import java.time.LocalDate;
 @Getter
 @NoArgsConstructor
 public class UserInfoRespDto {
-    private String userId;
+
+    private Long id;
+    private String loginId;
 
     private String password;
 
@@ -30,8 +32,9 @@ public class UserInfoRespDto {
     private String adSelect;
 
     @Builder
-    public UserInfoRespDto(String userId, String password, String name, Gender gender, LocalDate birthDate, String phone, String email, Long defaultCardId, String adSelect) {
-        this.userId = userId;
+    public UserInfoRespDto(Long id, String loginId, String password, String name, Gender gender, LocalDate birthDate, String phone, String email, Long defaultCardId, String adSelect) {
+        this.id = id;
+        this.loginId = loginId;
         this.password = password;
         this.name = name;
         this.gender = gender;
@@ -45,7 +48,8 @@ public class UserInfoRespDto {
     //TODO 유저정보 받아올때 password 뺄것인지 생각
     public static UserInfoRespDto of(User user) {
         return UserInfoRespDto.builder()
-                .userId(user.getLoginId())
+                .id(user.getId())
+                .loginId(user.getLoginId())
                 .email(user.getEmail())
                 .name(user.getName())
                 .gender(user.getGender())

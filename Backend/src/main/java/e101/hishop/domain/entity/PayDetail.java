@@ -14,7 +14,7 @@ public class PayDetail {
     @GeneratedValue
     @Column(name = "pay_detail_id")
     private Long id;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "pay_id")
     @JsonIgnore
     private Pay pay;
