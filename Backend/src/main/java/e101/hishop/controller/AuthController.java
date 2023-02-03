@@ -24,6 +24,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -50,7 +51,7 @@ public class AuthController {
     @PostMapping("/refresh-token")
     public ResponseEntity<String> refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String authorizationHeader = request.getHeader(AUTHORIZATION);
-
+        log.info("RESRESH=============================");
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             try {
                 String refreshToken = authorizationHeader.substring("Bearer ".length());
@@ -58,16 +59,16 @@ public class AuthController {
                 JWTVerifier verifier = JWT.require(algorithm).build();
                 DecodedJWT decodedJWT = verifier.verify(refreshToken);
                 String logindId = decodedJWT.getSubject();
-                List<String> roles = decodedJWT.getClaim("roles").asList(String.class);
-                Long id = decodedJWT.getClaim("user-id").asLong();
+                List<String> roles = new ArrayList<>();
                 User users = userJPARepository.findByLoginId(logindId).orElseThrow(() -> new EntityNotFoundException("Employee not found with id:" + logindId));
+                roles.add(users.getRole().toString());
                 String accessToken = JWT.create()
                         .withSubject(logindId)
                         .withExpiresAt(new Date(System.currentTimeMillis() + 1 * 60 * 1000))
                         .withIssuer(request.getRequestURL().toString())
                         //TODO 추후 User auth 객체로 변경
                         .withClaim("roles", roles)
-                        .withClaim("user-id", id)
+                        .withClaim("user-id", users.getId())
                         .sign(algorithm);
 
                 response.setHeader("access-token", accessToken);
