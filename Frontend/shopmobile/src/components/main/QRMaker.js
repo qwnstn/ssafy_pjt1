@@ -5,14 +5,17 @@ import { Grid } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 
 function QRMaker() {
-  const initialValue = "https://www.example.com";
+  const [userid] = useState();
+  const [time, setTime] = useState(Date.now());
+  const initialValue = `${userid}/${time}`;
   const [value, setValue] = useState(initialValue);
   const [countdown, setCountdown] = useState(59);
   const ref = React.useRef(null);
 
   useEffect(() => {
     if (countdown === 0) {
-      setValue(`${initialValue}}`);
+      setTime(Date.now());
+      setValue(initialValue);
       setCountdown(59);
     } else {
       const intervalId = setInterval(() => {
@@ -20,11 +23,17 @@ function QRMaker() {
       }, 1000);
       return () => clearInterval(intervalId);
     }
-  }, [countdown]);
+  }, [countdown, initialValue]);
 
   React.useEffect(() => {
     ref.current.ownerDocument.body.scrollTop = 0;
   });
+
+  const handleButtonClick = () => {
+    setTime(Date.now());
+    setValue(`${userid}/${time}`);
+    setCountdown(59);
+  };
 
   return (
     <Box sx={{ pb: 7 }} ref={ref}>
@@ -48,13 +57,7 @@ function QRMaker() {
               <QRCode value={value} size="100%" />
             </div>
             <Card sx={{ textAlign: "center", mb: 1 }}>
-              <Button
-                onClick={() => {
-                  setValue(`https://www.example.com/${Math.random()}`);
-                  setCountdown(59);
-                }}
-                sx={{fontWeight:'bold'}}
-              >
+              <Button onClick={handleButtonClick} sx={{fontWeight:'bold'}}>
                 QR 재생성
               </Button>
             </Card>

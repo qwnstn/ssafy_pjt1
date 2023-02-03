@@ -10,10 +10,10 @@ import Nav from './components/Nav';
 function App() {
   return (
     <BrowserRouter>
+    <Nav />
       <Routes>
         <Route path="/admin" element={<Dashboard />} />
         <Route path="/admin/dashboard" element={<Dashboard />} />
-        <Route path="/admin/nav" element={<Nav />} />
       </Routes>
     </BrowserRouter>
   );
