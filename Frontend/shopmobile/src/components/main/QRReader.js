@@ -1,17 +1,55 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import QrReader from "modern-react-qr-reader";
-import { Box, Card } from "@mui/material";
+import { Box, Card, Button } from "@mui/material";
 import { Grid } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
+import axios from "axios";
+import HOST from "../../Host";
+import { useNavigate } from "react-router-dom";
+
 
 const QRReader = (props) => {
-  const [result, setResult] = useState("No result");
-  const ref = React.useRef(null);
-  console.log(result);
+  const navigate = useNavigate();
 
-  const handleScan = (data) => {
-    if (data) {
-      setResult(data);
+  // 화면 전환 버튼
+  const [cameraMode, setCameraMode] = useState("environment");
+
+
+
+  
+  // 값 받아와야함
+  const userId = "userId"; 
+
+  // 값을 받으면 유저 정보, 시간, 키오스크 정보를 axios로 보냄
+  const API_URI = `${HOST}/iot/qr`
+  const handleScan = (kioskInput) => {
+    if (kioskInput) {
+      const kioskInputList = kioskInput.split('/')
+      const kioskTime = kioskInputList[1]
+      const kioskId = kioskInputList[0]
+      const timeCheck = Date.now() - kioskTime
+
+      console.log('kioskInputList', kioskInputList)
+      console.log('kioskTime', kioskTime)
+      console.log('kioskId', kioskId)
+      console.log('timeCheck', timeCheck)
+
+      if (timeCheck < 70000 ) {
+        axios
+          .post(API_URI, {
+            userId: userId,
+            kioskId: kioskId,
+            datetime: Date.now(),
+          })
+          .then((res) => {
+            // 성공시 모달창으로 확인 메세지 표시 후 메인 페이지로
+            alert("QR코드가 성공적으로 촬영되었습니다");
+            navigate('/app')
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
     }
   };
 
@@ -19,12 +57,8 @@ const QRReader = (props) => {
     console.error(err);
   };
 
-  React.useEffect(() => {
-    ref.current.ownerDocument.body.scrollTop = 0;
-  });
-
   return (
-    <Box sx={{ pb: 7 }} ref={ref} >
+    <Box sx={{ pb: 7 }}>
       <Card
         sx={{
           fontSize: 33,
@@ -34,7 +68,7 @@ const QRReader = (props) => {
           fontWeight: "bold",
         }}
       >
-        QR스캔
+        QR Scan
       </Card>
       <Grid container spacing={2}>
         <Grid item xs={1} />
@@ -42,11 +76,15 @@ const QRReader = (props) => {
           <CssBaseline />
           <Card sx={{ border: 1, padding: 1 }}>
             <QrReader
-              delay={300}
-              facingMode={"environment"}
+              delay={500}
+              // 기본은 user모드
+              facingMode={cameraMode}
               onError={handleError}
               onScan={handleScan}
             />
+            <Button onClick={() => setCameraMode(cameraMode === "environment" ? "user" : "environment")}>
+    화면 전환
+  </Button>
           </Card>
         </Grid>
       </Grid>

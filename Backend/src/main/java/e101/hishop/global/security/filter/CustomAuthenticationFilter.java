@@ -61,7 +61,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         //TODO accesstoken 시간변경
         String accessToken = JWT.create()
                 .withSubject(user.getUsername())
-                .withExpiresAt(new Date(System.currentTimeMillis() + 3000 * 60 * 1000))
+                .withExpiresAt(new Date(System.currentTimeMillis() + 1 * 60 * 1000))
                 .withIssuer(request.getRequestURL().toString())
                 .withClaim("roles", authorities)
                 .withClaim("user-id",jpaUser.getId() )
@@ -69,7 +69,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
                 .sign(algorithm);
         String refreshToken = JWT.create()
                 .withSubject(user.getUsername())
-                .withExpiresAt(new Date(System.currentTimeMillis() + 30000 * 60 * 1000))
+                .withExpiresAt(new Date(System.currentTimeMillis() + 90 * 24L * 60 * 60 * 60 * 1000))
                 .withIssuer(request.getRequestURL().toString())
                 .sign(algorithm);
         response.setHeader("access-token", accessToken);
@@ -88,9 +88,9 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
                                               AuthenticationException failed) throws IOException, ServletException {
 
 
-        log.error("Error login in: {} ", failed.getMessage());
-        response.setHeader("error", failed.getMessage());
-        response.setHeader("error-type", failed.getClass().getSimpleName());
+        log.error("Error login in: {} ", "============로그인 실패============");
+        response.setHeader("error", "failed to login");
+        response.setHeader("error-type", "LoginFail");
         response.setStatus(HttpStatus.FORBIDDEN.value());
     }
 }

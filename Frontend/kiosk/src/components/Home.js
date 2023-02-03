@@ -3,7 +3,7 @@ import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import QRCode from "react-qr-code";
 import { Grid } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -11,8 +11,16 @@ import { useNavigate } from "react-router-dom";
 
 export default function KioskMain() {
   const navigate = useNavigate();
-  const initialValue = "1";
-  const [value] = useState(initialValue);
+
+  const [value, setValue] = useState(`kioskId/${Date.now()}`);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setValue(`kioskId/${Date.now()}`);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
   // const [socket, setSocket] = useState(null);
   // const [message, setMessage] = useState("");
   // const [messages, setMessages] = useState([]);
@@ -42,6 +50,7 @@ export default function KioskMain() {
   // };
 
   useEffect(() => {
+    sessionStorage.removeItem("user");
     const handleKeyDown = (event) => {
       if (event.key === "Enter") {
         sessionStorage.setItem("user", "user");
@@ -56,7 +65,7 @@ export default function KioskMain() {
 
   return (
     <Box>
-      <Card sx={{ maxWidth: 760, minHeight: 1022 }}>
+      <Card sx={{ maxWidth: 720, minHeight: 1280 }}>
         <Box sx={{ pb: 7 }}>
           <Card
             sx={{
@@ -76,13 +85,13 @@ export default function KioskMain() {
               alignItems: "center",
             }}
           >
-            <Grid item xs={10} sx={{ mt: 1 }}>
+            <Grid item xs={10} sx={{ mt: 5 }}>
               <CssBaseline />
-              <Card sx={{ border: 1, padding: 1 }}>
+              <Card sx={{ border: 1, padding: 1, mt: 3 }}>
                 <CardMedia
                   component="img"
                   alt="howtowuse"
-                  height="500"
+                  height="600"
                   image="/kiosk/images/howtouse.jpg"
                 />
               </Card>
@@ -96,8 +105,8 @@ export default function KioskMain() {
             }}
           >
             <Grid item xs={50}>
-              <Card sx={{ my: 2, padding: 1 }}>
-                <QRCode value={value} size="100%" />
+              <Card sx={{ my: 5, padding: 1 }}>
+                <QRCode value={value} size={200} />
               </Card>
             </Grid>
           </Grid>
