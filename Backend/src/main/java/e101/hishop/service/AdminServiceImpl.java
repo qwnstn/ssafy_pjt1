@@ -29,7 +29,6 @@ public class AdminServiceImpl implements AdminService {
     private final KioskJPARepository kioskJPARepository;
     private final ProductJPARepository productJPARepository;
     private final BranchJPARepository branchJPARepository;
-    private final StaffJPARepository staffJPARepository;
 
     @Override
     public Pay savePay(Pay pays, Long userId) {
