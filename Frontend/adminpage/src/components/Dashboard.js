@@ -1,13 +1,13 @@
 import * as React from "react";
-import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
+
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
-import Link from "@mui/material/Link";
+
 import Chart from "./Chart.js";
 import Deposits from "./Deposits";
 import Orders from "./Orders";
@@ -22,7 +22,7 @@ function DashboardContent() {
         <Box
           component="main"
           sx={{
-            backgroundColor:'#f1ffff',
+            backgroundColor: "#f1ffff",
             flexGrow: 1,
             height: "100vh",
             overflow: "auto",
