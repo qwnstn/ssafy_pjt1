@@ -11,6 +11,7 @@ import { TableVirtuoso } from "react-virtuoso";
 import axios from "axios";
 import HOST from "../../Host";
 
+
 const sample = [
   ["농심)신라면5개입", 1, 3100],
   ["오뚜기)진라면5개입", 1, 2800],

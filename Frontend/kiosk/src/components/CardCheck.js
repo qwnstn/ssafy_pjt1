@@ -8,6 +8,8 @@ import axios from "axios";
 import HOST from "../Host";
 
 
+// 결제하기 버튼 하단에 추가필요
+
 
 export default function CardInfo() {
   const cardImage = (date) => {

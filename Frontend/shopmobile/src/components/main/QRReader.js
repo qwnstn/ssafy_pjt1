@@ -30,6 +30,7 @@ const QRReader = (props) => {
       console.log("kioskId", kioskId);
       console.log("timeCheck", timeCheck);
 
+      // 70초, 키오스크qr은 59초마다 변경되게 설정됨
       if (timeCheck < 70000) {
         axios
           .post(API_URI, {

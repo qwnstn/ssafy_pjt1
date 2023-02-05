@@ -9,15 +9,26 @@ import { Grid } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import { useNavigate } from "react-router-dom";
 
+
+// 웹소켓의 통신이 오면 rfid read 페이지로 넘어간뒤, 
+
+// 비회원 결제 버튼을 누르면 rfid read 페이지로 넘어간뒤, itemlist 페이지로 넘어가는 기능
+
+
 export default function KioskMain() {
   const navigate = useNavigate();
 
-  const [value, setValue] = useState(`kioskId/${Date.now()}`);
+  // 키오스크 아이디는 무슨 기준으로 정하는가?
+  const kioskId = 1
+
+
+  const [value, setValue] = useState(`${kioskId}/${Date.now()}`);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setValue(`kioskId/${Date.now()}`);
-    }, 5000);
+      setValue(`${kioskId}/${Date.now()}`);
+    }, 59000);
+    // 59초
     return () => clearInterval(interval);
   }, []);
 
