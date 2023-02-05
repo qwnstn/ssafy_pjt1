@@ -18,12 +18,17 @@ import {
 } from "@mui/material/";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import styled from "styled-components";
+import axios from "axios";
+import HOST from "../../Host";
+import { useNavigate } from "react-router-dom";
 
 const Boxs = styled(Box)`
   padding-bottom: 40px !important;
 `;
 
 const AddCard = () => {
+  const navigate = useNavigate();
+
   const ref = React.useRef(null);
 
   React.useEffect(() => {
@@ -33,10 +38,12 @@ const AddCard = () => {
   const [checked, setChecked] = useState(false);
   const [cardNumber, setCardNumber] = useState("");
   const [cardExpiration, setCardExpiration] = useState("");
+  const [cardCVC, setCardCVC] = useState("");
   const [cardCompany, setCardCompany] = useState("");
   const [error, setError] = useState({
     cardNumber: false,
     cardExpiration: false,
+    cardCVC: false,
   });
 
   const theme = createTheme();
@@ -47,17 +54,33 @@ const AddCard = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // 회원가입 동의 체크
-    if (!checked) alert("회원가입 약관에 동의해주세요.");
-
-    if (cardNumber === "" || cardExpiration === "") {
-      setError({
-        cardNumber: cardNumber === "",
-        cardExpiration: cardExpiration === "",
-      });
-    } else {
-      // Make API call to register card
-      console.log("Card Registered!");
+    // 개인정보 수집 및 이용 동의 체크
+    if (!checked) alert("개인정보 수집 및 이용에 동의해주세요.");
+    else {
+      if (cardNumber.length !== 16 || cardExpiration.length !== 4 || cardCVC.length !== 3 || cardCompany === "") {
+        setError({
+          cardNumber: cardNumber === "",
+          cardExpiration: cardExpiration === "",
+          cardCVC: cardCVC === "",
+        });
+        alert("카드정보를 다시 입력해주세요.")
+      } else {
+        // Make API call to register card
+        const API_URI = `${HOST}/card/`;
+        axios
+          .post(API_URI, {
+            cardNo: cardNumber,
+            name: cardCompany,
+            validDate: cardExpiration,
+          })
+          .then((res) => {
+            alert("카드 등록이 완료되었습니다");
+            navigate("/app/mycard");
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
     }
   };
 
@@ -78,6 +101,16 @@ const AddCard = () => {
     } else {
       setError({ ...error, cardExpiration: false });
       setCardExpiration(cardExp);
+    }
+  };
+
+  const handleCardCVC = (e) => {
+    const cardCVC = e.target.value;
+    if (!/^\d+$/.test(cardCVC)) {
+      setError({ ...error, cardCVC: true });
+    } else {
+      setError({ ...error, cardCVC: false });
+      setCardCVC(cardCVC);
     }
   };
 
@@ -127,10 +160,27 @@ const AddCard = () => {
                             required
                             fullWidth
                             id="cardExpiration"
-                            label="유효기간"
+                            label="유효기간(YYMM)"
                             value={cardExpiration}
                             onChange={handleCardExpiration}
                             inputProps={{ maxLength: 4 }}
+                          />
+                          {error.cardExpiration && (
+                            <FormHelperText error>
+                              올바른 값을 입력해주세요.
+                            </FormHelperText>
+                          )}
+                        </Grid>
+                        <Grid item xs={12}>
+                          <TextField
+                            error={error.cardExpiration}
+                            required
+                            fullWidth
+                            id="cardCVC"
+                            label="카드 CVC"
+                            value={cardCVC}
+                            onChange={handleCardCVC}
+                            inputProps={{ maxLength: 3 }}
                           />
                           {error.cardExpiration && (
                             <FormHelperText error>

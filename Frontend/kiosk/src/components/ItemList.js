@@ -13,6 +13,9 @@ import CardActions from "@mui/material/CardActions";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 
+
+
+
 const columns = [
   { id: "name", label: "품명", minWidth: 140 },
   { id: "price", label: "단가", minWidth: 50 },
@@ -35,6 +38,9 @@ function createData(name, price, cnt) {
   return { name, price, cnt, fullprice };
 }
 
+
+ // 웹소켓 통신을 통해 값을 넣어야 함
+ // 품명, 단가, 수량을 받고, 총액은 계삭해서 넣기
 const rows = [
   createData("폰트크기 바꿧지롱", 1500, 5),
   createData("동원참치", 4000, 1),

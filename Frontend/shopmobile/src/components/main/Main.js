@@ -31,6 +31,7 @@ export default function Main() {
               subheader={newDate}
               sx={{ textAlign: "center", borderBottom: 1, backgroundColor:'#ff8c8c' }}
             />
+            {/* 이미지는 관리자 페이지에서 넣기로 약속 */}
             <CardMedia
               component="img"
               image="/app/images/logo.png"
