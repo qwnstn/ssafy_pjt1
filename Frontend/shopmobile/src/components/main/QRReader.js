@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import QrReader from "modern-react-qr-reader";
 import { Box, Card, Button } from "@mui/material";
 import { Grid } from "@mui/material";
@@ -7,34 +7,30 @@ import axios from "axios";
 import HOST from "../../Host";
 import { useNavigate } from "react-router-dom";
 
-
 const QRReader = (props) => {
   const navigate = useNavigate();
 
   // 화면 전환 버튼
   const [cameraMode, setCameraMode] = useState("environment");
 
-
-
-  
   // 값 받아와야함
-  const userId = "userId"; 
+  const userId = "userId";
 
-  // 값을 받으면 유저 정보, 시간, 키오스크 정보를 axios로 보냄
-  const API_URI = `${HOST}/iot/qr`
+  // qr값을 받으면 유저 정보, 시간, 키오스크 정보를 axios로 보냄
+  const API_URI = `${HOST}/iot/qr`;
   const handleScan = (kioskInput) => {
     if (kioskInput) {
-      const kioskInputList = kioskInput.split('/')
-      const kioskTime = kioskInputList[1]
-      const kioskId = kioskInputList[0]
-      const timeCheck = Date.now() - kioskTime
+      const kioskInputList = kioskInput.split("/");
+      const kioskTime = kioskInputList[1];
+      const kioskId = kioskInputList[0];
+      const timeCheck = Date.now() - kioskTime;
 
-      console.log('kioskInputList', kioskInputList)
-      console.log('kioskTime', kioskTime)
-      console.log('kioskId', kioskId)
-      console.log('timeCheck', timeCheck)
+      console.log("kioskInputList", kioskInputList);
+      console.log("kioskTime", kioskTime);
+      console.log("kioskId", kioskId);
+      console.log("timeCheck", timeCheck);
 
-      if (timeCheck < 70000 ) {
+      if (timeCheck < 70000) {
         axios
           .post(API_URI, {
             userId: userId,
@@ -42,9 +38,9 @@ const QRReader = (props) => {
             datetime: Date.now(),
           })
           .then((res) => {
-            // 성공시 모달창으로 확인 메세지 표시 후 메인 페이지로
+            // 성공시 확인 메세지 표시 후 메인 페이지로
             alert("QR코드가 성공적으로 촬영되었습니다");
-            navigate('/app')
+            navigate("/app");
           })
           .catch((error) => {
             console.error(error);
@@ -70,21 +66,32 @@ const QRReader = (props) => {
       >
         QR Scan
       </Card>
-      <Grid container spacing={2}>
+      <Grid container spacing={1}>
         <Grid item xs={1} />
-        <Grid item xs={10} mt={15}>
+        <Grid item xs={10} mt={3}>
           <CssBaseline />
           <Card sx={{ border: 1, padding: 1 }}>
             <QrReader
               delay={500}
-              // 기본은 user모드
+              // 기본적으로 후방카메라인 user모드가 되도록 설정
               facingMode={cameraMode}
               onError={handleError}
               onScan={handleScan}
             />
-            <Button onClick={() => setCameraMode(cameraMode === "environment" ? "user" : "environment")}>
-    화면 전환
-  </Button>
+            <Button
+              style={{
+                display: "block",
+                marginLeft: "auto",
+                marginRight: "auto",
+              }}
+              onClick={() =>
+                setCameraMode(
+                  cameraMode === "environment" ? "user" : "environment"
+                )
+              }
+            >
+              화면 전환
+            </Button>
           </Card>
         </Grid>
       </Grid>

@@ -1,5 +1,6 @@
 package e101.hishop.service;
 
+import e101.hishop.domain.dto.request.BranchReqDto;
 import e101.hishop.domain.dto.request.ProductReqDto;
 import e101.hishop.domain.dto.request.StaffReqDto;
 import e101.hishop.domain.dto.request.UserInfoReqDto;
@@ -115,6 +116,10 @@ public class AdminServiceImpl implements AdminService {
     }
 
     public void deleteUser(Long userId) {
+        List<Pay> pays = payJPARepository.findAllByUserId(userId);
+        for (Pay p: pays) {
+            p.setUser(null);
+        }
         userJPARepository.deleteById(userId);
     }
     @Override
@@ -143,7 +148,14 @@ public class AdminServiceImpl implements AdminService {
     public void deleteStaff(Long employeeId) {
         staffJPARepository.deleteById(employeeId);
     }
-
+    @Override
+    public Staff saveStaff(Staff staff, Long branchId) {
+        //TODO Exception
+        Branch branch = branchJPARepository.findById(branchId)
+                .orElseThrow(() -> new CommonException(2, "Branch객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
+        staff.setBranchAndStaff(branch);
+        return staffJPARepository.save(staff);
+    }
     @Override
     public PayDetail savePayDetail(PayDetail payDetail, Long payId, Long productId, Long branchId) {
         //TODO Exception
@@ -160,16 +172,40 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public Branch saveBranch(Branch branch) { return branchJPARepository.save(branch); }
+    public List<BranchRespDto> getBranchs() {
+        List<Branch> branches = branchJPARepository.findAll();
+        List<BranchRespDto> branchList = new ArrayList<>();
+        for (Branch p: branches) {
+            branchList.add(BranchRespDto.of(p));
+        }
+        return branchList;
+    }
+    @Override
+    public BranchRespDto getBranch(Long branchId) {
+        Branch branch = branchJPARepository.findById(branchId)
+                .orElseThrow(() -> new CommonException(2, "User객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
+        return BranchRespDto.of(branch);
+    }
 
     @Override
-    public Staff saveStaff(Staff staff, Long branchId) {
-        //TODO Exception
-        Branch branch = branchJPARepository.findById(branchId)
-                .orElseThrow(() -> new CommonException(2, "Branch객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
-        staff.setBranchAndStaff(branch);
-        return staffJPARepository.save(staff);
+    public Long modifyBranch(BranchReqDto dto, Long branchId) {
+        return branchJPARepository.findById(branchId)
+                .orElseThrow(() -> new CommonException(2, "User객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR))
+                .updateBranch(dto)
+                .getId();
     }
+
+    public void deleteBranch(Long branchId) {
+        List<Staff> staffs = staffJPARepository.findAllByBranchId(branchId);
+        for (Staff p: staffs) {
+            p.setBranch(null);
+        }
+        branchJPARepository.deleteById(branchId);
+    }
+    @Override
+    public Branch saveBranch(Branch branch) { return branchJPARepository.save(branch); }
+
+
 
     @Override
     public Kiosk saveKiosk(Kiosk kiosk, Long branchId) {
@@ -178,5 +214,6 @@ public class AdminServiceImpl implements AdminService {
         kiosk.setBranchAndKiosk(branch);
         return kioskJPARepository.save(kiosk);
     }
+
 
 }

@@ -1,5 +1,6 @@
 package e101.hishop.controller;
 
+import e101.hishop.domain.dto.request.BranchReqDto;
 import e101.hishop.domain.dto.request.ProductReqDto;
 import e101.hishop.domain.dto.request.StaffReqDto;
 import e101.hishop.domain.dto.request.UserInfoReqDto;
@@ -112,4 +113,32 @@ public class AdminController {
         return new ResponseEntity<>("제거완료", HttpStatus.OK);
     }
 
+    @GetMapping("/branch")
+    public ResponseEntity<List<BranchRespDto>> branchs() {
+        return new ResponseEntity<>(adminService.getBranchs(), HttpStatus.OK);
+    }
+
+    @GetMapping("/branch/{branchId}")
+    public ResponseEntity<BranchRespDto> branch(@PathVariable Long branchId) {
+        return new ResponseEntity<>(adminService.getBranch(branchId), HttpStatus.OK);
+    }
+
+    @PatchMapping("/branch/{branchId}")
+    public ResponseEntity<String> branchModify(@RequestBody BranchReqDto dto, @PathVariable Long branchId) {
+        //TODO 지점 변경?
+        adminService.modifyBranch(dto, branchId);
+        return new ResponseEntity<>("수정완료", HttpStatus.OK);
+    }
+
+    @PostMapping("/branch")
+    public ResponseEntity<String> branchCreate(@RequestBody BranchReqDto dto) {
+        adminService.saveBranch(dto.toBranchEntity());
+        return new ResponseEntity<>("생성완료", HttpStatus.OK);
+    }
+
+    @DeleteMapping("/branch/{branchId}")
+    public ResponseEntity<String> branchDelete(@PathVariable Long branchId) {
+        adminService.deleteBranch(branchId);
+        return new ResponseEntity<>("제거완료", HttpStatus.OK);
+    }
 }

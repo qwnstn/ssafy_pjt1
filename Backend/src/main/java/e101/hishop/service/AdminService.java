@@ -1,5 +1,6 @@
 package e101.hishop.service;
 
+import e101.hishop.domain.dto.request.BranchReqDto;
 import e101.hishop.domain.dto.request.ProductReqDto;
 import e101.hishop.domain.dto.request.StaffReqDto;
 import e101.hishop.domain.dto.request.UserInfoReqDto;
@@ -28,7 +29,10 @@ public interface AdminService {
     StaffRespDto getStaffDetail(Long employeeId);
     Long modifyStaff(StaffReqDto dto, Long employeeId);
     void deleteStaff(Long employeeId);
-
+    List<BranchRespDto> getBranchs();
+    BranchRespDto getBranch(Long branchId);
+    Long modifyBranch(BranchReqDto dto, Long branchId);
+    void deleteBranch(Long branchId);
     Branch saveBranch(Branch branch);
 
     Staff saveStaff(Staff staff, Long branchId);

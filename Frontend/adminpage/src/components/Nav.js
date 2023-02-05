@@ -8,9 +8,6 @@ import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
-import Badge from "@mui/material/Badge";
-import NotificationsIcon from "@mui/icons-material/Notifications";
 import { mainListItems, secondaryListItems } from "./listItems";
 
 export default function Nav() {
@@ -63,9 +60,7 @@ export default function Nav() {
   const [open] = React.useState(true);
 
   return (
-    <Box sx={{ position: "fixed", left: 0, right: 0, zIndex:5 }}
-    elevation={3}>
-        <CssBaseline />
+    <Box sx={{ position: "fixed", left: 0, right: 0 }} elevation={3}>
       <AppBar position="absolute" open={open}>
         <Toolbar
           sx={{
@@ -81,24 +76,22 @@ export default function Nav() {
           >
             관리자 페이지
           </Typography>
-          <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
         </Toolbar>
       </AppBar>
-      <Drawer variant="permanent" open={open}>
-        <Toolbar sx={{backgroundColor:'red'}}>
-        <Typography sx={{textAlign:'right', fontWeight:'bold', color:"white"}}>
-          Hishopping AdminPage
-        </Typography>
+      <CssBaseline />
+      <Drawer variant="permanent" open={open} sx={{ maxHeight: 80 }}>
+        <Toolbar sx={{ backgroundColor: "red" }}>
+          <Typography
+            sx={{ textAlign: "right", fontWeight: "bold", color: "white" }}
+          >
+            Hishopping AdminPage
+          </Typography>
         </Toolbar>
         <Divider />
         <List component="nav">
           {mainListItems}
           <Divider sx={{ my: 1 }} />
-          {secondaryListItems}
+          <div>{secondaryListItems}</div>
         </List>
       </Drawer>
     </Box>

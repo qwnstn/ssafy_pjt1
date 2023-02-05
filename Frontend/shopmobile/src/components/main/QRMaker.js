@@ -50,14 +50,14 @@ function QRMaker() {
       </Card>
       <Grid style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
         <Grid item xs={1} />
-        <Grid item xs={10} mt={12}>
+        <Grid item xs={10} mt={3}>
           <CssBaseline />
           <Card sx={{ border: 1, padding: 1, maxWidth: 400, maxHeight: 500 }}>
             <div>
               <QRCode value={value} size="100%" />
             </div>
             <Card sx={{ textAlign: "center", mb: 1 }}>
-              <Button onClick={handleButtonClick} sx={{fontWeight:'bold'}}>
+              <Button onClick={handleButtonClick} sx={{width: '100%', fontWeight:'bold'}}>
                 QR 재생성
               </Button>
             </Card>

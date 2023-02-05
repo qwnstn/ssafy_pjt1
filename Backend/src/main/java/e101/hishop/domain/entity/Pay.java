@@ -2,6 +2,8 @@ package e101.hishop.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -25,6 +27,7 @@ public class Pay {
     //TODO LAZY로 변경?
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
     @JsonIgnore
     private User user;
 
