@@ -66,7 +66,7 @@ const AddCard = () => {
         alert("카드정보를 다시 입력해주세요.")
       } else {
         // Make API call to register card
-        const API_URI = `${HOST}/api/card/`;
+        const API_URI = `${HOST}/card/`;
         axios
           .post(API_URI, {
             cardNo: cardNumber,
