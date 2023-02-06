@@ -25,14 +25,49 @@ export default function Account() {
   const [email, setEmail] = useState("");
   const [birthDate, setbirthDate] = useState("");
 
-  const API_URI = `${HOST}/user/1`;
+  const API_URI = `${HOST}/user`;
+
+  // Function to refresh the access token
+  // const refreshAccessToken = async () => {
+  //   try {
+  //     // Get the refresh token from localStorage
+  //     const refreshToken = localStorage.getItem("refreshtoken");
+
+  //     // Make a POST request to the refresh token endpoint
+  //     const response = await axios.post(`${HOST}/refresh-token`, {
+  //       headers: {
+  //         Authorization: `Bearer ${refreshToken}`
+  //       }});
+
+  //     // Update the access token in localStorage
+  //     localStorage.setItem("accesstoken", response.headers["accesstoken"]);
+
+  //     return response.headers["accesstoken"];
+  //   } catch (error) {
+  //     // Handle the error
+  //   }
+  // };
+
   useEffect(() => {
     (async () => {
-      const { data } = await axios.get(API_URI);
+      let accesstoken = localStorage.getItem("accesstoken");
 
-      setUserId(data.userId);
+      // If the access token is not set or has expired
+      // if (!accesstoken) {
+      //   // Refresh the access token
+      //   accesstoken = await refreshAccessToken();
+      // }
+
+      const { data } = await axios.get(API_URI, {
+        headers: {
+          Authorization: `Bearer ${accesstoken}`,
+        },
+      });
+
+      setUserId(data.loginId);
       setName(data.name);
       setPhone(data.phone);
+      console.log(data);
       setGender(data.gender);
       setEmail(data.email);
       setbirthDate(data.birthDate);
@@ -108,12 +143,12 @@ export default function Account() {
         </Grid>
         <Grid container sx={{ mt: 2, mb: 2 }}>
           <Grid item xs>
-            <Link href="/app/register" variant="body2">
-              개인정보인증
+            <Link href="/app/removeid" variant="body2">
+              회원 탈퇴
             </Link>
           </Grid>
           <Grid item>
-            <Link href="/app/findid" variant="body2">
+            <Link href="/app/pwdchange" variant="body2">
               비밀번호 변경
             </Link>
           </Grid>

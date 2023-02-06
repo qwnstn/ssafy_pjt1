@@ -3,7 +3,6 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -13,8 +12,9 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import styled from "styled-components";
 import axios from "axios";
 import { FormControl } from "@mui/material";
-import HOST from "../../Host";
+import HOST from "../Host";
 import { useNavigate } from "react-router-dom";
+import getPayloadFromToken from "../getPayloadFromToken";
 
 const FormHelperTexts = styled(FormHelperText)`
   width: 100%;
@@ -23,24 +23,9 @@ const FormHelperTexts = styled(FormHelperText)`
   color: #d32f2f !important;
 `;
 
+const theme = createTheme();
+
 const SignIn = () => {
-  const theme = createTheme({
-    palette: {
-      primary: {
-        main: "#0971f1",
-        darker: "#053e85",
-      },
-      kakao: {
-        main: "#FEE500",
-        darker: "#053e85",
-      },
-      naver: {
-        main: "#2DB400",
-        darker: "#053e85",
-        contrastText: "#fff",
-      },
-    },
-  });
   const [userIdError, setUserIdError] = useState("");
   const [passwordState, setPasswordState] = useState("");
   const [loginError, setLoginError] = useState("");
@@ -61,19 +46,32 @@ const SignIn = () => {
       .post(API_URI, formData)
       .then((response) => {
         localStorage.setItem("accesstoken", response.headers["accesstoken"]);
-        localStorage.setItem("refreshtoken", response.headers["refreshtoken"]);
 
         axios.defaults.headers.common[
           "Authorization"
         ] = `Bearer ${response.headers["accesstoken"]}`;
 
-        movePage("/app");
-        window.location.reload();
-        setLoginError("");
+        const decodedPayload = getPayloadFromToken(response.headers["accesstoken"]);
+        const obj = JSON.stringify(decodedPayload, ["roles"], 1);
+        console.log(obj);
+        if (obj !== null) {
+          const parsedObj = JSON.parse(obj);
+          if (parsedObj && parsedObj.hasOwnProperty("roles")) {
+            const adminCheck = parsedObj["roles"][0];
+            if (adminCheck === "ROLE_ADMIN") {
+              movePage("/admin");
+              window.location.reload();
+            } else {
+              setLoginError("관리자 로그인 실패");
+            }
+          }
+          setLoginError("관리자 로그인 실패");
+        }
+        setLoginError("관리자 로그인 실패");
       })
       .catch(function (err) {
         console.log(err);
-        setLoginError("로그인에 실패하였습니다. 다시 시도해주세요");
+        setLoginError("관리자 로그인 실패");
       });
   };
 
@@ -114,15 +112,20 @@ const SignIn = () => {
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
+            backgroundColor: "white",
+            zIndex: 5,
           }}
         >
-          <Avatar src="./images/logo.png" variant="square" sx={{ mb: 2 }} />
+          <Avatar
+            src="./images/logo.png"
+            variant="square"
+            sx={{ my: 2, mt: 15 }}
+          />
           <Typography component="h1" variant="h5">
-            로그인
+            관리자 로그인
           </Typography>
           <Box
             component="form"
@@ -168,48 +171,6 @@ const SignIn = () => {
               로그인
             </Button>
             <FormHelperTexts>{loginError}</FormHelperTexts>
-            <Grid container sx={{ mt: 2, mb: 2 }}>
-              <Grid item xs>
-                <Link href="/app/findid" variant="body2">
-                  비밀번호 찾기
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="/app/register" variant="body2">
-                  {"회원가입"}
-                </Link>
-              </Grid>
-            </Grid>
-            <Button
-              color="kakao"
-              fullWidth
-              startIcon={
-                <img
-                  src="./images/kakao_login.png"
-                  width={"28"}
-                  alt="kakao_login"
-                />
-              }
-              variant="contained"
-              sx={{ mt: 3 }}
-            >
-              카카오 로그인
-            </Button>
-            <Button
-              color="naver"
-              fullWidth
-              variant="contained"
-              startIcon={
-                <img
-                  src="./images/login_naver_w.png"
-                  width={"28"}
-                  alt="naver_login"
-                />
-              }
-              sx={{ mt: 3, mb: 2 }}
-            >
-              네이버 로그인
-            </Button>
           </Box>
         </Box>
       </Container>

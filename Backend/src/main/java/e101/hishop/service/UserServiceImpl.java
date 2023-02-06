@@ -172,27 +172,33 @@ public class UserServiceImpl implements UserService {
 
     @PostConstruct
     public void initWebClient() {
-        webClient = WebClient.create("http://localhost:5000");
+        webClient = WebClient.create("http://192.168.30.114:8000/");
     }
     @Override
     public String qrRead(QrReqDto dto) {
+        log.info("서비스는 들어왔구나");
         Long userId = dto.getUserId();
+        log.info("이게 아이디야");
         User user = userJPARepository.findById(userId)
                 .orElseThrow(() -> new CommonException(2, "User객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
+        log.info("User 받아와짐");
         Long defaultCardId = user.getDefaultCardId();
         List<Card> cards = cardJPARepository.findAllByUserId(userId);
+        log.info("카드 받아와짐");
         CardSendRespDto cardSendRespDto = new CardSendRespDto();
         cardSendRespDto.builder()
                 .userId(userId)
                 .defaultCardId(defaultCardId)
                 .cardList(cards)
                 .build();
+        log.info("빌드 됐음");
         Mono<String> response = webClient.post()
                 .uri("/api/kiosk/cardinfo")
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(BodyInserters.fromObject(cardSendRespDto))
                 .retrieve()
                 .bodyToMono(String.class);
+        log.info("{}", response);
         // POST 완성되면 작업
         return "true";
     }

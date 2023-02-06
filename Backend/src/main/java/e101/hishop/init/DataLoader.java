@@ -126,13 +126,13 @@ public class DataLoader {
 
         adminService.savePayDetail(PayDetail.builder()
                 .productName("세우깡")
-                .count(1)
+                .count(1L)
                 .price(1500L)
                 .build(), 4L, 6L, 9L);
 
         adminService.savePayDetail(PayDetail.builder()
                 .productName("꺼깔콘")
-                .count(2)
+                .count(2L)
                 .price(4000L)
                 .build(), 4L, 7L, 9L);
 

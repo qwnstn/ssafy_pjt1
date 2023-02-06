@@ -8,6 +8,7 @@ import e101.hishop.domain.dto.response.UserInfoRespDto;
 import e101.hishop.global.common.CommonResponse;
 import e101.hishop.service.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -19,6 +20,7 @@ import java.util.*;
 @RestController
 @RequestMapping("/api/user")
 @RequiredArgsConstructor
+@Slf4j
 public class UserController {
 
     private final UserService userService;
@@ -97,6 +99,7 @@ public class UserController {
 
     @PostMapping("/qr")
     public ResponseEntity<String> qrRead(@RequestBody QrReqDto dto) {
+        log.info("안녕 QR엥 온걸 환영해");
         userService.qrRead(dto);
         return new ResponseEntity<>("전달 완료", HttpStatus.OK);
     }
