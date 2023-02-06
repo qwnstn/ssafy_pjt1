@@ -27,16 +27,15 @@ public class UserInfoReqDto {
     @Pattern(regexp = "^[가-힣a-zA-Z]{1,30}$", message = "한글영문 1~30자")
     private String name;
 
-    @NotBlank
+    @NotNull
     private Gender gender;
 
+    @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthdate;
 
-    private Long defaultCardId;
-
     @NotBlank
-    @Pattern(regexp = "^\\d{3}-\\d{4}-\\d{4}$", message = "000-0000-0000형식")
+    @Pattern(regexp = "^01([0|1|6|7|8|9])-([0-9]{3,4})-([0-9]{4})$", message = "000-0000-0000형식")
     private String phone;
 
     @Email

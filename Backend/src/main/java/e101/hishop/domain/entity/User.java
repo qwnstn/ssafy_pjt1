@@ -65,7 +65,6 @@ public class User {
         password = StringUtils.hasText(dto.getPassword()) ? dto.getPassword() : password;
         phone = StringUtils.hasText(dto.getPhone()) ? dto.getPhone() : phone;
         email = StringUtils.hasText(dto.getEmail()) ? dto.getEmail() : email;
-        defaultCardId = dto.getDefaultCardId() != null ? dto.getDefaultCardId() : defaultCardId;
         adSelect = dto.getAdSelect() != null ? dto.getAdSelect() : adSelect;
         return this;
     }
