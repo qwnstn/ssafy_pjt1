@@ -4,7 +4,6 @@ import e101.hishop.domain.entity.Card;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
@@ -17,11 +16,17 @@ public class CardSaveReqDto {
     private String cardNo;
 
     @NotBlank
+    @Pattern(regexp = "^[가-힣a-zA-Z]{1,30}$", message = "한글영문 1~30자")
     private String name;
 
-    //TODO LocalDate로 변경 필요
     @NotBlank
+    @Pattern(regexp="^[0-9]{4}$", message="유효기간은 4자리여야 합니다.")
     private String validDate;
+
+    @NotBlank
+    @Pattern(regexp="^[0-9]{3}$", message="CVC는 3자리여야 합니다.")
+    private String cvc;
+
 
     public Card toPaymentEntity(){
         return Card.builder()
