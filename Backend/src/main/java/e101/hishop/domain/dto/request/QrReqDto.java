@@ -12,5 +12,5 @@ public class QrReqDto {
     private Long userId;
     private Long kioskId;
 
-    private LocalDate datetime;
+    private Long datetime;
 }

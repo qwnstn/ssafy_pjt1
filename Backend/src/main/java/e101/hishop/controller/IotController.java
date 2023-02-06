@@ -1,9 +1,6 @@
 package e101.hishop.controller;
 
-import e101.hishop.domain.dto.request.BarcodeReqDto;
-import e101.hishop.domain.dto.request.CardSaveReqDto;
-import e101.hishop.domain.dto.request.MemberReqDto;
-import e101.hishop.domain.dto.request.RfidReqDto;
+import e101.hishop.domain.dto.request.*;
 import e101.hishop.service.IotService;
 import e101.hishop.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -49,6 +46,12 @@ public class IotController {
     @PostMapping("/member")
     public ResponseEntity<String> memberPay(@RequestBody MemberReqDto dto) {
         iotService.memberPay(dto);
+        return new ResponseEntity<>("결제 완료", HttpStatus.OK);
+    }
+
+    @PostMapping("/guest")
+    public ResponseEntity<String> guestPay(@RequestBody GuestReqDto dto) {
+        iotService.guestPay(dto);
         return new ResponseEntity<>("결제 완료", HttpStatus.OK);
     }
 

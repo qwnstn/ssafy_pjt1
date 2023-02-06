@@ -29,7 +29,7 @@ public class PayDetail {
     private Branch branch;
     private String productName;
     private String couponName;
-    private Integer count;
+    private Long count;
     private Long price;
 
     public void setPayAndPayDetail(Pay pay) {
@@ -47,7 +47,7 @@ public class PayDetail {
     }
 
     @Builder
-    public PayDetail(Long id, String productName, String couponName, Integer count, Long price) {
+    public PayDetail(Long id, String productName, String couponName, Long count, Long price) {
         this.id = id;
         this.productName = productName;
         this.couponName = couponName;

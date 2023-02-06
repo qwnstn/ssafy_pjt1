@@ -16,12 +16,12 @@ public class PayDetailInfoRespDto {
 
     private String couponName;
 
-    private Integer count;
+    private Long count;
 
     private Long price;
 
     @Builder
-    public PayDetailInfoRespDto(Long id, String productName, String couponName, Integer count, Long price) {
+    public PayDetailInfoRespDto(Long id, String productName, String couponName, Long count, Long price) {
         this.id = id;
         this.productName = productName;
         this.couponName = couponName;
