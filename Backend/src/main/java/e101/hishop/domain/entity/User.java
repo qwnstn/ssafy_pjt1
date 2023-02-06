@@ -45,7 +45,7 @@ public class User {
 
     private Long defaultCardId;
 
-    private String adSelect;
+    private Boolean adSelect;
 
     @Builder.Default
     @Enumerated(EnumType.STRING)
@@ -63,11 +63,10 @@ public class User {
 
     public User updateUserInfo(UserInfoReqDto dto) {
         password = StringUtils.hasText(dto.getPassword()) ? dto.getPassword() : password;
-        gender = dto.getGender() != null ? dto.getGender() : gender;
         phone = StringUtils.hasText(dto.getPhone()) ? dto.getPhone() : phone;
         email = StringUtils.hasText(dto.getEmail()) ? dto.getEmail() : email;
         defaultCardId = dto.getDefaultCardId() != null ? dto.getDefaultCardId() : defaultCardId;
-        adSelect = StringUtils.hasText(dto.getAdSelect()) ? dto.getAdSelect() : adSelect;
+        adSelect = dto.getAdSelect() != null ? dto.getAdSelect() : adSelect;
         return this;
     }
 
