@@ -21,7 +21,8 @@ export default function ListDividers() {
   function logout() {
     localStorage.removeItem("accesstoken");
     localStorage.removeItem("refreshtoken");
-    navigate("/app", {replace: true});
+    navigate("/app");
+    window.location.reload();
   }
 
   return (

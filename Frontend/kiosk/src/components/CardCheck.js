@@ -39,17 +39,22 @@ export default function CardInfo() {
 
   const API_URI = `${HOST}/card`;
   // const HOST = 'https://himart.shop/api'
-  // 수정 필요
 
-  axios
-  .get(API_URI)
-  .then((res) => {
-    console.log(res);
-    // 카드 목록 받아서 cards에 넣기
-  })
-  .catch((error) => {
-    console.error(error);
-  });
+
+  // accesstoken을 키오스크가 어떻게 가지고있지?
+  // useEffect(() => {
+  //   (async () => {
+  //     let accesstoken = localStorage.getItem("accesstoken");
+
+  //     const { data } = await axios.get(API_URI, {
+  //       headers: {
+  //         Authorization: `Bearer ${accesstoken}`,
+  //       },
+  //     });
+  //     console.log(data);
+
+  //   });
+  // });
 
 
 
@@ -131,7 +136,7 @@ export default function CardInfo() {
             }}
           />
           <div style={{ overflowY: "scroll", height: "90%", flexShrink: 0 }}>
-            <Card>{renderCards()}</Card>
+            {renderCards()}
           </div>
         </Card>
       </Box>

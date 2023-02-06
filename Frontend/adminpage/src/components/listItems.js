@@ -6,11 +6,12 @@ import ListSubheader from "@mui/material/ListSubheader";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PaymentIcon from "@mui/icons-material/Payment";
 import PeopleIcon from "@mui/icons-material/People";
-import BarChartIcon from "@mui/icons-material/BarChart";
 import HomeIcon from "@mui/icons-material/Home";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
+import BadgeIcon from "@mui/icons-material/Badge";
 import { Link } from "react-router-dom";
+import getPayloadFromToken from "../getPayloadFromToken";
 
 export const mainListItems = (
   <React.Fragment>
@@ -20,13 +21,13 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="메인 페이지" />
     </ListItemButton>
-    <ListItemButton>
+    <ListItemButton component={Link} to="/admin/paymentlist">
       <ListItemIcon>
         <PaymentIcon />
       </ListItemIcon>
       <ListItemText primary="결제 관리" />
     </ListItemButton>
-    <ListItemButton>
+    <ListItemButton component={Link} to="/admin/userlist">
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>
@@ -38,31 +39,54 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="상품 관리" />
     </ListItemButton>
-    <ListItemButton>
+    <ListItemButton component={Link} to="/admin/employeelist">
       <ListItemIcon>
-        <BarChartIcon />
+        <BadgeIcon />
       </ListItemIcon>
-      <ListItemText primary="통계" />
+      <ListItemText primary="직원 관리" />
     </ListItemButton>
   </React.Fragment>
 );
+
+const accesstoken = localStorage.getItem("accesstoken");
+const handleLogout = () => {
+  localStorage.removeItem("accesstoken");
+  window.location.reload();
+};
+const decodedPayload = getPayloadFromToken(accesstoken);
+const obj = JSON.stringify(decodedPayload, ["roles"], 1);
+let loginCheck = false;
+if (obj !== null) {
+  const parsedObj = JSON.parse(obj);
+  if (parsedObj && parsedObj.hasOwnProperty("roles")) {
+    const adminCheck = parsedObj["roles"][0];
+    if(adminCheck === "ROLE_ADMIN"){
+      loginCheck = true;
+    }else{
+      loginCheck = false;
+    } 
+  }
+}
 
 export const secondaryListItems = (
   <React.Fragment>
     <ListSubheader component="div" inset>
       Account
     </ListSubheader>
-    <ListItemButton>
-      <ListItemIcon>
-        <LogoutIcon />
-      </ListItemIcon>
-      <ListItemText primary="로그아웃" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <LoginIcon />
-      </ListItemIcon>
-      <ListItemText primary="로그인" />
-    </ListItemButton>
+    {loginCheck ? (
+      <ListItemButton onClick={handleLogout} component={Link} to="/admin/login">
+        <ListItemIcon>
+          <LogoutIcon />
+        </ListItemIcon>
+        <ListItemText primary="로그아웃" />
+      </ListItemButton>
+    ) : (
+      <ListItemButton component={Link} to="/admin/login">
+        <ListItemIcon>
+          <LoginIcon />
+        </ListItemIcon>
+        <ListItemText primary="로그인" />
+      </ListItemButton>
+    )}
   </React.Fragment>
 );

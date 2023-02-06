@@ -22,6 +22,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import HOST from "../../Host";
+import getPayloadFromToken from "../../getPayloadFromToken";
 
 const style = {
   position: "absolute",
@@ -34,36 +35,6 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
-
-// Generate Order Data
-function createData(id, productId, name, price, rfid, barcode, image) {
-  return { id, productId, name, price, rfid, barcode, image };
-}
-
-const rows = [
-  createData(0, 4234, "꺼깔콘", 3000, "3124875", null, "img.jpg"),
-  createData(1, 5137, "바밤바", 3000, null, "8803154372", "img.jpg"),
-  createData(2, 4124, "커카콜라", 3110, "3116875", null, "img.jpg"),
-  createData(3, 4124, "커카콜라", 3110, "3116875", null, "img.jpg"),
-  createData(4, 4124, "커카콜라", 3110, "3116875", null, "img.jpg"),
-  createData(5, 4124, "커카콜라", 3110, "3116875", null, "img.jpg"),
-  createData(6, 4124, "커카콜라", 3110, "3116875", null, "img.jpg"),
-  createData(7, 4124, "커카콜라", 3110, "3116875", null, "img.jpg"),
-  createData(8, 4124, "커카콜라", 3110, "3116875", null, "img.jpg"),
-  createData(9, 4124, "커카콜라", 3110, "3116875", null, "img.jpg"),
-  createData(10, 4124, "커카콜라", 3110, "3116875", null, "img.jpg"),
-  createData(11, 4124, "커카콜라", 3110, "3116875", null, "img.jpg"),
-  createData(12, 4124, "커카콜라", 3110, "3116875", null, "img.jpg"),
-  createData(13, 4124, "커카콜라", 3110, "3116875", null, "img.jpg"),
-  createData(14, 4124, "커카콜라", 3110, "3116875", null, "img.jpg"),
-  createData(15, 4124, "커카콜라", 3110, "3116875", null, "img.jpg"),
-  createData(16, 4124, "커카콜라", 3110, "3116875", null, "img.jpg"),
-  createData(17, 4124, "커카콜라", 3110, "3116875", null, "img.jpg"),
-  createData(18, 4124, "커카콜라", 3110, "3116875", null, "img.jpg"),
-  createData(19, 4124, "커카콜라", 3110, "3116875", null, "img.jpg"),
-  createData(20, 4124, "커카콜라", 3110, "3116875", null, "img.jpg"),
-  createData(21, 4124, "커카콜라", 3110, "3116875", null, "img.jpg"),
-];
 
 const mdTheme = createTheme();
 const API_URI = `${HOST}/admin/product`;
@@ -80,34 +51,62 @@ export default function ProductList() {
   const handleClose = () => setOpen(false);
 
   // 상품 목록 list axios통신
-  // const [rows, setRows] = useState([]);
+  const [rows, setRows] = useState([]);
+  const [payload, setPayload] = useState({});
 
-  // useEffect(() => {
-  //   axios
-  //     .get(API_URI)
-  //     .then((res) => {
-  //       setRows(res.data);
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  // }, []);
+  useEffect(() => {
+    const accessToken = localStorage.getItem("accesstoken");
+    axios
+      .get(API_URI, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+      .then((res) => {
+        setRows(res.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    const decodedPayload = getPayloadFromToken(accessToken);
+    setPayload(decodedPayload);
+  }, []);
+  const obj = JSON.stringify(payload, ["roles"], 1);
+  if (obj !== null) {
+    const parsedObj = JSON.parse(obj);
+    if (parsedObj && parsedObj.hasOwnProperty("roles")) {
+      const adminCheck = parsedObj["roles"][0];
+      if (adminCheck === "ROLE_ADMIN") {
+        console.log("AdminLogin");
+      } else {
+        navigate("/admin/login");
+      }
+    } else {
+      navigate("/admin/login");
+    }
+  } else {
+    navigate("/admin/login");
+  }
 
   const handleAddProduct = async () => {
+    const accessToken = localStorage.getItem("accesstoken");
     try {
-      const productName = document.getElementById("name").value;
-      const productPrice = document.getElementById("price").value;
-      const productRfid = document.getElementById("rfid").value;
-      const productBarcode = document.getElementById("barcode").value;
-
-      const response = await axios.post(API_URI, {
-        name: productName,
-        price: productPrice,
-        rfid: productRfid,
-        barcode: productBarcode,
+      const name = document.getElementById("name").value;
+      const price = document.getElementById("price").value;
+      const rfid = document.getElementById("rfid").value;
+      const barcode = document.getElementById("barcode").value;
+      const image = document.getElementById("image").value;
+      const data = { name, price, rfid, barcode, image };
+      console.log(data);
+      const response = await axios.post(API_URI, data, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
       });
 
       console.log(response.data);
+      handleClose();
+      window.location.reload();
     } catch (error) {
       console.error(error);
     }
@@ -133,7 +132,7 @@ export default function ProductList() {
                 <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
                   <Typography
                     component="h2"
-                    variant="h6"
+                    variant="h5"
                     color="primary"
                     gutterBottom
                     sx={{ fontWeight: "bold" }}
@@ -162,28 +161,24 @@ export default function ProductList() {
                             가격
                           </TableCell>
                           <TableCell sx={{ fontWeight: "bold", fontSize: 18 }}>
-                            RFID
+                            RFID코드
                           </TableCell>
                           <TableCell sx={{ fontWeight: "bold", fontSize: 18 }}>
-                            Barcode
-                          </TableCell>
-                          <TableCell sx={{ fontWeight: "bold", fontSize: 18 }}>
-                            Image
+                            바코드
                           </TableCell>
                         </TableRow>
                       </TableHead>
                       <TableBody>
                         {rows.map((row) => (
                           <TableRow
-                            onClick={() => ProductDetail(row.productId)}
+                            onClick={() => ProductDetail(row.id)}
                             key={row.id}
                           >
-                            <TableCell>{row.productId}</TableCell>
+                            <TableCell>{row.id}</TableCell>
                             <TableCell>{row.name}</TableCell>
                             <TableCell>{row.price}원</TableCell>
                             <TableCell>{row.rfid}</TableCell>
                             <TableCell>{row.barcode}</TableCell>
-                            <TableCell>{row.image}</TableCell>
                           </TableRow>
                         ))}
                       </TableBody>
@@ -216,7 +211,6 @@ export default function ProductList() {
                       required
                       id="name"
                       label="제품명"
-                      defaultValue="제품명"
                       variant="standard"
                       sx={{ mb: 1 }}
                     />
@@ -224,7 +218,6 @@ export default function ProductList() {
                       required
                       id="price"
                       label="가격"
-                      defaultValue="가격"
                       variant="standard"
                       sx={{ mb: 1 }}
                     />
@@ -232,7 +225,6 @@ export default function ProductList() {
                       required
                       id="rfid"
                       label="RFID코드"
-                      defaultValue="RFID코드"
                       variant="standard"
                       sx={{ mb: 1 }}
                     />
@@ -240,14 +232,22 @@ export default function ProductList() {
                       required
                       id="barcode"
                       label="바코드"
-                      defaultValue="바코드"
+                      variant="standard"
+                      sx={{ mb: 1 }}
+                    />
+                    <TextField
+                      required
+                      id="image"
+                      label="이미지"
                       variant="standard"
                       sx={{ mb: 1 }}
                     />
                     <Button
                       sx={{ mt: 1, ml: 8 }}
                       variant="contained"
-                      onClick={handleAddProduct}
+                      onClick={() => {
+                        handleAddProduct();
+                      }}
                     >
                       추가
                     </Button>

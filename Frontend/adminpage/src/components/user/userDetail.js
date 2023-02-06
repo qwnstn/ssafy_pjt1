@@ -32,40 +32,60 @@ const style = {
 
 const mdTheme = createTheme();
 
-const ProductDetail = () => {
-  const { productId } = useParams();
-  const [product, setProduct] = useState({});
-  const [name, setName] = useState(product.name || "이름 호출 실패");
-  const [price, setPrice] = useState(product.price || "가격 호출 실패");
-  const [rfid, setRfid] = useState(product.rfid || "RFID 호출 실패");
-  const [barcode, setBarcode] = useState(product.barcode || "바코드 호출 실패");
+const UserDetail = () => {
+  const { userId } = useParams();
+  const [user, setUser] = useState({});
+  const [userid, setUserId] = useState(user.loginId || "아이디 호출 실패");
+  const [password, setPassword] = useState(
+    user.password || "패스워드 호출 실패"
+  );
+  const [name, setName] = useState(user.name || "이름 호출 실패");
+  const [gender, setGender] = useState(user.gender || "성별 호출 실패");
+  const [birthdate, setBirthdate] = useState(
+    user.birthDate || "생년월일 호출 실패"
+  );
+  const [phone, setPhone] = useState(user.phone || "핸드폰 호출 실패");
+  const [email, setEmail] = useState(user.email || "이메일 호출 실패");
   const navigate = useNavigate();
   useEffect(() => {
     const accessToken = localStorage.getItem("accesstoken");
     const fetchData = async () => {
       try {
-        const result = await axios.get(`${HOST}/admin/product/${productId}`, {
+        const result = await axios.get(`${HOST}/admin/users/${userId}`, {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
         });
-        setProduct(result.data);
+        setUser(result.data);
+        setUserId(result.data.loginId);
+        setPassword(result.data.password);
         setName(result.data.name);
-        setPrice(result.data.price);
-        setRfid(result.data.rfid);
-        setBarcode(result.data.barcode);
+        setGender(result.data.gender);
+        setBirthdate(result.data.birthDate);
+        setPhone(result.data.phone);
+        setEmail(result.data.email);
       } catch (error) {
         console.error(error);
       }
     };
     fetchData();
-  }, [productId]);
+  }, [userId]);
 
-  const handleModifyProduct = async () => {
+  const handleModifyUser = async () => {
     const accessToken = localStorage.getItem("accesstoken");
     try {
-      const data = { name, price, rfid, barcode };
-      await axios.patch(`${HOST}/admin/product/${productId}`, data, {
+      const adSelect = false;
+      const data = {
+        userid,
+        password,
+        gender,
+        birthdate,
+        name,
+        phone,
+        email,
+        adSelect,
+      };
+      await axios.patch(`${HOST}/admin/users/${userId}`, data, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
@@ -77,11 +97,11 @@ const ProductDetail = () => {
     }
   };
 
-  const productDelete = async (data) => {
+  const UserDelete = async (data) => {
     // TODO Delete
-    const productId = data;
+    const userId = data;
     const accessToken = localStorage.getItem("accesstoken");
-    const API_URI = `${HOST}/admin/product/${productId}`;
+    const API_URI = `${HOST}/admin/users/${userId}`;
     await axios
       .delete(API_URI, {
         headers: {
@@ -90,7 +110,7 @@ const ProductDetail = () => {
       })
       .then(() => {
         console.log("삭제완료");
-        navigate("/admin/productlist");
+        navigate("/admin/userlist");
       })
       .catch(function (err) {
         console.log(err);
@@ -124,6 +144,7 @@ const ProductDetail = () => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: "flex", ml: 30 }}>
@@ -148,23 +169,26 @@ const ProductDetail = () => {
                     flexDirection: "column",
                   }}
                 >
+                  <Typography variant="h4" sx={{ mb: 4 }}>
+                    회원 상세 정보
+                  </Typography>
                   <Typography variant="h5" sx={{ mb: 3 }}>
-                    상품ID : {productId}
-                  </Typography>
-                  <Typography component="p" variant="h4">
-                    품명 : {product.name || "이름 호출 실패"}
-                  </Typography>
-                  <Typography sx={{ flex: 1, my: 1 }}>
-                    가격 : {product.price || "가격 호출 실패"}
+                    [ {user.name || "이름 호출 실패"} ]
                   </Typography>
                   <Typography sx={{ flex: 1, mb: 1 }}>
-                    RFID : {product.rfid || "RFID 호출 실패"}
+                    로그인ID : {user.loginId || "아이디 호출 실패"}
                   </Typography>
                   <Typography sx={{ flex: 1, mb: 1 }}>
-                    Barcode : {product.barcode || "바코드 호출 실패"}
+                    성별 : {user.gender || "성별 호출 실패"}
+                  </Typography>
+                  <Typography sx={{ flex: 1, mb: 1 }}>
+                    생년월일 : {user.birthDate || "생년월일 호출 실패"}
+                  </Typography>
+                  <Typography sx={{ flex: 1, mb: 1 }}>
+                    핸드폰 : {user.phone || "핸드폰 호출 실패"}
                   </Typography>
                   <Typography sx={{ flex: 1 }}>
-                    이미지 : {product.image || "이미지 호출 실패"}
+                    이메일 : {user.email || "이메일 호출 실패"}
                   </Typography>
                 </Paper>
                 <Button
@@ -172,7 +196,7 @@ const ProductDetail = () => {
                   variant="contained"
                   onClick={handleOpen}
                 >
-                  상품 수정
+                  회원수정
                 </Button>
                 <Modal
                   open={open}
@@ -187,12 +211,29 @@ const ProductDetail = () => {
                       component="h2"
                       sx={{ mb: 2 }}
                     >
-                      상품 수정
+                      회원 수정
                     </Typography>
                     <TextField
                       required
+                      id="userid"
+                      label="아이디"
+                      value={userid}
+                      variant="standard"
+                      onChange={(event) => setUserId(event.target.value)}
+                      sx={{ mb: 1 }}
+                    />
+                    <TextField
+                      id="password"
+                      label="비밀번호"
+                      type="password"
+                      variant="standard"
+                      onChange={(event) => setPassword(event.target.value)}
+                      sx={{ mb: 1 }}
+                    />
+                    <TextField
+                      required
                       id="name"
-                      label="제품명"
+                      label="이름"
                       value={name}
                       variant="standard"
                       onChange={(event) => setName(event.target.value)}
@@ -200,46 +241,46 @@ const ProductDetail = () => {
                     />
                     <TextField
                       required
-                      id="price"
-                      label="가격"
-                      value={price}
+                      id="gender"
+                      label="성별"
+                      value={gender}
                       variant="standard"
-                      onChange={(event) => setPrice(event.target.value)}
+                      onChange={(event) => setGender(event.target.value)}
                       sx={{ mb: 1 }}
                     />
                     <TextField
                       required
-                      id="rfid"
-                      label="RFID코드"
-                      value={rfid}
+                      id="birthdate"
+                      label="생년월일"
+                      value={birthdate}
                       variant="standard"
-                      onChange={(event) => setRfid(event.target.value)}
+                      onChange={(event) => setBirthdate(event.target.value)}
                       sx={{ mb: 1 }}
                     />
                     <TextField
                       required
-                      id="barcode"
-                      label="바코드"
-                      value={barcode}
+                      id="phone"
+                      label="핸드폰"
+                      value={phone}
                       variant="standard"
-                      onChange={(event) => setBarcode(event.target.value)}
+                      onChange={(event) => setPhone(event.target.value)}
                       sx={{ mb: 1 }}
                     />
                     <Button
                       sx={{ mt: 1, ml: 8 }}
                       variant="contained"
-                      onClick={handleModifyProduct}
+                      onClick={handleModifyUser}
                     >
                       수정
                     </Button>
                   </Box>
                 </Modal>
                 <Button
-                  onClick={() => productDelete(productId)}
+                  onClick={() => UserDelete(userId)}
                   sx={{ mt: 1, fontWeight: "bold" }}
                   variant="contained"
                 >
-                  상품 삭제
+                  회원탈퇴
                 </Button>
               </Grid>
             </Grid>
@@ -250,4 +291,4 @@ const ProductDetail = () => {
   );
 };
 
-export default ProductDetail;
+export default UserDetail;
