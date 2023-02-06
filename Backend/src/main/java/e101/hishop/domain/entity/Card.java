@@ -23,7 +23,7 @@ public class Card {
 
     private String name;
 
-//추후 암호와 필요
+    //TODO 추후 암호화 필요
     private String cardNo;
 
     private String validDate;

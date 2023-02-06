@@ -1,6 +1,7 @@
 package e101.hishop.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import e101.hishop.AppConfig;
 import e101.hishop.domain.dto.request.PayPasswordReqDto;
 import e101.hishop.domain.dto.request.UserInfoReqDto;
 import e101.hishop.global.enumeration.Gender;
@@ -67,7 +68,7 @@ public class User {
     private List<Pay> pays = new ArrayList<>();
 
     public User updateUserInfo(UserInfoReqDto dto) {
-        password = StringUtils.hasText(dto.getPassword()) ? dto.getPassword() : password;
+        password = StringUtils.hasText(dto.getPassword()) ? AppConfig.testPasswordEncoder().encode(dto.getPassword()) : password;
         phone = StringUtils.hasText(dto.getPhone()) ? dto.getPhone() : phone;
         email = StringUtils.hasText(dto.getEmail()) ? dto.getEmail() : email;
         adSelect = dto.getAdSelect() != null ? dto.getAdSelect() : adSelect;

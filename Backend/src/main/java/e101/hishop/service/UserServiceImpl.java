@@ -10,16 +10,17 @@ import e101.hishop.domain.entity.Pay;
 import e101.hishop.domain.entity.PayDetail;
 import e101.hishop.domain.entity.User;
 import e101.hishop.global.common.CommonException;
-import e101.hishop.repository.*;
+import e101.hishop.repository.CardJPARepository;
+import e101.hishop.repository.PayDetailJPARepository;
+import e101.hishop.repository.PayJPARepository;
+import e101.hishop.repository.UserJPARepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
@@ -73,7 +74,6 @@ public class UserServiceImpl implements UserService {
                     .cardNo(p.getCardNo().substring(0, 4))
                     .name(p.getName())
                     .validDate(p.getValidDate())
-                    .cvc(p.getCvc())
                     .build());
         }
         return respList;
@@ -88,7 +88,7 @@ public class UserServiceImpl implements UserService {
         if (!card.getUser().equals(user)) {
             throw new CommonException(2, "User객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        if (user.getDefaultCardId() == cardId) {
+        if (user.getDefaultCardId().equals(cardId)) {
             editMainCard(null);
         }
         cardJPARepository.deleteById(cardId);
@@ -133,7 +133,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public Boolean editName(EditNameReqDto dto, Long cardId) {
         Card card = cardJPARepository.findById(cardId)
-                .orElseThrow(() -> new CommonException(2, "Card객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
+                .orElseThrow(() -> new CommonException(2, "Card가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
+        if (!(card.getUser().getId().equals(getUserId()))) throw new CommonException(9, "유저소유카드가 아닙니다.", HttpStatus.BAD_REQUEST);
         card.setName(dto.getName());
         return true;
     }
