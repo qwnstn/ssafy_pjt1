@@ -40,10 +40,10 @@ public class DataLoader {
     public void loadData(){
 
         authService.signUp(User.builder()
-                .loginId("user1234!")
+                .loginId("user1234")
                 .gender(Gender.MALE)
                 .birthDate(LocalDate.of(1993,12,31))
-                .adSelect("YES")
+                .adSelect(true)
                 .email("EMAIL@naver.com")
                 .name("NAME")
                 .password(AppConfig.testPasswordEncoder().encode("user1234!"))
@@ -69,10 +69,10 @@ public class DataLoader {
                 .build(), 1L);
 
         authService.signUp(User.builder()
-                .loginId("admin1234!")
+                .loginId("admin1234")
                 .gender(Gender.MALE)
                 .birthDate(LocalDate.of(1999,12,31))
-                .adSelect("YES")
+                .adSelect(false)
                 .email("EMAIL@naver.com")
                 .name("NAME")
                 .password(AppConfig.testPasswordEncoder().encode("admin1234!"))

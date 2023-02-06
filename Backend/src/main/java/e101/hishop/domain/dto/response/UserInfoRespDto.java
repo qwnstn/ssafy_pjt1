@@ -29,10 +29,10 @@ public class UserInfoRespDto {
 
     private Long defaultCardId;
 
-    private String adSelect;
+    private Boolean adSelect;
 
     @Builder
-    public UserInfoRespDto(Long id, String loginId, String password, String name, Gender gender, LocalDate birthDate, String phone, String email, Long defaultCardId, String adSelect) {
+    public UserInfoRespDto(Long id, String loginId, String password, String name, Gender gender, LocalDate birthDate, String phone, String email, Long defaultCardId, Boolean adSelect) {
         this.id = id;
         this.loginId = loginId;
         this.password = password;
