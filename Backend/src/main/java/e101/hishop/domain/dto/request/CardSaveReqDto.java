@@ -27,12 +27,12 @@ public class CardSaveReqDto {
     @Pattern(regexp="^[0-9]{3}$", message="CVC는 3자리여야 합니다.")
     private String cvc;
 
-
     public Card toPaymentEntity(){
         return Card.builder()
                 .cardNo(cardNo)
                 .name(name)
                 .validDate(validDate)
+                .cvc(cvc)
                 .build();
     }
 

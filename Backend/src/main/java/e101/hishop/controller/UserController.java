@@ -1,9 +1,6 @@
 package e101.hishop.controller;
 
-import e101.hishop.domain.dto.request.CardSaveReqDto;
-import e101.hishop.domain.dto.request.EditNameReqDto;
-import e101.hishop.domain.dto.request.PayPasswordReqDto;
-import e101.hishop.domain.dto.request.UserInfoReqDto;
+import e101.hishop.domain.dto.request.*;
 import e101.hishop.domain.dto.response.CardInfoRespDto;
 import e101.hishop.domain.dto.response.PayDetailInfoRespDto;
 import e101.hishop.domain.dto.response.PayInfoRespDto;
@@ -99,11 +96,9 @@ public class UserController {
     }
 
     @PostMapping("/qr")
-    public ResponseEntity<Map<String, Object>> qrCreate() {
-        Map<String, Object> json = new HashMap<>();
-        json.put("userId", "ssafy1234");
-        json.put("datetime", "2023-01-12T14:38:27");
-        return new ResponseEntity<>(json, HttpStatus.OK);
+    public ResponseEntity<String> qrRead(@RequestBody QrReqDto dto) {
+        userService.qrRead(dto);
+        return new ResponseEntity<>("전달 완료", HttpStatus.OK);
     }
 
 

@@ -2,6 +2,7 @@ package e101.hishop.service;
 
 import e101.hishop.domain.dto.request.EditNameReqDto;
 import e101.hishop.domain.dto.request.PayPasswordReqDto;
+import e101.hishop.domain.dto.request.QrReqDto;
 import e101.hishop.domain.dto.request.UserInfoReqDto;
 import e101.hishop.domain.dto.response.CardInfoRespDto;
 import e101.hishop.domain.dto.response.PayDetailInfoRespDto;
@@ -37,4 +38,5 @@ public interface UserService {
     List<PayDetailInfoRespDto> getPayDetail(Long purchaseId);
 
     Long getUserId();
+    public String qrRead(QrReqDto dto);
 }

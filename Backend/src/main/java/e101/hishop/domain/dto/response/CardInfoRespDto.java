@@ -6,9 +6,10 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotNull;
+
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
 @Builder
 public class CardInfoRespDto {
 
@@ -17,4 +18,15 @@ public class CardInfoRespDto {
     private String name;
     private String validDate;
 
+    @NotNull
+    private String cvc;
+
+    @Builder
+    public CardInfoRespDto(Long cardId, String cardNo, String name, String validDate, String cvc) {
+        this.cardId = cardId;
+        this.cardNo = cardNo;
+        this.name = name;
+        this.validDate = validDate;
+        this.cvc = cvc;
+    }
 }

@@ -2,11 +2,9 @@ package e101.hishop.service;
 
 import e101.hishop.domain.dto.request.EditNameReqDto;
 import e101.hishop.domain.dto.request.PayPasswordReqDto;
+import e101.hishop.domain.dto.request.QrReqDto;
 import e101.hishop.domain.dto.request.UserInfoReqDto;
-import e101.hishop.domain.dto.response.CardInfoRespDto;
-import e101.hishop.domain.dto.response.PayDetailInfoRespDto;
-import e101.hishop.domain.dto.response.PayInfoRespDto;
-import e101.hishop.domain.dto.response.UserInfoRespDto;
+import e101.hishop.domain.dto.response.*;
 import e101.hishop.domain.entity.Card;
 import e101.hishop.domain.entity.Pay;
 import e101.hishop.domain.entity.PayDetail;
@@ -16,10 +14,17 @@ import e101.hishop.repository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.BodyInserters;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
+import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,18 +37,18 @@ public class UserServiceImpl implements UserService {
 
     private final UserJPARepository userJPARepository;
     private final PayJPARepository payJPARepository;
-
     private final PayDetailJPARepository payDetailJPARepository;
     private final CardJPARepository cardJPARepository;
+    private WebClient webClient;
 
 
     @Override
-    public Card saveCard(Card cards) {
+    public Card saveCard(Card card) {
         User user = userJPARepository.findById(getUserId())
                 .orElseThrow(() -> new CommonException(2, "User객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
         log.info("user, {}", user);
-        cards.setUsersAndCards(user);
-        return cardJPARepository.save(cards);
+        card.setUsersAndCards(user);
+        return cardJPARepository.save(card);
     }
 
     @Override
@@ -68,6 +73,7 @@ public class UserServiceImpl implements UserService {
                     .cardNo(p.getCardNo().substring(0, 4))
                     .name(p.getName())
                     .validDate(p.getValidDate())
+                    .cvc(p.getCvc())
                     .build());
         }
         return respList;
@@ -161,5 +167,32 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new CommonException(2, "User객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
 
         return user.getId();
+    }
+
+    @PostConstruct
+    public void initWebClient() {
+        webClient = WebClient.create("http://localhost:5000");
+    }
+    @Override
+    public String qrRead(QrReqDto dto) {
+        Long userId = dto.getUserId();
+        User user = userJPARepository.findById(userId)
+                .orElseThrow(() -> new CommonException(2, "User객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
+        Long defaultCardId = user.getDefaultCardId();
+        List<Card> cards = cardJPARepository.findAllByUserId(userId);
+        CardSendRespDto cardSendRespDto = new CardSendRespDto();
+        cardSendRespDto.builder()
+                .userId(userId)
+                .defaultCardId(defaultCardId)
+                .cardList(cards)
+                .build();
+        Mono<String> response = webClient.post()
+                .uri("/api/kiosk/cardinfo")
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(BodyInserters.fromObject(cardSendRespDto))
+                .retrieve()
+                .bodyToMono(String.class);
+        // POST 완성되면 작업
+        return "true";
     }
 }

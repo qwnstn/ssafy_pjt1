@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Component
 @Slf4j
@@ -47,24 +48,27 @@ public class DataLoader {
                 .email("EMAIL@naver.com")
                 .name("NAME")
                 .password(AppConfig.testPasswordEncoder().encode("user1234!"))
+                .defaultCardId(2L)
                 .build());
 
         userService.cardLoad(Card.builder()
                 .cardNo("1234121211111111")
                 .name("신한")
                 .validDate("0121")
+                .cvc("123")
                 .build(), 1L);
 
         userService.cardLoad(Card.builder()
                 .cardNo("555121211111111")
                 .name("국민")
                 .validDate("0121")
+                .cvc("654")
                 .build(), 1L);
 
         adminService.savePay(Pay.builder()
-                .userName("NAME")
-                .cardName("삼성")
-                .buyDate("2022-09-01")
+                .payName("삼성")
+                .payImg("img.jpg")
+                .buyDate(LocalDateTime.of(2022,12,12,12,12,12,1234))
                 .buyTotal(50000L)
                 .build(), 1L);
 
@@ -139,6 +143,50 @@ public class DataLoader {
                 .name("사사")
                 .validDate("2221")
                 .build(), 5L);
+
+        authService.signUp(User.builder()
+                .loginId("consult_user")
+                .gender(Gender.MALE)
+                .birthDate(LocalDate.of(1993,12,31))
+                .adSelect("YES")
+                .email("Consultant@gmail.com")
+                .name("서컨턴")
+                .password(AppConfig.testPasswordEncoder().encode("pass1234!"))
+                .build());
+
+        authService.signUp(User.builder()
+                .loginId("consult_admin")
+                .gender(Gender.MALE)
+                .birthDate(LocalDate.of(1993,12,31))
+                .adSelect("YES")
+                .email("Consultant@gmail.com")
+                .name("서컨턴")
+                .password(AppConfig.testPasswordEncoder().encode("pass1234!"))
+                .role(Role.ROLE_ADMIN)
+                .build());
+
+        authService.signUp(User.builder()
+                .loginId("coach_user")
+                .gender(Gender.MALE)
+                .birthDate(LocalDate.of(1993,12,31))
+                .adSelect("YES")
+                .email("Coach_park@gmail.com")
+                .name("박코치")
+                .password(AppConfig.testPasswordEncoder().encode("pass1234!"))
+                .build());
+
+
+        authService.signUp(User.builder()
+                .loginId("coach_admin")
+                .gender(Gender.MALE)
+                .birthDate(LocalDate.of(1993,12,31))
+                .adSelect("YES")
+                .email("EMAIL@naver.com")
+                .name("김코치")
+                .password(AppConfig.testPasswordEncoder().encode("pass1234!"))
+                .role(Role.ROLE_ADMIN)
+                .build());
+
     }
 
     //method invoked during the shutdown
