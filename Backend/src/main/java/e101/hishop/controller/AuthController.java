@@ -71,8 +71,9 @@ public class AuthController {
                         .withClaim("user-id", users.getId())
                         .sign(algorithm);
 
-                response.setHeader("access-token", accessToken);
-                response.setHeader("refresh-token", refreshToken);
+                response.setHeader("accessToken", accessToken);
+                response.setHeader("refreshToken", refreshToken);
+
             } catch (Exception e) {
                 //TODO 적합한 예외처리 클래스 구현
                 log.error("Error login in: {} ", "refrsh fail");

@@ -67,6 +67,7 @@ public class UserServiceImpl implements UserService {
                     .cardId(p.getId())
                     .cardNo(p.getCardNo().substring(0, 4))
                     .name(p.getName())
+                    .validDate(p.getValidDate())
                     .build());
         }
         return respList;
