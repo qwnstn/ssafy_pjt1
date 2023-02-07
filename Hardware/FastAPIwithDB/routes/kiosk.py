@@ -3,6 +3,7 @@ from asyncio import run
 from fastapi import APIRouter, Request
 
 from routes.models import BarcodeList, CardList, RFIDList
+from functions.serial_test import RFID_Serial_Trans
 
 # from sqlalchemy.orm import Session
 
@@ -19,6 +20,8 @@ def 카드정보전송(request: Request, CardList: CardList):
     userId = data["userId"]
     defaultCardId = data["defaultCardId"]
     cardList = data["cardList"]
+    ### RFID 시작
+    RFID_Serial_Trans().main()
     ###
     ### 웹소켓 자리
     ### 
