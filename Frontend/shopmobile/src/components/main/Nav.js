@@ -24,8 +24,6 @@ const Nav = () => {
   if (obj !== null) {
     const parsedObj = JSON.parse(obj);
     if (parsedObj && parsedObj.hasOwnProperty("user-id")) {
-      const userid = parsedObj["user-id"];
-      console.log(userid);
       loginCheck = true;
     }
     else{

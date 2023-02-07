@@ -61,7 +61,6 @@ const SignIn = () => {
       .post(API_URI, formData)
       .then((response) => {
         localStorage.setItem("accesstoken", response.headers["accesstoken"]);
-        localStorage.setItem("refreshtoken", response.headers["refreshtoken"]);
 
         axios.defaults.headers.common[
           "Authorization"

@@ -37,43 +37,22 @@ const style = {
 };
 
 const mdTheme = createTheme();
-const API_URI = `${HOST}/admin/product`;
+const API_URI = `${HOST}/admin/employees`;
 
-export default function ProductList() {
+export default function EmployeeList() {
   const navigate = useNavigate();
 
-  function ProductDetail(productId) {
-    navigate(`/admin/productdetail/${productId}`);
+  function EmployeeDetail(employeeId) {
+    navigate(`/admin/employeedetail/${employeeId}`);
   }
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  // 상품 목록 list axios통신
+  // 직원 목록 list axios통신
   const [rows, setRows] = useState([]);
   const [payload, setPayload] = useState({});
-
-  const refreshAccessToken = async () => {
-    try {
-      // Get the refresh token from localStorage
-      const refreshToken = localStorage.getItem("refreshtoken");
-
-      // Make a POST request to the refresh token endpoint
-      const response = await axios.post(`${HOST}/refresh-token`, null, {
-        headers: {
-          Authorization: `Bearer ${refreshToken}`,
-        },
-      });
-
-      // Update the access token in localStorage
-      localStorage.setItem("accesstoken", response.headers["accesstoken"]);
-
-      return response.headers["accesstoken"];
-    } catch (error) {
-      // Handle the error
-    }
-  };
 
   useEffect(() => {
     const accessToken = localStorage.getItem("accesstoken");
@@ -109,15 +88,15 @@ export default function ProductList() {
     navigate("/admin/login");
   }
 
-  const handleAddProduct = async () => {
+  const handleAddEmployee = async () => {
     const accessToken = localStorage.getItem("accesstoken");
     try {
+      const branchId = document.getElementById("branchId").value;
       const name = document.getElementById("name").value;
-      const price = document.getElementById("price").value;
-      const rfid = document.getElementById("rfid").value;
-      const barcode = document.getElementById("barcode").value;
-      const image = document.getElementById("image").value;
-      const data = { name, price, rfid, barcode, image };
+      const position = document.getElementById("position").value;
+      const part = document.getElementById("part").value;
+      const staffLoginId = document.getElementById("staffLoginId").value;
+      const data = { branchId, name, position, part, staffLoginId };
       await axios.post(API_URI, data, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -156,7 +135,7 @@ export default function ProductList() {
                     gutterBottom
                     sx={{ fontWeight: "bold" }}
                   >
-                    상품 목록
+                    직원 리스트
                   </Typography>
                   <TableContainer
                     sx={{
@@ -176,33 +155,33 @@ export default function ProductList() {
                           }}
                         >
                           <TableCell sx={{ fontWeight: "bold", fontSize: 18 }}>
-                            상품ID
+                            직원ID
                           </TableCell>
                           <TableCell sx={{ fontWeight: "bold", fontSize: 18 }}>
-                            이름
+                            직원로그인ID
                           </TableCell>
                           <TableCell sx={{ fontWeight: "bold", fontSize: 18 }}>
-                            가격
+                            직원이름
                           </TableCell>
                           <TableCell sx={{ fontWeight: "bold", fontSize: 18 }}>
-                            RFID코드
+                            직급
                           </TableCell>
                           <TableCell sx={{ fontWeight: "bold", fontSize: 18 }}>
-                            바코드
+                            담당
                           </TableCell>
                         </TableRow>
                       </TableHead>
                       <TableBody>
                         {rows.map((row) => (
                           <TableRow
-                            onClick={() => ProductDetail(row.id)}
+                            onClick={() => EmployeeDetail(row.id)}
                             key={row.id}
                           >
                             <TableCell>{row.id}</TableCell>
+                            <TableCell>{row.staffLoginId}</TableCell>
                             <TableCell>{row.name}</TableCell>
-                            <TableCell>{row.price}원</TableCell>
-                            <TableCell>{row.rfid}</TableCell>
-                            <TableCell>{row.barcode}</TableCell>
+                            <TableCell>{row.position}</TableCell>
+                            <TableCell>{row.part}</TableCell>
                           </TableRow>
                         ))}
                       </TableBody>
@@ -214,7 +193,7 @@ export default function ProductList() {
                   sx={{ mt: 1, fontWeight: "bold" }}
                   variant="contained"
                 >
-                  상품 추가
+                  직원 추가
                 </Button>
                 <Modal
                   open={open}
@@ -229,40 +208,40 @@ export default function ProductList() {
                       component="h2"
                       sx={{ mb: 2 }}
                     >
-                      상품 추가
+                      직원 추가
                     </Typography>
                     <TextField
                       required
+                      id="branchId"
+                      label="지점아이디"
+                      variant="standard"
+                      sx={{ mb: 1 }}
+                    />
+                    <TextField
+                      required
                       id="name"
-                      label="제품명"
+                      label="직원이름"
                       variant="standard"
                       sx={{ mb: 1 }}
                     />
                     <TextField
                       required
-                      id="price"
-                      label="가격"
+                      id="position"
+                      label="직급"
                       variant="standard"
                       sx={{ mb: 1 }}
                     />
                     <TextField
                       required
-                      id="rfid"
-                      label="RFID코드"
+                      id="part"
+                      label="역할"
                       variant="standard"
                       sx={{ mb: 1 }}
                     />
                     <TextField
                       required
-                      id="barcode"
-                      label="바코드"
-                      variant="standard"
-                      sx={{ mb: 1 }}
-                    />
-                    <TextField
-                      required
-                      id="image"
-                      label="이미지"
+                      id="staffLoginId"
+                      label="직원로그인ID"
                       variant="standard"
                       sx={{ mb: 5 }}
                     />
@@ -270,7 +249,7 @@ export default function ProductList() {
                       sx={{ mt: 1, ml: 8 }}
                       variant="contained"
                       onClick={() => {
-                        handleAddProduct();
+                        handleAddEmployee();
                       }}
                     >
                       추가

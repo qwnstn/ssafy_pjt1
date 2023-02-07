@@ -53,26 +53,40 @@ const AddCard = () => {
   };
 
   const handleSubmit = (e) => {
+    let accesstoken = localStorage.getItem("accesstoken");
     e.preventDefault();
     // 개인정보 수집 및 이용 동의 체크
     if (!checked) alert("개인정보 수집 및 이용에 동의해주세요.");
     else {
-      if (cardNumber.length !== 16 || cardExpiration.length !== 4 || cardCVC.length !== 3 || cardCompany === "") {
+      if (
+        cardNumber.length !== 16 ||
+        cardExpiration.length !== 4 ||
+        cardCVC.length !== 3 ||
+        cardCompany === ""
+      ) {
         setError({
           cardNumber: cardNumber === "",
           cardExpiration: cardExpiration === "",
           cardCVC: cardCVC === "",
         });
-        alert("카드정보를 다시 입력해주세요.")
+        alert("카드정보를 다시 입력해주세요.");
       } else {
         // Make API call to register card
         const API_URI = `${HOST}/card/`;
         axios
-          .post(API_URI, {
-            cardNo: cardNumber,
-            name: cardCompany,
-            validDate: cardExpiration,
-          })
+          .post(
+            API_URI,
+            {
+              cardNo: cardNumber,
+              name: cardCompany,
+              validDate: cardExpiration,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${accesstoken}`,
+              },
+            }
+          )
           .then((res) => {
             alert("카드 등록이 완료되었습니다");
             navigate("/app/mycard");
@@ -80,13 +94,14 @@ const AddCard = () => {
           .catch((error) => {
             console.error(error);
           });
+        // console.log(cardNumber)
       }
     }
   };
 
   const handleCardNumber = (e) => {
     const cardNum = e.target.value;
-    if (!/^\d+$/.test(cardNum)) {
+    if (/[^0-9]/g.test(cardNum)) {
       setError({ ...error, cardNumber: true });
     } else {
       setError({ ...error, cardNumber: false });
@@ -96,7 +111,7 @@ const AddCard = () => {
 
   const handleCardExpiration = (e) => {
     const cardExp = e.target.value;
-    if (!/^\d+$/.test(cardExp)) {
+    if (/[^0-9]/g.test(cardExp)) {
       setError({ ...error, cardExpiration: true });
     } else {
       setError({ ...error, cardExpiration: false });
@@ -106,7 +121,7 @@ const AddCard = () => {
 
   const handleCardCVC = (e) => {
     const cardCVC = e.target.value;
-    if (!/^\d+$/.test(cardCVC)) {
+    if (/[^0-9]/g.test(cardCVC)) {
       setError({ ...error, cardCVC: true });
     } else {
       setError({ ...error, cardCVC: false });

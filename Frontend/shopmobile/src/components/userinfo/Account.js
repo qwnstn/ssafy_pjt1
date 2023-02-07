@@ -17,6 +17,25 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
+const UserSecession = async () => {
+  // TODO Delete
+  const accessToken = localStorage.getItem("accesstoken");
+  localStorage.removeItem("accesstoken");
+  const API_URI = `${HOST}/user`;
+  await axios
+    .delete(API_URI, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+    .then(() => {
+      console.log("삭제완료");
+    })
+    .catch(function (err) {
+      console.log(err);
+    });
+};
+
 export default function Account() {
   const [userId, setUserId] = useState("");
   const [name, setName] = useState("");
@@ -27,52 +46,29 @@ export default function Account() {
 
   const API_URI = `${HOST}/user`;
 
-  // Function to refresh the access token
-  // const refreshAccessToken = async () => {
-  //   try {
-  //     // Get the refresh token from localStorage
-  //     const refreshToken = localStorage.getItem("refreshtoken");
-
-  //     // Make a POST request to the refresh token endpoint
-  //     const response = await axios.post(`${HOST}/refresh-token`, {
-  //       headers: {
-  //         Authorization: `Bearer ${refreshToken}`
-  //       }});
-
-  //     // Update the access token in localStorage
-  //     localStorage.setItem("accesstoken", response.headers["accesstoken"]);
-
-  //     return response.headers["accesstoken"];
-  //   } catch (error) {
-  //     // Handle the error
-  //   }
-  // };
-
   useEffect(() => {
     (async () => {
-      let accesstoken = localStorage.getItem("accesstoken");
+      const accesstoken = localStorage.getItem("accesstoken");
 
-      // If the access token is not set or has expired
-      // if (!accesstoken) {
-      //   // Refresh the access token
-      //   accesstoken = await refreshAccessToken();
-      // }
-
-      const { data } = await axios.get(API_URI, {
-        headers: {
-          Authorization: `Bearer ${accesstoken}`,
-        },
-      });
-
-      setUserId(data.loginId);
-      setName(data.name);
-      setPhone(data.phone);
-      console.log(data);
-      setGender(data.gender);
-      setEmail(data.email);
-      setbirthDate(data.birthDate);
+      try {
+        const { data } = await axios.get(API_URI, {
+          headers: {
+            Authorization: `Bearer ${accesstoken}`,
+          },
+        });
+  
+        setUserId(data.loginId);
+        setName(data.name);
+        setPhone(data.phone);
+        setGender(data.gender);
+        setEmail(data.email);
+        setbirthDate(data.birthDate);
+      } catch (error) {
+          console.log(error);
+      }
     })();
   });
+  
   return (
     <Container component="main" maxWidth="xs">
       <Box
@@ -143,7 +139,7 @@ export default function Account() {
         </Grid>
         <Grid container sx={{ mt: 2, mb: 2 }}>
           <Grid item xs>
-            <Link href="/app/removeid" variant="body2">
+            <Link href="/app" onClick={UserSecession}>
               회원 탈퇴
             </Link>
           </Grid>

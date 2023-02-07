@@ -10,6 +10,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
 import BadgeIcon from "@mui/icons-material/Badge";
+import StoreIcon from '@mui/icons-material/Store';
 import { Link } from "react-router-dom";
 import getPayloadFromToken from "../getPayloadFromToken";
 
@@ -21,7 +22,7 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="메인 페이지" />
     </ListItemButton>
-    <ListItemButton component={Link} to="/admin/paymentlist">
+    <ListItemButton component={Link} to="/admin/paylist">
       <ListItemIcon>
         <PaymentIcon />
       </ListItemIcon>
@@ -44,6 +45,12 @@ export const mainListItems = (
         <BadgeIcon />
       </ListItemIcon>
       <ListItemText primary="직원 관리" />
+    </ListItemButton>
+    <ListItemButton component={Link} to="/admin/branchlist">
+      <ListItemIcon>
+        <StoreIcon />
+      </ListItemIcon>
+      <ListItemText primary="지점 관리" />
     </ListItemButton>
   </React.Fragment>
 );

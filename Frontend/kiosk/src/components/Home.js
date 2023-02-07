@@ -9,19 +9,17 @@ import { Grid } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import { useNavigate } from "react-router-dom";
 
-
-// 웹소켓의 통신이 오면 rfid read 페이지로 넘어간뒤, 
+// 웹소켓의 통신이 오면 rfid read 페이지로 넘어간뒤,
 
 // 비회원 결제 버튼을 누르면 rfid read 페이지로 넘어간뒤, itemlist 페이지로 넘어가는 기능
-
 
 export default function KioskMain() {
   const navigate = useNavigate();
 
   // 키오스크 아이디는 무슨 기준으로 정하는가?
-  const kioskId = 1
+  const kioskId = 1;
 
-
+  const [message, setMessage] = useState("");
   const [value, setValue] = useState(`${kioskId}/${Date.now()}`);
 
   useEffect(() => {
@@ -31,34 +29,6 @@ export default function KioskMain() {
     // 59초
     return () => clearInterval(interval);
   }, []);
-
-  // const [socket, setSocket] = useState(null);
-  // const [message, setMessage] = useState("");
-  // const [messages, setMessages] = useState([]);
-
-  // useEffect(() => {
-  //   const ws = new WebSocket("ws://192.168.40.111:8888");
-
-  //   ws.onopen = () => {
-  //     console.log("WebSocket connection established.");
-  //   };
-
-  //   ws.onmessage = (event) => {
-  //     setMessages((prevMessages) => [...prevMessages, event.data]);
-  //   };
-
-  //   setSocket(ws);
-
-  //   return () => {
-  //     ws.close();
-  //   };
-  // }, []);
-
-  // const sendMessage = (event) => {
-  //   event.preventDefault();
-  //   socket.send(message);
-  //   setMessage("");
-  // };
 
   useEffect(() => {
     sessionStorage.removeItem("user");
@@ -73,6 +43,19 @@ export default function KioskMain() {
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, [navigate]);
+
+  useEffect(() => {
+    const socket = new WebSocket("ws:");
+
+    socket.addEventListener("message", (event) => {
+      setMessage(event.data);
+      console.log("WebSocket message received:", event.data);
+    });
+
+    return () => {
+      socket.close();
+    };
+  }, []);
 
   return (
     <Box>
@@ -131,6 +114,7 @@ export default function KioskMain() {
           >
             회원결제를 위해 바코드에 QR을 찍거나 앱으로 QR스캔하세요
           </Grid>
+          {message}
           <Grid container sx={{ mt: 2, mb: 2 }}>
             <Grid item xs />
             <Grid item>
@@ -143,22 +127,6 @@ export default function KioskMain() {
               </Button>
             </Grid>
           </Grid>
-          {/* <div>
-            <h1>WebSocket Chat</h1>
-            <ul>
-              {messages.map((message, index) => (
-                <li key={index}>{message}</li>
-              ))}
-            </ul>
-            <form onSubmit={sendMessage}>
-              <input
-                type="text"
-                value={message}
-                onChange={(event) => setMessage(event.target.value)}
-              />
-              <button type="submit">Send</button>
-            </form>
-          </div> */}
         </Box>
       </Card>
     </Box>

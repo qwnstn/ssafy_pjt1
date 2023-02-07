@@ -3,7 +3,6 @@ import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import Box from "@mui/material/Box";
-import CssBaseline from "@mui/material/CssBaseline";
 import { Grid, Button } from "@mui/material";
 import axios from "axios";
 import HOST from "../../Host";
@@ -13,66 +12,69 @@ import HOST from "../../Host";
 export default function CardInfo() {
   // const navigate = useNavigate();
 
-  const cardImage = (date) => {
-    if (date === "현대") {
+  const cardImage = (data) => {
+    if (data === "현대") {
       return "/app/images/hyundai.png";
-    } else if (date === "ibk") {
+    } else if (data === "ibk") {
       return "/app/images/ibk.png";
-    } else if (date === "하나") {
+    } else if (data === "하나") {
       return "/app/images//hana.png";
-    } else if (date === "신한") {
+    } else if (data === "신한") {
       return "/app/images/shinhan.png";
-    } else if (date === "우리") {
+    } else if (data === "우리") {
       return "/app/images/woori.png";
     } else {
       return "/app/images/samsung.png";
     }
   };
+ 
+  const accesstoken = localStorage.getItem("accesstoken");
+
 
   // 카드 목록 리스트 - 카드정보 통신을 통해 값을 받아와야함
   const [cards, setCards] = useState([]);
 
-  
-  const API_URI = `${HOST}/user/card`;
-  
   useEffect(() => {
     (async () => {
-      let accesstoken = localStorage.getItem("accesstoken");
-      const { data } = await axios.get(API_URI, {
+      const { data } = await axios.get(`${HOST}/user/card`, {
         headers: {
           Authorization: `Bearer ${accesstoken}`,
         },
       });
 
       setCards(data)
-      // console.log(data);
+      // console.log('카드 목록',data);
     })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   
 
 
   // 메인 카드 pk
-  const [defaultCardId, setDefaultCardId] = useState([]);
-  
-  const API_URI_2 = `${HOST}/user`;
+  const [defaultCardId, setDefaultCardId] = useState();
+  // console.log('메인카드번호',defaultCardId)
   
   useEffect(() => {
     (async () => {
-      let accesstoken = localStorage.getItem("accesstoken");
-      const { data } = await axios.get(API_URI_2, {
+      const { data } = await axios.get(`${HOST}/user`, {
         headers: {
           Authorization: `Bearer ${accesstoken}`,
         },
       });
       setDefaultCardId(data.defaultCardId)
+      // console.log('asdasdasda',data.defaultCardId)
     })();
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[]);
+  
+
   
   // 유저 정보에서 card id 뽑아서 저장
-  const mainCard = cards.find(object => object.cardId === defaultCardId);
+  const [mainCard, setMainCard] = useState();
+  useEffect(() => {
+    setMainCard(cards.find(object => object.cardId === defaultCardId));
+  });
 
-
-  // setMainCard(main.cardId) 
 
   // 카드 목록 등록 함수
   const renderCards = () => {
@@ -81,23 +83,14 @@ export default function CardInfo() {
         <Grid item margin={1} key={index}>
           <Button
             sx={{ width: "100%", height: "100%", p: 0 }}
-            onClick={() => {
-              // console.log(card);
-              // 메인 카드 교체 axios 통신
-              // const API_URI_3 = `${HOST}/user/card/${card.cardId}/main`;
-              // useEffect(() => {
-              //   (async () => {
-              //     let accesstoken = localStorage.getItem("accesstoken");
-              //     const { data } = await axios.patch(API_URI_3, {
-              //       cardId: "2"
-              //     }, {
-              //       headers: {
-              //         Authorization: `Bearer ${accesstoken}`,
-              //       },
-              //     });
-              //     setDefaultCardId(data.defaultCardId)
-              //   })();
-              // }, []);
+            onClick={async () => {
+                await axios.patch(`${HOST}/user/card/${card.cardId}/main`, null ,{
+                  headers: {
+                    Authorization: `Bearer ${accesstoken}`,
+                  },
+                });
+                setDefaultCardId(card.cardId)
+                setMainCard(cards.find(object => object.cardId === card.cardId))
             }}
           >
             <CardMedia component="img" image={cardImage(card['name'])} />

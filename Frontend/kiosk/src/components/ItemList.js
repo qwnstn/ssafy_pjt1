@@ -13,9 +13,6 @@ import CardActions from "@mui/material/CardActions";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 
-
-
-
 const columns = [
   { id: "name", label: "품명", minWidth: 140 },
   { id: "price", label: "단가", minWidth: 50 },

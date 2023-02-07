@@ -22,13 +22,16 @@ import HOST from "../../Host";
 import getPayloadFromToken from "../../getPayloadFromToken";
 
 const mdTheme = createTheme();
-const API_URI = `${HOST}/admin/users`;
+const API_URI = `${HOST}/admin/pays`;
 
-export default function UserList() {
+export default function PayList() {
   const navigate = useNavigate();
+  const convertDate = (date) => {
+    return date.split("T")[0];
+  };
 
-  function UserDetail(userId) {
-    navigate(`/admin/userdetail/${userId}`);
+  function PayDetail(buyId, userName) {
+    navigate(`/admin/paydetail/${buyId}`, { userName });
   }
 
   // 상품 목록 list axios통신
@@ -94,7 +97,7 @@ export default function UserList() {
                     gutterBottom
                     sx={{ fontWeight: "bold" }}
                   >
-                    유저 목록
+                    결제 목록
                   </Typography>
                   <TableContainer
                     sx={{
@@ -114,33 +117,33 @@ export default function UserList() {
                           }}
                         >
                           <TableCell sx={{ fontWeight: "bold", fontSize: 18 }}>
-                            아이디
+                            결제ID
                           </TableCell>
                           <TableCell sx={{ fontWeight: "bold", fontSize: 18 }}>
-                            이름
+                            결제카드
                           </TableCell>
                           <TableCell sx={{ fontWeight: "bold", fontSize: 18 }}>
-                            성별
+                            결제가격
                           </TableCell>
                           <TableCell sx={{ fontWeight: "bold", fontSize: 18 }}>
-                            생년월일
+                            결제날짜
                           </TableCell>
                           <TableCell sx={{ fontWeight: "bold", fontSize: 18 }}>
-                            핸드폰번호
+                            결제자
                           </TableCell>
                         </TableRow>
                       </TableHead>
                       <TableBody>
                         {rows.map((row) => (
                           <TableRow
-                            onClick={() => UserDetail(row.id)}
+                            onClick={() => PayDetail(row.id, row.userName)}
                             key={row.id}
                           >
-                            <TableCell>{row.loginId}</TableCell>
-                            <TableCell>{row.name}</TableCell>
-                            <TableCell>{row.gender}</TableCell>
-                            <TableCell>{row.birthDate}</TableCell>
-                            <TableCell>{row.phone}</TableCell>
+                            <TableCell>{row.id}</TableCell>
+                            <TableCell>{row.payName}</TableCell>
+                            <TableCell>{row.buyTotal}원</TableCell>
+                            <TableCell>{convertDate(row.buyDate)}</TableCell>
+                            <TableCell>{row.userName}</TableCell>
                           </TableRow>
                         ))}
                       </TableBody>

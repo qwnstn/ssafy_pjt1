@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import QrReader from "modern-react-qr-reader";
 import { Box, Card, Button } from "@mui/material";
 import { Grid } from "@mui/material";
@@ -7,14 +7,28 @@ import axios from "axios";
 import HOST from "../../Host";
 import { useNavigate } from "react-router-dom";
 
-const QRReader = (props) => {
+const QRReader = () => {
   const navigate = useNavigate();
+  const API_USERID = `${HOST}/user`;
 
   // 화면 전환 버튼
   const [cameraMode, setCameraMode] = useState("environment");
+  const [userId, setUserId] = useState(""); 
 
   // 값 받아와야함
-  const userId = "userId";
+  useEffect(() => {
+    (async () => {
+      let accesstoken = localStorage.getItem("accesstoken");
+
+      const { data } = await axios.get(API_USERID, {
+        headers: {
+          Authorization: `Bearer ${accesstoken}`,
+        },
+      });
+      setUserId(data.id);
+
+    })();
+  });
 
   // qr값을 받으면 유저 정보, 시간, 키오스크 정보를 axios로 보냄
   const API_URI = `${HOST}/iot/qr`;
@@ -40,6 +54,7 @@ const QRReader = (props) => {
           })
           .then((res) => {
             // 성공시 확인 메세지 표시 후 메인 페이지로
+            console.log(res);
             alert("QR코드가 성공적으로 촬영되었습니다");
             navigate("/app");
           })

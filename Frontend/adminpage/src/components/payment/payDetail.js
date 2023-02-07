@@ -1,54 +1,54 @@
 import * as React from "react";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useState, useEffect } from "react";
+import Typography from "@mui/material/Typography";
 import {
   Box,
   Grid,
   Paper,
-  Container,
-  CssBaseline,
   Toolbar,
-  Typography,
+  CssBaseline,
   Table,
-  TableBody,
-  TableCell,
-  TableHead,
   TableRow,
+  TableCell,
   TableContainer,
+  TableHead,
+  TableBody,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { Container } from "@mui/system";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
 import HOST from "../../Host";
+import { useParams, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 import getPayloadFromToken from "../../getPayloadFromToken";
 
 const mdTheme = createTheme();
-const API_URI = `${HOST}/admin/users`;
 
-export default function UserList() {
+const PayDetail = () => {
+  const { buyId } = useParams();
+  const [pays, setPays] = useState([]);
   const navigate = useNavigate();
 
-  function UserDetail(userId) {
-    navigate(`/admin/userdetail/${userId}`);
-  }
+  useEffect(() => {
+    const accessToken = localStorage.getItem("accesstoken");
+    const fetchData = async () => {
+      try {
+        const result = await axios.get(`${HOST}/admin/pays/${buyId}`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+        setPays(result.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  }, [buyId]);
 
-  // 상품 목록 list axios통신
-  const [rows, setRows] = useState([]);
   const [payload, setPayload] = useState({});
 
   useEffect(() => {
     const accessToken = localStorage.getItem("accesstoken");
-    axios
-      .get(API_URI, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      })
-      .then((res) => {
-        setRows(res.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
     const decodedPayload = getPayloadFromToken(accessToken);
     setPayload(decodedPayload);
   }, []);
@@ -85,8 +85,14 @@ export default function UserList() {
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid>
-              <Grid item xs={12}>
-                <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
+              <Grid item xs={12} md={4} lg={3}>
+                <Paper
+                  sx={{
+                    p: 2,
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                >
                   <Typography
                     component="h2"
                     variant="h5"
@@ -94,7 +100,7 @@ export default function UserList() {
                     gutterBottom
                     sx={{ fontWeight: "bold" }}
                   >
-                    유저 목록
+                    결제 상세
                   </Typography>
                   <TableContainer
                     sx={{
@@ -107,40 +113,34 @@ export default function UserList() {
                   >
                     <Table size="small">
                       <TableHead>
-                        <TableRow
-                          sx={{
-                            backgroundColor: "#90caf9",
-                            borderBottom: 1,
-                          }}
-                        >
+                        <TableRow>
                           <TableCell sx={{ fontWeight: "bold", fontSize: 18 }}>
-                            아이디
+                            번호
                           </TableCell>
                           <TableCell sx={{ fontWeight: "bold", fontSize: 18 }}>
-                            이름
+                            쿠폰여부
                           </TableCell>
                           <TableCell sx={{ fontWeight: "bold", fontSize: 18 }}>
-                            성별
+                            상품ID
                           </TableCell>
                           <TableCell sx={{ fontWeight: "bold", fontSize: 18 }}>
-                            생년월일
+                            가격
                           </TableCell>
                           <TableCell sx={{ fontWeight: "bold", fontSize: 18 }}>
-                            핸드폰번호
+                            제품명
                           </TableCell>
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                        {rows.map((row) => (
+                        {pays.map((row) => (
                           <TableRow
-                            onClick={() => UserDetail(row.id)}
                             key={row.id}
                           >
-                            <TableCell>{row.loginId}</TableCell>
-                            <TableCell>{row.name}</TableCell>
-                            <TableCell>{row.gender}</TableCell>
-                            <TableCell>{row.birthDate}</TableCell>
-                            <TableCell>{row.phone}</TableCell>
+                            <TableCell>{row.count + 1}</TableCell>
+                            <TableCell>{row.couponName}</TableCell>
+                            <TableCell>{row.id}</TableCell>
+                            <TableCell>{row.price}</TableCell>
+                            <TableCell>{row.productName}</TableCell>
                           </TableRow>
                         ))}
                       </TableBody>
@@ -154,4 +154,6 @@ export default function UserList() {
       </Box>
     </ThemeProvider>
   );
-}
+};
+
+export default PayDetail;

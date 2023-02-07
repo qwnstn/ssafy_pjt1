@@ -12,16 +12,16 @@ import HOST from "../Host";
 
 
 export default function CardInfo() {
-  const cardImage = (date) => {
-    if (date === "현대") {
+  const cardImage = (data) => {
+    if (data === "현대") {
       return "/kiosk/images/hyundai.png";
-    } else if (date === "ibk") {
+    } else if (data === "ibk") {
       return "/kiosk/images/ibk.png";
-    } else if (date === "하나") {
+    } else if (data === "하나") {
       return "/kiosk/images//hana.png";
-    } else if (date === "신한") {
+    } else if (data === "신한") {
       return "/kiosk/images/shinhan.png";
-    } else if (date === "우리") {
+    } else if (data === "우리") {
       return "/kiosk/images/woori.png";
     } else {
       return null;
