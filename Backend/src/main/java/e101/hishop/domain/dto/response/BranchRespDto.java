@@ -1,7 +1,6 @@
 package e101.hishop.domain.dto.response;
 
 import e101.hishop.domain.entity.Branch;
-import e101.hishop.domain.entity.Staff;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +11,6 @@ public class BranchRespDto {
 
     private Long id;
     private String branchName;
-
     private String region;
 
 

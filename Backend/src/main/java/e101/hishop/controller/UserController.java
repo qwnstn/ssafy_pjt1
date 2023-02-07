@@ -51,7 +51,7 @@ public class UserController {
 
     @PostMapping("/card")
     public ResponseEntity<String> userCardSave(@RequestBody @Validated CardSaveReqDto dto) {
-        userService.saveCard(dto.toPaymentEntity());
+        userService.saveCard(dto.toCardEntity());
         return new ResponseEntity<>("저장완료", HttpStatus.OK);
     }
 

@@ -179,7 +179,6 @@ public class UserServiceImpl implements UserService {
 
         User user = userJPARepository.findByLoginId(username)
                 .orElseThrow(() -> new CommonException(2, "User객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
-
         return user.getId();
     }
 
