@@ -205,13 +205,17 @@ public class UserServiceImpl implements UserService {
                 .cardList(cards)
                 .build();
         log.info("빌드 됐음");
+        log.info("{}", cardSendRespDto.getUserId());
+        log.info("{}", cardSendRespDto.getDefaultCardId());
+        log.info("{}", cardSendRespDto.getCardList());
         Mono<String> response = webClient.post()
                 .uri("/api/kiosk/cardinfo")
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(BodyInserters.fromObject(cardSendRespDto))
                 .retrieve()
                 .bodyToMono(String.class);
-        log.info("{}", response);
+        String mono = response.block();
+        log.info("{}", mono);
         // POST 완성되면 작업
         return "true";
     }
