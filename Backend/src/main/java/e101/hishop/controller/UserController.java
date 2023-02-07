@@ -98,7 +98,6 @@ public class UserController {
 
     @PostMapping("/qr")
     public ResponseEntity<String> qrRead(@RequestBody QrReqDto dto) {
-        log.info("안녕 QR엥 온걸 환영해");
         userService.qrRead(dto);
         return new ResponseEntity<>("전달 완료", HttpStatus.OK);
     }

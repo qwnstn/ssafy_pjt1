@@ -28,7 +28,9 @@ import reactor.core.publisher.Mono;
 import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 @Transactional
 @Service
@@ -188,34 +190,30 @@ public class UserServiceImpl implements UserService {
     }
     @Override
     public String qrRead(QrReqDto dto) {
-        log.info("서비스는 들어왔구나");
         Long userId = dto.getUserId();
-        log.info("이게 아이디야");
         User user = userJPARepository.findById(userId)
                 .orElseThrow(() -> new CommonException(2, "User객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
-        log.info("User 받아와짐");
         Long defaultCardId = user.getDefaultCardId();
         List<Card> cards = cardJPARepository.findAllByUserId(userId);
-        log.info("카드 받아와짐");
-        CardSendRespDto cardSendRespDto = new CardSendRespDto();
-        cardSendRespDto.builder()
+        List<Object> cardList = new ArrayList<>();
+        for (Card c: cards) {
+            HashMap hashMap = new HashMap<String, Optional>();
+            hashMap.put("cardId", c.getId());
+            hashMap.put("cardName", c.getName());
+            hashMap.put("cardNo", c.getCardNo().substring(0, 4));
+            cardList.add(hashMap);
+        }
+        CardSendRespDto cardSendRespDto = CardSendRespDto.builder()
                 .userId(userId)
                 .defaultCardId(defaultCardId)
-                .cardList(cards)
+                .cardList(cardList)
                 .build();
-        log.info("빌드 됐음");
-        log.info("{}", cardSendRespDto.getUserId());
-        log.info("{}", cardSendRespDto.getDefaultCardId());
-        log.info("{}", cardSendRespDto.getCardList());
         Mono<String> response = webClient.post()
                 .uri("/api/kiosk/cardinfo")
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(BodyInserters.fromObject(cardSendRespDto))
                 .retrieve()
                 .bodyToMono(String.class);
-        String mono = response.block();
-        log.info("{}", mono);
-        // POST 완성되면 작업
-        return "true";
+        return response.block();
     }
 }
