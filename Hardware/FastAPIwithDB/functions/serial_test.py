@@ -1,7 +1,7 @@
 import serial
 import threading
 import time
-import requests
+
 
 
 class RFID_Serial_Trans:
@@ -20,14 +20,18 @@ class RFID_Serial_Trans:
         # data = 0x3304B199 # Reading Stay
         # data = 0x3304B299 # Reading Nonstop
         while True:
-            if self.tag_uid.values() and max(self.tag_uid.values()) > 10:
-                return list(self.tag_uid.keys())
-            data = input().strip()
-            if data == "serial exit": # 종료 명령어
-                break
-            if data:
-                self.ser.write(data.encode())
-            time.sleep(0.5)
+            if self.tag_uid and max(list(self.tag_uid.values())) > 10:
+                result = list()
+                for key, value in self.tag_uid:
+                    if value > 3:
+                        result.append(key)
+                return result
+            # data = input().strip()
+            # if data == "serial exit": # 종료 명령어
+            #     break
+            # if data:
+            #     self.ser.write(data.encode())
+            # time.sleep(0.5)
 
     def readthread(self, ser):              # 데이터 받는 함수 => 스레드 생성해서 병렬로 처리 예정
         # 스레드가 종료될 때 까지 진행
