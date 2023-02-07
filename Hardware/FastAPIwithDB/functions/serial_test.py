@@ -9,18 +9,19 @@ class RFID_Serial_Trans:
     baud = 9600                                 # 보드레이트
     # baud = 115200                             # RFID 보드레이트 115200 기본값
     ser = serial.Serial(PORT, baud, timeout=0.1)  # serial 통신 세팅
-
+    tag_uid = dict()
     def main(self):
         thread = threading.Thread(target=self.readthread, args=(self.ser,), daemon=True)   # 통신을 다른 코드와 병렬처리 하기 위한 스레드 생성
         thread.start()                                              # 스레드 시작
 
         # 0.5초마다 데이터 전송
+        # RFID 통신 바이트 정리
+        # data = 0x3304C299 # RFID 확인 -> 0x33052C0199 정상응답
+        # data = 0x3304B199 # Reading Stay
+        # data = 0x3304B299 # Reading Nonstop
         while True:
-            # RFID 통신 바이트 정리
-            # data = 0x3304C299 # RFID 확인 -> 0x33052C0199 정상응답
-            # data = 0x3304B199 # Reading Stay
-            # data = 0x3304B299 # Reading Nonstop
-
+            if self.tag_uid.values() and max(self.tag_uid.values()) > 10:
+                return list(self.tag_uid.keys())
             data = input().strip()
             if data == "serial exit": # 종료 명령어
                 break
@@ -29,8 +30,6 @@ class RFID_Serial_Trans:
             time.sleep(0.5)
 
     def readthread(self, ser):              # 데이터 받는 함수 => 스레드 생성해서 병렬로 처리 예정
-        data_line = set()
-        tag_uid = dict()
         # 스레드가 종료될 때 까지 진행
         while True:
             time.sleep(0.1)
@@ -56,11 +55,11 @@ class RFID_Serial_Trans:
                         uid = ''
                         for byte in data_now[3:-1]:
                             uid += hex(byte)[2:]
-                        if uid in tag_uid.keys():
-                            tag_uid[uid] += 1
+                        if uid in self.tag_uid.keys():
+                            self.tag_uid[uid] += 1
                             print("tag exist")
                         else:
-                            tag_uid[uid] = 1
+                            self.tag_uid[uid] = 1
                             print("new tag")
                     elif received_command[1] == 0x1B:           # 읽기 Stay 모드
                         print("Reading Stay Mode ON")
@@ -80,25 +79,15 @@ class RFID_Serial_Trans:
                         uid = data_now[5:13]
                         bd = data_now[13:-1]
                     else:
-                        print(data.decode(), end=" ")
+                        print(data_now.decode(), end=" ")
                         print("Unknown Request")
                         continue
                     if data_now[-1] == 0x99:                    # 종료 바이트
-                        for u in tag_uid.keys():
-                            print(u, tag_uid[u], tag_uid.keys())
-                            if tag_uid[u] > 3:
-                                data_line.add(u)
+                        print(self.tag_uid.keys(), self.tag_uid.values())
+                        pass
                     else:
                         print("Error Request")
-                if data_line:
-                    print(data_line)
-                    # request_data = {
-                    #     "kioskId": 1,
-                    #     "products": data_line
-                    # }
-                    # r = requests.post("http://himart.shop/api/iot/rfid", request_data).json()
-                    # print(r)
         ser.close()
 
 
-RFID_Serial_Trans().main()
+# RFID_Serial_Trans().main()
