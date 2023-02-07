@@ -15,18 +15,18 @@ import java.time.LocalDateTime;
 public class PayInfoRespDto {
 
     private Long id;
+    private String loginId;
     private String userName;
     private String payName;
-
     private String payImg;
-
     private LocalDateTime buyDate;
-
     private Long buyTotal;
 
     public static PayInfoRespDto of(Pay pay) {
         return PayInfoRespDto.builder()
                 .id(pay.getId())
+                .loginId(pay.getUser().getLoginId())
+                .userName(pay.getUser().getName())
                 .payName(pay.getPayName())
                 .payImg(pay.getPayImg())
                 .buyDate(pay.getBuyDate())
