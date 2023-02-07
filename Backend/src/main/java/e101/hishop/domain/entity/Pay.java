@@ -8,7 +8,6 @@ import org.hibernate.annotations.OnDeleteAction;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +26,7 @@ public class Pay {
     private Long id;
 
     //TODO LAZY로 변경?
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     @JsonIgnore

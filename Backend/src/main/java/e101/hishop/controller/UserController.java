@@ -25,7 +25,6 @@ public class UserController {
 
     private final UserService userService;
 
-//    private final UserInfoLoder userInfoLoder;
     @GetMapping
     public ResponseEntity<UserInfoRespDto> getUserInfo() {
         return new ResponseEntity<>(userService.getUserInfo(), HttpStatus.OK);

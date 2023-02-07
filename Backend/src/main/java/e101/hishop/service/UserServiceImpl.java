@@ -86,7 +86,7 @@ public class UserServiceImpl implements UserService {
         Card card = cardJPARepository.findById(cardId)
                 .orElseThrow(() -> new CommonException(2, "Card객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));;
         if (!card.getUser().equals(user)) {
-            throw new CommonException(2, "User객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new CommonException(9, "유저소유카드가 아닙니다", HttpStatus.INTERNAL_SERVER_ERROR);
         }
         if (user.getDefaultCardId().equals(cardId)) {
             editMainCard(null);
@@ -99,6 +99,14 @@ public class UserServiceImpl implements UserService {
     public void editMainCard(Long cardId){
         User user = userJPARepository.findById(getUserId())
                 .orElseThrow(() -> new CommonException(2, "User객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
+        if (cardId != null) {
+            Card card = cardJPARepository.findById(cardId)
+                    .orElseThrow(() -> new CommonException(2, "Card객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));;
+            if (!card.getUser().equals(user)) {
+                throw new CommonException(9, "유저소유카드가 아닙니다", HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }
+
         user.changeDefaultCard(cardId);
     }
 
@@ -134,6 +142,8 @@ public class UserServiceImpl implements UserService {
     public Boolean editName(EditNameReqDto dto, Long cardId) {
         Card card = cardJPARepository.findById(cardId)
                 .orElseThrow(() -> new CommonException(2, "Card가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
+        User user = userJPARepository.findById(getUserId())
+                .orElseThrow(() -> new CommonException(2, "User객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
         if (!(card.getUser().getId().equals(getUserId()))) throw new CommonException(9, "유저소유카드가 아닙니다.", HttpStatus.BAD_REQUEST);
         card.setName(dto.getName());
         return true;
@@ -151,6 +161,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<PayDetailInfoRespDto> getPayDetail(Long purchaseId) {
+        Pay pay = payJPARepository.findById(purchaseId)
+                .orElseThrow(() -> new CommonException(2, "pay가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
+        if (!(pay.getUser().getId().equals(getUserId()))) throw new CommonException(9, "유저소유pay가 아닙니다.", HttpStatus.BAD_REQUEST);
         List<PayDetail> payDetails = payDetailJPARepository.findAllByPayId(purchaseId);
         List<PayDetailInfoRespDto> payDetailList = new ArrayList<>();
         for (PayDetail p: payDetails) {
