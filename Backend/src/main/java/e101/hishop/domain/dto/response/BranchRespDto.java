@@ -1,7 +1,6 @@
 package e101.hishop.domain.dto.response;
 
 import e101.hishop.domain.entity.Branch;
-import e101.hishop.domain.entity.Staff;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,15 +10,14 @@ import lombok.NoArgsConstructor;
 public class BranchRespDto {
 
     private Long id;
-    private String brnachName;
-
+    private String branchName;
     private String region;
 
 
     @Builder
-    public BranchRespDto(Long id, String brnachName, String region) {
+    public BranchRespDto(Long id, String branchName, String region) {
         this.id = id;
-        this.brnachName = brnachName;
+        this.branchName = branchName;
         this.region = region;
     }
 
@@ -28,7 +26,7 @@ public class BranchRespDto {
     public static BranchRespDto of(Branch branch) {
         return BranchRespDto.builder()
                 .id(branch.getId())
-                .brnachName(branch.getBranchName())
+                .branchName(branch.getBranchName())
                 .region(branch.getRegion())
                 .build();
     }
