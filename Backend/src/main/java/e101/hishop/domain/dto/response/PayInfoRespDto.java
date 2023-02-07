@@ -15,9 +15,7 @@ import java.time.LocalDateTime;
 public class PayInfoRespDto {
 
     private Long id;
-
     private String userName;
-
     private String payName;
 
     private String payImg;
