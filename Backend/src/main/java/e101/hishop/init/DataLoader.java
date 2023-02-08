@@ -95,7 +95,7 @@ public class DataLoader {
                 .name("꺼깔콘")
                 .price(2000L)
                 .rfid("BB4247AC500104E0")
-                .barcode("44103252")
+                .barcode("14103252")
                 .image("")
                 .build());
 
@@ -103,7 +103,7 @@ public class DataLoader {
                 .name("팝씨")
                 .price(1530L)
                 .rfid("FE9146AC500104E0")
-                .barcode("44103252")
+                .barcode("44103222")
                 .image("")
                 .build());
 

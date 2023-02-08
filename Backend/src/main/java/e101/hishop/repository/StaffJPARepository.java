@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface StaffJPARepository extends JpaRepository<Staff, Long> {
     List<Staff> findAllByBranchId(Long branchId);
+    Boolean existsByStaffLoginId(String loginId);
 }

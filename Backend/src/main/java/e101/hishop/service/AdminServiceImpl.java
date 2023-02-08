@@ -76,6 +76,13 @@ public class AdminServiceImpl implements AdminService {
     }
 
     public Long editProduct(ProductReqDto dto, Long productId) {
+        Boolean result = productJPARepository.existsByName(dto.getName());
+        Boolean result2 = productJPARepository.existsByRfid(dto.getRfid());
+        Boolean result3 = productJPARepository.existsByBarcode(dto.getBarcode());
+        if (result) throw new CommonException(1, "이름이 중복됩니다.", HttpStatus.BAD_REQUEST);
+        if (result2) throw new CommonException(1, "RFID가 중복됩니다.", HttpStatus.BAD_REQUEST);
+        if (result3) throw new CommonException(1, "barcode가 중복됩니다.", HttpStatus.BAD_REQUEST);
+
         return productJPARepository.findById(productId)
                 .orElseThrow(() -> new CommonException(2, "Product가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR))
                 .updateProduct(dto)
@@ -94,6 +101,12 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public Product saveProduct(Product product) {
+        Boolean result = productJPARepository.existsByName(product.getName());
+        Boolean result2 = productJPARepository.existsByRfid(product.getRfid());
+        Boolean result3 = productJPARepository.existsByBarcode(product.getBarcode());
+        if (result) throw new CommonException(1, "이름이 중복됩니다.", HttpStatus.BAD_REQUEST);
+        if (result2) throw new CommonException(1, "RFID가 중복됩니다.", HttpStatus.BAD_REQUEST);
+        if (result3) throw new CommonException(1, "barcode가 중복됩니다.", HttpStatus.BAD_REQUEST);
         return productJPARepository.save(product);
     }
 
@@ -115,6 +128,8 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public Long modifyUser(UserInfoReqDto dto, Long userId) {
+        Boolean result = userJPARepository.existsByLoginId(dto.getLoginId());
+        if (result) throw new CommonException(1, "이름이 중복됩니다.", HttpStatus.BAD_REQUEST);
         return userJPARepository.findById(userId)
                 .orElseThrow(() -> new CommonException(2, "User가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR))
                 .updateUserInfoByAdmin(dto)
@@ -148,6 +163,8 @@ public class AdminServiceImpl implements AdminService {
     }
     @Override
     public Long modifyStaff(StaffReqDto dto, Long employeeId) {
+        Boolean result = staffJPARepository.existsByStaffLoginId(dto.getStaffLoginId());
+        if (result) throw new CommonException(1, "아이디가 중복됩니다.", HttpStatus.BAD_REQUEST);
         Staff staff = staffJPARepository.findById(employeeId)
                 .orElseThrow(() -> new CommonException(2, "직원이 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
         Branch oldBranch = staff.getBranch();
@@ -165,6 +182,8 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public Staff saveStaff(Staff staff, Long branchId) {
         //TODO Exception
+        Boolean result = staffJPARepository.existsByStaffLoginId(staff.getStaffLoginId());
+        if (result) throw new CommonException(1, "아이디가 중복됩니다.", HttpStatus.BAD_REQUEST);
         Branch branch = branchJPARepository.findById(branchId)
                 .orElseThrow(() -> new CommonException(2, "Branch가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
         staff.setBranchAndStaff(branch);
