@@ -1,9 +1,6 @@
 package e101.hishop.service;
 
-import e101.hishop.domain.dto.request.BranchReqDto;
-import e101.hishop.domain.dto.request.ProductReqDto;
-import e101.hishop.domain.dto.request.StaffReqDto;
-import e101.hishop.domain.dto.request.UserInfoReqDto;
+import e101.hishop.domain.dto.request.*;
 import e101.hishop.domain.dto.response.*;
 import e101.hishop.domain.entity.*;
 import e101.hishop.global.common.CommonException;
@@ -110,7 +107,7 @@ public class AdminServiceImpl implements AdminService {
     public Long modifyUser(UserInfoReqDto dto, Long userId) {
         return userJPARepository.findById(userId)
                 .orElseThrow(() -> new CommonException(2, "User객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR))
-                .updateUserInfo(dto)
+                .updateUserInfoByAdmin(dto)
                 .updateUserByAdmin(dto)
                 .getId();
     }

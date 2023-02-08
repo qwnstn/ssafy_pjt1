@@ -2,7 +2,6 @@ package e101.hishop.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import e101.hishop.domain.dto.request.ProductReqDto;
-import e101.hishop.domain.dto.request.UserInfoReqDto;
 import lombok.*;
 import org.springframework.util.StringUtils;
 
@@ -24,17 +23,12 @@ public class Product {
     @GeneratedValue
     @Column(name = "product_id")
     private Long id;
-
     @NotBlank
     private String name;
-
     @NotNull
     private Long price;
-
     private String rfid;
-
     private String barcode;
-
     private String image;
 
     @JsonIgnore

@@ -1,9 +1,6 @@
 package e101.hishop.service;
 
-import e101.hishop.domain.dto.request.EditNameReqDto;
-import e101.hishop.domain.dto.request.PayPasswordReqDto;
-import e101.hishop.domain.dto.request.QrReqDto;
-import e101.hishop.domain.dto.request.UserInfoReqDto;
+import e101.hishop.domain.dto.request.*;
 import e101.hishop.domain.dto.response.*;
 import e101.hishop.domain.entity.Card;
 import e101.hishop.domain.entity.Pay;
@@ -128,7 +125,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Long updateUserInfo(UserInfoReqDto dto) {
+    public Long updateUserInfo(UserUpdateReqDto dto) {
         return userJPARepository.findById(getUserId())
                 .orElseThrow(() -> new CommonException(2, "User객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR))
                 .updateUserInfo(dto)

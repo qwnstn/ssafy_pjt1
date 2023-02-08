@@ -1,9 +1,6 @@
 package e101.hishop.service;
 
-import e101.hishop.domain.dto.request.EditNameReqDto;
-import e101.hishop.domain.dto.request.PayPasswordReqDto;
-import e101.hishop.domain.dto.request.QrReqDto;
-import e101.hishop.domain.dto.request.UserInfoReqDto;
+import e101.hishop.domain.dto.request.*;
 import e101.hishop.domain.dto.response.CardInfoRespDto;
 import e101.hishop.domain.dto.response.PayDetailInfoRespDto;
 import e101.hishop.domain.dto.response.PayInfoRespDto;
@@ -23,7 +20,7 @@ public interface UserService {
 
     UserInfoRespDto getUserInfo();
 
-    Long updateUserInfo(UserInfoReqDto dto);
+    Long updateUserInfo(UserUpdateReqDto dto);
 
     void deleteUserInfo();
 

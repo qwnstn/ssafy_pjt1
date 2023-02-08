@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import e101.hishop.AppConfig;
 import e101.hishop.domain.dto.request.PayPasswordReqDto;
 import e101.hishop.domain.dto.request.UserInfoReqDto;
+import e101.hishop.domain.dto.request.UserUpdateReqDto;
 import e101.hishop.global.enumeration.Gender;
 import e101.hishop.global.enumeration.Role;
 import lombok.*;
@@ -67,7 +68,15 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private List<Pay> pays = new ArrayList<>();
 
-    public User updateUserInfo(UserInfoReqDto dto) {
+    public User updateUserInfo(UserUpdateReqDto dto) {
+        password = StringUtils.hasText(dto.getPassword()) ? AppConfig.testPasswordEncoder().encode(dto.getPassword()) : password;
+        phone = StringUtils.hasText(dto.getPhone()) ? dto.getPhone() : phone;
+        email = StringUtils.hasText(dto.getEmail()) ? dto.getEmail() : email;
+        adSelect = dto.getAdSelect() != null ? dto.getAdSelect() : adSelect;
+        return this;
+    }
+
+    public User updateUserInfoByAdmin(UserInfoReqDto dto) {
         password = StringUtils.hasText(dto.getPassword()) ? AppConfig.testPasswordEncoder().encode(dto.getPassword()) : password;
         phone = StringUtils.hasText(dto.getPhone()) ? dto.getPhone() : phone;
         email = StringUtils.hasText(dto.getEmail()) ? dto.getEmail() : email;

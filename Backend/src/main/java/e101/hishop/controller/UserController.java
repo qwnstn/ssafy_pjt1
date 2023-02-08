@@ -31,7 +31,7 @@ public class UserController {
     }
 
     @PatchMapping
-    public CommonResponse updateUserInfo(@RequestBody @Validated  UserInfoReqDto dto) {
+    public CommonResponse updateUserInfo(@RequestBody @Validated  UserUpdateReqDto dto) {
         return CommonResponse.builder()
                 .data(Map.of("userId", userService.updateUserInfo(dto)))
                 .build();
