@@ -13,13 +13,9 @@ import java.time.LocalDateTime;
 public class PointReqDto {
     private Long userId;
     private Long point;
-
     private LocalDateTime endDate;
-
     private String category;
-
     private String description;
-
     public Point toPointEntity(){
         return Point.builder()
                 .point(point)

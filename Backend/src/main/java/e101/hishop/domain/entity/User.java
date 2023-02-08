@@ -59,8 +59,7 @@ public class User {
     private List<Card> cards = new ArrayList<>();
 
     @JsonIgnore
-    @Builder.Default
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
     private List<Point> points = new ArrayList<>();
 
     @JsonIgnore

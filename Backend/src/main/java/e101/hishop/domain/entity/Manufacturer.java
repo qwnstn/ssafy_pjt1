@@ -1,7 +1,10 @@
 package e101.hishop.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import e101.hishop.domain.dto.request.ManufacturerReqDto;
+import e101.hishop.domain.dto.request.ProductReqDto;
 import lombok.*;
+import org.springframework.util.StringUtils;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -28,10 +31,15 @@ public class Manufacturer {
 
     private String tel;
 
-//    @JsonIgnore
-//    @Builder.Default
-//    @OneToMany(mappedBy = "manufacturer", cascade = CascadeType.REMOVE)
-//    private List<Product> products = new ArrayList<>();
+    @JsonIgnore
+    @OneToMany(mappedBy = "manufacturer", cascade = CascadeType.PERSIST)
+    private List<Product> products = new ArrayList<>();
 
+    public Manufacturer updateManufacturer(ManufacturerReqDto dto) {
+        name = StringUtils.hasText(dto.getName()) ? dto.getName() : name;
+        address = StringUtils.hasText(dto.getAddress()) ? dto.getAddress() : address;
+        tel = StringUtils.hasText(dto.getTel()) ? dto.getTel() : tel;
+        return this;
+    }
 
 }

@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class PointRespDto {
 
-    private Long id;
+    private Long pointId;
 
     private Long userId;
 
@@ -27,8 +27,8 @@ public class PointRespDto {
     private String description;
 
     @Builder
-    public PointRespDto(Long id, Long userId, Long point, LocalDateTime endDate, String category, String description) {
-        this.id = id;
+    public PointRespDto(Long pointId, Long userId, Long point, LocalDateTime endDate, String category, String description) {
+        this.pointId = pointId;
         this.userId = userId;
         this.point = point;
         this.endDate = endDate;
@@ -39,7 +39,7 @@ public class PointRespDto {
 
     public static PointRespDto of (Point point) {
         return PointRespDto.builder()
-                .id(point.getId())
+                .pointId(point.getId())
                 .userId(point.getUser().getId())
                 .point(point.getPoint())
                 .endDate(point.getEndDate())

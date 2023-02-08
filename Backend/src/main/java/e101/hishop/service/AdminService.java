@@ -15,8 +15,7 @@ public interface AdminService {
     ProductRespDto getProductDetail(Long productId);
     Long editProduct(ProductEditReqDto dto, Long productId);
     void deleteProduct(Long productId);
-    Product saveProduct(Product product);
-
+    Product saveProduct(Product product, Long manuId);
     PayDetail savePayDetail(PayDetail payDetail, Long payId, Long productId, Long branchId);
     List<UserInfoRespDto> getUsers();
     UserInfoRespDto getUser(Long userId);
@@ -35,7 +34,12 @@ public interface AdminService {
     Kiosk saveKiosk(Kiosk kiosk, Long branchId);
     Point savePoint(Point point, Long userId);
     List<PointRespDto> getPoints();
-//    PointRespDto getPoint(Long pointId);
-
-
+    PointRespDto getPoint(Long pointId);
+    Long modifyPoint(PointReqDto dto, Long pointId);
+    void deletePoint(Long pointId);
+    List<ManufacturerRespDto> getManufacturers();
+    ManufacturerRespDto getManufacturer(Long manuId);
+    Manufacturer saveManufacturer(Manufacturer manufacturer);
+    Long modifyManufacturer(ManufacturerReqDto dto, Long manuId);
+    void deleteManufacturer(Long manuId);
 }
