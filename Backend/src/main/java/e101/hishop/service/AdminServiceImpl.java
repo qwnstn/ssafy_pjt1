@@ -67,18 +67,20 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public ProductRespDto getProductDetail(Long productId) {
         Product product = productJPARepository.findById(productId)
-                .orElseThrow(() -> new CommonException(2, "Product객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
+                .orElseThrow(() -> new CommonException(2, "Product가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
         return ProductRespDto.of(product);
     }
 
     public Long editProduct(ProductReqDto dto, Long productId) {
         return productJPARepository.findById(productId)
-                .orElseThrow(() -> new CommonException(2, "Product객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR))
+                .orElseThrow(() -> new CommonException(2, "Product가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR))
                 .updateProduct(dto)
                 .getId();
     }
 
     public void deleteProduct(Long productId) {
+        productJPARepository.findById(productId)
+                .orElseThrow(() -> new CommonException(2, "Product가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
         productJPARepository.deleteById(productId);
     }
 
@@ -99,14 +101,14 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public UserInfoRespDto getUser(Long userId) {
         User user = userJPARepository.findById(userId)
-                .orElseThrow(() -> new CommonException(2, "User객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
+                .orElseThrow(() -> new CommonException(2, "User가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
         return UserInfoRespDto.of(user);
     }
 
     @Override
     public Long modifyUser(UserInfoReqDto dto, Long userId) {
         return userJPARepository.findById(userId)
-                .orElseThrow(() -> new CommonException(2, "User객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR))
+                .orElseThrow(() -> new CommonException(2, "User가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR))
                 .updateUserInfoByAdmin(dto)
                 .updateUserByAdmin(dto)
                 .getId();
