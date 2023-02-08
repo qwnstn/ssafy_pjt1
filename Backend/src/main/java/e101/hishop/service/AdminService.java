@@ -13,7 +13,7 @@ public interface AdminService {
     List<PayDetailInfoRespDto> getPayDetail(Long buyId);
     List<ProductRespDto> getProduct();
     ProductRespDto getProductDetail(Long productId);
-    Long editProduct(ProductReqDto dto, Long productId);
+    Long editProduct(ProductEditReqDto dto, Long productId);
     void deleteProduct(Long productId);
     Product saveProduct(Product product, Long manuId);
     PayDetail savePayDetail(PayDetail payDetail, Long payId, Long productId, Long branchId);
@@ -23,7 +23,7 @@ public interface AdminService {
     void deleteUser(Long userId);
     List<StaffRespDto> getStaff();
     StaffRespDto getStaffDetail(Long employeeId);
-    Long modifyStaff(StaffReqDto dto, Long employeeId);
+    Long modifyStaff(StaffEditReqDto dto, Long employeeId);
     void deleteStaff(Long employeeId);
     List<BranchRespDto> getBranchs();
     BranchRespDto getBranch(Long branchId);

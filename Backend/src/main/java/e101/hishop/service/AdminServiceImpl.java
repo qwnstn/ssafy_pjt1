@@ -74,7 +74,7 @@ public class AdminServiceImpl implements AdminService {
         return ProductRespDto.of(product);
     }
 
-    public Long editProduct(ProductReqDto dto, Long productId) {
+    public Long editProduct(ProductEditReqDto dto, Long productId) {
         Boolean result = productJPARepository.existsByName(dto.getName());
         Boolean result2 = productJPARepository.existsByRfid(dto.getRfid());
         Boolean result3 = productJPARepository.existsByBarcode(dto.getBarcode());
@@ -138,7 +138,6 @@ public class AdminServiceImpl implements AdminService {
         return userJPARepository.findById(userId)
                 .orElseThrow(() -> new CommonException(2, "User가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR))
                 .updateUserInfoByAdmin(dto)
-                .updateUserByAdmin(dto)
                 .getId();
     }
 
@@ -167,7 +166,7 @@ public class AdminServiceImpl implements AdminService {
         return StaffRespDto.of(staff);
     }
     @Override
-    public Long modifyStaff(StaffReqDto dto, Long employeeId) {
+    public Long modifyStaff(StaffEditReqDto dto, Long employeeId) {
         Boolean result = staffJPARepository.existsByStaffLoginId(dto.getStaffLoginId());
         if (result) throw new CommonException(1, "아이디가 중복됩니다.", HttpStatus.BAD_REQUEST);
         Staff staff = staffJPARepository.findById(employeeId)
@@ -221,14 +220,14 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public BranchRespDto getBranch(Long branchId) {
         Branch branch = branchJPARepository.findById(branchId)
-                .orElseThrow(() -> new CommonException(2, "User가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
+                .orElseThrow(() -> new CommonException(2, "Branch가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
         return BranchRespDto.of(branch);
     }
 
     @Override
     public Long modifyBranch(BranchReqDto dto, Long branchId) {
         return branchJPARepository.findById(branchId)
-                .orElseThrow(() -> new CommonException(2, "User가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR))
+                .orElseThrow(() -> new CommonException(2, "Branch가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR))
                 .updateBranch(dto)
                 .getId();
     }
