@@ -1,6 +1,9 @@
 package e101.hishop.service;
 
-import e101.hishop.domain.dto.request.*;
+import e101.hishop.domain.dto.request.BranchReqDto;
+import e101.hishop.domain.dto.request.ProductReqDto;
+import e101.hishop.domain.dto.request.StaffReqDto;
+import e101.hishop.domain.dto.request.UserInfoReqDto;
 import e101.hishop.domain.dto.response.*;
 import e101.hishop.domain.entity.*;
 import e101.hishop.global.common.CommonException;
@@ -8,16 +11,11 @@ import e101.hishop.repository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.BodyInserters;
-import reactor.core.publisher.Mono;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Transactional
@@ -121,6 +119,8 @@ public class AdminServiceImpl implements AdminService {
     }
 
     public void deleteUser(Long userId) {
+        userJPARepository.findById(userId)
+                .orElseThrow(() -> new CommonException(2, "User가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
         List<Pay> pays = payJPARepository.findAllByUserId(userId);
         for (Pay p: pays) {
             p.setUser(null);
