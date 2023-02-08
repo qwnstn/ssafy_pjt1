@@ -85,6 +85,10 @@ public class AdminServiceImpl implements AdminService {
     public void deleteProduct(Long productId) {
         productJPARepository.findById(productId)
                 .orElseThrow(() -> new CommonException(2, "Product가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
+        List<PayDetail> payDetails = payDetailJPARepository.findAllByProductId(productId);
+        for (PayDetail p: payDetails) {
+            p.setProduct(null);
+        }
         productJPARepository.deleteById(productId);
     }
 
