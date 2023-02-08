@@ -1,9 +1,6 @@
 package e101.hishop.service;
 
-import e101.hishop.domain.dto.request.BranchReqDto;
-import e101.hishop.domain.dto.request.ProductReqDto;
-import e101.hishop.domain.dto.request.StaffReqDto;
-import e101.hishop.domain.dto.request.UserInfoReqDto;
+import e101.hishop.domain.dto.request.*;
 import e101.hishop.domain.dto.response.*;
 import e101.hishop.domain.entity.*;
 import e101.hishop.global.common.CommonException;
@@ -31,6 +28,7 @@ public class AdminServiceImpl implements AdminService {
     private final ProductJPARepository productJPARepository;
     private final BranchJPARepository branchJPARepository;
     private final PointJPARepository pointJPARepository;
+    private final ManufacturerJPARepository manufacturerJPARepository;
 
     @Override
     public Pay savePay(Pay pays, Long userId) {
@@ -100,13 +98,16 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public Product saveProduct(Product product) {
+    public Product saveProduct(Product product, Long manuId) {
         Boolean result = productJPARepository.existsByName(product.getName());
         Boolean result2 = productJPARepository.existsByRfid(product.getRfid());
         Boolean result3 = productJPARepository.existsByBarcode(product.getBarcode());
         if (result) throw new CommonException(1, "이름이 중복됩니다.", HttpStatus.BAD_REQUEST);
         if (result2) throw new CommonException(1, "RFID가 중복됩니다.", HttpStatus.BAD_REQUEST);
         if (result3) throw new CommonException(1, "barcode가 중복됩니다.", HttpStatus.BAD_REQUEST);
+        Manufacturer manufacturer = manufacturerJPARepository.findById(manuId)
+                .orElseThrow(() -> new CommonException(2, "Manufacturer객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
+        product.setManufacturersAndProducts(manufacturer);
         return productJPARepository.save(product);
     }
 
@@ -238,8 +239,6 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public Branch saveBranch(Branch branch) { return branchJPARepository.save(branch); }
 
-
-
     @Override
     public Kiosk saveKiosk(Kiosk kiosk, Long branchId) {
         Branch branch = branchJPARepository.findById(branchId)
@@ -258,12 +257,12 @@ public class AdminServiceImpl implements AdminService {
         return pointList;
     }
 
-//    @Override
-//    public PointRespDto getPoint(Long pointId) {
-//        Point point = pointJPARepository.findById(pointId)
-//                .orElseThrow(() -> new CommonException(2, "User객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
-//        return PointRespDto.of(point);
-//    }
+    @Override
+    public PointRespDto getPoint(Long pointId) {
+        Point point = pointJPARepository.findById(pointId)
+                .orElseThrow(() -> new CommonException(2, "User객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
+        return PointRespDto.of(point);
+    }
 
     @Override
     public Point savePoint(Point point, Long userId) {
@@ -273,7 +272,51 @@ public class AdminServiceImpl implements AdminService {
         return pointJPARepository.save(point);
     }
 
+    @Override
+    public Long modifyPoint(PointReqDto dto, Long pointId) {
+        return pointJPARepository.findById(pointId)
+                .orElseThrow(() -> new CommonException(2, "User객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR))
+                .updatePoint(dto)
+                .getId();
+    }
 
+    public void deletePoint(Long pointId) { pointJPARepository.deleteById(pointId); }
 
+    @Override
+    public List<ManufacturerRespDto> getManufacturers() {
+        List<Manufacturer> manufacturers = manufacturerJPARepository.findAll();
+        List<ManufacturerRespDto> manufacturerList = new ArrayList<>();
+        for (Manufacturer p: manufacturers) {
+            manufacturerList.add(ManufacturerRespDto.of(p));
+        }
+        return manufacturerList;
+    }
 
+    @Override
+    public ManufacturerRespDto getManufacturer(Long manuId) {
+        Manufacturer manufacturer = manufacturerJPARepository.findById(manuId)
+                .orElseThrow(() -> new CommonException(2, "User객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
+        return ManufacturerRespDto.of(manufacturer);
+    }
+
+    @Override
+    public Manufacturer saveManufacturer(Manufacturer manufacturer) {
+        return manufacturerJPARepository.save(manufacturer);
+    }
+
+    @Override
+    public Long modifyManufacturer(ManufacturerReqDto dto, Long manuId) {
+        return manufacturerJPARepository.findById(manuId)
+                .orElseThrow(() -> new CommonException(2, "User객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR))
+                .updateManufacturer(dto)
+                .getId();
+    }
+
+    public void deleteManufacturer(Long manuId) {
+        List<Product> products = productJPARepository.findAllByManufacturerId(manuId);
+        for (Product p: products) {
+            p.setManufacturer(null);
+        }
+        manufacturerJPARepository.deleteById(manuId);
+    }
 }

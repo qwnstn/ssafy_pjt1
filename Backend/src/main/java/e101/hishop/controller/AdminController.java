@@ -49,7 +49,8 @@ public class AdminController {
 
     @PostMapping("/product")
     public ResponseEntity<String> productCreate(@RequestBody ProductReqDto dto) {
-        adminService.saveProduct(dto.toProductEntity());
+        Long manuId = dto.getManuId();
+        adminService.saveProduct(dto.toProductEntity(), manuId);
         return new ResponseEntity<>("저장완료", HttpStatus.OK);
     }
 
@@ -145,10 +146,10 @@ public class AdminController {
         return new ResponseEntity<>(adminService.getPoints(), HttpStatus.OK);
     }
 
-//    @GetMapping("/branch/{branchId}")
-//    public ResponseEntity<PointRespDto> pointDetail(@PathVariable Long pointId) {
-//        return new ResponseEntity<>(adminService.getPoint(pointId), HttpStatus.OK);
-//    }
+    @GetMapping("/point/{pointId}")
+    public ResponseEntity<PointRespDto> pointDetail(@PathVariable Long pointId) {
+        return new ResponseEntity<>(adminService.getPoint(pointId), HttpStatus.OK);
+    }
 
     @PostMapping("/point")
     public ResponseEntity<String> savePoint(@RequestBody PointReqDto dto) {
@@ -157,5 +158,44 @@ public class AdminController {
         return new ResponseEntity<>("저장완료", HttpStatus.OK);
     }
 
+    @PatchMapping("/point/{pointId}")
+    public ResponseEntity<String> pointModify(@RequestBody PointReqDto dto, @PathVariable Long pointId) {
+        //TODO 지점 변경?
+        adminService.modifyPoint(dto, pointId);
+        return new ResponseEntity<>("수정완료", HttpStatus.OK);
+    }
 
+    @DeleteMapping("/point/{pointId}")
+    public ResponseEntity<String> pointDelete(@PathVariable Long pointId) {
+        adminService.deletePoint(pointId);
+        return new ResponseEntity<>("제거완료", HttpStatus.OK);
+    }
+
+    @GetMapping("/manufacturer")
+    public ResponseEntity<List<ManufacturerRespDto>> manufacturers() {
+        return new ResponseEntity<>(adminService.getManufacturers(), HttpStatus.OK);
+    }
+
+    @GetMapping("/manufacturer/{manuId}")
+    public ResponseEntity<ManufacturerRespDto> manufacturerDetail(@PathVariable Long manuId) {
+        return new ResponseEntity<>(adminService.getManufacturer(manuId), HttpStatus.OK);
+    }
+
+    @PostMapping("/manufacturer")
+    public ResponseEntity<String> saveManufacturer(@RequestBody ManufacturerReqDto dto) {
+        adminService.saveManufacturer(dto.toManufacturerEntity());
+        return new ResponseEntity<>("저장완료", HttpStatus.OK);
+    }
+
+    @PatchMapping("/manufacturer/{manuId}")
+    public ResponseEntity<String> manufacturerModify(@RequestBody ManufacturerReqDto dto, @PathVariable Long manuId) {
+        adminService.modifyManufacturer(dto, manuId);
+        return new ResponseEntity<>("수정완료", HttpStatus.OK);
+    }
+
+    @DeleteMapping("/manufacturer/{manuId}")
+    public ResponseEntity<String> manufacturerDelete(@PathVariable Long manuId) {
+        adminService.deleteManufacturer(manuId);
+        return new ResponseEntity<>("제거완료", HttpStatus.OK);
+    }
 }

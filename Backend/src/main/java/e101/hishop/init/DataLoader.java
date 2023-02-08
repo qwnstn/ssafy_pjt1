@@ -83,13 +83,19 @@ public class DataLoader {
                 .role(Role.ROLE_ADMIN)
                 .build());
 
+        adminService.saveManufacturer(Manufacturer.builder()
+                .name("녹데")
+                .address("부산광역시 강서구 녹산산업중로 333")
+                .tel("051-123-1234")
+                .build());
+
         adminService.saveProduct(Product.builder()
                 .name("세우깡")
                 .price(1500L)
                 .rfid("FC4947AC500104E0")
                 .barcode("01243252")
                 .image("")
-                .build());
+                .build(), 6L);
 
         adminService.saveProduct(Product.builder()
                 .name("꺼깔콘")
@@ -97,7 +103,7 @@ public class DataLoader {
                 .rfid("BB4247AC500104E0")
                 .barcode("14103252")
                 .image("")
-                .build());
+                .build(), 6L);
 
         adminService.saveProduct(Product.builder()
                 .name("팝씨")
@@ -105,7 +111,7 @@ public class DataLoader {
                 .rfid("FE9146AC500104E0")
                 .barcode("44103222")
                 .image("")
-                .build());
+                .build(), 6L);
 
         adminService.saveBranch(Branch.builder()
                 .branchName("부산점")
@@ -122,21 +128,21 @@ public class DataLoader {
                 .position("점장")
                 .part("지점장")
                 .staffLoginId("kimssafy")
-                .build(), 9L);
+                .build(), 10L);
 
         adminService.savePayDetail(PayDetail.builder()
                 .productName("세우깡")
                 .count(1L)
                 .price(1500L)
-                .build(), 4L, 6L, 9L);
+                .build(), 4L, 7L, 10L);
 
         adminService.savePayDetail(PayDetail.builder()
                 .productName("꺼깔콘")
                 .count(2L)
                 .price(4000L)
-                .build(), 4L, 7L, 9L);
+                .build(), 4L, 8L, 10L);
 
-        adminService.saveKiosk(Kiosk.builder().build(), 9L);
+        adminService.saveKiosk(Kiosk.builder().build(), 10L);
 
         userService.cardLoad(Card.builder()
                 .cardNo("1968267535975189")

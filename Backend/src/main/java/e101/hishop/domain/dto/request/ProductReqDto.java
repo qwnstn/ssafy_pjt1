@@ -9,7 +9,8 @@ import javax.validation.constraints.*;
 @Getter
 @NoArgsConstructor
 public class ProductReqDto {
-
+    @NotNull
+    private Long manuId;
     @NotBlank
     @Pattern(regexp = "^[가-힣a-zA-Z0-9]{1,250}$", message = "한글영문 1~250자")
     private String name;

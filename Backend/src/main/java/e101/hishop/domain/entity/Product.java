@@ -3,6 +3,8 @@ package e101.hishop.domain.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import e101.hishop.domain.dto.request.ProductReqDto;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.*;
@@ -36,6 +38,19 @@ public class Product {
     @OneToMany(mappedBy = "product")
     private List<PayDetail> payDetails = new ArrayList<>();
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "manu_id")
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
+    private Manufacturer manufacturer;
+//
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "category_id")
+//    private ProductCategory productCategory;
+
+    public void setManufacturersAndProducts(Manufacturer manufacturer) {
+        this.manufacturer = manufacturer;
+        manufacturer.getProducts().add(this);
+    }
     public Product updateProduct(ProductReqDto dto) {
         name = StringUtils.hasText(dto.getName()) ? dto.getName() : name;
         price = dto.getPrice() != null ? dto.getPrice() : price;
@@ -45,11 +60,4 @@ public class Product {
         return this;
     }
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "manu_id")
-//    private Manufacturer manufacturer;
-//
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "category_id")
-//    private ProductCategory productCategory;
 }
