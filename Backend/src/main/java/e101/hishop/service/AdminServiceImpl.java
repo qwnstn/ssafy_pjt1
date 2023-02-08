@@ -1,9 +1,6 @@
 package e101.hishop.service;
 
-import e101.hishop.domain.dto.request.BranchReqDto;
-import e101.hishop.domain.dto.request.ProductReqDto;
-import e101.hishop.domain.dto.request.StaffReqDto;
-import e101.hishop.domain.dto.request.UserInfoReqDto;
+import e101.hishop.domain.dto.request.*;
 import e101.hishop.domain.dto.response.*;
 import e101.hishop.domain.entity.*;
 import e101.hishop.global.common.CommonException;
@@ -75,7 +72,7 @@ public class AdminServiceImpl implements AdminService {
         return ProductRespDto.of(product);
     }
 
-    public Long editProduct(ProductReqDto dto, Long productId) {
+    public Long editProduct(ProductEditReqDto dto, Long productId) {
         Boolean result = productJPARepository.existsByName(dto.getName());
         Boolean result2 = productJPARepository.existsByRfid(dto.getRfid());
         Boolean result3 = productJPARepository.existsByBarcode(dto.getBarcode());
@@ -216,14 +213,14 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public BranchRespDto getBranch(Long branchId) {
         Branch branch = branchJPARepository.findById(branchId)
-                .orElseThrow(() -> new CommonException(2, "User가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
+                .orElseThrow(() -> new CommonException(2, "Branch가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
         return BranchRespDto.of(branch);
     }
 
     @Override
     public Long modifyBranch(BranchReqDto dto, Long branchId) {
         return branchJPARepository.findById(branchId)
-                .orElseThrow(() -> new CommonException(2, "User가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR))
+                .orElseThrow(() -> new CommonException(2, "Branch가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR))
                 .updateBranch(dto)
                 .getId();
     }

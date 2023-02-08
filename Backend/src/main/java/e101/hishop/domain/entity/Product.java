@@ -1,7 +1,7 @@
 package e101.hishop.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import e101.hishop.domain.dto.request.ProductReqDto;
+import e101.hishop.domain.dto.request.ProductEditReqDto;
 import lombok.*;
 import org.springframework.util.StringUtils;
 
@@ -36,7 +36,7 @@ public class Product {
     @OneToMany(mappedBy = "product")
     private List<PayDetail> payDetails = new ArrayList<>();
 
-    public Product updateProduct(ProductReqDto dto) {
+    public Product updateProduct(ProductEditReqDto dto) {
         name = StringUtils.hasText(dto.getName()) ? dto.getName() : name;
         price = dto.getPrice() != null ? dto.getPrice() : price;
         rfid = StringUtils.hasText(dto.getRfid()) ? dto.getRfid() : rfid;

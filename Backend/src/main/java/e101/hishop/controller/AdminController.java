@@ -42,7 +42,7 @@ public class AdminController {
     }
 
     @PatchMapping("/product/{productId}")
-    public ResponseEntity<String> productModify(@RequestBody ProductReqDto dto, @PathVariable Long productId) {
+    public ResponseEntity<String> productModify(@RequestBody ProductEditReqDto dto, @PathVariable Long productId) {
         adminService.editProduct(dto, productId);
         return new ResponseEntity<>("수정완료", HttpStatus.OK);
     }

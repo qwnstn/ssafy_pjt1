@@ -1,9 +1,6 @@
 package e101.hishop.service;
 
-import e101.hishop.domain.dto.request.BranchReqDto;
-import e101.hishop.domain.dto.request.ProductReqDto;
-import e101.hishop.domain.dto.request.StaffReqDto;
-import e101.hishop.domain.dto.request.UserInfoReqDto;
+import e101.hishop.domain.dto.request.*;
 import e101.hishop.domain.dto.response.*;
 import e101.hishop.domain.entity.*;
 
@@ -16,7 +13,7 @@ public interface AdminService {
     List<PayDetailInfoRespDto> getPayDetail(Long buyId);
     List<ProductRespDto> getProduct();
     ProductRespDto getProductDetail(Long productId);
-    Long editProduct(ProductReqDto dto, Long productId);
+    Long editProduct(ProductEditReqDto dto, Long productId);
     void deleteProduct(Long productId);
     Product saveProduct(Product product);
 
