@@ -139,25 +139,30 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public StaffRespDto getStaffDetail(Long employeeId) {
         Staff staff = staffJPARepository.findById(employeeId)
-                .orElseThrow(() -> new CommonException(2, "User객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
+                .orElseThrow(() -> new CommonException(2, "직원이 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
         return StaffRespDto.of(staff);
     }
     @Override
     public Long modifyStaff(StaffReqDto dto, Long employeeId) {
-        return staffJPARepository.findById(employeeId)
-                .orElseThrow(() -> new CommonException(2, "User객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR))
-                .updateStaff(dto)
+        Staff staff = staffJPARepository.findById(employeeId)
+                .orElseThrow(() -> new CommonException(2, "직원이 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
+        Branch oldBranch = staff.getBranch();
+        Branch newBranch = branchJPARepository.findById(dto.getBranchId())
+                .orElseThrow(() -> new CommonException(2, "Branch가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
+            oldBranch.getStaff().remove(staff);
+            staff.setBranchAndStaff(newBranch);
+        return staff.updateStaff(dto)
                 .getId();
     }
-
     public void deleteStaff(Long employeeId) {
         staffJPARepository.deleteById(employeeId);
     }
+
     @Override
     public Staff saveStaff(Staff staff, Long branchId) {
         //TODO Exception
         Branch branch = branchJPARepository.findById(branchId)
-                .orElseThrow(() -> new CommonException(2, "Branch객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
+                .orElseThrow(() -> new CommonException(2, "Branch가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
         staff.setBranchAndStaff(branch);
         return staffJPARepository.save(staff);
     }
@@ -165,11 +170,11 @@ public class AdminServiceImpl implements AdminService {
     public PayDetail savePayDetail(PayDetail payDetail, Long payId, Long productId, Long branchId) {
         //TODO Exception
         Pay pay = payJPARepository.findById(payId)
-                .orElseThrow(() -> new CommonException(2, "Pay객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
+                .orElseThrow(() -> new CommonException(2, "Pay가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
         Product product = productJPARepository.findById(productId)
-                .orElseThrow(() -> new CommonException(2, "Product객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));;
+                .orElseThrow(() -> new CommonException(2, "Product가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));;
         Branch branch = branchJPARepository.findById(branchId)
-                .orElseThrow(() -> new CommonException(2, "Branch객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
+                .orElseThrow(() -> new CommonException(2, "Branch가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
         payDetail.setPayAndPayDetail(pay);
         payDetail.setProductAndPayDetail(product);
         payDetail.setBranchAndPayDetail(branch);
@@ -188,14 +193,14 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public BranchRespDto getBranch(Long branchId) {
         Branch branch = branchJPARepository.findById(branchId)
-                .orElseThrow(() -> new CommonException(2, "User객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
+                .orElseThrow(() -> new CommonException(2, "User가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
         return BranchRespDto.of(branch);
     }
 
     @Override
     public Long modifyBranch(BranchReqDto dto, Long branchId) {
         return branchJPARepository.findById(branchId)
-                .orElseThrow(() -> new CommonException(2, "User객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR))
+                .orElseThrow(() -> new CommonException(2, "User가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR))
                 .updateBranch(dto)
                 .getId();
     }
@@ -215,7 +220,7 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public Kiosk saveKiosk(Kiosk kiosk, Long branchId) {
         Branch branch = branchJPARepository.findById(branchId)
-                .orElseThrow(() -> new CommonException(2, "Branch객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
+                .orElseThrow(() -> new CommonException(2, "Branch가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
         kiosk.setBranchAndKiosk(branch);
         return kioskJPARepository.save(kiosk);
     }

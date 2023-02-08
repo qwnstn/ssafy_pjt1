@@ -1,7 +1,6 @@
 package e101.hishop.domain.entity;
 
 import e101.hishop.domain.dto.request.StaffReqDto;
-import e101.hishop.domain.dto.request.UserInfoReqDto;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
