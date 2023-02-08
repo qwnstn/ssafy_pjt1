@@ -134,7 +134,6 @@ public class AdminServiceImpl implements AdminService {
         return userJPARepository.findById(userId)
                 .orElseThrow(() -> new CommonException(2, "User가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR))
                 .updateUserInfoByAdmin(dto)
-                .updateUserByAdmin(dto)
                 .getId();
     }
 
