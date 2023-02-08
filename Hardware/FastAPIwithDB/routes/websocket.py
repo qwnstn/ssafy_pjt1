@@ -1,14 +1,15 @@
-from fastapi import FastAPI, WebSocket
+import asyncio
 
-from fastapi import APIRouter
+import websockets
 
-websocket_router = APIRouter(
-    prefix="/ws", # url 앞에 고정적으로 붙는 경로추가
-) # Route 분리
+URL = "ws://192.168.30.202:8080/"
 
-# @app.websocket("/ws")
-# async def websocket_endpoint(websocket: WebSocket):
-#     await websocket.accept()
-#     while True:
-#         data = await websocket.receive_text()
-#         await websocket.send_text(f"Message text was: {data}")
+
+async def hello():
+    async with websockets.connect(URL) as websocket:
+        await websocket.send("next")
+        await websocket.recv()
+
+
+if __name__ == "__main__":
+    asyncio.run(hello())
