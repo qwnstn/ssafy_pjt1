@@ -198,4 +198,32 @@ public class AdminController {
         adminService.deleteManufacturer(manuId);
         return new ResponseEntity<>("제거완료", HttpStatus.OK);
     }
+
+//    @GetMapping("/prodcategories")
+//    public ResponseEntity<List<ProductCategoryRespDto>> prodcategorys() {
+//        return new ResponseEntity<>(adminService.getProductCategorys(), HttpStatus.OK);
+//    }
+//
+//    @GetMapping("/prodcategories/{manuId}")
+//    public ResponseEntity<ProductCategoryRespDto> prodCategoryDetail(@PathVariable Long manuId) {
+//        return new ResponseEntity<>(adminService.getProductCategory(manuId), HttpStatus.OK);
+//    }
+//
+//    @PostMapping("/prodcategories")
+//    public ResponseEntity<String> saveProdCategory(@RequestBody ProductCategoryReqDto dto) {
+//        adminService.saveProductCategory(dto.toProductCategoryEntity());
+//        return new ResponseEntity<>("저장완료", HttpStatus.OK);
+//    }
+//
+//    @PatchMapping("/prodcategories/{manuId}")
+//    public ResponseEntity<String> prodCategoryModify(@RequestBody ProductCategoryReqDto dto, @PathVariable Long manuId) {
+//        adminService.modifyProductCategory(dto, manuId);
+//        return new ResponseEntity<>("수정완료", HttpStatus.OK);
+//    }
+//
+//    @DeleteMapping("/prodcategories/{manuId}")
+//    public ResponseEntity<String> prodCategoryDelete(@PathVariable Long manuId) {
+//        adminService.deleteProductCategory(manuId);
+//        return new ResponseEntity<>("제거완료", HttpStatus.OK);
+//    }
 }

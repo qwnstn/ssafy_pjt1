@@ -40,6 +40,7 @@ public class DataLoader {
     @PostConstruct
     public void loadData(){
 
+        // id 1 : user
         authService.signUp(User.builder()
                 .loginId("user1234")
                 .gender(Gender.MALE)
@@ -51,6 +52,7 @@ public class DataLoader {
                 .defaultCardId(2L)
                 .build());
 
+        // id 2 : card
         userService.cardLoad(Card.builder()
                 .cardNo("1234121211111111")
                 .name("신한")
@@ -58,6 +60,7 @@ public class DataLoader {
                 .cvc("123")
                 .build(), 1L);
 
+        // id 3 : card
         userService.cardLoad(Card.builder()
                 .cardNo("555121211111111")
                 .name("국민")
@@ -65,6 +68,7 @@ public class DataLoader {
                 .cvc("654")
                 .build(), 1L);
 
+        // id 4 : pay
         adminService.savePay(Pay.builder()
                 .payName("삼성")
                 .payImg("img.jpg")
@@ -72,6 +76,7 @@ public class DataLoader {
                 .buyTotal(50000L)
                 .build(), 1L);
 
+        // id 5 : user
         authService.signUp(User.builder()
                 .loginId("admin1234")
                 .gender(Gender.MALE)
@@ -83,12 +88,21 @@ public class DataLoader {
                 .role(Role.ROLE_ADMIN)
                 .build());
 
+        // id 6 : manufacturer
         adminService.saveManufacturer(Manufacturer.builder()
                 .name("녹데")
                 .address("부산광역시 강서구 녹산산업중로 333")
                 .tel("051-123-1234")
                 .build());
 
+        // id 7 : manufacturer
+        adminService.saveManufacturer(Manufacturer.builder()
+                .name("동심")
+                .address("부산광역시 강서구 녹산산업중로 333")
+                .tel("031-876-5234")
+                .build());
+
+        // id 8 : product
         adminService.saveProduct(Product.builder()
                 .name("세우깡")
                 .price(1500L)
@@ -97,14 +111,16 @@ public class DataLoader {
                 .image("")
                 .build(), 6L);
 
+        // id 9 : product
         adminService.saveProduct(Product.builder()
                 .name("꺼깔콘")
                 .price(2000L)
                 .rfid("BB4247AC500104E0")
                 .barcode("14103252")
                 .image("")
-                .build(), 6L);
+                .build(), 7L);
 
+        // id 10 : product
         adminService.saveProduct(Product.builder()
                 .name("팝씨")
                 .price(1530L)
@@ -113,11 +129,13 @@ public class DataLoader {
                 .image("")
                 .build(), 6L);
 
+        // id 11 : branch
         adminService.saveBranch(Branch.builder()
                 .branchName("부산점")
                 .region("부산광역시 강서구 녹산산업중로 333")
                 .build());
 
+        // id 12 : branch
         adminService.saveBranch(Branch.builder()
                 .branchName("서울점")
                 .region("서울시 강남구 테헤란로 212")
@@ -128,21 +146,21 @@ public class DataLoader {
                 .position("점장")
                 .part("지점장")
                 .staffLoginId("kimssafy")
-                .build(), 10L);
+                .build(), 11L);
 
         adminService.savePayDetail(PayDetail.builder()
                 .productName("세우깡")
                 .count(1L)
                 .price(1500L)
-                .build(), 4L, 7L, 10L);
+                .build(), 4L, 8L, 11L);
 
         adminService.savePayDetail(PayDetail.builder()
                 .productName("꺼깔콘")
                 .count(2L)
                 .price(4000L)
-                .build(), 4L, 8L, 10L);
+                .build(), 4L, 9L, 11L);
 
-        adminService.saveKiosk(Kiosk.builder().build(), 10L);
+        adminService.saveKiosk(Kiosk.builder().build(), 11L);
 
         userService.cardLoad(Card.builder()
                 .cardNo("1968267535975189")

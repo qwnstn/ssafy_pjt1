@@ -42,4 +42,9 @@ public interface AdminService {
     Manufacturer saveManufacturer(Manufacturer manufacturer);
     Long modifyManufacturer(ManufacturerReqDto dto, Long manuId);
     void deleteManufacturer(Long manuId);
+//    List<ProductCategoryRespDto> getProductCategorys();
+//    ProductCategoryRespDto getProductCategory(Long manuId);
+//    ProductCategory saveProductCategory(ProductCategory manufacturer);
+//    Long modifyProductCategory(ProductCategoryReqDto dto, Long manuId);
+//    void deleteProductCategory(Long manuId);
 }

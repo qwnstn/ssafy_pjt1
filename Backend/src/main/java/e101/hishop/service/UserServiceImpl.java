@@ -178,7 +178,7 @@ public class UserServiceImpl implements UserService {
 
     @PostConstruct
     public void initWebClient() {
-        webClient = WebClient.create("http://172.17.0.1:7777");
+        webClient = WebClient.create("http://i8e101.p.ssafy.io:7777");
 //        webClient = WebClient.create("http://192.168.40.111:8888");
 //        webClient = WebClient.create("https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=861");
     }

@@ -29,6 +29,7 @@ public class AdminServiceImpl implements AdminService {
     private final BranchJPARepository branchJPARepository;
     private final PointJPARepository pointJPARepository;
     private final ManufacturerJPARepository manufacturerJPARepository;
+    private final ProductCategoryJPARepository productCategoryJPARepository;
 
     @Override
     public Pay savePay(Pay pays, Long userId) {
@@ -108,6 +109,9 @@ public class AdminServiceImpl implements AdminService {
         Manufacturer manufacturer = manufacturerJPARepository.findById(manuId)
                 .orElseThrow(() -> new CommonException(2, "Manufacturer객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
         product.setManufacturersAndProducts(manufacturer);
+//        ProductCategory productCategory = productCategoryJPARepository.findById(categoryId)
+//                .orElseThrow(() -> new CommonException(2, "ProductCategory객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
+//        product.setProductCategoriesAndProducts(productCategory);
         return productJPARepository.save(product);
     }
 

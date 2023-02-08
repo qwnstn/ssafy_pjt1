@@ -43,13 +43,18 @@ public class Product {
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     private Manufacturer manufacturer;
 //
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "category_id")
-//    private ProductCategory productCategory;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
+    private ProductCategory productCategory;
 
     public void setManufacturersAndProducts(Manufacturer manufacturer) {
         this.manufacturer = manufacturer;
         manufacturer.getProducts().add(this);
+    }
+    public void setProductCategoriesAndProducts(ProductCategory productCategory) {
+        this.productCategory = productCategory;
+        productCategory.getProducts().add(this);
     }
     public Product updateProduct(ProductReqDto dto) {
         name = StringUtils.hasText(dto.getName()) ? dto.getName() : name;

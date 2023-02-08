@@ -22,10 +22,9 @@ public class ProductCategory {
 
     private String category;
 
-//    @JsonIgnore
-//    @Builder.Default
-//    @OneToMany(mappedBy = "productCategory", cascade = CascadeType.REMOVE)
-//    private List<Product> products = new ArrayList<>();
+    @JsonIgnore
+    @OneToMany(mappedBy = "productCategory", cascade = CascadeType.PERSIST)
+    private List<Product> products = new ArrayList<>();
 
 
 
