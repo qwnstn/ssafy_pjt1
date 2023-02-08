@@ -46,7 +46,8 @@ public class AdminController {
     @PostMapping("/product")
     public ResponseEntity<String> productCreate(@RequestBody ProductReqDto dto) {
         Long manuId = dto.getManuId();
-        adminService.saveProduct(dto.toProductEntity(), manuId);
+        Long categoryId = dto.getCategoryId();
+        adminService.saveProduct(dto.toProductEntity(), manuId, categoryId);
         return new ResponseEntity<>("저장완료", HttpStatus.OK);
     }
 
@@ -205,11 +206,11 @@ public class AdminController {
 //        return new ResponseEntity<>(adminService.getProductCategory(manuId), HttpStatus.OK);
 //    }
 //
-//    @PostMapping("/prodcategories")
-//    public ResponseEntity<String> saveProdCategory(@RequestBody ProductCategoryReqDto dto) {
-//        adminService.saveProductCategory(dto.toProductCategoryEntity());
-//        return new ResponseEntity<>("저장완료", HttpStatus.OK);
-//    }
+    @PostMapping("/prodcategories")
+    public ResponseEntity<String> saveProdCategory(@RequestBody ProductCategoryReqDto dto) {
+        adminService.saveProductCategory(dto.toProductCategoryEntity());
+        return new ResponseEntity<>("저장완료", HttpStatus.OK);
+    }
 //
 //    @PatchMapping("/prodcategories/{manuId}")
 //    public ResponseEntity<String> prodCategoryModify(@RequestBody ProductCategoryReqDto dto, @PathVariable Long manuId) {

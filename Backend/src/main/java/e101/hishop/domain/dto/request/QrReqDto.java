@@ -11,6 +11,5 @@ import java.time.LocalDate;
 public class QrReqDto {
     private Long userId;
     private Long kioskId;
-
     private Long datetime;
 }

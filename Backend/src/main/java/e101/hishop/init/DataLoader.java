@@ -102,72 +102,88 @@ public class DataLoader {
                 .tel("031-876-5234")
                 .build());
 
-        // id 8 : product
+        // id 8 : manufacturer
+        adminService.saveProductCategory(ProductCategory.builder()
+                .category("과자")
+                .build());
+
+        // id 9 : manufacturer
+        adminService.saveProductCategory(ProductCategory.builder()
+                .category("음료")
+                .build());
+
+        // id 10 : product
         adminService.saveProduct(Product.builder()
                 .name("세우깡")
                 .price(1500L)
                 .rfid("FC4947AC500104E0")
                 .barcode("01243252")
                 .image("")
-                .build(), 6L);
+                .build(), 6L, 8L);
 
-        // id 9 : product
+        // id 11 : product
         adminService.saveProduct(Product.builder()
                 .name("꺼깔콘")
                 .price(2000L)
                 .rfid("BB4247AC500104E0")
                 .barcode("14103252")
                 .image("")
-                .build(), 7L);
+                .build(), 7L, 8L);
 
-        // id 10 : product
+        // id 12 : product
         adminService.saveProduct(Product.builder()
                 .name("팝씨")
                 .price(1530L)
                 .rfid("FE9146AC500104E0")
                 .barcode("44103222")
                 .image("")
-                .build(), 6L);
+                .build(), 6L, 9L);
 
-        // id 11 : branch
+        // id 13 : branch
         adminService.saveBranch(Branch.builder()
                 .branchName("부산점")
                 .region("부산광역시 강서구 녹산산업중로 333")
                 .build());
 
-        // id 12 : branch
+        // id 14 : branch
         adminService.saveBranch(Branch.builder()
                 .branchName("서울점")
                 .region("서울시 강남구 테헤란로 212")
                 .build());
 
+        // id 15 : staff
         adminService.saveStaff(Staff.builder()
                 .name("김싸피")
                 .position("점장")
                 .part("지점장")
                 .staffLoginId("kimssafy")
-                .build(), 11L);
+                .build(), 13L);
 
+        // id 16 : payDetail
         adminService.savePayDetail(PayDetail.builder()
                 .productName("세우깡")
                 .count(1L)
                 .price(1500L)
-                .build(), 4L, 8L, 11L);
+                .build(), 4L, 10L, 13L);
 
+        // id 17 : payDetail
         adminService.savePayDetail(PayDetail.builder()
                 .productName("꺼깔콘")
                 .count(2L)
                 .price(4000L)
-                .build(), 4L, 9L, 11L);
+                .build(), 4L, 11L, 13L);
 
-        adminService.saveKiosk(Kiosk.builder().build(), 11L);
+        // id 18 : kiosk
+        adminService.saveKiosk(Kiosk.builder().build(), 13L);
 
+        // id 19 : card
         userService.cardLoad(Card.builder()
                 .cardNo("1968267535975189")
                 .name("사사")
                 .validDate("2221")
                 .build(), 5L);
 
+        // id 20 : user
         authService.signUp(User.builder()
                 .loginId("consult_user")
                 .gender(Gender.MALE)
@@ -178,6 +194,7 @@ public class DataLoader {
                 .password(AppConfig.testPasswordEncoder().encode("pass1234!"))
                 .build());
 
+        // id 21 : user
         authService.signUp(User.builder()
                 .loginId("consult_admin")
                 .gender(Gender.MALE)
@@ -189,6 +206,7 @@ public class DataLoader {
                 .role(Role.ROLE_ADMIN)
                 .build());
 
+        // id 22 : user
         authService.signUp(User.builder()
                 .loginId("coach_user")
                 .gender(Gender.MALE)
@@ -199,6 +217,7 @@ public class DataLoader {
                 .password(AppConfig.testPasswordEncoder().encode("pass1234!"))
                 .build());
 
+        // id 23 : user
         authService.signUp(User.builder()
                 .loginId("coach_admin")
                 .gender(Gender.MALE)
@@ -210,6 +229,7 @@ public class DataLoader {
                 .role(Role.ROLE_ADMIN)
                 .build());
 
+        // id 24 : user
         adminService.savePoint(Point.builder()
                 .point(40000L)
                 .endDate(LocalDateTime.of(2024,1,1,23,59,59,0))

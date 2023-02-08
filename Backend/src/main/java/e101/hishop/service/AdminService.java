@@ -15,7 +15,7 @@ public interface AdminService {
     ProductRespDto getProductDetail(Long productId);
     Long editProduct(ProductEditReqDto dto, Long productId);
     void deleteProduct(Long productId);
-    Product saveProduct(Product product, Long manuId);
+    Product saveProduct(Product product, Long manuId, Long categoryId);
     PayDetail savePayDetail(PayDetail payDetail, Long payId, Long productId, Long branchId);
     List<UserInfoRespDto> getUsers();
     UserInfoRespDto getUser(Long userId);
@@ -44,7 +44,7 @@ public interface AdminService {
     void deleteManufacturer(Long manuId);
 //    List<ProductCategoryRespDto> getProductCategorys();
 //    ProductCategoryRespDto getProductCategory(Long manuId);
-//    ProductCategory saveProductCategory(ProductCategory manufacturer);
+    ProductCategory saveProductCategory(ProductCategory manufacturer);
 //    Long modifyProductCategory(ProductCategoryReqDto dto, Long manuId);
 //    void deleteProductCategory(Long manuId);
 }

@@ -99,7 +99,7 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public Product saveProduct(Product product, Long manuId) {
+    public Product saveProduct(Product product, Long manuId, Long categoryId) {
         Boolean result = productJPARepository.existsByName(product.getName());
         Boolean result2 = productJPARepository.existsByRfid(product.getRfid());
         Boolean result3 = productJPARepository.existsByBarcode(product.getBarcode());
@@ -109,9 +109,9 @@ public class AdminServiceImpl implements AdminService {
         Manufacturer manufacturer = manufacturerJPARepository.findById(manuId)
                 .orElseThrow(() -> new CommonException(2, "Manufacturer객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
         product.setManufacturersAndProducts(manufacturer);
-//        ProductCategory productCategory = productCategoryJPARepository.findById(categoryId)
-//                .orElseThrow(() -> new CommonException(2, "ProductCategory객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
-//        product.setProductCategoriesAndProducts(productCategory);
+        ProductCategory productCategory = productCategoryJPARepository.findById(categoryId)
+                .orElseThrow(() -> new CommonException(2, "ProductCategory객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
+        product.setProductCategoriesAndProducts(productCategory);
         return productJPARepository.save(product);
     }
 
@@ -322,4 +322,10 @@ public class AdminServiceImpl implements AdminService {
         }
         manufacturerJPARepository.deleteById(manuId);
     }
+
+    @Override
+    public ProductCategory saveProductCategory(ProductCategory productCategory) {
+        return productCategoryJPARepository.save(productCategory);
+    }
+
 }

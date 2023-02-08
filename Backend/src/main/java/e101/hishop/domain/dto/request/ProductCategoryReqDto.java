@@ -9,11 +9,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ProductCategoryReqDto {
     private Long id;
-    private String cateogry;
+    private String category;
     public ProductCategory toProductCategoryEntity(){
         return ProductCategory.builder()
                 .id(id)
-                .category(cateogry)
+                .category(category)
                 .build();
     }
 }
