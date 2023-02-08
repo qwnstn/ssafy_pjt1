@@ -178,8 +178,9 @@ public class UserServiceImpl implements UserService {
 
     @PostConstruct
     public void initWebClient() {
-//        webClient = WebClient.create("http://localhost:7777/");
-        webClient = WebClient.create("http://192.168.30.114:8000/");
+        webClient = WebClient.create("http://localhost:7777");
+//        webClient = WebClient.create("http://192.168.40.111:8888");
+//        webClient = WebClient.create("https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=861");
     }
     @Override
     public String qrRead(QrReqDto dto) {
@@ -240,11 +241,10 @@ public class UserServiceImpl implements UserService {
 //                .build();
         log.info("보낸다");
         Mono<String> response = webClient.get()
-                .uri("/docs")
                 .retrieve()
                 .bodyToMono(String.class);
         log.info("안터짐?");
-//        log.info("{}", response.toString());
+        response.subscribe(ss -> log.info("result is {}", ss));
         return "123";
     }
 }
