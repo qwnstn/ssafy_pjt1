@@ -178,7 +178,8 @@ public class UserServiceImpl implements UserService {
 
     @PostConstruct
     public void initWebClient() {
-        webClient = WebClient.create("http://localhost:7777/");
+//        webClient = WebClient.create("http://localhost:7777/");
+        webClient = WebClient.create("http://192.168.30.114:8000/");
     }
     @Override
     public String qrRead(QrReqDto dto) {
