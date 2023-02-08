@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @ToString(exclude = {"user, cardCategory"})
 @Entity
@@ -13,12 +14,12 @@ import java.time.LocalDate;
 public class Point {
     @Id
     @GeneratedValue
-    @Column(name = "card_id")
+    @Column(name = "point_id")
     private Long id;
 
-    private Long amount;
+    private Long point;
 
-    private LocalDate endDate;
+    private LocalDateTime endDate;
 
     private String category;
 
@@ -36,9 +37,9 @@ public class Point {
 
 
     @Builder
-    public Point(Long id, Long amount, LocalDate endDate, String category, String description) {
+    public Point(Long id, Long point, LocalDateTime endDate, String category, String description) {
         this.id = id;
-        this.amount = amount;
+        this.point = point;
         this.endDate = endDate;
         this.category = category;
         this.description = description;
