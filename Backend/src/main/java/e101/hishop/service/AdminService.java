@@ -34,9 +34,9 @@ public interface AdminService {
     Long modifyBranch(BranchReqDto dto, Long branchId);
     void deleteBranch(Long branchId);
     Branch saveBranch(Branch branch);
-
     Staff saveStaff(Staff staff, Long branchId);
-
     Kiosk saveKiosk(Kiosk kiosk, Long branchId);
+    Point savePoint(Point point, Long userId);
+
 
 }

@@ -2,15 +2,9 @@ package e101.hishop.service;
 
 import e101.hishop.domain.dto.request.*;
 import e101.hishop.domain.dto.response.*;
-import e101.hishop.domain.entity.Card;
-import e101.hishop.domain.entity.Pay;
-import e101.hishop.domain.entity.PayDetail;
-import e101.hishop.domain.entity.User;
+import e101.hishop.domain.entity.*;
 import e101.hishop.global.common.CommonException;
-import e101.hishop.repository.CardJPARepository;
-import e101.hishop.repository.PayDetailJPARepository;
-import e101.hishop.repository.PayJPARepository;
-import e101.hishop.repository.UserJPARepository;
+import e101.hishop.repository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -39,6 +33,7 @@ public class UserServiceImpl implements UserService {
     private final PayJPARepository payJPARepository;
     private final PayDetailJPARepository payDetailJPARepository;
     private final CardJPARepository cardJPARepository;
+    private final PointJPARepository pointJPARepository;
     private WebClient webClient;
 
 
@@ -183,7 +178,7 @@ public class UserServiceImpl implements UserService {
 
     @PostConstruct
     public void initWebClient() {
-        webClient = WebClient.create("http://192.168.30.114:8000/");
+        webClient = WebClient.create("http://localhost:7777/");
     }
     @Override
     public String qrRead(QrReqDto dto) {
@@ -212,5 +207,43 @@ public class UserServiceImpl implements UserService {
                 .retrieve()
                 .bodyToMono(String.class);
         return response.block();
+    }
+
+    @Override
+    public List<PointRespDto> getPoint() {
+        User user = userJPARepository.findById(getUserId())
+                .orElseThrow(() -> new CommonException(2, "User객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
+        List<Point> point = pointJPARepository.findAllByUserId(user.getId());
+        List<PointRespDto> pointList = new ArrayList<>();
+        for (Point p: point) {
+            pointList.add(PointRespDto.of(p));
+        }
+        return pointList;
+    }
+
+    @Override
+    public String sendDB() {
+//        List<Object> productList = new ArrayList<>();
+//        for (int i = 0; i < 4; i++) {
+//            HashMap hashMap = new HashMap<String, Optional>();
+//            hashMap.put("productId", 4234);
+//            hashMap.put("name", "꺼깔콘");
+//            hashMap.put("price", 3000);
+//            hashMap.put("rfid", "3124875");
+//            hashMap.put("barcode", null);
+//            hashMap.put("image", "img.jpg");
+//            productList.add(hashMap);
+//        }
+//        EggDto eggDto = EggDto.builder()
+//                .product(productList)
+//                .build();
+        log.info("보낸다");
+        Mono<String> response = webClient.get()
+                .uri("/docs")
+                .retrieve()
+                .bodyToMono(String.class);
+        log.info("안터짐?");
+//        log.info("{}", response.toString());
+        return "123";
     }
 }

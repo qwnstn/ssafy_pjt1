@@ -8,11 +8,16 @@ import e101.hishop.repository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.BodyInserters;
+import reactor.core.publisher.Mono;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Transactional
@@ -27,6 +32,7 @@ public class AdminServiceImpl implements AdminService {
     private final KioskJPARepository kioskJPARepository;
     private final ProductJPARepository productJPARepository;
     private final BranchJPARepository branchJPARepository;
+    private final PointJPARepository pointJPARepository;
 
     @Override
     public Pay savePay(Pay pays, Long userId) {
@@ -213,6 +219,16 @@ public class AdminServiceImpl implements AdminService {
         kiosk.setBranchAndKiosk(branch);
         return kioskJPARepository.save(kiosk);
     }
+
+    @Override
+    public Point savePoint(Point point, Long userId) {
+        User user = userJPARepository.findById(userId)
+                .orElseThrow(() -> new CommonException(2, "Branch객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
+        point.setUsersAndPoints(user);
+        return pointJPARepository.save(point);
+    }
+
+
 
 
 }

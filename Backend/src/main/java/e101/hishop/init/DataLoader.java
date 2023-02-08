@@ -175,7 +175,6 @@ public class DataLoader {
                 .password(AppConfig.testPasswordEncoder().encode("pass1234!"))
                 .build());
 
-
         authService.signUp(User.builder()
                 .loginId("coach_admin")
                 .gender(Gender.MALE)
@@ -186,6 +185,13 @@ public class DataLoader {
                 .password(AppConfig.testPasswordEncoder().encode("pass1234!"))
                 .role(Role.ROLE_ADMIN)
                 .build());
+
+        adminService.savePoint(Point.builder()
+                .point(40000L)
+                .endDate(LocalDateTime.of(2024,1,1,23,59,59,0))
+                .category("적립")
+                .description("구매 적립")
+                .build(), 1L);
 
     }
 

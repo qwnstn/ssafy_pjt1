@@ -1,10 +1,7 @@
 package e101.hishop.controller;
 
 import e101.hishop.domain.dto.request.*;
-import e101.hishop.domain.dto.response.CardInfoRespDto;
-import e101.hishop.domain.dto.response.PayDetailInfoRespDto;
-import e101.hishop.domain.dto.response.PayInfoRespDto;
-import e101.hishop.domain.dto.response.UserInfoRespDto;
+import e101.hishop.domain.dto.response.*;
 import e101.hishop.global.common.CommonResponse;
 import e101.hishop.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -102,5 +99,14 @@ public class UserController {
         return new ResponseEntity<>("전달 완료", HttpStatus.OK);
     }
 
+    @GetMapping("/point")
+    public ResponseEntity<List<PointRespDto>> getPoint() {
+        return new ResponseEntity<>(userService.getPoint(), HttpStatus.OK);
+    }
 
+    @GetMapping("/egg")
+    public ResponseEntity<String> sendDB() {
+        userService.sendDB();
+        return new ResponseEntity<>("완료", HttpStatus.OK);
+    }
 }

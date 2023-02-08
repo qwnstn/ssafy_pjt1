@@ -1,14 +1,12 @@
 package e101.hishop.controller;
 
-import e101.hishop.domain.dto.request.BranchReqDto;
-import e101.hishop.domain.dto.request.ProductReqDto;
-import e101.hishop.domain.dto.request.StaffReqDto;
-import e101.hishop.domain.dto.request.UserInfoReqDto;
+import e101.hishop.domain.dto.request.*;
 import e101.hishop.domain.dto.response.*;
 import e101.hishop.service.AdminService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -141,4 +139,13 @@ public class AdminController {
         adminService.deleteBranch(branchId);
         return new ResponseEntity<>("제거완료", HttpStatus.OK);
     }
+
+    @PostMapping("/point")
+    public ResponseEntity<String> savePoint(@RequestBody PointReqDto dto) {
+        Long userId = dto.getUserId();
+        adminService.savePoint(dto.toPointEntity(), userId);
+        return new ResponseEntity<>("저장완료", HttpStatus.OK);
+    }
+
+
 }
