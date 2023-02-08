@@ -102,7 +102,7 @@ const Register = () => {
       phone: data.phone,
       birthDate: data.birthday.replace(/^(\d{4})(\d{2})(\d{2})$/, `$1-$2-$3`),
       gender: data.gender,
-      mail: data.mail,
+      email: data.mail,
       adSelect: data.adSelect,
     };
 

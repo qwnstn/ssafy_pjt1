@@ -56,7 +56,6 @@ export default function Account() {
             Authorization: `Bearer ${accesstoken}`,
           },
         });
-  
         setUserId(data.loginId);
         setName(data.name);
         setPhone(data.phone);
@@ -145,7 +144,7 @@ export default function Account() {
           </Grid>
           <Grid item>
             <Link href="/app/pwdchange" variant="body2">
-              비밀번호 변경
+              회원 정보 변경
             </Link>
           </Grid>
         </Grid>

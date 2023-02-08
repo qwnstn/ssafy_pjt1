@@ -35,9 +35,8 @@ function createData(name, price, cnt) {
   return { name, price, cnt, fullprice };
 }
 
-
- // 웹소켓 통신을 통해 값을 넣어야 함
- // 품명, 단가, 수량을 받고, 총액은 계삭해서 넣기
+// 웹소켓 통신을 통해 값을 넣어야 함
+// 품명, 단가, 수량을 받고, 총액은 계삭해서 넣기
 const rows = [
   createData("폰트크기 바꿧지롱", 1500, 5),
   createData("동원참치", 4000, 1),
@@ -108,19 +107,20 @@ export default function ItemList() {
         alignItems: "center",
       }}
     >
-      <Box sx={{maxWidth: 720, minHeight: 1280}}>
+      <Box sx={{ maxWidth: 720, minHeight: 1280 }}>
         <Card
           sx={{
             fontSize: 40,
-            padding: 2,
+            padding: 1,
             textAlign: "center",
             backgroundColor: "#ff8c8c",
             fontWeight: "bold",
+            width: "100vw",
           }}
         >
           장바구니
         </Card>
-        <Card sx={{ width: `100vw`, border: 1 }}>
+        <Card sx={{  border: 1, width: "100vw", }}>
           <Paper sx={{ width: "100%", overflow: "hidden" }}>
             <TableContainer sx={{ minHeight: `73vh`, maxHeight: `50vh` }}>
               <Table stickyHeader aria-label="sticky table">
@@ -206,9 +206,8 @@ export default function ItemList() {
             결제취소
           </Button>
           <Button
-            
             variant="outlined"
-            sx={{ fontSize: 30, margin: 1}}
+            sx={{ fontSize: 30, margin: 1 }}
             onClick={() => navigate("/kiosk/rfidread")}
           >
             물품 다시찍기

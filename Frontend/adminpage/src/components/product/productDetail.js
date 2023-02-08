@@ -163,9 +163,6 @@ const ProductDetail = () => {
                   <Typography sx={{ flex: 1, mb: 1 }}>
                     Barcode : {product.barcode || "바코드 호출 실패"}
                   </Typography>
-                  <Typography sx={{ flex: 1 }}>
-                    이미지 : {product.image || "이미지 호출 실패"}
-                  </Typography>
                 </Paper>
                 <Button
                   sx={{ mt: 1, mr: 1, fontWeight: "bold" }}

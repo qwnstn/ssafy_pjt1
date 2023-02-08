@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState, useEffect } from "react";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
@@ -7,9 +7,7 @@ import { Grid, Button } from "@mui/material";
 import axios from "axios";
 import HOST from "../Host";
 
-
 // 결제하기 버튼 하단에 추가필요
-
 
 export default function CardInfo() {
   const cardImage = (data) => {
@@ -24,42 +22,50 @@ export default function CardInfo() {
     } else if (data === "우리") {
       return "/kiosk/images/woori.png";
     } else {
-      return null;
+      return "/kiosk/images/samsung.png";
     }
   };
 
+  const accesstoken = localStorage.getItem("accesstoken");
+
   // 카드 목록 리스트 - 카드정보 통신을 통해 값을 받아와야함
-  const cards = [
-    ["1", "1234-5678-9234-2345", "신한", "0124"],
-    ["2", "1234-5678-9234-2345", "현대", "0124"],
-    ["3", "1234-5678-9234-2345", "ibk", "0124"],
-    ["4", "1234-5678-9234-2345", "하나", "0124"],
-    ["5", "1234-5678-9234-2345", "우리", "0124"],
-  ];
+  const [cards, setCards] = useState([]);
+  useEffect(() => {
+    (async () => {
+      const { data } = await axios.get(`${HOST}/user/card`, {
+        headers: {
+          Authorization: `Bearer ${accesstoken}`,
+        },
+      });
 
-  const API_URI = `${HOST}/card`;
-  // const HOST = 'https://himart.shop/api'
+      setCards(data);
+      // console.log('카드 목록',data);
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
+  // 메인 카드 pk
+  const [defaultCardId, setDefaultCardId] = useState();
+  // console.log('메인카드번호',defaultCardId)
 
-  // accesstoken을 키오스크가 어떻게 가지고있지?
-  // useEffect(() => {
-  //   (async () => {
-  //     let accesstoken = localStorage.getItem("accesstoken");
+  useEffect(() => {
+    (async () => {
+      const { data } = await axios.get(`${HOST}/user`, {
+        headers: {
+          Authorization: `Bearer ${accesstoken}`,
+        },
+      });
+      setDefaultCardId(data.defaultCardId);
+      // console.log('asdasdasda',data.defaultCardId)
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  //     const { data } = await axios.get(API_URI, {
-  //       headers: {
-  //         Authorization: `Bearer ${accesstoken}`,
-  //       },
-  //     });
-  //     console.log(data);
-
-  //   });
-  // });
-
-
-
-  const [mainCard, setMainCard] = useState([     "4",     "1234-5678-9234-2345",     "하나",     "0124",  ]);
-  // 유저 정보에서 card id 뽑아서 카드 목록과 비교 후 저장
+  // 유저 정보에서 card id 뽑아서 저장
+  const [mainCard, setMainCard] = useState();
+  useEffect(() => {
+    setMainCard(cards.find((object) => object.cardId === defaultCardId));
+  });
 
   // 카드 목록 등록 함수
   const renderCards = () => {
@@ -68,16 +74,15 @@ export default function CardInfo() {
         <Grid item margin={1} key={index}>
           <Button
             sx={{ width: "100%", height: "100%", p: 0 }}
-            onClick={() => {
-              setMainCard(card);
-            }}
+            onClick={console.log('클릭')}
           >
-            <CardMedia component="img" image={cardImage(card[2])} />
+            <CardMedia component="img" image={cardImage(card["name"])} />
           </Button>
         </Grid>
       );
     });
   };
+
 
   return (
     <Box

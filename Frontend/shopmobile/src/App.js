@@ -14,7 +14,7 @@ import AddCard from "./components/userinfo/AddCard";
 import Payment from "./components/userinfo/Payment";
 import PaymentDetail from "./components/userinfo/PaymentDetail";
 import Account from "./components/userinfo/Account";
-import PwdChange from "./components/login/PwdChange";
+import PwdChange from "./components/userinfo/PwdChange";
 
 function App() {
   return (

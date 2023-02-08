@@ -37,7 +37,6 @@ export default function Payment() {
           },
         })
         .then((response) => {
-          console.log(response.data);
           setRows(response.data);
         })
         .catch(function (err) {

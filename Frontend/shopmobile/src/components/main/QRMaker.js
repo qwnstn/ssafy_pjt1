@@ -5,17 +5,26 @@ import { Grid } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 
 function QRMaker() {
-  const [userid] = useState();
+  const accesstoken = localStorage.getItem("accesstoken");
   const [time, setTime] = useState(Date.now());
-  const initialValue = `${userid}/${time}`;
-  const [value, setValue] = useState(initialValue);
+  const test = {
+    token: accesstoken,
+    time: time,
+  };
+  const [value, setValue] = useState(JSON.stringify(test));
   const [countdown, setCountdown] = useState(59);
   const ref = React.useRef(null);
 
   useEffect(() => {
     if (countdown === 0) {
       setTime(Date.now());
-      setValue(initialValue);
+      const newTest = {
+        token: accesstoken,
+        time: time,
+      };
+      const test1 = JSON.stringify(newTest);
+      // console.log(typeof test1)
+      setValue(test1);
       setCountdown(59);
     } else {
       const intervalId = setInterval(() => {
@@ -23,15 +32,17 @@ function QRMaker() {
       }, 1000);
       return () => clearInterval(intervalId);
     }
-  }, [countdown, initialValue]);
-
-  React.useEffect(() => {
-    ref.current.ownerDocument.body.scrollTop = 0;
-  });
+  }, [countdown, accesstoken, time]);
 
   const handleButtonClick = () => {
     setTime(Date.now());
-    setValue(`${userid}/${time}`);
+    const newTest = {
+      token: accesstoken,
+      time: time,
+    };
+    const test1 = JSON.stringify(newTest);
+    setValue(test1);
+    // console.log(typeof test1)
     setCountdown(59);
   };
 
@@ -48,7 +59,13 @@ function QRMaker() {
       >
         QR생성
       </Card>
-      <Grid style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
+      <Grid
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <Grid item xs={1} />
         <Grid item xs={10} mt={3}>
           <CssBaseline />
@@ -57,11 +74,14 @@ function QRMaker() {
               <QRCode value={value} size="100%" />
             </div>
             <Card sx={{ textAlign: "center", mb: 1 }}>
-              <Button onClick={handleButtonClick} sx={{width: '100%', fontWeight:'bold'}}>
+              <Button
+                onClick={handleButtonClick}
+                sx={{ width: "100%", fontWeight: "bold" }}
+              >
                 QR 재생성
               </Button>
             </Card>
-            <Card sx={{ textAlign: "center", mb: 1, fontWeight:'bold' }}>
+            <Card sx={{ textAlign: "center", mb: 1, fontWeight: "bold" }}>
               자동 재생성까지 {countdown}초
             </Card>
           </Card>

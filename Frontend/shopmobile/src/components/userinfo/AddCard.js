@@ -72,14 +72,24 @@ const AddCard = () => {
         alert("카드정보를 다시 입력해주세요.");
       } else {
         // Make API call to register card
-        const API_URI = `${HOST}/card/`;
-        axios
+        const API_URI = `${HOST}/user/card/`;
+        // 카드 번호 형식에 맞게 변형
+        let cardNo = cardNumber;
+        cardNo = cardNo.match(/.{1,4}/g).join('-');
+        // 카드 유효기간 맞는지 확인
+        const currentYear = new Date().getFullYear().toString().substr(-2);
+        const currentMonth = new Date().getMonth() + 1;       
+        if (cardExpiration.match(/^\d{2}(0[1-9]|1[0-2])$/) 
+        && cardExpiration.substr(0, 2) >= currentYear 
+        && (parseInt(cardExpiration.substr(0, 2)) + parseInt(cardExpiration.substr(2))) >= (parseInt(currentYear) + currentMonth)) {
+          axios
           .post(
             API_URI,
             {
-              cardNo: cardNumber,
+              cardNo: cardNo,
               name: cardCompany,
               validDate: cardExpiration,
+              cvc: cardCVC
             },
             {
               headers: {
@@ -94,7 +104,9 @@ const AddCard = () => {
           .catch((error) => {
             console.error(error);
           });
-        // console.log(cardNumber)
+        } else {
+          setError({ ...error, cardExpiration: true });
+        }
       }
     }
   };

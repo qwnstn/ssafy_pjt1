@@ -8,54 +8,87 @@ import QRCode from "react-qr-code";
 import { Grid } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 // 웹소켓의 통신이 오면 rfid read 페이지로 넘어간뒤,
 
 // 비회원 결제 버튼을 누르면 rfid read 페이지로 넘어간뒤, itemlist 페이지로 넘어가는 기능
 
-export default function KioskMain() {
-  const navigate = useNavigate();
-
-  // 키오스크 아이디는 무슨 기준으로 정하는가?
-  const kioskId = 1;
-
-  const [message, setMessage] = useState("");
-  const [value, setValue] = useState(`${kioskId}/${Date.now()}`);
+const useWebSocket = (url) => {
+  const [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setValue(`${kioskId}/${Date.now()}`);
-    }, 59000);
-    // 59초
-    return () => clearInterval(interval);
-  }, []);
+    const socket = new WebSocket(url);
 
-  useEffect(() => {
-    sessionStorage.removeItem("user");
-    const handleKeyDown = (event) => {
-      if (event.key === "Enter") {
-        sessionStorage.setItem("user", "user");
-        navigate("/kiosk/rfidread");
+    socket.onopen = () => {
+      console.log("WebSocket connection opened:", url);
+    };
+
+    socket.onmessage = (event) => {
+      if (event.data instanceof Blob) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          setMessages((prevMessages) => [...prevMessages, reader.result]);
+        };
+        reader.readAsText(event.data);
+      } else {
+        setMessages((prevMessages) => [...prevMessages, event.data]);
       }
     };
-    document.addEventListener("keydown", handleKeyDown);
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
+
+    socket.onclose = () => {
+      console.log("WebSocket connection closed:", url);
     };
-  }, [navigate]);
-
-  useEffect(() => {
-    const socket = new WebSocket("ws:");
-
-    socket.addEventListener("message", (event) => {
-      setMessage(event.data);
-      console.log("WebSocket message received:", event.data);
-    });
 
     return () => {
       socket.close();
     };
+  }, [url]);
+
+  return messages;
+};
+
+export default function KioskMain() {
+  const navigate = useNavigate();
+  const [kioskId, setKioskId] = useState();
+  const [value, setValue] = useState("");
+  const messages = useWebSocket("ws://192.168.30.202:8080");
+
+  function QRMake(kioskId) {
+    const newTest = {
+      token: kioskId,
+      time: Date.now(),
+    };
+    const test1 = JSON.stringify(newTest);
+    setValue(test1);
+  }
+
+  // 키오스크 아이디는 Python과 통신으로 받아옴
+  useEffect(() => {
+    (async () => {
+      const { data } = await axios.get("http://192.168.30.114:8000/api/kiosk");
+      const kiosk = data["kioskId"];
+      QRMake(kiosk);
+      setKioskId(kiosk);
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      QRMake(kioskId);
+    }, 59000);
+    // 59초
+    return () => clearInterval(interval);
+  }, [kioskId]);
+
+  useEffect(() => {
+    sessionStorage.removeItem("user");
+    if (messages[0] === "next") {
+      sessionStorage.setItem("user", "user");
+      navigate("/kiosk/rfidread");
+    }
+  }, [messages, navigate]);
 
   return (
     <Box>
@@ -102,6 +135,7 @@ export default function KioskMain() {
               <Card sx={{ my: 5, padding: 1 }}>
                 <QRCode value={value} size={200} />
               </Card>
+              {messages}
             </Grid>
           </Grid>
           <Grid
@@ -114,7 +148,6 @@ export default function KioskMain() {
           >
             회원결제를 위해 바코드에 QR을 찍거나 앱으로 QR스캔하세요
           </Grid>
-          {message}
           <Grid container sx={{ mt: 2, mb: 2 }}>
             <Grid item xs />
             <Grid item>

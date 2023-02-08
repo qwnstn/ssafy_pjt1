@@ -13,36 +13,35 @@ const QRReader = () => {
 
   // 화면 전환 버튼
   const [cameraMode, setCameraMode] = useState("environment");
-  const [userId, setUserId] = useState(""); 
+  const [userId, setUserId] = useState("");
 
   // 값 받아와야함
   useEffect(() => {
     (async () => {
       let accesstoken = localStorage.getItem("accesstoken");
-
       const { data } = await axios.get(API_USERID, {
         headers: {
           Authorization: `Bearer ${accesstoken}`,
         },
       });
       setUserId(data.id);
-
     })();
   });
 
   // qr값을 받으면 유저 정보, 시간, 키오스크 정보를 axios로 보냄
   const API_URI = `${HOST}/iot/qr`;
   const handleScan = (kioskInput) => {
+    console.log(kioskInput)
     if (kioskInput) {
-      const kioskInputList = kioskInput.split("/");
-      const kioskTime = kioskInputList[1];
-      const kioskId = kioskInputList[0];
+      const kioskInputObject = JSON.parse(kioskInput);
+      const kioskTime = kioskInputObject["time"];
+      const kioskId = kioskInputObject["token"];
       const timeCheck = Date.now() - kioskTime;
 
-      console.log("kioskInputList", kioskInputList);
-      console.log("kioskTime", kioskTime);
-      console.log("kioskId", kioskId);
-      console.log("timeCheck", timeCheck);
+      // console.log("kioskInputJson", typeof kioskInputJson, kioskInputJson);
+      // console.log("kioskTime", kioskTime);
+      // console.log("kioskId", kioskId);
+      // console.log("timeCheck", timeCheck);
 
       // 70초, 키오스크qr은 59초마다 변경되게 설정됨
       if (timeCheck < 70000) {
