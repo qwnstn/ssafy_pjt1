@@ -106,7 +106,7 @@ public class UserController {
 
     @GetMapping("/egg")
     public ResponseEntity<String> sendDB() {
-        userService.sendDB();
-        return new ResponseEntity<>("완료", HttpStatus.OK);
+        String msg = userService.sendDB();
+        return new ResponseEntity<>(msg, HttpStatus.OK);
     }
 }

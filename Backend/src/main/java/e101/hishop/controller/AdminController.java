@@ -140,6 +140,16 @@ public class AdminController {
         return new ResponseEntity<>("제거완료", HttpStatus.OK);
     }
 
+    @GetMapping("/point")
+    public ResponseEntity<List<PointRespDto>> points() {
+        return new ResponseEntity<>(adminService.getPoints(), HttpStatus.OK);
+    }
+
+//    @GetMapping("/branch/{branchId}")
+//    public ResponseEntity<PointRespDto> pointDetail(@PathVariable Long pointId) {
+//        return new ResponseEntity<>(adminService.getPoint(pointId), HttpStatus.OK);
+//    }
+
     @PostMapping("/point")
     public ResponseEntity<String> savePoint(@RequestBody PointReqDto dto) {
         Long userId = dto.getUserId();

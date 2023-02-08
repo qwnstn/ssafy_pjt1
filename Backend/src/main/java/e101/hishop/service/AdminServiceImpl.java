@@ -221,6 +221,23 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
+    public List<PointRespDto> getPoints() {
+        List<Point> points = pointJPARepository.findAll();
+        List<PointRespDto> pointList = new ArrayList<>();
+        for (Point p: points) {
+            pointList.add(PointRespDto.of(p));
+        }
+        return pointList;
+    }
+
+//    @Override
+//    public PointRespDto getPoint(Long pointId) {
+//        Point point = pointJPARepository.findById(pointId)
+//                .orElseThrow(() -> new CommonException(2, "User객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
+//        return PointRespDto.of(point);
+//    }
+
+    @Override
     public Point savePoint(Point point, Long userId) {
         User user = userJPARepository.findById(userId)
                 .orElseThrow(() -> new CommonException(2, "Branch객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));

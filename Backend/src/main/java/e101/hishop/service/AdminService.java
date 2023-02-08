@@ -37,6 +37,8 @@ public interface AdminService {
     Staff saveStaff(Staff staff, Long branchId);
     Kiosk saveKiosk(Kiosk kiosk, Long branchId);
     Point savePoint(Point point, Long userId);
+    List<PointRespDto> getPoints();
+//    PointRespDto getPoint(Long pointId);
 
 
 }
