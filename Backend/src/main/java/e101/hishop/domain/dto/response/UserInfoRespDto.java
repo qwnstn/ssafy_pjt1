@@ -2,6 +2,7 @@ package e101.hishop.domain.dto.response;
 
 import e101.hishop.domain.entity.User;
 import e101.hishop.global.enumeration.Gender;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,6 +11,8 @@ import java.time.LocalDate;
 
 @Getter
 @NoArgsConstructor
+@Builder
+@AllArgsConstructor
 public class UserInfoRespDto {
 
     private Long id;
@@ -21,19 +24,6 @@ public class UserInfoRespDto {
     private String email;
     private Long defaultCardId;
     private Boolean adSelect;
-
-    @Builder
-    public UserInfoRespDto(Long id, String loginId, String name, Gender gender, LocalDate birthDate, String phone, String email, Long defaultCardId, Boolean adSelect) {
-        this.id = id;
-        this.loginId = loginId;
-        this.name = name;
-        this.gender = gender;
-        this.birthDate = birthDate;
-        this.phone = phone;
-        this.email = email;
-        this.defaultCardId = defaultCardId;
-        this.adSelect = adSelect;
-    }
 
     //TODO 유저정보 받아올때 password 뺄것인지 생각
     public static UserInfoRespDto of(User user) {
