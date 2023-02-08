@@ -14,28 +14,18 @@ public class UserInfoRespDto {
 
     private Long id;
     private String loginId;
-
-    private String password;
-
     private String name;
-
     private Gender gender;
-
     private LocalDate birthDate;
-
     private String phone;
-
     private String email;
-
     private Long defaultCardId;
-
     private Boolean adSelect;
 
     @Builder
-    public UserInfoRespDto(Long id, String loginId, String password, String name, Gender gender, LocalDate birthDate, String phone, String email, Long defaultCardId, Boolean adSelect) {
+    public UserInfoRespDto(Long id, String loginId, String name, Gender gender, LocalDate birthDate, String phone, String email, Long defaultCardId, Boolean adSelect) {
         this.id = id;
         this.loginId = loginId;
-        this.password = password;
         this.name = name;
         this.gender = gender;
         this.birthDate = birthDate;
@@ -53,7 +43,6 @@ public class UserInfoRespDto {
                 .email(user.getEmail())
                 .name(user.getName())
                 .gender(user.getGender())
-                .password(user.getPassword())
                 .birthDate(user.getBirthDate())
                 .phone(user.getPhone())
                 .defaultCardId(user.getDefaultCardId())
