@@ -6,13 +6,9 @@ import e101.hishop.service.AdminService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/admin")
@@ -93,7 +89,7 @@ public class AdminController {
     }
 
     @PatchMapping("/employees/{employeeId}")
-    public ResponseEntity<String> employeeModify(@RequestBody StaffReqDto dto, @PathVariable Long employeeId) {
+    public ResponseEntity<String> employeeModify(@RequestBody StaffEditReqDto dto, @PathVariable Long employeeId) {
         //TODO 지점 변경?
         adminService.modifyStaff(dto, employeeId);
         return new ResponseEntity<>("수정완료", HttpStatus.OK);

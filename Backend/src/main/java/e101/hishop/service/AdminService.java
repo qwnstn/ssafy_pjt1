@@ -23,7 +23,7 @@ public interface AdminService {
     void deleteUser(Long userId);
     List<StaffRespDto> getStaff();
     StaffRespDto getStaffDetail(Long employeeId);
-    Long modifyStaff(StaffReqDto dto, Long employeeId);
+    Long modifyStaff(StaffEditReqDto dto, Long employeeId);
     void deleteStaff(Long employeeId);
     List<BranchRespDto> getBranchs();
     BranchRespDto getBranch(Long branchId);

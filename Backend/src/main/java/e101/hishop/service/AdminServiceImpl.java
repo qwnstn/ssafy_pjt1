@@ -162,7 +162,7 @@ public class AdminServiceImpl implements AdminService {
         return StaffRespDto.of(staff);
     }
     @Override
-    public Long modifyStaff(StaffReqDto dto, Long employeeId) {
+    public Long modifyStaff(StaffEditReqDto dto, Long employeeId) {
         Boolean result = staffJPARepository.existsByStaffLoginId(dto.getStaffLoginId());
         if (result) throw new CommonException(1, "아이디가 중복됩니다.", HttpStatus.BAD_REQUEST);
         Staff staff = staffJPARepository.findById(employeeId)

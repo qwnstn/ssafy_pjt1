@@ -1,6 +1,6 @@
 package e101.hishop.domain.entity;
 
-import e101.hishop.domain.dto.request.StaffReqDto;
+import e101.hishop.domain.dto.request.StaffEditReqDto;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -42,7 +42,7 @@ public class Staff {
         branch.getStaff().add(this);
     }
 
-    public Staff updateStaff(StaffReqDto dto) {
+    public Staff updateStaff(StaffEditReqDto dto) {
         name = StringUtils.hasText(dto.getName()) ? dto.getName() : name;
         position = StringUtils.hasText(dto.getPosition()) ? dto.getPosition() : position;
         part = StringUtils.hasText(dto.getPart()) ? dto.getPart() : part;
