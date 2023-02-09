@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
@@ -6,8 +6,6 @@ import Box from "@mui/material/Box";
 import { Grid, Button } from "@mui/material";
 import axios from "axios";
 import HOST from "../../Host";
-
-
 
 export default function CardInfo() {
   // const navigate = useNavigate();
@@ -27,9 +25,8 @@ export default function CardInfo() {
       return "/app/images/samsung.png";
     }
   };
- 
-  const accesstoken = localStorage.getItem("accesstoken");
 
+  const accesstoken = localStorage.getItem("accesstoken");
 
   // 카드 목록 리스트 - 카드정보 통신을 통해 값을 받아와야함
   const [cards, setCards] = useState([]);
@@ -42,18 +39,16 @@ export default function CardInfo() {
         },
       });
 
-      setCards(data)
+      setCards(data);
       // console.log('카드 목록',data);
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  
-
 
   // 메인 카드 pk
   const [defaultCardId, setDefaultCardId] = useState();
   // console.log('메인카드번호',defaultCardId)
-  
+
   useEffect(() => {
     (async () => {
       const { data } = await axios.get(`${HOST}/user`, {
@@ -61,20 +56,17 @@ export default function CardInfo() {
           Authorization: `Bearer ${accesstoken}`,
         },
       });
-      setDefaultCardId(data.defaultCardId)
+      setDefaultCardId(data.defaultCardId);
       // console.log('asdasdasda',data.defaultCardId)
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[]);
-  
+  }, []);
 
-  
   // 유저 정보에서 card id 뽑아서 저장
   const [mainCard, setMainCard] = useState();
   useEffect(() => {
-    setMainCard(cards.find(object => object.cardId === defaultCardId));
-  });
-
+    setMainCard(cards.find((object) => object.cardId === defaultCardId));
+  }, [cards, defaultCardId]);
 
   // 카드 목록 등록 함수
   const renderCards = () => {
@@ -84,23 +76,23 @@ export default function CardInfo() {
           <Button
             sx={{ width: "100%", height: "100%", p: 0 }}
             onClick={async () => {
-                await axios.patch(`${HOST}/user/card/${card.cardId}/main`, null ,{
-                  headers: {
-                    Authorization: `Bearer ${accesstoken}`,
-                  },
-                });
-                setDefaultCardId(card.cardId)
-                setMainCard(cards.find(object => object.cardId === card.cardId))
+              await axios.patch(`${HOST}/user/card/${card.cardId}/main`, null, {
+                headers: {
+                  Authorization: `Bearer ${accesstoken}`,
+                },
+              });
+              setDefaultCardId(card.cardId);
+              setMainCard(
+                cards.find((object) => object.cardId === card.cardId)
+              );
             }}
           >
-            <CardMedia component="img" image={cardImage(card['name'])} />
+            <CardMedia component="img" image={cardImage(card["name"])} />
           </Button>
         </Grid>
       );
     });
   };
-
-
 
   return (
     <Box
@@ -132,11 +124,12 @@ export default function CardInfo() {
           <CardHeader
             title="메인 카드"
             style={{ textAlign: "center", borderBottom: 1 }}
+            sx={{backgroundColor:'#ff8c8c', mt:1, borderRadius:2}}
           />
           <Grid item margin={1}>
             <CardMedia
               component="img"
-              image={mainCard ? cardImage(mainCard['name']) : null}
+              image={mainCard ? cardImage(mainCard["name"]) : null}
               style={{ width: "100%", height: "auto" }}
             />
           </Grid>
@@ -148,7 +141,7 @@ export default function CardInfo() {
             textAlign: "center",
             maxWidth: "500px",
             paddingBottom: cards.length ? 70 : 0,
-            marginBottom: 70
+            marginBottom: 70,
           }}
         >
           <CardHeader
@@ -158,8 +151,16 @@ export default function CardInfo() {
               borderBottom: 1,
               wordWrap: "break-word",
             }}
+            sx={{backgroundColor:'#90caf9', mt:1, borderRadius:2}}
           />
-          <div style={{ overflowY: "scroll", height: "100%", flexShrink: 0, scrollbarWidth: "none" }}>
+          <div
+            style={{
+              overflowY: "scroll",
+              height: "100%",
+              flexShrink: 0,
+              scrollbarWidth: "none",
+            }}
+          >
             {renderCards()}
             <Button
               id="addCard"

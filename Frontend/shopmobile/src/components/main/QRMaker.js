@@ -4,6 +4,8 @@ import { Box, Button, Card } from "@mui/material";
 import { Grid } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 
+
+
 function QRMaker() {
   const accesstoken = localStorage.getItem("accesstoken");
   const [time, setTime] = useState(Date.now());
@@ -47,6 +49,7 @@ function QRMaker() {
   };
 
   return (
+
     <Box sx={{ pb: 7 }} ref={ref}>
       <Card
         sx={{
@@ -57,7 +60,7 @@ function QRMaker() {
           fontWeight: "bold",
         }}
       >
-        QR생성
+        QR생성  
       </Card>
       <Grid
         style={{

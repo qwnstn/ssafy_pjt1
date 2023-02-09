@@ -9,11 +9,45 @@ import { useNavigate } from "react-router-dom";
 
 const theme = createTheme();
 
+const useWebSocket = (url) => {
+  const [messages, setMessages] = useState([]);
+
+  useEffect(() => {
+    const socket = new WebSocket(url);
+
+    socket.onopen = () => {
+      console.log("WebSocket connection opened:", url);
+    };
+
+    socket.onmessage = (event) => {
+      if (event.data instanceof Blob) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          setMessages((prevMessages) => [...prevMessages, reader.result]);
+        };
+        reader.readAsText(event.data);
+      } else {
+        setMessages((prevMessages) => [...prevMessages, event.data]);
+      }
+    };
+
+    socket.onclose = () => {
+      console.log("WebSocket connection closed:", url);
+    };
+
+    return () => {
+      socket.close();
+    };
+  }, [url]);
+
+  return messages;
+};
+
 export default function ResultPayment() {
   const navigate = useNavigate();
   const [redirect, setRedirect] = useState(false);
   const [countdown, setCountdown] = useState(20);
-
+  
   useEffect(() => {
     if (countdown > 0) {
       const timer = setTimeout(() => {
@@ -24,18 +58,18 @@ export default function ResultPayment() {
       setRedirect(true);
     }
   }, [countdown]);
-
+  
+  const itemList = useWebSocket("ws://192.168.30.202:8080");
   useEffect(() => {
-    const handleKeyPress = (event) => {
-      if (event.key === "Enter") {
-        setRedirect(true);
-      }
-    };
-    document.addEventListener("keydown", handleKeyPress);
-    return () => {
-      document.removeEventListener("keydown", handleKeyPress);
-    };
-  }, []);
+    if (itemList.length > 0) {
+      sessionStorage.setItem("data", itemList);
+      console.log(itemList);
+      console.log(typeof itemList);
+      setRedirect(true);
+    }else {
+      console.log("itemlist가 비어있음");
+    }
+  }, [itemList]);
 
   if (redirect) {
     navigate(countdown > 0 ? "/kiosk/itemlist" : "/kiosk");

@@ -1,15 +1,35 @@
-import React, {useState, useEffect } from "react";
+import React, { useState } from "react";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import Box from "@mui/material/Box";
 import { Grid, Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import HOST from "../Host";
 
 // 결제하기 버튼 하단에 추가필요
 
+// 세션 데이터
+const session = JSON.parse(sessionStorage.getItem("data"));
+
+// 카드 목록 리스트 - 세션을 통해 값을 받아와야함
+const cards = sessionStorage.getItem("data") ? session["cardList"] : null
+// console.log(session)
+
+// 메인 카드 번호 세션에서 값 받기
+const defaultCardId = sessionStorage.getItem("data") ? session["defaultCardId"] : null;
+
 export default function CardInfo() {
+  const navigate = useNavigate();
+  // 유저 정보에서 card id 뽑아서 저장
+  // 버튼 누를 시 계속 바뀌고 결제 버튼 시 값 보내기
+  // console.log('m', mainCard)
+  // console.log('c', cards)
+  // cards.find((object) => object.cardId === defaultCardId)
+  const [mainCard, setMainCard] = useState(
+    cards.find((object) => object.cardId === defaultCardId)
+  );
+
   const cardImage = (data) => {
     if (data === "현대") {
       return "/kiosk/images/hyundai.png";
@@ -26,46 +46,23 @@ export default function CardInfo() {
     }
   };
 
-  const accesstoken = localStorage.getItem("accesstoken");
-
-  // 카드 목록 리스트 - 카드정보 통신을 통해 값을 받아와야함
-  const [cards, setCards] = useState([]);
-  useEffect(() => {
-    (async () => {
-      const { data } = await axios.get(`${HOST}/user/card`, {
-        headers: {
-          Authorization: `Bearer ${accesstoken}`,
-        },
+  const API_URI = "http://192.168.30.114:8000/api/pay/member"
+  const ResultPayment = async (data) => {
+    const cardId = {
+      cardId: data.cardId
+    }
+    console.log(cardId);
+    axios
+      .post(API_URI, cardId)
+      .then(() => {
+        console.log("결제완료");
+        navigate("/kiosk/resultpayment");
+      })
+      .catch((error) => {
+        console.error(error);
       });
 
-      setCards(data);
-      // console.log('카드 목록',data);
-    })();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  // 메인 카드 pk
-  const [defaultCardId, setDefaultCardId] = useState();
-  // console.log('메인카드번호',defaultCardId)
-
-  useEffect(() => {
-    (async () => {
-      const { data } = await axios.get(`${HOST}/user`, {
-        headers: {
-          Authorization: `Bearer ${accesstoken}`,
-        },
-      });
-      setDefaultCardId(data.defaultCardId);
-      // console.log('asdasdasda',data.defaultCardId)
-    })();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  // 유저 정보에서 card id 뽑아서 저장
-  const [mainCard, setMainCard] = useState();
-  useEffect(() => {
-    setMainCard(cards.find((object) => object.cardId === defaultCardId));
-  });
+  };
 
   // 카드 목록 등록 함수
   const renderCards = () => {
@@ -74,15 +71,17 @@ export default function CardInfo() {
         <Grid item margin={1} key={index}>
           <Button
             sx={{ width: "100%", height: "100%", p: 0 }}
-            onClick={console.log('클릭')}
+            onClick={() => {
+              // console.log("클릭");
+              setMainCard(card);
+            }}
           >
-            <CardMedia component="img" image={cardImage(card["name"])} />
+            <CardMedia component="img" image={cardImage(card["cardName"])} />
           </Button>
         </Grid>
       );
     });
   };
-
 
   return (
     <Box
@@ -118,7 +117,7 @@ export default function CardInfo() {
           <Grid item margin={1}>
             <CardMedia
               component="img"
-              image={mainCard.length > 0 ? cardImage(mainCard[2]) : null}
+              image={mainCard ? cardImage(mainCard["cardName"]) : null}
               style={{ width: "100%", height: "auto" }}
             />
           </Grid>
@@ -140,10 +139,42 @@ export default function CardInfo() {
               wordWrap: "break-word",
             }}
           />
-          <div style={{ overflowY: "scroll", height: "90%", flexShrink: 0 }}>
+          <div
+            style={{
+              overflowY: "scroll",
+              height: "92%",
+              flexShrink: 0,
+              marginBottom: 10,
+              maxHeight: "60vh",
+            }}
+          >
             {renderCards()}
           </div>
         </Card>
+        <div style={{ position: "absolute", bottom: 10, marginTop: 20 }}>
+          <Button
+            variant="contained"
+            color="error"
+            onClick={() => navigate("/kiosk/itemlist")}
+            sx={{
+              fontSize: 30,
+              fontWeight: "bold",
+              mr: 3,
+            }}
+          >
+            뒤로가기
+          </Button>
+          <Button
+            variant="contained"
+            onClick={() => ResultPayment(mainCard)}
+            sx={{
+              fontSize: 30,
+              fontWeight: "bold",
+            }}
+          >
+            결제하기
+          </Button>
+        </div>
       </Box>
     </Box>
   );

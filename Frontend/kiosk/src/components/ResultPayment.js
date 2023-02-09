@@ -16,6 +16,7 @@ export default function ResultPayment() {
   const [countdown, setCountdown] = useState(3);
 
   useEffect(() => {
+    sessionStorage.removeItem("data");
     const timer = setTimeout(() => {
       setCountdown(countdown - 1);
     }, 1000);
@@ -50,9 +51,9 @@ export default function ResultPayment() {
           <Typography component="h1" variant="h5">
             이용해주셔서 감사합니다
           </Typography>
-          {/* <Typography component="h1" variant="h5">
+          <Typography component="h1" variant="h5">
           {countdown}초 후 메인화면으로 이동합니다
-          </Typography> */}
+          </Typography>
         </Box>
       </Container>
     </ThemeProvider>
