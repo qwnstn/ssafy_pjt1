@@ -15,4 +15,5 @@ public interface ProductJPARepository extends JpaRepository<Product, Long> {
     Boolean existsByBarcode(String name);
 
     List<Product> findAllByManufacturerId(Long manuId);
+    List<Product> findAllByProductCategoryId(Long categoryId);
 }

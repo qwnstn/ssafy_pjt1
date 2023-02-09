@@ -324,8 +324,42 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
+    public List<ProductCategoryRespDto> getProductCategories() {
+        List<ProductCategory> productcategories = productCategoryJPARepository.findAll();
+        List<ProductCategoryRespDto> productCategoryList = new ArrayList<>();
+        for (ProductCategory p: productcategories) {
+            productCategoryList.add(ProductCategoryRespDto.of(p));
+        }
+        return productCategoryList;
+    }
+
+    @Override
+    public ProductCategoryRespDto getProductCategory(Long categoryId) {
+        ProductCategory productCategory = productCategoryJPARepository.findById(categoryId)
+                .orElseThrow(() -> new CommonException(2, "User객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
+        return ProductCategoryRespDto.of(productCategory);
+    }
+
+    @Override
     public ProductCategory saveProductCategory(ProductCategory productCategory) {
         return productCategoryJPARepository.save(productCategory);
     }
+
+    @Override
+    public Long modifyProductCategory(ProductCategoryReqDto dto, Long categoryId) {
+        return productCategoryJPARepository.findById(categoryId)
+                .orElseThrow(() -> new CommonException(2, "User객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR))
+                .updateProductCategory(dto)
+                .getId();
+    }
+
+    public void deleteProductCategory(Long categoryId) {
+        List<Product> products = productJPARepository.findAllByProductCategoryId(categoryId);
+        for (Product p: products) {
+            p.setProductCategory(null);
+        }
+        productCategoryJPARepository.deleteById(categoryId);
+    }
+
 
 }
