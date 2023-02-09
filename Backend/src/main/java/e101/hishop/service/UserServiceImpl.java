@@ -1,6 +1,9 @@
 package e101.hishop.service;
 
-import e101.hishop.domain.dto.request.*;
+import e101.hishop.domain.dto.request.EditNameReqDto;
+import e101.hishop.domain.dto.request.PayPasswordReqDto;
+import e101.hishop.domain.dto.request.QrReqDto;
+import e101.hishop.domain.dto.request.UserUpdateReqDto;
 import e101.hishop.domain.dto.response.*;
 import e101.hishop.domain.entity.*;
 import e101.hishop.global.common.CommonException;
@@ -16,7 +19,6 @@ import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
-import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.HashMap;

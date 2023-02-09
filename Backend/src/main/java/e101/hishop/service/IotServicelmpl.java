@@ -8,12 +8,9 @@ import e101.hishop.repository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -34,11 +31,12 @@ public class IotServicelmpl implements IotService{
     @Override
     public Long memberPay(MemberReqDto dto) {
         User user = userJPARepository.findById(dto.getUserId())
-                .orElseThrow(() -> new CommonException(2, "Pays객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
+                .orElseThrow(() -> new CommonException(2, "User가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
         Card card = cardJPARepository.findById(dto.getCardId())
-                .orElseThrow(() -> new CommonException(2, "Card객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
+
+                .orElseThrow(() -> new CommonException(2, "Card가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
         Kiosk kiosk = kioskJPARepository.findById(dto.getKioskId())
-                .orElseThrow(() -> new CommonException(2, "Kiosk객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
+                .orElseThrow(() -> new CommonException(2, "Kiosk가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
         Long branchId = kiosk.getBranch().getId();
         Pay pay = Pay.builder()
                 .user(user)
@@ -64,7 +62,7 @@ public class IotServicelmpl implements IotService{
     public Long guestPay(GuestReqDto dto) {
         // 결제과정
         Kiosk kiosk = kioskJPARepository.findById(dto.getKioskId())
-                .orElseThrow(() -> new CommonException(2, "Kiosk객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
+                .orElseThrow(() -> new CommonException(2, "kiosk가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
         Long branchId = kiosk.getBranch().getId();
         Pay pay = Pay.builder()
                 .payName(dto.getCardInfo().get("cardholderName").toString())
