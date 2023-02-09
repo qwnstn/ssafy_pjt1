@@ -1,10 +1,19 @@
+import json
 from asyncio import run
+from functions.barcode_test import SessionStorage
+from fastapi import APIRouter, Depends, Request
+from sqlalchemy.orm import Session
 
-from fastapi import APIRouter, Request
-
-from routes.models import BarcodeList, CardList, RFIDList
-from functions.serial_test import RFID_Serial_Trans
 from core.config import KIOSK_ID
+from crud.crud import select_products_with_rfid
+from db.connection import get_db
+from routes.models import BarcodeList, CardList, RFIDList
+from routes.websocket import send
+
+try:
+    from functions.serial_test import RFID_Serial_Trans
+except:
+    pass
 
 # from sqlalchemy.orm import Session
 
@@ -12,25 +21,44 @@ from core.config import KIOSK_ID
 router = APIRouter(
     prefix="/api/kiosk",  # url 앞에 고정적으로 붙는 경로추가
 )  # Route 분리
+cardInfo = dict()
+
+
+def reset_cardlist():
+    cardInfo = list()
 
 
 @router.get("")
 def 키오스크_아이디(request: Request):
+    SessionStorage().startThread()
     return {"kioskId": KIOSK_ID}
 
 
 @router.post("/cardinfo")
-def 카드정보전송(request: Request, CardList: CardList):
+def 카드정보전송(request: Request, CardList: CardList, db: Session = Depends(get_db)):
     data = run(request.json())
-    userId = data["userId"]
-    defaultCardId = data["defaultCardId"]
-    cardList = data["cardList"]
+    cardInfo = json.dumps(data)
     # RFID 시작
-    RFID_Serial_Trans().main()
-    ###
-    # 웹소켓 자리
-    ###
-    return {"message": "미완성 API"}
+    try:
+        rfid_uids = RFID_Serial_Trans().main()
+    except:
+        rfid_uids = list()
+    # rfid 상품정보를 이용해서 DB 조회
+    querys = select_products_with_rfid(rfid_uids, db)
+    products = list()
+    for q in querys:
+        prd = dict()
+        # prd['productId'] = q.product_id            
+        prd['name'] = q.name
+        prd['price'] = q.price
+        # prd['rfid'] = q.rfid
+        # prd['barcode'] = q.barcode
+        # prd['image'] = q.image
+        products.append(prd)
+
+    payload = json.dumps({"productList": products})
+    run(send(payload))
+    return {"message": "OK"}
 
 
 @router.post("/rfid")
@@ -53,3 +81,8 @@ def 장바구니_상품담기_Barcode(request: Request, BarcodeList: BarcodeList
     # 웹소켓 자리
     ###
     return {"message": "미완성 API"}
+
+
+@router.get("/cardinfo")
+def 카드리스트_요청(request: Request):
+    return {"cardInfo": cardInfo}

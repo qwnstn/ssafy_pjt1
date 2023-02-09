@@ -38,7 +38,7 @@ class CardList(BaseModel):
 
 
 class Product(BaseModel):
-    product_id: int
+    productId: int
     name: str
     price: int
     rfid: Optional[str] = None
