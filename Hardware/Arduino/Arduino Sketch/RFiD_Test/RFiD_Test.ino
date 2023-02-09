@@ -22,36 +22,28 @@ void flushmySerialBuffer() {
 void execute_commandline(String message, uint8_t* cl) {
   uint8_t c[20] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
   char i;
-
-  Serial.println(message);
-  Serial.print("request bit : ");
-  for (i = 0; i < cl[1]; i++) {
-    Serial.print(cl[i], HEX);
-    Serial.print(" ");
-  }
-  Serial.println();
+  Serial.print(message);
+  // for (i = 0; i < cl[1]; i++) {
+  //   Serial.print(cl[i], HEX);
+  //   Serial.print(" ");
+  // }
+  // Serial.println();
   for (i = 0; i < cl[1]; i++) {
     mySerial.write(cl[i]);
   }
   delay(2000);
-  Serial.println("============================");
   i = 0;
-  Serial.print("response len : ");
-  Serial.println(mySerial.available());
-  Serial.print("response bit : ");
   while (mySerial.available() > 0) {
     c[i] = mySerial.read();
-    Serial.print(c[i], HEX);
-    Serial.print(" ");
+    // Serial.print(c[i], HEX);
     i++;
   }
-  Serial.println();
+  // Serial.println();
   if (c[3]) {
     Serial.println("OK");
   } else {
     Serial.println("FAIL");
   }
-  Serial.println("============================\n\n\n");
 }
 
 
@@ -86,7 +78,7 @@ void setup() {
   flushSerialBuffer();
   flushmySerialBuffer();
   // RFID 리더 체크
-  execute_commandline("RFID reader check", check_reader);
+  execute_commandline("RFID reader check...", check_reader);
   // RF 리딩모트 끄기
   // execute_commandline("RF carrier off", set_RF_request_off);
   // baudrate 세팅 (9600)
@@ -94,7 +86,7 @@ void setup() {
   // // Reading Stay 모드 테스트
   // execute_commandline("RFID Reading Stay", readingStay_request);
   // Reading Continue 모드 테스트
-  execute_commandline("RFID Reading Continue", readingContinue_request);
+  execute_commandline("RFID Reading Continue...", readingContinue_request);
 }
 
 void loop() {
@@ -104,7 +96,7 @@ void loop() {
   // // // 입력이 오면 리딩모드 on
   // execute_commandline("RF carrier on", set_RF_request_on);
   int count = 0;
-  uint8_t data;
+  char data;
   while (count < 50) {
     if (mySerial.available() > 0) {
       while (mySerial.available() > 0) {
