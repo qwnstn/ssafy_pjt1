@@ -7,7 +7,7 @@ async def handle_message(websocket):
         print(f'Received: {message}')
 
 async def run_client():
-    async with websockets.connect('ws://0.0.0.0:7777') as websocket:
+    async with websockets.connect('ws://localhost:6665') as websocket:
         await websocket.send("Hello from the client")
         await handle_message(websocket)
 

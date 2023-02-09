@@ -13,7 +13,7 @@ async def handle_new_connection(websocket, path):
     await handle_connection(websocket, path)
     clients.remove(websocket)
 
-start_server = websockets.serve(handle_new_connection, '0.0.0.0', 7777)
+start_server = websockets.serve(handle_new_connection, 'localhost', 6665)
 
 asyncio.get_event_loop().run_until_complete(start_server)
 asyncio.get_event_loop().run_forever()
