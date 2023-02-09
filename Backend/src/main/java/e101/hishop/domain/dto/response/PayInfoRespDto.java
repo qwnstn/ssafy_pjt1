@@ -25,8 +25,8 @@ public class PayInfoRespDto {
     public static PayInfoRespDto of(Pay pay) {
         return PayInfoRespDto.builder()
                 .id(pay.getId())
-                .loginId(pay.getUser().getLoginId())
-                .userName(pay.getUser().getName())
+                .loginId(pay.getUser() == null ? "guest" : pay.getUser().getLoginId())
+                .userName(pay.getUser() == null ? "비회원" : pay.getUser().getName())
                 .payName(pay.getPayName())
                 .payImg(pay.getPayImg())
                 .buyDate(pay.getBuyDate())

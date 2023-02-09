@@ -55,7 +55,7 @@ public class User {
 
     @JsonIgnore
     @Builder.Default
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Card> cards = new ArrayList<>();
 
     @JsonIgnore
