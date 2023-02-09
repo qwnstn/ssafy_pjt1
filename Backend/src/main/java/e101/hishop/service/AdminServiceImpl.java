@@ -298,7 +298,7 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public ManufacturerRespDto getManufacturer(Long manuId) {
         Manufacturer manufacturer = manufacturerJPARepository.findById(manuId)
-                .orElseThrow(() -> new CommonException(2, "User객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
+                .orElseThrow(() -> new CommonException(2, "manufacturer가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
         return ManufacturerRespDto.of(manufacturer);
     }
 
@@ -310,7 +310,7 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public Long modifyManufacturer(ManufacturerReqDto dto, Long manuId) {
         return manufacturerJPARepository.findById(manuId)
-                .orElseThrow(() -> new CommonException(2, "User객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR))
+                .orElseThrow(() -> new CommonException(2, "manufacturer가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR))
                 .updateManufacturer(dto)
                 .getId();
     }

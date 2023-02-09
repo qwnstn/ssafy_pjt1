@@ -184,7 +184,7 @@ public class UserServiceImpl implements UserService {
     }
     @Override
     public String qrRead(QrReqDto dto) {
-        Long userId = dto.getUserId();
+        Long userId = getUserId();
         User user = userJPARepository.findById(userId)
                 .orElseThrow(() -> new CommonException(2, "User객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
         Long defaultCardId = user.getDefaultCardId();
