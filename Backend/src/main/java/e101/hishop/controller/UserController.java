@@ -104,9 +104,4 @@ public class UserController {
         return new ResponseEntity<>(userService.getPoint(), HttpStatus.OK);
     }
 
-    @GetMapping("/egg")
-    public ResponseEntity<String> sendDB() {
-        String msg = userService.sendDB();
-        return new ResponseEntity<>(msg, HttpStatus.OK);
-    }
 }

@@ -1,6 +1,9 @@
 package e101.hishop.service;
 
-import e101.hishop.domain.dto.request.*;
+import e101.hishop.domain.dto.request.EditNameReqDto;
+import e101.hishop.domain.dto.request.PayPasswordReqDto;
+import e101.hishop.domain.dto.request.QrReqDto;
+import e101.hishop.domain.dto.request.UserUpdateReqDto;
 import e101.hishop.domain.dto.response.*;
 import e101.hishop.domain.entity.*;
 import e101.hishop.global.common.CommonException;
@@ -16,7 +19,6 @@ import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
-import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,6 +36,7 @@ public class UserServiceImpl implements UserService {
     private final PayDetailJPARepository payDetailJPARepository;
     private final CardJPARepository cardJPARepository;
     private final PointJPARepository pointJPARepository;
+    private final KioskJPARepository kioskJPARepository;
     private WebClient webClient;
 
 
@@ -176,15 +179,16 @@ public class UserServiceImpl implements UserService {
         return user.getId();
     }
 
-    @PostConstruct
-    public void initWebClient() {
-        webClient = WebClient.create("http://i8e101.p.ssafy.io:7777");
+//    @PostConstruct
+//    public void initWebClient() {
+//        webClient = WebClient.create("http://i8e101.p.ssafy.io:7777");
 //        webClient = WebClient.create("http://192.168.40.111:8888");
 //        webClient = WebClient.create("https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=861");
-    }
+//    }
     @Override
     public String qrRead(QrReqDto dto) {
         Long userId = getUserId();
+        Long kioskId = dto.getKioskId();
         User user = userJPARepository.findById(userId)
                 .orElseThrow(() -> new CommonException(2, "User객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
         Long defaultCardId = user.getDefaultCardId();
@@ -202,6 +206,9 @@ public class UserServiceImpl implements UserService {
                 .defaultCardId(defaultCardId)
                 .cardList(cardList)
                 .build();
+        Kiosk kiosk = kioskJPARepository.findById(kioskId)
+                .orElseThrow(() -> new CommonException(2, "Kiosk객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
+        webClient = WebClient.create(kiosk.getUrl());
         Mono<String> response = webClient.post()
                 .uri("/api/kiosk/cardinfo")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -223,27 +230,4 @@ public class UserServiceImpl implements UserService {
         return pointList;
     }
 
-    @Override
-    public String sendDB() {
-//        List<Object> productList = new ArrayList<>();
-//        for (int i = 0; i < 4; i++) {
-//            HashMap hashMap = new HashMap<String, Optional>();
-//            hashMap.put("productId", 4234);
-//            hashMap.put("name", "꺼깔콘");
-//            hashMap.put("price", 3000);
-//            hashMap.put("rfid", "3124875");
-//            hashMap.put("barcode", null);
-//            hashMap.put("image", "img.jpg");
-//            productList.add(hashMap);
-//        }
-//        EggDto eggDto = EggDto.builder()
-//                .product(productList)
-//                .build();
-        log.info("보낸다");
-        Mono<String> response = webClient.get()
-                .retrieve()
-                .bodyToMono(String.class);
-        log.info("안터짐?");
-        return response.block();
-    }
 }

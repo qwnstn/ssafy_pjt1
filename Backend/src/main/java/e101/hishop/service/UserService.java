@@ -44,5 +44,4 @@ public interface UserService {
     Long getUserId();
     public String qrRead(QrReqDto dto);
     List<PointRespDto> getPoint();
-    String sendDB();
 }
