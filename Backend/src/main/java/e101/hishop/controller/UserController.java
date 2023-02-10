@@ -3,6 +3,7 @@ package e101.hishop.controller;
 import e101.hishop.domain.dto.request.*;
 import e101.hishop.domain.dto.response.*;
 import e101.hishop.global.common.CommonResponse;
+import e101.hishop.service.MailService;
 import e101.hishop.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,7 +13,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/api/user")
@@ -21,6 +24,7 @@ import java.util.*;
 public class UserController {
 
     private final UserService userService;
+    private final MailService mailService;
 
     @GetMapping
     public ResponseEntity<UserInfoRespDto> getUserInfo() {
@@ -79,7 +83,6 @@ public class UserController {
             } catch (NoSuchElementException e) {
                 throw new ResponseStatusException(HttpStatus.NOT_FOUND, "비밀번호는 숫자 4자리여야 합니다.");
             }
-
     }
 
     @GetMapping("/purchase")
@@ -102,6 +105,15 @@ public class UserController {
     @GetMapping("/point")
     public ResponseEntity<List<PointRespDto>> getPoint() {
         return new ResponseEntity<>(userService.getPoint(), HttpStatus.OK);
+    }
+
+    @PostMapping("/newPassword")
+    public ResponseEntity<UserIdRespDto> sendPwdEmail(@RequestBody NewPasswordReqDto dto) {
+
+        log.info("sendPwdEmail 진입");
+        UserIdRespDto resp = mailService.sendPwdEmail(dto);
+
+        return new ResponseEntity<>(resp, HttpStatus.OK);
     }
 
 }

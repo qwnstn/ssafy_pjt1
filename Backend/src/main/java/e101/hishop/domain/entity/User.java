@@ -86,7 +86,9 @@ public class User {
         return this;
     }
 
-
+    public void changeTmpPassword(String tmpPwd) {
+        password = StringUtils.hasText(tmpPwd) ? AppConfig.testPasswordEncoder().encode(tmpPwd) : password;
+    }
 
     public void changePayPassword(PayPasswordReqDto dto) {
         this.payPassword = dto.getPayPassword();
