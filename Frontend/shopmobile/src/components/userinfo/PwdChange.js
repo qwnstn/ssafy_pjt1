@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import {
   Avatar,
@@ -41,7 +41,29 @@ const PwdChange = () => {
   const [passwordState, setPasswordState] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [pwdChangeError, setPwdChangeError] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
   const movePage = useNavigate();
+
+  const API_URI = `${HOST}/user`;
+
+  useEffect(() => {
+    (async () => {
+      const accesstoken = localStorage.getItem("accesstoken");
+
+      try {
+        const { data } = await axios.get(API_URI, {
+          headers: {
+            Authorization: `Bearer ${accesstoken}`,
+          },
+        });
+        setPhone(data.phone);
+        setEmail(data.email);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  });
 
   const onhandlePatch = async (data) => {
     const jsonData = {
@@ -107,7 +129,7 @@ const PwdChange = () => {
 
     // 핸드폰 유효성 검사
     const phoneRegex = /01[016789]-[^0][0-9]{2,3}-[0-9]{3,4}/;
-    if (!phoneRegex.test(phone) || phone.length < 1) {
+    if (!phoneRegex.test(phone)) {
       setPhoneError("핸드폰 번호를 확인해주세요");
       flag = false;
     } else setPhoneError("");
@@ -169,12 +191,12 @@ const PwdChange = () => {
                   <FormHelperTexts>{passwordError}</FormHelperTexts>
                   <Grid item xs={12}>
                     <TextField
-                      required
                       fullWidth
                       inputProps={{ maxLength: 11 }}
                       id="phone"
                       label="휴대폰(-없이 11자리)"
                       name="phone"
+                      value={phone}
                       autoComplete="new-phone"
                       error={phoneError !== "" || false}
                     />
@@ -187,6 +209,7 @@ const PwdChange = () => {
                       label="이메일"
                       type="email"
                       id="mail"
+                      value={email}
                       autoComplete="new-email"
                     />
                   </Grid>
