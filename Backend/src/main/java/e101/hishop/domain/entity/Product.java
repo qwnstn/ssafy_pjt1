@@ -27,6 +27,7 @@ public class Product {
     private Long price;
     private String rfid;
     private String barcode;
+    private boolean isAdult;
     private String image;
 
     @JsonIgnore
@@ -56,6 +57,7 @@ public class Product {
         rfid = StringUtils.hasText(dto.getRfid()) ? dto.getRfid() : rfid;
         barcode = StringUtils.hasText(dto.getBarcode()) ? dto.getBarcode() : barcode;
         image = StringUtils.hasText(dto.getImage()) ? dto.getImage() : image;
+        isAdult = isAdult;
         return this;
     }
 

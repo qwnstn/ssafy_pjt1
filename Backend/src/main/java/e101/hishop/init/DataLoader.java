@@ -119,6 +119,7 @@ public class DataLoader {
                 .rfid("FC4947AC500104E0")
                 .barcode("01243252")
                 .image("")
+                .isAdult(false)
                 .build(), 6L, 8L);
 
         // id 11 : product
@@ -128,6 +129,7 @@ public class DataLoader {
                 .rfid("BB4247AC500104E0")
                 .barcode("14103252")
                 .image("")
+                .isAdult(false)
                 .build(), 7L, 8L);
 
         // id 12 : product
@@ -137,6 +139,7 @@ public class DataLoader {
                 .rfid("FE9146AC500104E0")
                 .barcode("44103222")
                 .image("")
+                .isAdult(false)
                 .build(), 6L, 9L);
 
         // id 13 : branch
