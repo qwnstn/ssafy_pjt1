@@ -11,7 +11,7 @@ class Base(DeclarativeBase):
 class Product_Kiosk(Base):
     __tablename__ = "Product_Kiosk"
     id: Mapped[int] = mapped_column(primary_key=True)
-    product_id: Mapped[int] = mapped_column(Integer)
+    productId: Mapped[int] = mapped_column(Integer)
     name: Mapped[str] = mapped_column(String)
     price: Mapped[int] = mapped_column(Integer)
     rfid: Mapped[str] = mapped_column(String, nullable=True)
@@ -27,4 +27,4 @@ class Shopping(Base):
     count = Column(Integer)
     price = Column(Integer)
     date = Column(DATE)
-    product_kiosk_id = Column(Integer, ForeignKey("Product_Kiosk.id"))
+    productKioskId = Column(Integer, ForeignKey("Product_Kiosk.id"))

@@ -1,10 +1,13 @@
 from asyncio import run
-from routes.models import CardId, GuestCardInfo
-from core.config import BASE_URL, KIOSK_ID
-from fastapi import APIRouter, Request
 from datetime import datetime
-from functions.test import cardReader
+
 import requests
+from fastapi import APIRouter, Request
+
+from core.config import BASE_URL, KIOSK_ID
+from functions.test import cardReader
+from routes.models import CardId, GuestCardInfo
+from routes.kiosk import reset_cardlist
 
 router = APIRouter(
     prefix="/api/pay", # url 앞에 고정적으로 붙는 경로추가
@@ -47,6 +50,8 @@ def 키오스크_회원_결제요청(request: Request, cardId: CardId):
         "shopping" : shopping
     }
     print(requests.post(url, data=payload).text)
+    reset_cardlist()
+
 
 @router.post("/guest")
 def 키오스크_비회원_결제요청(request: Request, cardInfo: GuestCardInfo):
