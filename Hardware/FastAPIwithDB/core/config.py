@@ -19,6 +19,7 @@ class Settings:
 settings = Settings()
 
 
-WEBSOCKET_URL = "ws://192.168.30.202:8080"
 BASE_URL = "https://himart.shop"
+WEBSOCKET_URL = "ws://192.168.30.202:8080"
+SERIAL_PORT = "COM6"
 KIOSK_ID = 18

@@ -1,11 +1,11 @@
 import threading
 import time
-
+from core.config import SERIAL_PORT
 import serial
 
 
 class RFID_Serial_Trans:
-    PORT = "COM6"                               # 포트 번호
+    PORT = SERIAL_PORT                               # 포트 번호
     baud = 9600                                 # 보드레이트
     # baud = 115200                             # RFID 보드레이트 115200 기본값
     ser = serial.Serial(PORT, baud, timeout=0.1)  # serial 통신 세팅
