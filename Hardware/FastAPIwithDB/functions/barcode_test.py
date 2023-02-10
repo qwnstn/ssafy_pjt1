@@ -19,7 +19,9 @@ class SessionStorage():
     def readCode(self):
         while self.thread_on:
             data = input()
-            if data.isnumeric():
+            if not data:
+                continue
+            elif data.isnumeric():
                 self.barcode.append(data)
             elif data[0] == "{" and len(data) > 50:
                 jsondata = json.loads(data)
@@ -42,7 +44,7 @@ class SessionStorage():
                 #     print("이딴걸 QR이라고 보냈냐")
         return
 
-    def startThread(self):
+    async def startThread(self):
         # 통신을 다른 코드와 병렬처리 하기 위한 스레드 생성
         self.thread_on = True
         thread = threading.Thread(target=self.readCode)

@@ -29,7 +29,7 @@ def reset_cardlist():
 
 @router.get("")
 def 키오스크_아이디(request: Request):
-    sessionStore.startThread()
+    asyncio.run(sessionStore.startThread())
     return {"kioskId": KIOSK_ID}
 
 
@@ -38,9 +38,7 @@ def 카드정보전송(request: Request, CardList: CardList, db: Session = Depen
     data = asyncio.run(request.json())
     cardInfo = json.dumps(data)
     # RFID 시작
-    while sessionStore.thread_on:
-        asyncio.sleep(0.5)
-    rfid_uids = RFID_Serial_Trans().main()
+    rfid_uids = asyncio.run(RFID_Serial_Trans().main())
     # rfid 상품정보를 이용해서 DB 조회
     querys = select_products_with_rfid(rfid_uids, db)
     products = list()
