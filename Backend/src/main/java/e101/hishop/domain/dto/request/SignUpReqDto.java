@@ -47,6 +47,7 @@ public class SignUpReqDto {
     private String phone;
 
     @Email
+    @NotBlank
     private String email;
 
     @NotNull
