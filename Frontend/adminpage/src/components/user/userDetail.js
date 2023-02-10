@@ -188,7 +188,7 @@ const UserDetail = () => {
                     핸드폰 : {user.phone || "핸드폰 호출 실패"}
                   </Typography>
                   <Typography sx={{ flex: 1 }}>
-                    이메일 : {user.email || "이메일 호출 실패"}
+                    이메일 : {user.email || "이메일을 입력하지 않았습니다."}
                   </Typography>
                 </Paper>
                 <Button

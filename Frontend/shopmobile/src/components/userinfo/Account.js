@@ -20,20 +20,21 @@ const Item = styled(Paper)(({ theme }) => ({
 const UserSecession = async () => {
   // TODO Delete
   const accessToken = localStorage.getItem("accesstoken");
-  localStorage.removeItem("accesstoken");
-  const API_URI = `${HOST}/user`;
-  await axios
-    .delete(API_URI, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    })
-    .then(() => {
-      console.log("삭제완료");
-    })
-    .catch(function (err) {
-      console.log(err);
-    });
+  console.log("삭제완료");
+  // localStorage.removeItem("accesstoken");
+  // const API_URI = `${HOST}/user`;
+  // await axios
+  //   .delete(API_URI, {
+  //     headers: {
+  //       Authorization: `Bearer ${accessToken}`,
+  //     },
+  //   })
+  //   .then(() => {
+  //     console.log("삭제완료");
+  //   })
+  //   .catch(function (err) {
+  //     console.log(err);
+  //   });
 };
 
 export default function Account() {
@@ -43,6 +44,22 @@ export default function Account() {
   const [gender, setGender] = useState("");
   const [email, setEmail] = useState("");
   const [birthDate, setbirthDate] = useState("");
+
+  const useConfirm = (message = "", onConfirm, onCancle) => {
+    if (!onConfirm || typeof onConfirm !== "function") {
+      return;
+    }
+    if (onCancle && typeof onCancle !== "function") {
+      return;
+    }
+    const confirmAction = () => {
+      if (confirm(message)) {
+        onConfirm();
+      } else {
+        onCancle();
+      }
+    };
+    return confirmAction;
 
   const API_URI = `${HOST}/user`;
 
@@ -63,11 +80,11 @@ export default function Account() {
         setEmail(data.email);
         setbirthDate(data.birthDate);
       } catch (error) {
-          console.log(error);
+        console.log(error);
       }
     })();
   });
-  
+
   return (
     <Container component="main" maxWidth="xs">
       <Box
@@ -138,9 +155,14 @@ export default function Account() {
         </Grid>
         <Grid container sx={{ mt: 2, mb: 2 }}>
           <Grid item xs>
-            <Link href="/app" onClick={UserSecession}>
+            <Link
+              //  href="/app"
+              onClick={handleClick}
+            >
               회원 탈퇴
             </Link>
+            {showConfirm && <confirm onConfirm={handleConfirm} />}
+            {isConfirmed && <div>탈퇴 처리되었습니다.</div>}
           </Grid>
           <Grid item>
             <Link href="/app/pwdchange" variant="body2">

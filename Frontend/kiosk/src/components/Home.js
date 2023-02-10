@@ -35,6 +35,10 @@ const useWebSocket = (url) => {
       }
     };
 
+    socket.onerror = (error) => {
+      console.error(`WebSocket error: ${error}`);
+    };
+
     socket.onclose = () => {
       console.log("WebSocket connection closed:", url);
     };
@@ -51,7 +55,7 @@ export default function KioskMain() {
   const navigate = useNavigate();
   const [kioskId, setKioskId] = useState();
   const [value, setValue] = useState("");
-  const messages = useWebSocket("ws://192.168.30.202:8080");
+  const messages = useWebSocket("wss://localhost:80");
 
   function QRMake(kioskId) {
     const newTest = {
@@ -84,7 +88,7 @@ export default function KioskMain() {
   useEffect(() => {
     sessionStorage.removeItem("user");
     sessionStorage.removeItem("data");
-    if (messages[0] === 'next') {
+    if (messages[0] === "next") {
       sessionStorage.setItem("user", "user");
       navigate("/kiosk/rfidread");
     }
