@@ -1,10 +1,8 @@
 import asyncio
 
 import websockets
-try:    
-    from core.config import WEBSOCKET_URL
-except:
-    pass
+
+from core.config import WEBSOCKET_URL
 
 
 async def send(message: str):

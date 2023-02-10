@@ -10,14 +10,12 @@ from db.connection import get_db
 from functions.barcode_test import SessionStorage
 from routes.models import BarcodeList, CardList, RFIDList
 from routes.websocket import send
+from functions.serial_test import RFID_Serial_Trans
 
-try:
-    from functions.serial_test import RFID_Serial_Trans
-except:
-    pass
 
-# from sqlalchemy.orm import Session
+# from sqlalchemy.orm import Sessiosn
 
+sessionStore = SessionStorage()
 
 router = APIRouter(
     prefix="/api/kiosk",  # url 앞에 고정적으로 붙는 경로추가
@@ -31,7 +29,7 @@ def reset_cardlist():
 
 @router.get("")
 def 키오스크_아이디(request: Request):
-    SessionStorage().startThread()
+    sessionStore.startThread()
     return {"kioskId": KIOSK_ID}
 
 
@@ -40,10 +38,9 @@ def 카드정보전송(request: Request, CardList: CardList, db: Session = Depen
     data = run(request.json())
     cardInfo = json.dumps(data)
     # RFID 시작
-    try:
-        rfid_uids = RFID_Serial_Trans().main()
-    except:
-        rfid_uids = list()
+    while sessionStore.thread_on:
+        pass
+    rfid_uids = RFID_Serial_Trans().main()
     # rfid 상품정보를 이용해서 DB 조회
     querys = select_products_with_rfid(rfid_uids, db)
     products = list()
