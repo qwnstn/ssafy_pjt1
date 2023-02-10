@@ -9,53 +9,15 @@ import { Grid } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Nav from "./Nav";
 
 // 웹소켓의 통신이 오면 rfid read 페이지로 넘어간뒤,
-
-// 비회원 결제 버튼을 누르면 rfid read 페이지로 넘어간뒤, itemlist 페이지로 넘어가는 기능
-const useWebSocket = (url) => {
-  const [messages, setMessages] = useState([]);
-
-  useEffect(() => {
-    const socket = new WebSocket(url);
-
-    socket.onopen = () => {
-      console.log("WebSocket connection opened:", url);
-    };
-
-    socket.onmessage = (event) => {
-      if (event.data instanceof Blob) {
-        const reader = new FileReader();
-        reader.onload = () => {
-          setMessages((prevMessages) => [...prevMessages, reader.result]);
-        };
-        reader.readAsText(event.data);
-      } else {
-        setMessages((prevMessages) => [...prevMessages, event.data]);
-      }
-    };
-
-    socket.onerror = (error) => {
-      console.error(`WebSocket error: ${error}`);
-    };
-
-    socket.onclose = () => {
-      console.log("WebSocket connection closed:", url);
-    };
-
-    return () => {
-      socket.close();
-    };
-  }, [url]);
-
-  return messages;
-};
 
 export default function KioskMain() {
   const navigate = useNavigate();
   const [kioskId, setKioskId] = useState();
   const [value, setValue] = useState("");
-  const messages = useWebSocket("ws://localhost:3333");
+  const messages = Nav();
 
   function QRMake(kioskId) {
     const newTest = {
@@ -66,33 +28,43 @@ export default function KioskMain() {
     setValue(test1);
   }
 
-  // 키오스크 아이디는 Python과 통신으로 받아옴
   useEffect(() => {
+    // 키오스크 아이디는 Python과 통신으로 받아옴
     (async () => {
-      const { data } = await axios.get("http://192.168.30.114:8000/api/kiosk");
+      const { data } = await axios.get("http://localhost:8888/api/kiosk");
       const kiosk = data["kioskId"];
       QRMake(kiosk);
       setKioskId(kiosk);
     })();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
-  useEffect(() => {
+    //QR 생성 함수
     const interval = setInterval(() => {
       QRMake(kioskId);
     }, 59000);
-    // 59초
-    return () => clearInterval(interval);
-  }, [kioskId]);
+    // 59초 재성성 타이머
 
-  useEffect(() => {
+    // user, data 정보 초기화
     sessionStorage.removeItem("user");
     sessionStorage.removeItem("data");
     if (messages[0] === "next") {
       sessionStorage.setItem("user", "user");
       navigate("/kiosk/rfidread");
     }
-  }, [messages, navigate]);
+    return () => clearInterval(interval);
+  }, [kioskId, messages, navigate]);
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === "Enter") {
+        sessionStorage.setItem("user", "user");
+        navigate("/kiosk/rfidread");
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [navigate]);
 
   return (
     <Box>

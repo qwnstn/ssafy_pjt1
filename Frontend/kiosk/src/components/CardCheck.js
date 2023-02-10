@@ -10,7 +10,16 @@ import axios from "axios";
 // 결제하기 버튼 하단에 추가필요
 
 // 세션 데이터
-const session = JSON.parse(sessionStorage.getItem("data"));
+const data = sessionStorage.getItem("data");
+let session;
+
+if (typeof data === "string") {
+  try {
+    session = JSON.parse(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
 
 // 카드 목록 리스트 - 세션을 통해 값을 받아와야함
 const cards = sessionStorage.getItem("data") ? session["cardList"] : null
@@ -46,7 +55,7 @@ export default function CardInfo() {
     }
   };
 
-  const API_URI = "http://192.168.30.114:8000/api/pay/member"
+  const API_URI = "http://localhost:8888/api/pay/member"
   const ResultPayment = async (data) => {
     const cardId = {
       cardId: data.cardId

@@ -21,8 +21,8 @@ const Item = styled(Paper)(({ theme }) => ({
 const UserSecession = async () => {
   // TODO Delete
   const accessToken = localStorage.getItem("accesstoken");
-  console.log("삭제완료");
-  localStorage.removeItem("accesstoken");
+  // console.log("삭제완료");
+
   const navigate = useNavigate();
   const API_URI = `${HOST}/user`;
   await axios
@@ -33,6 +33,7 @@ const UserSecession = async () => {
     })
     .then(() => {
       console.log("삭제완료");
+      localStorage.removeItem("accesstoken");
       navigate("/app");
     })
     .catch(function (err) {

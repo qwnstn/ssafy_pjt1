@@ -1,53 +1,48 @@
 import React, { useState, useEffect } from "react";
 
-const useWebSocket = (url) => {
-  const [messages, setMessages] = useState([]);
+const socket = new WebSocket("ws://localhost:3333");
+
+const Chat = () => {
+  const [message, setMessage] = useState("");
+  const [serverMessage, setServerMessage] = useState("");
 
   useEffect(() => {
-    const socket = new WebSocket(url);
-
-    socket.onopen = () => {
-      console.log("WebSocket connection opened:", url);
-    };
-
     socket.onmessage = (event) => {
-      if (event.data instanceof Blob) {
-        const reader = new FileReader();
-        reader.onload = () => {
-          setMessages((prevMessages) => [...prevMessages, reader.result]);
-        };
-        reader.readAsText(event.data);
-      } else {
-        setMessages((prevMessages) => [...prevMessages, event.data]);
-      }
+      setServerMessage(event.data);
     };
 
-    socket.onclose = () => {
-      console.log("WebSocket connection closed:", url);
+    socket.onerror = (error) => {
+      console.error(`WebSocket error: ${error}`);
     };
 
-    return () => {
-      socket.close();
+    socket.onclose = (event) => {
+      console.log(`WebSocket connection closed with code ${event.code}`);
     };
-  }, [url]);
+  }, []);
 
-  return messages;
-};
+  const handleMessageChange = (event) => {
+    setMessage(event.target.value);
+  };
 
-const WebSocketComponent = () => {
-  const messages = useWebSocket("ws://localhost:8080");
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    socket.send(message);
+    setMessage("");
+  };
 
   return (
     <div>
-      {messages.length > 0 ? (
-        messages.map((message, index) => (
-          <p key={index}>Received message: {message}</p>
-        ))
-      ) : (
-        <p>No messages received yet.</p>
-      )}
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          value={message}
+          onChange={handleMessageChange}
+        />
+        <button type="submit">Send</button>
+      </form>
+      <p>{serverMessage}</p>
     </div>
   );
 };
 
-export default WebSocketComponent;
+export default Chat;

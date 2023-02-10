@@ -10,7 +10,7 @@ import ItemList from './components/ItemList';
 import RfidRead from './components/RfidRead';
 import CardCheck from './components/CardCheck';
 import CardPayment from './components/CardPayment';
-import Test from "./components/Test"
+import Test from "./components/Test";
 
 function App() {
   return (
