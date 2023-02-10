@@ -55,13 +55,13 @@ def 카드정보전송(request: Request, CardList: CardList, db: Session = Depen
         products.append(prd)
 
     payload = json.dumps({"productList": products})
-    run(send(payload))
+    asyncio.run(send(payload))
     return {"message": "OK"}
 
 
 @router.post("/rfid")
 def 장바구니_상품담기_RFID(request: Request, RFIDList: RFIDList):
-    data = run(request.json())
+    data = asyncio.run(request.json())
     kioskId = data["kioskId"]   # 꼭 필요한가?
     rfid_list = data["rfid"]    # 문자열 리스트
     ###
@@ -72,7 +72,7 @@ def 장바구니_상품담기_RFID(request: Request, RFIDList: RFIDList):
 
 @router.post("/barcode")
 def 장바구니_상품담기_Barcode(request: Request, BarcodeList: BarcodeList):
-    data = run(request.json())
+    data = asyncio.run(request.json())
     kioskId = data["kioskId"]   # 꼭 필요한가?
     barcode = data["barcode"]   # 문자열 1개
     ###
