@@ -1,16 +1,11 @@
 package e101.hishop.controller;
 
-import e101.hishop.domain.dto.request.CardSaveReqDto;
-import e101.hishop.domain.dto.request.EditNameReqDto;
-import e101.hishop.domain.dto.request.PayPasswordReqDto;
-import e101.hishop.domain.dto.request.UserInfoReqDto;
-import e101.hishop.domain.dto.response.CardInfoRespDto;
-import e101.hishop.domain.dto.response.PayDetailInfoRespDto;
-import e101.hishop.domain.dto.response.PayInfoRespDto;
-import e101.hishop.domain.dto.response.UserInfoRespDto;
+import e101.hishop.domain.dto.request.*;
+import e101.hishop.domain.dto.response.*;
 import e101.hishop.global.common.CommonResponse;
 import e101.hishop.service.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -22,18 +17,18 @@ import java.util.*;
 @RestController
 @RequestMapping("/api/user")
 @RequiredArgsConstructor
+@Slf4j
 public class UserController {
 
     private final UserService userService;
 
-//    private final UserInfoLoder userInfoLoder;
     @GetMapping
     public ResponseEntity<UserInfoRespDto> getUserInfo() {
         return new ResponseEntity<>(userService.getUserInfo(), HttpStatus.OK);
     }
 
     @PatchMapping
-    public CommonResponse updateUserInfo(@RequestBody UserInfoReqDto dto) {
+    public CommonResponse updateUserInfo(@RequestBody @Validated  UserUpdateReqDto dto) {
         return CommonResponse.builder()
                 .data(Map.of("userId", userService.updateUserInfo(dto)))
                 .build();
@@ -53,7 +48,7 @@ public class UserController {
 
     @PostMapping("/card")
     public ResponseEntity<String> userCardSave(@RequestBody @Validated CardSaveReqDto dto) {
-        userService.saveCard(dto.toPaymentEntity());
+        userService.saveCard(dto.toCardEntity());
         return new ResponseEntity<>("저장완료", HttpStatus.OK);
     }
 
@@ -99,12 +94,14 @@ public class UserController {
     }
 
     @PostMapping("/qr")
-    public ResponseEntity<Map<String, Object>> qrCreate() {
-        Map<String, Object> json = new HashMap<>();
-        json.put("userId", "ssafy1234");
-        json.put("datetime", "2023-01-12T14:38:27");
-        return new ResponseEntity<>(json, HttpStatus.OK);
+    public ResponseEntity<String> qrRead(@RequestBody QrReqDto dto) {
+        userService.qrRead(dto);
+        return new ResponseEntity<>("전달 완료", HttpStatus.OK);
     }
 
+    @GetMapping("/point")
+    public ResponseEntity<List<PointRespDto>> getPoint() {
+        return new ResponseEntity<>(userService.getPoint(), HttpStatus.OK);
+    }
 
 }

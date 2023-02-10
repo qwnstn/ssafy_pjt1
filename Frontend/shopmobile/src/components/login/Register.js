@@ -96,15 +96,15 @@ const Register = () => {
 
   const onhandlePost = async (data) => {
     const jsonData = {
-      loginId : data.id,
-      password : data.password,
+      loginId: data.id,
+      password: data.password,
       name: data.name,
       phone: data.phone,
       birthDate: data.birthday.replace(/^(\d{4})(\d{2})(\d{2})$/, `$1-$2-$3`),
       gender: data.gender,
-      mail: data.mail,
+      email: data.mail,
       adSelect: data.adSelect,
-    }
+    };
 
     console.log(jsonData);
     // post
@@ -116,7 +116,7 @@ const Register = () => {
         movePage("/app");
       })
       .catch(function (err) {
-        console.log(err);
+        console.log(err.response.status);
         setRegisterError("회원가입에 실패하셨습니다. 다시한번 확인해주세요");
       });
   };
@@ -136,15 +136,16 @@ const Register = () => {
         .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`),
       birthday: data.get("birthday"),
       mail: data.get("mail"),
-      adSelect: "YES",
+      adSelect: true,
     };
     const { id, password, rePassword, name, gender, phone, birthday } =
       joinData;
 
     let flag = true;
     // 아이디 입력 체크
-    if (id.length < 1) {
-      setUserIdError("아이디를 입력해주세요");
+    const idRegax = /^(?=.*[a-zA-Z])(?=.*[0-9]).{4,15}$/;
+    if (!idRegax.test(id)) {
+      setUserIdError("영문+숫자 조합으로 4~15자리 이상");
       flag = false;
     } else setUserIdError("");
 
@@ -233,7 +234,7 @@ const Register = () => {
                       fullWidth
                       id="id"
                       name="id"
-                      label="아이디"
+                      label="아이디 (영문+숫자 조합으로 4~15자리 이상)"
                       error={userIdError !== "" || false}
                     />
                   </Grid>
@@ -332,7 +333,7 @@ const Register = () => {
                       fullWidth
                       name="mail"
                       label="이메일"
-                      type="mail"
+                      type="email"
                       id="mail"
                       autoComplete="new-email"
                     />

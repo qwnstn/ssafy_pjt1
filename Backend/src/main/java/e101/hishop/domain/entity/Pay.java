@@ -2,10 +2,13 @@ package e101.hishop.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,19 +26,19 @@ public class Pay {
     private Long id;
 
     //TODO LAZY로 변경?
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
     @JsonIgnore
     private User user;
 
     @NotBlank
-    private String userName;
+    private String payName;
 
-    @NotBlank
-    private String cardName;
+    private String payImg;
 
-    @NotBlank
-    private String buyDate;
+    @NotNull
+    private LocalDateTime buyDate;
 
     @NotNull
     private Long buyTotal;
@@ -52,9 +55,9 @@ public class Pay {
     private List<PayDetail> payDetails = new ArrayList<>();
 
     @Builder
-    public Pay(String userName, String cardName, String buyDate, Long buyTotal) {
-        this.userName = userName;
-        this.cardName = cardName;
+    public Pay(String payName, String payImg, LocalDateTime buyDate, Long buyTotal) {
+        this.payName = payName;
+        this.payImg = payImg;
         this.buyDate = buyDate;
         this.buyTotal = buyTotal;
     }

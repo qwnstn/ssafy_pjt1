@@ -25,9 +25,11 @@ public class Kiosk {
     @JoinColumn(name = "branch_id")
     private Branch branch;
 
+    private String url;
 
     public void setBranchAndKiosk(Branch branch) {
         this.branch = branch;
+        this.url = url;
         branch.getKiosks().add(this);
     }
 

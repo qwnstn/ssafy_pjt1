@@ -13,6 +13,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
 
 @Getter
@@ -21,13 +22,17 @@ import java.time.LocalDate;
 @Builder
 public class SignUpReqDto {
 
+    //TODO 유효성 추가
     @NotBlank
+    @Pattern(regexp = "^[a-zA-Z0-9]{4,15}$", message = "아이디는 영문숫자 4~15자")
     private String loginId;
 
     @NotBlank
+    @Pattern(regexp = "^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$",message = "비밀번호는 영문숫자특수문자포함 8~25자")
     private String password;
 
     @NotBlank
+    @Pattern(regexp = "^[가-힣a-zA-Z]{1,30}$", message = "한글영문 1~30자")
     private String name;
 
     @NotNull
@@ -37,14 +42,15 @@ public class SignUpReqDto {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDate;
 
+    @NotBlank
+    @Pattern(regexp = "^01([0|1|6|7|8|9])-([0-9]{3,4})-([0-9]{4})$", message = "000-0000-0000형식")
     private String phone;
 
     @Email
     private String email;
 
-    @NotBlank
-    private String adSelect;
-
+    @NotNull
+    private Boolean adSelect;
 
     public User toUsersEntity(){
         return User.builder()
@@ -53,27 +59,9 @@ public class SignUpReqDto {
                 .birthDate(birthDate)
                 .adSelect(adSelect)
                 .email(email)
+                .phone(phone)
                 .name(name)
                 .password(AppConfig.testPasswordEncoder().encode(password))
                 .build();
     }
-//    SignUpReqDto.builder()
-//            .loginId("user1234!")
-//                .gender(Gender.MALE)
-//                .birthDate(LocalDate.of(1993,12,31))
-//            .adSelect("YES")
-//                .email("EMAIL@naver.com")
-//                .name("NAME")
-//                .role(Role.ROLE_USER)
-//                .password("user1234!")
-//                .build().toUsersEntity());
-
-//    {
-//        "loginId": "user123456",
-//            "password" :"pass1234!!",
-//            "name" :"NAMMME",
-//            "gender" :"MALE",
-//            "birthDate" :"1919-11-01",
-//            "adSelect": "YES"
-//    }
 }

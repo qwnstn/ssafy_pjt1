@@ -23,10 +23,12 @@ public class Card {
 
     private String name;
 
-//추후 암호와 필요
+    //TODO 추후 암호화 필요
     private String cardNo;
 
     private String validDate;
+
+    private String cvc;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
@@ -54,10 +56,11 @@ public class Card {
     }
 
     @Builder
-    public Card(String name, String cardNo, String validDate) {
+    public Card(String name, String cardNo, String validDate, String cvc) {
         this.name = name;
         this.cardNo = cardNo;
         this.validDate = validDate;
+        this.cvc = cvc;
     }
 }
 

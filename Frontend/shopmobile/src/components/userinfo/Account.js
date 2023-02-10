@@ -5,6 +5,7 @@ import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import { Card, Container } from "@mui/material";
 import Link from "@mui/material/Link";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import HOST from "../../Host";
 import { useState, useEffect } from "react";
@@ -17,6 +18,30 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
+const UserSecession = async () => {
+  // TODO Delete
+  const accessToken = localStorage.getItem("accesstoken");
+  // console.log("삭제완료");
+
+  const navigate = useNavigate();
+  const API_URI = `${HOST}/user`;
+  await axios
+    .delete(API_URI, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+    .then(() => {
+      console.log("삭제완료");
+      localStorage.removeItem("accesstoken");
+      navigate("/app");
+    })
+    .catch(function (err) {
+      console.log(err);
+      alert("오류발생")
+    });
+};
+
 export default function Account() {
   const [userId, setUserId] = useState("");
   const [name, setName] = useState("");
@@ -25,19 +50,53 @@ export default function Account() {
   const [email, setEmail] = useState("");
   const [birthDate, setbirthDate] = useState("");
 
-  const API_URI = `${HOST}/user/1`;
+  const useConfirm = (message = "", onConfirm, onCancel) => {
+    if (!onConfirm || typeof onConfirm !== "function") {
+      return;
+    }
+    if (onCancel && typeof onCancel !== "function") {
+      return;
+    }
+    const confirmAction = () => {
+      if (window.confirm(message)) {
+        onConfirm();
+      } else {
+        onCancel();
+      }
+    };
+    return confirmAction;
+  };
+
+  const confirmDelete = useConfirm(
+    "정말 탈퇴하시겠습니까?",
+    UserSecession,
+    () => console.log("Cancelled")
+  );
+
+  const API_URI = `${HOST}/user`;
+
   useEffect(() => {
     (async () => {
-      const { data } = await axios.get(API_URI);
+      const accesstoken = localStorage.getItem("accesstoken");
 
-      setUserId(data.userId);
-      setName(data.name);
-      setPhone(data.phone);
-      setGender(data.gender);
-      setEmail(data.email);
-      setbirthDate(data.birthDate);
+      try {
+        const { data } = await axios.get(API_URI, {
+          headers: {
+            Authorization: `Bearer ${accesstoken}`,
+          },
+        });
+        setUserId(data.loginId);
+        setName(data.name);
+        setPhone(data.phone);
+        setGender(data.gender);
+        setEmail(data.email);
+        setbirthDate(data.birthDate);
+      } catch (error) {
+        console.log(error);
+      }
     })();
   });
+
   return (
     <Container component="main" maxWidth="xs">
       <Box
@@ -108,13 +167,11 @@ export default function Account() {
         </Grid>
         <Grid container sx={{ mt: 2, mb: 2 }}>
           <Grid item xs>
-            <Link href="/app/register" variant="body2">
-              개인정보인증
-            </Link>
+            <Link onClick={confirmDelete}>회원 탈퇴</Link>
           </Grid>
           <Grid item>
-            <Link href="/app/findid" variant="body2">
-              비밀번호 변경
+            <Link href="/app/pwdchange" variant="body2">
+              회원 정보 변경
             </Link>
           </Grid>
         </Grid>

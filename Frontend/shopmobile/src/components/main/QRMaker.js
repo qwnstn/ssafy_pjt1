@@ -4,15 +4,29 @@ import { Box, Button, Card } from "@mui/material";
 import { Grid } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 
+
+
 function QRMaker() {
-  const initialValue = "https://www.example.com";
-  const [value, setValue] = useState(initialValue);
+  const accesstoken = localStorage.getItem("accesstoken");
+  const [time, setTime] = useState(Date.now());
+  const test = {
+    token: accesstoken,
+    time: time,
+  };
+  const [value, setValue] = useState(JSON.stringify(test));
   const [countdown, setCountdown] = useState(59);
   const ref = React.useRef(null);
 
   useEffect(() => {
     if (countdown === 0) {
-      setValue(`${initialValue}}`);
+      setTime(Date.now());
+      const newTest = {
+        token: accesstoken,
+        time: time,
+      };
+      const test1 = JSON.stringify(newTest);
+      // console.log(typeof test1)
+      setValue(test1);
       setCountdown(59);
     } else {
       const intervalId = setInterval(() => {
@@ -20,13 +34,22 @@ function QRMaker() {
       }, 1000);
       return () => clearInterval(intervalId);
     }
-  }, [countdown]);
+  }, [countdown, accesstoken, time]);
 
-  React.useEffect(() => {
-    ref.current.ownerDocument.body.scrollTop = 0;
-  });
+  const handleButtonClick = () => {
+    setTime(Date.now());
+    const newTest = {
+      token: accesstoken,
+      time: time,
+    };
+    const test1 = JSON.stringify(newTest);
+    setValue(test1);
+    // console.log(typeof test1)
+    setCountdown(59);
+  };
 
   return (
+
     <Box sx={{ pb: 7 }} ref={ref}>
       <Card
         sx={{
@@ -37,11 +60,17 @@ function QRMaker() {
           fontWeight: "bold",
         }}
       >
-        QR생성
+        QR생성  
       </Card>
-      <Grid style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
+      <Grid
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <Grid item xs={1} />
-        <Grid item xs={10} mt={12}>
+        <Grid item xs={10} mt={3}>
           <CssBaseline />
           <Card sx={{ border: 1, padding: 1, maxWidth: 400, maxHeight: 500 }}>
             <div>
@@ -49,16 +78,13 @@ function QRMaker() {
             </div>
             <Card sx={{ textAlign: "center", mb: 1 }}>
               <Button
-                onClick={() => {
-                  setValue(`https://www.example.com/${Math.random()}`);
-                  setCountdown(59);
-                }}
-                sx={{fontWeight:'bold'}}
+                onClick={handleButtonClick}
+                sx={{ width: "100%", fontWeight: "bold" }}
               >
                 QR 재생성
               </Button>
             </Card>
-            <Card sx={{ textAlign: "center", mb: 1, fontWeight:'bold' }}>
+            <Card sx={{ textAlign: "center", mb: 1, fontWeight: "bold" }}>
               자동 재생성까지 {countdown}초
             </Card>
           </Card>
