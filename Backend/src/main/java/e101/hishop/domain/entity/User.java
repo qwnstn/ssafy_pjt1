@@ -59,7 +59,7 @@ public class User {
     private List<Card> cards = new ArrayList<>();
 
     @JsonIgnore
-    @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Point> points = new ArrayList<>();
 
     @JsonIgnore

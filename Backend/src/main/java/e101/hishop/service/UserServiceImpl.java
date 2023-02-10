@@ -132,6 +132,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUserInfo() {
+        userJPARepository.findById(getUserId())
+                .orElseThrow(() -> new CommonException(2, "User가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
+        List<Pay> pays = payJPARepository.findAllByUserId(getUserId());
+        for (Pay p: pays) {
+            p.setUser(null);
+        }
         userJPARepository.deleteById(getUserId());
     }
 

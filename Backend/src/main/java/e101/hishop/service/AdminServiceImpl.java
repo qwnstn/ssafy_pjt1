@@ -148,6 +148,7 @@ public class AdminServiceImpl implements AdminService {
         for (Pay p: pays) {
             p.setUser(null);
         }
+
         userJPARepository.deleteById(userId);
     }
     @Override
