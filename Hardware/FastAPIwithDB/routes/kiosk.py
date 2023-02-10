@@ -1,5 +1,5 @@
 import json
-from asyncio import run
+import asyncio
 
 from fastapi import APIRouter, Depends, Request
 from sqlalchemy.orm import Session
@@ -35,11 +35,11 @@ def 키오스크_아이디(request: Request):
 
 @router.post("/cardinfo")
 def 카드정보전송(request: Request, CardList: CardList, db: Session = Depends(get_db)):
-    data = run(request.json())
+    data = asyncio.run(request.json())
     cardInfo = json.dumps(data)
     # RFID 시작
     while sessionStore.thread_on:
-        pass
+        asyncio.sleep(0.5)
     rfid_uids = RFID_Serial_Trans().main()
     # rfid 상품정보를 이용해서 DB 조회
     querys = select_products_with_rfid(rfid_uids, db)
