@@ -28,43 +28,35 @@ export default function KioskMain() {
     setValue(test1);
   }
 
+  // 키오스크 아이디는 Python과 통신으로 받아옴
   useEffect(() => {
-    // 키오스크 아이디는 Python과 통신으로 받아옴
     (async () => {
+      console.log("통신")
       const { data } = await axios.get("http://localhost:8888/api/kiosk");
       const kiosk = data["kioskId"];
+      console.log(kiosk);
       QRMake(kiosk);
       setKioskId(kiosk);
     })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-    //QR 생성 함수
+  useEffect(() => {
     const interval = setInterval(() => {
       QRMake(kioskId);
     }, 59000);
-    // 59초 재성성 타이머
+    // 59초
+    return () => clearInterval(interval);
+  }, [kioskId, messages, navigate]);
 
-    // user, data 정보 초기화
+  useEffect(() => {
     sessionStorage.removeItem("user");
     sessionStorage.removeItem("data");
     if (messages[0] === "next") {
       sessionStorage.setItem("user", "user");
       navigate("/kiosk/rfidread");
     }
-    return () => clearInterval(interval);
-  }, [kioskId, messages, navigate]);
-
-  useEffect(() => {
-    const handleKeyDown = (event) => {
-      if (event.key === "Enter") {
-        sessionStorage.setItem("user", "user");
-        navigate("/kiosk/rfidread");
-      }
-    };
-    document.addEventListener("keydown", handleKeyDown);
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [navigate]);
+  }, [messages, navigate]);
 
   return (
     <Box>
