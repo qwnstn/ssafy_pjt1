@@ -1,7 +1,9 @@
 import threading
 import time
-from core.config import SERIAL_PORT
+
 import serial
+
+from core.config import SERIAL_PORT
 
 
 class RFID_Serial_Trans:
@@ -10,6 +12,7 @@ class RFID_Serial_Trans:
     # baud = 115200                             # RFID 보드레이트 115200 기본값
     ser = serial.Serial(PORT, baud, timeout=0.1)  # serial 통신 세팅
     tag_uid = dict()
+    read_flag = True
 
     def main(self):
         thread = threading.Thread(target=self.readthread, args=(
@@ -23,6 +26,7 @@ class RFID_Serial_Trans:
         # data = 0x3304B299 # Reading Nonstop
         while True:
             if self.tag_uid and max(list(self.tag_uid.values())) > 10:
+                self.read_flag = False
                 result = list()
                 for key, value in self.tag_uid:
                     if value > 3:
@@ -37,7 +41,7 @@ class RFID_Serial_Trans:
 
     def readthread(self, ser):              # 데이터 받는 함수 => 스레드 생성해서 병렬로 처리 예정
         # 스레드가 종료될 때 까지 진행
-        while True:
+        while self.read_flag:
             time.sleep(0.1)
             if ser.readable():
                 data = ser.readline()

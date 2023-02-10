@@ -1,12 +1,13 @@
 import json
 from asyncio import run
-from functions.barcode_test import SessionStorage
+
 from fastapi import APIRouter, Depends, Request
 from sqlalchemy.orm import Session
 
 from core.config import KIOSK_ID
 from crud.crud import select_products_with_rfid
 from db.connection import get_db
+from functions.barcode_test import SessionStorage
 from routes.models import BarcodeList, CardList, RFIDList
 from routes.websocket import send
 
@@ -48,7 +49,7 @@ def 카드정보전송(request: Request, CardList: CardList, db: Session = Depen
     products = list()
     for q in querys:
         prd = dict()
-        # prd['productId'] = q.product_id            
+        # prd['productId'] = q.product_id
         prd['name'] = q.name
         prd['price'] = q.price
         # prd['rfid'] = q.rfid

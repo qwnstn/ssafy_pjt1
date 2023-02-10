@@ -5,12 +5,13 @@ from routes.db import router as db_router
 from routes.kiosk import router as kiosk_router
 from routes.pay import router as pay_router
 
-
 app = FastAPI()  # FastAPI 모듈
 
 origins = [
     "http://192.168.30.202:3001",
-    "http://192.168.30.163:3001"
+    "http://192.168.30.202:8000",
+    "http://192.168.30.163:3001",
+    "*"
 ]
 
 app.add_middleware(
