@@ -5,6 +5,7 @@ import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import { Card, Container } from "@mui/material";
 import Link from "@mui/material/Link";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import HOST from "../../Host";
 import { useState, useEffect } from "react";
@@ -21,20 +22,23 @@ const UserSecession = async () => {
   // TODO Delete
   const accessToken = localStorage.getItem("accesstoken");
   console.log("삭제완료");
-  // localStorage.removeItem("accesstoken");
-  // const API_URI = `${HOST}/user`;
-  // await axios
-  //   .delete(API_URI, {
-  //     headers: {
-  //       Authorization: `Bearer ${accessToken}`,
-  //     },
-  //   })
-  //   .then(() => {
-  //     console.log("삭제완료");
-  //   })
-  //   .catch(function (err) {
-  //     console.log(err);
-  //   });
+  localStorage.removeItem("accesstoken");
+  const navigate = useNavigate();
+  const API_URI = `${HOST}/user`;
+  await axios
+    .delete(API_URI, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+    .then(() => {
+      console.log("삭제완료");
+      navigate("/app");
+    })
+    .catch(function (err) {
+      console.log(err);
+      alert("오류발생")
+    });
 };
 
 export default function Account() {
@@ -45,21 +49,28 @@ export default function Account() {
   const [email, setEmail] = useState("");
   const [birthDate, setbirthDate] = useState("");
 
-  const useConfirm = (message = "", onConfirm, onCancle) => {
+  const useConfirm = (message = "", onConfirm, onCancel) => {
     if (!onConfirm || typeof onConfirm !== "function") {
       return;
     }
-    if (onCancle && typeof onCancle !== "function") {
+    if (onCancel && typeof onCancel !== "function") {
       return;
     }
     const confirmAction = () => {
-      if (confirm(message)) {
+      if (window.confirm(message)) {
         onConfirm();
       } else {
-        onCancle();
+        onCancel();
       }
     };
     return confirmAction;
+  };
+
+  const confirmDelete = useConfirm(
+    "정말 탈퇴하시겠습니까?",
+    UserSecession,
+    () => console.log("Cancelled")
+  );
 
   const API_URI = `${HOST}/user`;
 
@@ -155,14 +166,7 @@ export default function Account() {
         </Grid>
         <Grid container sx={{ mt: 2, mb: 2 }}>
           <Grid item xs>
-            <Link
-              //  href="/app"
-              onClick={handleClick}
-            >
-              회원 탈퇴
-            </Link>
-            {showConfirm && <confirm onConfirm={handleConfirm} />}
-            {isConfirmed && <div>탈퇴 처리되었습니다.</div>}
+            <Link onClick={confirmDelete}>회원 탈퇴</Link>
           </Grid>
           <Grid item>
             <Link href="/app/pwdchange" variant="body2">

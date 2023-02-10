@@ -55,7 +55,7 @@ export default function KioskMain() {
   const navigate = useNavigate();
   const [kioskId, setKioskId] = useState();
   const [value, setValue] = useState("");
-  const messages = useWebSocket("wss://localhost:80");
+  const messages = useWebSocket("ws://localhost:3333");
 
   function QRMake(kioskId) {
     const newTest = {
