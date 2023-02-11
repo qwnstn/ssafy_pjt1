@@ -16,9 +16,6 @@ def main():
     # 0.5초마다 데이터 전송
     while True:
         # RFID 통신 바이트 정리
-        # data = 0x3304C299 # RFID 확인 -> 0x33052C0199 정상응답
-        # data = 0x3304B199 # Reading Stay
-        # data = 0x3304B299 # Reading Nonstop
 
         data = input().strip()
         if data == "serial exit": # 종료 명령어
