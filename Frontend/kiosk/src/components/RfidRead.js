@@ -6,6 +6,7 @@ import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import LinearProgress from "@mui/material/LinearProgress";
 import { useNavigate } from "react-router-dom";
+import Nav from "./Nav";
 
 const theme = createTheme();
 
@@ -13,6 +14,7 @@ export default function ResultPayment() {
   const navigate = useNavigate();
   const [redirect, setRedirect] = useState(false);
   const [countdown, setCountdown] = useState(20);
+  const itemList = Nav();
 
   useEffect(() => {
     if (countdown > 0) {
@@ -26,16 +28,15 @@ export default function ResultPayment() {
   }, [countdown]);
 
   useEffect(() => {
-    const handleKeyPress = (event) => {
-      if (event.key === "Enter") {
-        setRedirect(true);
-      }
-    };
-    document.addEventListener("keydown", handleKeyPress);
-    return () => {
-      document.removeEventListener("keydown", handleKeyPress);
-    };
-  }, []);
+    if (itemList.length > 0) {
+      sessionStorage.setItem("data", itemList);
+      console.log(itemList);
+      console.log(typeof itemList);
+      setRedirect(true);
+    } else {
+      console.log("itemlist가 비어있음");
+    }
+  }, [itemList]);
 
   if (redirect) {
     navigate(countdown > 0 ? "/kiosk/itemlist" : "/kiosk");

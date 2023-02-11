@@ -1,38 +1,34 @@
 package e101.hishop.domain.dto.response;
 
 import e101.hishop.domain.entity.Pay;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Getter
 @NoArgsConstructor
+@Builder
+@AllArgsConstructor
 public class PayInfoRespDto {
 
     private Long id;
-
+    private String loginId;
     private String userName;
-
-    private String cardName;
-
-    private String buyDate;
-
+    private String payName;
+    private String payImg;
+    private LocalDateTime buyDate;
     private Long buyTotal;
-
-    @Builder
-    public PayInfoRespDto(Long id, String userName, String cardName, String buyDate, Long buyTotal) {
-        this.id = id;
-        this.userName = userName;
-        this.cardName = cardName;
-        this.buyDate = buyDate;
-        this.buyTotal = buyTotal;
-    }
 
     public static PayInfoRespDto of(Pay pay) {
         return PayInfoRespDto.builder()
                 .id(pay.getId())
-                .userName(pay.getUserName())
-                .cardName(pay.getCardName())
+                .loginId(pay.getUser() == null ? "guest" : pay.getUser().getLoginId())
+                .userName(pay.getUser() == null ? "비회원" : pay.getUser().getName())
+                .payName(pay.getPayName())
+                .payImg(pay.getPayImg())
                 .buyDate(pay.getBuyDate())
                 .buyTotal(pay.getBuyTotal())
                 .build();

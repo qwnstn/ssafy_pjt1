@@ -14,6 +14,7 @@ import AddCard from "./components/userinfo/AddCard";
 import Payment from "./components/userinfo/Payment";
 import PaymentDetail from "./components/userinfo/PaymentDetail";
 import Account from "./components/userinfo/Account";
+import PwdChange from "./components/userinfo/PwdChange";
 
 function App() {
   return (
@@ -31,8 +32,9 @@ function App() {
         <Route path="/app/mycard" element={<MyCard />} />
         <Route path="/app/addcard" element={<AddCard />} />
         <Route path="/app/payment" element={<Payment />} />
-        <Route path="/app/paymentDetail" element={<PaymentDetail />} />
+        <Route path="/app/paymentdetail/:purchaseId" element={<PaymentDetail />} />
         <Route path="/app/account" element={<Account />} />
+        <Route path="/app/pwdchange" element={<PwdChange />} />
       </Routes>
     </BrowserRouter>
   );

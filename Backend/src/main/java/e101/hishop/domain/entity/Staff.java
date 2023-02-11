@@ -1,8 +1,9 @@
 package e101.hishop.domain.entity;
 
-import e101.hishop.domain.dto.request.StaffReqDto;
-import e101.hishop.domain.dto.request.UserInfoReqDto;
+import e101.hishop.domain.dto.request.StaffEditReqDto;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.*;
@@ -33,6 +34,7 @@ public class Staff {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "branch_id")
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
     private Branch branch;
 
     public void setBranchAndStaff(Branch branch) {
@@ -40,7 +42,7 @@ public class Staff {
         branch.getStaff().add(this);
     }
 
-    public Staff updateStaff(StaffReqDto dto) {
+    public Staff updateStaff(StaffEditReqDto dto) {
         name = StringUtils.hasText(dto.getName()) ? dto.getName() : name;
         position = StringUtils.hasText(dto.getPosition()) ? dto.getPosition() : position;
         part = StringUtils.hasText(dto.getPart()) ? dto.getPart() : part;

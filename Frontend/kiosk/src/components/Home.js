@@ -3,60 +3,64 @@ import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import QRCode from "react-qr-code";
 import { Grid } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import Nav from "./Nav";
+
+// 웹소켓의 통신이 오면 rfid read 페이지로 넘어간뒤,
 
 export default function KioskMain() {
   const navigate = useNavigate();
-  const initialValue = "1";
-  const [value] = useState(initialValue);
-  // const [socket, setSocket] = useState(null);
-  // const [message, setMessage] = useState("");
-  // const [messages, setMessages] = useState([]);
+  const [kioskId, setKioskId] = useState();
+  const [value, setValue] = useState("");
+  const messages = Nav();
 
-  // useEffect(() => {
-  //   const ws = new WebSocket("ws://192.168.40.111:8888");
+  function QRMake(kioskId) {
+    const newTest = {
+      token: kioskId,
+      time: Date.now(),
+    };
+    const test1 = JSON.stringify(newTest);
+    setValue(test1);
+  }
 
-  //   ws.onopen = () => {
-  //     console.log("WebSocket connection established.");
-  //   };
-
-  //   ws.onmessage = (event) => {
-  //     setMessages((prevMessages) => [...prevMessages, event.data]);
-  //   };
-
-  //   setSocket(ws);
-
-  //   return () => {
-  //     ws.close();
-  //   };
-  // }, []);
-
-  // const sendMessage = (event) => {
-  //   event.preventDefault();
-  //   socket.send(message);
-  //   setMessage("");
-  // };
+  // 키오스크 아이디는 Python과 통신으로 받아옴
+  useEffect(() => {
+    (async () => {
+      console.log("통신")
+      const { data } = await axios.get("http://localhost:8888/api/kiosk");
+      const kiosk = data["kioskId"];
+      console.log(kiosk);
+      QRMake(kiosk);
+      setKioskId(kiosk);
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
-    const handleKeyDown = (event) => {
-      if (event.key === "Enter") {
-        sessionStorage.setItem("user", "user");
-        navigate("/kiosk/rfidread");
-      }
-    };
-    document.addEventListener("keydown", handleKeyDown);
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [navigate]);
+    const interval = setInterval(() => {
+      QRMake(kioskId);
+    }, 59000);
+    // 59초
+    return () => clearInterval(interval);
+  }, [kioskId, messages, navigate]);
+
+  useEffect(() => {
+    sessionStorage.removeItem("user");
+    sessionStorage.removeItem("data");
+    if (messages[0] === "next") {
+      sessionStorage.setItem("user", "user");
+      navigate("/kiosk/rfidread");
+    }
+  }, [messages, navigate]);
 
   return (
     <Box>
-      <Card sx={{ maxWidth: 760, minHeight: 1022 }}>
+      <Card sx={{ maxWidth: 720, minHeight: 1280 }}>
         <Box sx={{ pb: 7 }}>
           <Card
             sx={{
@@ -76,13 +80,13 @@ export default function KioskMain() {
               alignItems: "center",
             }}
           >
-            <Grid item xs={10} sx={{ mt: 1 }}>
+            <Grid item xs={10} sx={{ mt: 5 }}>
               <CssBaseline />
-              <Card sx={{ border: 1, padding: 1 }}>
+              <Card sx={{ border: 1, padding: 1, mt: 3 }}>
                 <CardMedia
                   component="img"
                   alt="howtowuse"
-                  height="500"
+                  height="600"
                   image="/kiosk/images/howtouse.jpg"
                 />
               </Card>
@@ -96,9 +100,10 @@ export default function KioskMain() {
             }}
           >
             <Grid item xs={50}>
-              <Card sx={{ my: 2, padding: 1 }}>
-                <QRCode value={value} size="100%" />
+              <Card sx={{ my: 5, padding: 1 }}>
+                <QRCode value={value} size={200} />
               </Card>
+              {messages}
             </Grid>
           </Grid>
           <Grid
@@ -123,22 +128,6 @@ export default function KioskMain() {
               </Button>
             </Grid>
           </Grid>
-          {/* <div>
-            <h1>WebSocket Chat</h1>
-            <ul>
-              {messages.map((message, index) => (
-                <li key={index}>{message}</li>
-              ))}
-            </ul>
-            <form onSubmit={sendMessage}>
-              <input
-                type="text"
-                value={message}
-                onChange={(event) => setMessage(event.target.value)}
-              />
-              <button type="submit">Send</button>
-            </form>
-          </div> */}
         </Box>
       </Card>
     </Box>

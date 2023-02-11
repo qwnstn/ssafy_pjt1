@@ -1,17 +1,66 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import QrReader from "modern-react-qr-reader";
-import { Box, Card } from "@mui/material";
+import { Box, Card, Button } from "@mui/material";
 import { Grid } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
+import axios from "axios";
+import HOST from "../../Host";
+import { useNavigate } from "react-router-dom";
 
-const QRReader = (props) => {
-  const [result, setResult] = useState("No result");
-  const ref = React.useRef(null);
-  console.log(result);
+const QRReader = () => {
+  const navigate = useNavigate();
+  const API_USERID = `${HOST}/user`;
 
-  const handleScan = (data) => {
-    if (data) {
-      setResult(data);
+  // 화면 전환 버튼
+  const [cameraMode, setCameraMode] = useState("environment");
+  const [userId, setUserId] = useState("");
+
+  // 값 받아와야함
+  useEffect(() => {
+    (async () => {
+      let accesstoken = localStorage.getItem("accesstoken");
+      const { data } = await axios.get(API_USERID, {
+        headers: {
+          Authorization: `Bearer ${accesstoken}`,
+        },
+      });
+      setUserId(data.id);
+    })();
+  });
+
+  // qr값을 받으면 유저 정보, 시간, 키오스크 정보를 axios로 보냄
+  const API_URI = `${HOST}/iot/qr`;
+  const handleScan = (kioskInput) => {
+    console.log(kioskInput)
+    if (kioskInput) {
+      const kioskInputObject = JSON.parse(kioskInput);
+      const kioskTime = kioskInputObject["time"];
+      const kioskId = kioskInputObject["token"];
+      const timeCheck = Date.now() - kioskTime;
+
+      // console.log("kioskInputJson", typeof kioskInputJson, kioskInputJson);
+      // console.log("kioskTime", kioskTime);
+      // console.log("kioskId", kioskId);
+      // console.log("timeCheck", timeCheck);
+
+      // 70초, 키오스크qr은 59초마다 변경되게 설정됨
+      if (timeCheck < 70000) {
+        axios
+          .post(API_URI, {
+            userId: userId,
+            kioskId: kioskId,
+            datetime: Date.now(),
+          })
+          .then((res) => {
+            // 성공시 확인 메세지 표시 후 메인 페이지로
+            console.log(res);
+            alert("QR코드가 성공적으로 촬영되었습니다");
+            navigate("/app");
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
     }
   };
 
@@ -19,12 +68,8 @@ const QRReader = (props) => {
     console.error(err);
   };
 
-  React.useEffect(() => {
-    ref.current.ownerDocument.body.scrollTop = 0;
-  });
-
   return (
-    <Box sx={{ pb: 7 }} ref={ref} >
+    <Box sx={{ pb: 7 }}>
       <Card
         sx={{
           fontSize: 33,
@@ -34,19 +79,34 @@ const QRReader = (props) => {
           fontWeight: "bold",
         }}
       >
-        QR스캔
+        QR Scan
       </Card>
-      <Grid container spacing={2}>
+      <Grid container spacing={1}>
         <Grid item xs={1} />
-        <Grid item xs={10} mt={15}>
+        <Grid item xs={10} mt={3}>
           <CssBaseline />
           <Card sx={{ border: 1, padding: 1 }}>
             <QrReader
-              delay={300}
-              facingMode={"environment"}
+              delay={500}
+              // 기본적으로 후방카메라인 user모드가 되도록 설정
+              facingMode={cameraMode}
               onError={handleError}
               onScan={handleScan}
             />
+            <Button
+              style={{
+                display: "block",
+                marginLeft: "auto",
+                marginRight: "auto",
+              }}
+              onClick={() =>
+                setCameraMode(
+                  cameraMode === "environment" ? "user" : "environment"
+                )
+              }
+            >
+              화면 전환
+            </Button>
           </Card>
         </Grid>
       </Grid>

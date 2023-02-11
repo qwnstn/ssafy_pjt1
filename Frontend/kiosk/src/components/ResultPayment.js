@@ -8,12 +8,15 @@ import { useNavigate } from "react-router-dom"
 
 const theme = createTheme();
 
+// 메인 페이지로 이동하면서 앞선 정보를 모두 제거
+// kioskId는 남겨놓아야 함
 
 export default function ResultPayment() {
   const navigate = useNavigate();
   const [countdown, setCountdown] = useState(3);
 
   useEffect(() => {
+    sessionStorage.removeItem("data");
     const timer = setTimeout(() => {
       setCountdown(countdown - 1);
     }, 1000);
@@ -46,7 +49,10 @@ export default function ResultPayment() {
             완료되었습니다
           </Typography>
           <Typography component="h1" variant="h5">
-            {countdown}초 후 메인화면으로 이동합니다 이용해주셔서 감사합니다
+            이용해주셔서 감사합니다
+          </Typography>
+          <Typography component="h1" variant="h5">
+          {countdown}초 후 메인화면으로 이동합니다
           </Typography>
         </Box>
       </Container>

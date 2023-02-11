@@ -47,7 +47,6 @@ const SignIn = () => {
   const movePage = useNavigate();
 
   const onhandlePost = async (data) => {
-
     const { userid, password } = data;
 
     const formData = new FormData();
@@ -61,14 +60,14 @@ const SignIn = () => {
     await axios
       .post(API_URI, formData)
       .then((response) => {
-        localStorage.setItem("refreshtoken", response.headers["refresh-token"]);
-        localStorage.setItem("access-token", response.headers["access-token"]);
+        localStorage.setItem("accesstoken", response.headers["accesstoken"]);
 
         axios.defaults.headers.common[
           "Authorization"
-        ] = `Bearer ${response.headers["access-token"]}`;
-        
-        movePage("/app")
+        ] = `Bearer ${response.headers["accesstoken"]}`;
+
+        movePage("/app");
+        window.location.reload();
         setLoginError("");
       })
       .catch(function (err) {
@@ -89,7 +88,8 @@ const SignIn = () => {
 
     let flag = true;
     // 아이디 입력 체크
-    if (userid.length < 1) {
+    const idRegax = /^(?=.*[a-zA-Z])(?=.*[0-9]).{4,15}$/;
+    if (!idRegax.test(userid)) {
       setUserIdError("아이디를 입력해주세요");
       flag = false;
     } else setUserIdError("");

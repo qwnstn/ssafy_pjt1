@@ -12,6 +12,7 @@ import Typography from "@mui/material/Typography";
 import CardActions from "@mui/material/CardActions";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 const columns = [
   { id: "name", label: "품명", minWidth: 140 },
@@ -28,26 +29,6 @@ const columns = [
     minWidth: 70,
     align: "right",
   },
-];
-
-function createData(name, price, cnt) {
-  const fullprice = price * cnt;
-  return { name, price, cnt, fullprice };
-}
-
-const rows = [
-  createData("폰트크기 바꿧지롱", 1500, 5),
-  createData("동원참치", 4000, 1),
-  createData("???", 10000, 3),
-  createData("????", 5000, 4),
-  createData("?????", 4000, 1),
-  createData("??????", 5000, 2),
-  createData("??", 12000, 5),
-  createData("???", 8000, 6),
-  createData("????", 12000, 2),
-  createData("?????", 400, 3),
-  createData("??????", 2400, 4),
-  createData("???????", 500, 5),
 ];
 
 const lstStyle = {
@@ -96,6 +77,32 @@ export default function ItemList() {
   var paymentAll = 0;
   const navigate = useNavigate();
   const user = sessionStorage.getItem("user");
+  const [rows, setRows] = useState([]);
+
+  // 품명, 단가, 수량을 받고, 총액은 계산해서 넣기
+  useEffect(() => {
+    const data = sessionStorage.getItem("data");
+    const jsondata = JSON.parse(data);
+    const itemList = jsondata.itemList;
+    const result = [];
+
+    itemList.forEach((item) => {
+      const existingItem = result.find((i) => i.name === item.name);
+      if (existingItem) {
+        existingItem.cnt += 1;
+        existingItem.fullprice += item.price;
+      } else {
+        result.push({
+          name: item.name,
+          price: item.price,
+          cnt: 1,
+          fullprice: item.price,
+        });
+      }
+    });
+
+    setRows(result);
+  }, []);
 
   return (
     <Box
@@ -105,21 +112,22 @@ export default function ItemList() {
         alignItems: "center",
       }}
     >
-      <Box>
+      <Box sx={{ maxWidth: 720, minHeight: 1280 }}>
         <Card
           sx={{
             fontSize: 40,
-            padding: 2,
+            padding: 1,
             textAlign: "center",
             backgroundColor: "#ff8c8c",
             fontWeight: "bold",
+            width: "100vw",
           }}
         >
           장바구니
         </Card>
-        <Card sx={{ width: `100vw`, border: 1 }}>
+        <Card sx={{ border: 1, width: "100vw" }}>
           <Paper sx={{ width: "100%", overflow: "hidden" }}>
-            <TableContainer sx={{ minHeight: `73vh`, maxHeight: `50vh` }}>
+            <TableContainer sx={{ minHeight: `77vh`, maxHeight: `70vh` }}>
               <Table stickyHeader aria-label="sticky table">
                 <TableHead>
                   <TableRow>
@@ -203,9 +211,8 @@ export default function ItemList() {
             결제취소
           </Button>
           <Button
-            
             variant="outlined"
-            sx={{ fontSize: 30, margin: 1}}
+            sx={{ fontSize: 30, margin: 1 }}
             onClick={() => navigate("/kiosk/rfidread")}
           >
             물품 다시찍기

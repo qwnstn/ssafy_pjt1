@@ -1,13 +1,17 @@
+from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from db.models.model import Product_Kiosk, Shopping
 
 
+def select_products_with_rfid(rfids: list, db: Session):
+    return db.execute(select(Product_Kiosk).where(Product_Kiosk.rfid.in_(rfids)))
+
+
 def copy_products(products: list, db: Session):
-    db.query(Product_Kiosk).all()
     for prd in products:
         product = Product_Kiosk(
-            product_id= prd['productId'],
+            productId= prd['productId'],
             name= prd['name'],
             price= prd['price'],
             rfid= prd['rfid'],
@@ -23,10 +27,10 @@ def copy_products(products: list, db: Session):
 def create_product(products: list, db: Session):
     for prd in products:
         product = Product_Kiosk(
-            product_id= prd['product_id'],
+            productId= prd['productId'],
             name= prd['name'],
             price= prd['price'],
-            RFID= prd['RFID'],
+            rfid= prd['rfid'],
             barcode= prd['barcode'],
             image= prd['image']
         )
@@ -38,8 +42,7 @@ def create_product(products: list, db: Session):
 
 def delete_product(ids: list, db: Session):
     for id in ids:
-        prd = db.query(Product_Kiosk).get(product_id=id)
-        db.delete(prd)
+        db.query(Product_Kiosk).filter(Product_Kiosk.productId == id).delete()
     i = len(ids)
     db.commit()
     return i

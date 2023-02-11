@@ -1,8 +1,6 @@
 package e101.hishop.controller;
 
-import e101.hishop.domain.dto.request.BarcodeReqDto;
-import e101.hishop.domain.dto.request.CardSaveReqDto;
-import e101.hishop.domain.dto.request.RfidReqDto;
+import e101.hishop.domain.dto.request.*;
 import e101.hishop.service.IotService;
 import e101.hishop.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -23,16 +21,6 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class IotController {
     private final IotService iotService;
-
-    @PostMapping("/rfid")
-    public ResponseEntity<String> rfidRead(@RequestBody RfidReqDto dto) {
-        return new ResponseEntity<>("장바구니 생성 완료", HttpStatus.OK);
-    }
-
-    @PostMapping("/barcode")
-    public ResponseEntity<String> barcodeRead(@RequestBody BarcodeReqDto dto) {
-        return new ResponseEntity<>("장바구니 추가 완료", HttpStatus.OK);
-    }
 
     @GetMapping("/shopping/{kioskId}")
     public ResponseEntity<List<Map<String, Object>>> shopping(@PathVariable Long kioskId) {
@@ -55,12 +43,16 @@ public class IotController {
         return new ResponseEntity<>(json, HttpStatus.OK);
     }
 
-    @PostMapping("/qr")
-    public ResponseEntity<Map<String, Object>> qrCreate() {
-        Map<String, Object> json = new HashMap<>();
-        json.put("kioskId", 3);
-        json.put("datetime", "2023-01-12T14:38:27");
-        return new ResponseEntity<>(json, HttpStatus.OK);
+    @PostMapping("/member")
+    public ResponseEntity<String> memberPay(@RequestBody MemberReqDto dto) {
+        iotService.memberPay(dto);
+        return new ResponseEntity<>("결제 완료", HttpStatus.OK);
+    }
+
+    @PostMapping("/guest")
+    public ResponseEntity<String> guestPay(@RequestBody GuestReqDto dto) {
+        iotService.guestPay(dto);
+        return new ResponseEntity<>("결제 완료", HttpStatus.OK);
     }
 
     @PostMapping("/init")
