@@ -39,10 +39,11 @@ class SessionStorage():
                 }
                 r = requests.post(url=url, headers=headers, json=payload, )
                 if r.status_code == 200:
+                    print("정상적인 QR코드")
                     asyncio.run(send("next"))
                     self.endThread()
-                # else:
-                #     print("이딴걸 QR이라고 보냈냐")
+                else:
+                    print("이딴걸 QR이라고 보냈냐")
         return
 
     async def startThread(self):

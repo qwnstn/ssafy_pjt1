@@ -5,7 +5,7 @@ import requests
 from fastapi import APIRouter, Request
 
 from core.config import BASE_URL, KIOSK_ID
-from routes.kiosk import reset_cardlist
+from routes.kiosk import cardInfo, productInfo, reset_info
 from routes.models import CardId, GuestCardInfo
 
 router = APIRouter(
@@ -18,23 +18,38 @@ def 키오스크_회원_결제요청(request: Request, cardId: CardId):
     data = run(request.json())
     cardId = data["cardId"]
     # testdata
-    userId = 1234
+    userId = cardInfo["userId"]
     kioskId = KIOSK_ID
     date = str(datetime.now().strftime("%Y-%m-%dT%H:%M:%S")),
-    shopping = [
-        {
-            "productId": 1234, 
-            "itemName" : "노트북",
-            "count" :3,
-            "price": 20000,
-        },
-		{
-			"productId": 134,
-			"itemName" : "과자",
-			"count" :5,
-			"price": 30000,
-		},
-    ]
+    # shopping = [
+    #     {
+    #         "productId": 1234, 
+    #         "itemName" : "노트북",
+    #         "count" :3,
+    #         "price": 20000,
+    #     },
+	# 	{
+	# 		"productId": 134,
+	# 		"itemName" : "과자",
+	# 		"count" :5,
+	# 		"price": 30000,
+	# 	},
+    # ]
+    shopping = list()
+    byingdict = dict()
+    for prd in productInfo:
+        if prd["name"] in byingdict.keys():
+            byingdict[prd["name"]][1] += 1
+        else:
+            byingdict[prd["name"]] = [prd['productId'], 1, prd['price']]
+    for itemName, value in byingdict.items():
+        productId, count, price = value
+        shopping.append({
+            "productKioskId": productId,
+            "itemName" : itemName,
+            "count": count,
+            "price": price,
+        })
     priceSum = 0
     for product in shopping:
         priceSum += product["price"] * product["count"]
@@ -48,8 +63,10 @@ def 키오스크_회원_결제요청(request: Request, cardId: CardId):
         "priceSum" : priceSum,
         "shopping" : shopping
     }
-    print(requests.post(url, data=payload).text)
-    reset_cardlist()
+    r = requests.post(url, data=payload)
+    print(r.status_code)
+    if r.status_code == 200:
+        reset_info()
 
 
 @router.post("/guest")

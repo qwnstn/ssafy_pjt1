@@ -25,10 +25,12 @@ router = APIRouter(
     prefix="/api/kiosk",  # url 앞에 고정적으로 붙는 경로추가
 )  # Route 분리
 cardInfo = dict()
+productInfo = list()
 
-
-def reset_cardlist():
-    cardInfo = list()
+def reset_info():
+    global cardInfo, productInfo
+    cardInfo = dict()
+    productInfo = list()
 
 
 @router.get("")
@@ -39,8 +41,8 @@ def 키오스크_아이디(request: Request):
 
 @router.post("/cardinfo")
 def 카드정보전송(request: Request, CardList: CardList):
-    data = asyncio.run(request.json())
-    cardInfo = json.dumps(data)
+    global cardInfo
+    cardInfo = asyncio.run(json.dumps(request.json()))
     return {"message": "OK"}
 
 
@@ -56,14 +58,15 @@ def RFID_리딩(request: Request, db: Session = Depends(get_db)):
     products = list()
     for q in querys:
         prd = dict()
-        # prd['productId'] = q.product_id
+        prd['productId'] = q.product_id
         prd['name'] = q.name
         prd['price'] = q.price
         # prd['rfid'] = q.rfid
         # prd['barcode'] = q.barcode
         # prd['image'] = q.image
         products.append(prd)
-
+    global productInfo
+    productInfo = products
     return {
         "userId" : cardInfo["userId"],
         "defaultCardId" : cardInfo["defaultCardId"],

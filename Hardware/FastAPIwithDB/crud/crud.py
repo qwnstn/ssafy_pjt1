@@ -48,4 +48,15 @@ def delete_product(ids: list, db: Session):
     return i
 
 
-# def create
+def create_shopping(shoppings: list, date, db: Session):
+    byingdict = dict()
+    for shp in shoppings:
+        shopping = Shopping(
+            count=shp["count"],
+            price=shp["price"],
+            date=date,
+            productKioskId=shp["productKioskId"]
+        )
+        db.add(shopping)
+    db.commit()
+
