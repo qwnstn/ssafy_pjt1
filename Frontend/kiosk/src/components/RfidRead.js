@@ -14,7 +14,7 @@ const theme = createTheme();
 export default function ResultPayment() {
   const navigate = useNavigate();
   const [redirect, setRedirect] = useState(false);
-  const [countdown, setCountdown] = useState(20);
+  const [countdown, setCountdown] = useState(50);
   const itemList = Nav();
 
   useEffect(() => {
@@ -49,6 +49,7 @@ export default function ResultPayment() {
       await axios
         .get("http://localhost:8888/api/kiosk/rfid")
         .then((res) => {
+          console.log(res.data);
           console.log("성공");
         })
         .catch((error) => {

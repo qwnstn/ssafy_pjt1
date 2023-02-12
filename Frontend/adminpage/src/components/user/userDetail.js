@@ -9,6 +9,12 @@ import {
   Button,
   Modal,
   TextField,
+  Table,
+  TableRow,
+  TableCell,
+  TableBody,
+  TableHead,
+  Card,
 } from "@mui/material";
 import { Container } from "@mui/system";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -46,7 +52,9 @@ const UserDetail = () => {
   );
   const [phone, setPhone] = useState(user.phone || "핸드폰 호출 실패");
   const [email, setEmail] = useState(user.email || "이메일 호출 실패");
+  const [cards, setCards] = useState([]);
   const navigate = useNavigate();
+
   useEffect(() => {
     const accessToken = localStorage.getItem("accesstoken");
     const fetchData = async () => {
@@ -56,12 +64,14 @@ const UserDetail = () => {
             Authorization: `Bearer ${accessToken}`,
           },
         });
+        console.log(result.data.cards);
         setUser(result.data);
         setUserId(result.data.loginId);
         setPassword(result.data.password);
         setName(result.data.name);
         setGender(result.data.gender);
         setBirthdate(result.data.birthDate);
+        setCards(result.data.cards);
         setPhone(result.data.phone);
         setEmail(result.data.email);
       } catch (error) {
@@ -190,6 +200,35 @@ const UserDetail = () => {
                   <Typography sx={{ flex: 1 }}>
                     이메일 : {user.email || "이메일을 입력하지 않았습니다."}
                   </Typography>
+                  <Card
+                    sx={{
+                      border: 1,
+                      borderRadius: 3,
+                      borderColor: "#90caf9",
+                      mt: 2,
+                    }}
+                  >
+                    <Table>
+                      <TableHead>
+                        <Typography
+                          component="h2"
+                          variant="h5"
+                          color="primary"
+                          gutterBottom
+                          sx={{ fontWeight: "bold", margin: 1 }}
+                        >
+                          등록 카드 목록
+                        </Typography>
+                      </TableHead>
+                      <TableBody>
+                        {cards.map((card, index) => (
+                          <TableRow key={index}>
+                            <TableCell>{card}</TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </Card>
                 </Paper>
                 <Button
                   sx={{ mt: 1, mr: 1, fontWeight: "bold" }}
