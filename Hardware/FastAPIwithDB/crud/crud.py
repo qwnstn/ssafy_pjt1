@@ -46,3 +46,6 @@ def delete_product(ids: list, db: Session):
     i = len(ids)
     db.commit()
     return i
+
+
+# def create

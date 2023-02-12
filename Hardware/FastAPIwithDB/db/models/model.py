@@ -1,7 +1,7 @@
-from sqlalchemy import Column, String, Integer, ForeignKey, DATE
-from sqlalchemy.orm import DeclarativeBase
-from sqlalchemy.orm import Mapped, mapped_column, relationship
 from typing import Optional
+
+from sqlalchemy import DATE, Column, ForeignKey, Integer, String
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
 
 class Base(DeclarativeBase):
@@ -22,7 +22,6 @@ class Product_Kiosk(Base):
 
 class Shopping(Base):
     __tablename__ = "Shopping"
-
     id = Column(Integer, primary_key=True, index=True)
     count = Column(Integer)
     price = Column(Integer)

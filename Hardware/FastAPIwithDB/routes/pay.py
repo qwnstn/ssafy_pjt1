@@ -5,9 +5,8 @@ import requests
 from fastapi import APIRouter, Request
 
 from core.config import BASE_URL, KIOSK_ID
-from functions.test import cardReader
-from routes.models import CardId, GuestCardInfo
 from routes.kiosk import reset_cardlist
+from routes.models import CardId, GuestCardInfo
 
 router = APIRouter(
     prefix="/api/pay", # url 앞에 고정적으로 붙는 경로추가
@@ -21,7 +20,7 @@ def 키오스크_회원_결제요청(request: Request, cardId: CardId):
     # testdata
     userId = 1234
     kioskId = KIOSK_ID
-    date = datetime.now()
+    date = str(datetime.now().strftime("%Y-%m-%dT%H:%M:%S")),
     shopping = [
         {
             "productId": 1234, 
