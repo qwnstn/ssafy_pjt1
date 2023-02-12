@@ -177,7 +177,7 @@ public class DataLoader {
                 .build(), 4L, 11L, 13L);
 
         // id 18 : kiosk
-        adminService.saveKiosk(Kiosk.builder().url("http://i8e101.p.ssafy.io:7777").build(), 13L);
+        adminService.saveKiosk(Kiosk.builder().url("http://ssafy.duckdns.org:8888").build(), 13L);
 
         // id 19 : card
         userService.cardLoad(Card.builder()
