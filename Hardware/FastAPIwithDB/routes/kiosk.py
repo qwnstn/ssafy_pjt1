@@ -24,8 +24,52 @@ sessionStore = SessionStorage()
 router = APIRouter(
     prefix="/api/kiosk",  # url 앞에 고정적으로 붙는 경로추가
 )  # Route 분리
-cardInfo = dict()
-productInfo = list()
+cardInfo = {
+	"userId" : 123,
+	"defaultCardId" : 3,
+	"cardList" : [{
+		"cardId" : 2,
+		"cardName" : "현대",
+		"cardNo" : "1234"
+	},
+	{
+		"cardId" : 3,
+		"cardName" : "ibk",
+		"cardNo" : "8513"
+	}, 
+	{
+		"cardId" : 4,
+		"cardName" : "우리",
+		"cardNo" : "9128"
+	}]
+}
+productInfo = [{
+		"productId" : 4234,
+		"name" : "꺼깔콘",
+		"price" :3000,
+		"rfid": "3124875",
+		"barcode" : None,
+		"image":"img.jpg",
+		"isAdult" : False
+	},
+	{
+		"productId" : 5137,
+		"name" : "바밤바",
+		"price" :3000,
+		"rfid": None,
+		"barcode" : "8803154372",
+		"image":"img.jpg",
+		"isAdult" : False
+	},
+	{
+		"productId" : 4124,
+		"name" : "커카콜라",
+		"price" :3110,
+		"rfid": "3116875",
+		"barcode" : None,
+		"image":"img.jpg",
+		"isAdult" : False
+	}]
 
 def reset_info():
     global cardInfo, productInfo
@@ -42,7 +86,7 @@ def 키오스크_아이디(request: Request):
 @router.post("/cardinfo")
 def 카드정보전송(request: Request, CardList: CardList):
     global cardInfo
-    cardInfo = asyncio.run(json.dumps(request.json()))
+    cardInfo = json.dumps(asyncio.run(request.json()))
     return {"message": "OK"}
 
 
