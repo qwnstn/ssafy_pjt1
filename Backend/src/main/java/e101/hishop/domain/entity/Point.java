@@ -11,7 +11,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-@ToString(exclude = {"user, cardCategory"})
+//@ToString(exclude = {"user, cardCategory"})
 @Entity
 @Getter
 @Setter

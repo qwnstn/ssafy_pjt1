@@ -54,7 +54,7 @@ public class DataLoader {
 
         // id 2 : card
         userService.cardLoad(Card.builder()
-                .cardNo("1234121211111111")
+                .cardNo("1234-1212-1111-1111")
                 .name("신한")
                 .validDate("0121")
                 .cvc("123")
@@ -62,7 +62,7 @@ public class DataLoader {
 
         // id 3 : card
         userService.cardLoad(Card.builder()
-                .cardNo("555121211111111")
+                .cardNo("5551-2121-1111-5111")
                 .name("국민")
                 .validDate("0121")
                 .cvc("654")
@@ -181,7 +181,7 @@ public class DataLoader {
 
         // id 19 : card
         userService.cardLoad(Card.builder()
-                .cardNo("1968267535975189")
+                .cardNo("1968-2675-3597-5189")
                 .name("사사")
                 .validDate("2221")
                 .build(), 5L);

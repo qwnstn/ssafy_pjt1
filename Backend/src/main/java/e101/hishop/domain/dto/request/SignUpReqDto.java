@@ -10,6 +10,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -45,7 +46,7 @@ public class SignUpReqDto {
     @Pattern(regexp = "^01([0|1|6|7|8|9])-([0-9]{3,4})-([0-9]{4})$", message = "000-0000-0000형식")
     private String phone;
 
-    @Pattern(regexp = "^(?:\\\\w+\\\\.?)*\\\\w+@(?:\\\\w+\\\\.)+\\\\w+$", message = "유효한 이메일이 아님")
+    @Email(message = "유효한이메일이 아님")
     @NotBlank
     private String email;
 

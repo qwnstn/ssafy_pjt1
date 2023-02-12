@@ -107,13 +107,4 @@ public class UserController {
         return new ResponseEntity<>(userService.getPoint(), HttpStatus.OK);
     }
 
-    @PostMapping("/newPassword")
-    public ResponseEntity<UserIdRespDto> sendPwdEmail(@RequestBody NewPasswordReqDto dto) {
-
-        log.info("sendPwdEmail 진입");
-        UserIdRespDto resp = mailService.sendPwdEmail(dto);
-
-        return new ResponseEntity<>(resp, HttpStatus.OK);
-    }
-
 }

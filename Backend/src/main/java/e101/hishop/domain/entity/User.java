@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Builder
-@ToString(exclude = {"cards", "pays"})
+//@ToString(exclude = {"cards", "pays"})
 @Entity
 @Getter
 @Table(name = "users")

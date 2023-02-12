@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -25,7 +26,7 @@ public class UserInfoRespDto {
     private String email;
     private Long defaultCardId;
     private Boolean adSelect;
-
+    private List<String> cards;
 
     //TODO 유저정보 받아올때 password 뺄것인지 생각
     public static UserInfoRespDto of(User user) {
@@ -40,5 +41,9 @@ public class UserInfoRespDto {
                 .defaultCardId(user.getDefaultCardId())
                 .adSelect(user.getAdSelect())
                 .build();
+    }
+
+    public void setCards(List<String> list) {
+        this.cards = list;
     }
 }
