@@ -43,7 +43,7 @@ class SessionStorage():
                     asyncio.run(send("next"))
                     self.endThread()
                 else:
-                    print("이딴걸 QR이라고 보냈냐")
+                    print("이딴걸 QR이라고 보냈냐", r.status_code)
         return
 
     async def startThread(self):
