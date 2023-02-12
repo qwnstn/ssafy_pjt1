@@ -86,7 +86,7 @@ def 키오스크_아이디(request: Request):
 @router.post("/cardinfo")
 def 카드정보전송(request: Request, CardList: CardList):
     global cardInfo
-    cardInfo = json.dumps(asyncio.run(request.json()))
+    cardInfo = asyncio.run(request.json())
     return {"message": "OK"}
 
 
