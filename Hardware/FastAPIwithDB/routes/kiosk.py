@@ -1,22 +1,15 @@
 import asyncio
 import json
-from datetime import datetime
-
 import requests
 from fastapi import APIRouter, Depends, Request
 from sqlalchemy.orm import Session
-
 from core.config import BASE_URL, KIOSK_ID
 from crud.crud import select_products_with_rfid
 from db.connection import get_db
 from functions.barcode_test import SessionStorage
 from routes.models import BarcodeList, CardId, CardList, RFIDList
 from routes.websocket import send
-
-try:
-    from functions.serial_test import RFID_Serial_Trans
-except:
-    pass
+from functions.serial_test import RFID_Serial_Trans
 
 
 sessionStore = SessionStorage()
@@ -25,51 +18,52 @@ router = APIRouter(
     prefix="/api/kiosk",  # url 앞에 고정적으로 붙는 경로추가
 )  # Route 분리
 cardInfo = {
-	"userId" : 123,
-	"defaultCardId" : 3,
-	"cardList" : [{
-		"cardId" : 2,
-		"cardName" : "현대",
-		"cardNo" : "1234"
-	},
-	{
-		"cardId" : 3,
-		"cardName" : "ibk",
-		"cardNo" : "8513"
-	}, 
-	{
-		"cardId" : 4,
-		"cardName" : "우리",
-		"cardNo" : "9128"
-	}]
+    "userId": 123,
+    "defaultCardId": 3,
+    "cardList": [{
+        "cardId": 2,
+        "cardName": "현대",
+        "cardNo": "1234"
+    },
+        {
+        "cardId": 3,
+        "cardName": "ibk",
+        "cardNo": "8513"
+    },
+        {
+        "cardId": 4,
+        "cardName": "우리",
+        "cardNo": "9128"
+    }]
 }
 productInfo = [{
-		"productId" : 4234,
-		"name" : "꺼깔콘",
-		"price" :3000,
-		"rfid": "3124875",
-		"barcode" : None,
-		"image":"img.jpg",
-		"isAdult" : False
-	},
-	{
-		"productId" : 5137,
-		"name" : "바밤바",
-		"price" :3000,
-		"rfid": None,
-		"barcode" : "8803154372",
-		"image":"img.jpg",
-		"isAdult" : False
-	},
-	{
-		"productId" : 4124,
-		"name" : "커카콜라",
-		"price" :3110,
-		"rfid": "3116875",
-		"barcode" : None,
-		"image":"img.jpg",
-		"isAdult" : False
-	}]
+    "productId": 4234,
+    "name": "꺼깔콘",
+    "price": 3000,
+    "rfid": "3124875",
+    "barcode": None,
+    "image": "img.jpg",
+    "isAdult": False
+},
+    {
+    "productId": 5137,
+    "name": "바밤바",
+    "price": 3000,
+    "rfid": None,
+    "barcode": "8803154372",
+    "image": "img.jpg",
+    "isAdult": False
+},
+    {
+    "productId": 4124,
+    "name": "커카콜라",
+    "price": 3110,
+    "rfid": "3116875",
+    "barcode": None,
+    "image": "img.jpg",
+    "isAdult": False
+}]
+
 
 def reset_info():
     global cardInfo, productInfo
@@ -79,6 +73,7 @@ def reset_info():
 
 @router.get("")
 def 키오스크_아이디(request: Request):
+    # reset_info()
     asyncio.run(sessionStore.startThread())
     return {"kioskId": KIOSK_ID}
 
@@ -93,30 +88,28 @@ def 카드정보전송(request: Request, CardList: CardList):
 @router.get("/rfid")
 def RFID_리딩(request: Request, db: Session = Depends(get_db)):
     # RFID 시작
-    try:
-        rfid_uids = asyncio.run(RFID_Serial_Trans().main())
-    except:
-        rfid_uids = list()
+	rfid_uids = asyncio.run(RFID_Serial_Trans().main())
     # rfid 상품정보를 이용해서 DB 조회
-    querys = select_products_with_rfid(rfid_uids, db)
-    products = list()
-    for q in querys:
-        prd = dict()
-        prd['productId'] = q.product_id
-        prd['name'] = q.name
-        prd['price'] = q.price
-        # prd['rfid'] = q.rfid
-        # prd['barcode'] = q.barcode
-        # prd['image'] = q.image
-        products.append(prd)
-    global productInfo
-    productInfo = products
-    return {
-        "userId" : cardInfo["userId"],
-        "defaultCardId" : cardInfo["defaultCardId"],
-        "cardList" : cardInfo["cardList"],
-        "itemList": products,
-    }
+	querys = select_products_with_rfid(rfid_uids, db)
+	products = list()
+	for q in querys:
+		prd = dict()
+		prd['productId'] = q.product_id
+		prd['name'] = q.name
+		prd['price'] = q.price
+		# prd['rfid'] = q.rfid
+		# prd['barcode'] = q.barcode
+		# prd['image'] = q.image
+		products.append(prd)
+	global productInfo
+	productInfo = products
+	asyncio.run(send(json.dumps({
+		"userId": cardInfo["userId"],
+		"defaultCardId": cardInfo["defaultCardId"],
+		"cardList": cardInfo["cardList"],
+		"itemList": products,
+	})))
+
 
 
 # @router.post("/rfid")

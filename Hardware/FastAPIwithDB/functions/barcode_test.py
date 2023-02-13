@@ -1,7 +1,6 @@
 import asyncio
 import json
 import threading
-import time
 from collections import deque
 
 import requests
@@ -44,6 +43,7 @@ class SessionStorage():
                     self.endThread()
                 else:
                     print("이딴걸 QR이라고 보냈냐", r.status_code)
+                    self.endThread()
         return
 
     async def startThread(self):
