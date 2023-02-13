@@ -43,7 +43,7 @@ def 키오스크_회원_결제요청(request: Request, cardId: CardId):
             byingdict[prd["name"]][1] += 1
         else:
             byingdict[prd["name"]] = [prd['productId'], 1, prd['price']]
-    for itemName, value in byingdict.items():
+    for itemName, value, price in byingdict.items():
         productId, count, price = value
         shopping.append({
             "productKioskId": productId,
@@ -82,7 +82,7 @@ def 키오스크_비회원_결제요청(request: Request, cardInfo: GuestCardInf
             byingdict[prd["name"]][1] += 1
         else:
             byingdict[prd["name"]] = [prd['productId'], 1, prd['price']]
-    for itemName, value in byingdict.items():
+    for itemName, value, price in byingdict.items():
         productId, count, price = value
         shopping.append({
             "productKioskId": productId,
