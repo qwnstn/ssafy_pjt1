@@ -1,4 +1,7 @@
 spring:
+  batch:
+    job.enabled: true # true: 앱 구동시 job 실행 함
+    jdbc.initialize-schema: always
   mail:
     host: smtp.gmail.com
     port: 587
@@ -35,6 +38,8 @@ spring:
       hibernate:
         format_sql: true
         show_sql: true
+#  profiles:
+#    active:
 
 #  batch:
 #    job.enabled: true # true: ? ??? job ?? ?
