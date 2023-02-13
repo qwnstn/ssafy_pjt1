@@ -88,7 +88,7 @@ const SignIn = () => {
 
     let flag = true;
     // 아이디 입력 체크
-    const idRegax = /^(?=.*[a-zA-Z])(?=.*[0-9]).{4,15}$/;
+    const idRegax = /^(?=.*[a-zA-Z0-9_]).{4,15}$/;
     if (!idRegax.test(userid)) {
       setUserIdError("아이디를 입력해주세요");
       flag = false;
