@@ -32,7 +32,6 @@ export default function ResultPayment() {
     if (itemList.length > 0) {
       sessionStorage.setItem("data", itemList);
       console.log(itemList);
-      console.log(typeof itemList);
       setRedirect(true);
     } else {
       console.log("itemlist가 비어있음");
@@ -48,12 +47,14 @@ export default function ResultPayment() {
       console.log("통신");
       await axios
         .get("http://localhost:8888/api/kiosk/rfid")
-        .then((res) => {
-          console.log(res.data);
-          console.log("성공");
+        .then(() => {
+          console.log("RFID 리더 요청 성공");
         })
         .catch((error) => {
-          console.log("RFID 리더 요청 에러");
+          alert("RFID 요청에러발생")
+          // sessionStorage.removeItem("data");
+          // navigate("/kiosk");
+          // window.location.reload();
         });
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -33,11 +33,7 @@ const Chat = () => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={message}
-          onChange={handleMessageChange}
-        />
+        <input type="text" value={message} onChange={handleMessageChange} />
         <button type="submit">Send</button>
       </form>
       <p>{serverMessage}</p>

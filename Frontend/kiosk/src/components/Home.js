@@ -50,8 +50,8 @@ export default function KioskMain() {
   }, [kioskId, messages, navigate]);
 
   useEffect(() => {
-    sessionStorage.removeItem("user");
     sessionStorage.removeItem("data");
+    sessionStorage.removeItem("user");
     if (messages[0] === "next") {
       sessionStorage.setItem("user", "user");
       navigate("/kiosk/rfidread");
@@ -87,7 +87,7 @@ export default function KioskMain() {
                   component="img"
                   alt="howtowuse"
                   height="600"
-                  image="/kiosk/images/howtouse.jpg"
+                  image="/kiosk/images/kioskMain.png"
                 />
               </Card>
             </Grid>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
@@ -7,37 +7,30 @@ import { Grid, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-// 결제하기 버튼 하단에 추가필요
-
-// 세션 데이터
-const data = sessionStorage.getItem("data");
-let session;
-
-if (typeof data === "string") {
-  try {
-    session = JSON.parse(data);
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-// 카드 목록 리스트 - 세션을 통해 값을 받아와야함
-const cards = sessionStorage.getItem("data") ? session["cardList"] : null
-// console.log(session)
-
-// 메인 카드 번호 세션에서 값 받기
-const defaultCardId = sessionStorage.getItem("data") ? session["defaultCardId"] : null;
-
 export default function CardInfo() {
   const navigate = useNavigate();
-  // 유저 정보에서 card id 뽑아서 저장
-  // 버튼 누를 시 계속 바뀌고 결제 버튼 시 값 보내기
-  // console.log('m', mainCard)
-  // console.log('c', cards)
-  // cards.find((object) => object.cardId === defaultCardId)
-  const [mainCard, setMainCard] = useState(
-    cards.find((object) => object.cardId === defaultCardId)
-  );
+  const [cards, setCards] = useState([]);
+  const [defaultCardId, setDefaultCardId] = useState([]);
+  const [mainCard, setMainCard] = useState();
+
+  useEffect(() => {
+    // 세션 데이터
+    const data = sessionStorage.getItem("data");
+    let session;
+
+    if (typeof data === "string") {
+      try {
+        session = JSON.parse(data);
+        setCards(sessionStorage.getItem("data") ? session["cardList"] : null);
+        setDefaultCardId(
+          sessionStorage.getItem("data") ? session["defaultCardId"] : null
+        );
+        setMainCard(cards.find((object) => object.cardId === defaultCardId));
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  }, [cards, defaultCardId]);
 
   const cardImage = (data) => {
     if (data === "현대") {
@@ -55,11 +48,11 @@ export default function CardInfo() {
     }
   };
 
-  const API_URI = "http://localhost:8888/api/pay/member"
+  const API_URI = "http://localhost:8888/api/pay/member";
   const ResultPayment = async (data) => {
     const cardId = {
-      cardId: data.cardId
-    }
+      cardId: data.cardId,
+    };
     console.log(cardId);
     axios
       .post(API_URI, cardId)
@@ -70,7 +63,6 @@ export default function CardInfo() {
       .catch((error) => {
         console.error(error);
       });
-
   };
 
   // 카드 목록 등록 함수
