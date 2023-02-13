@@ -34,7 +34,7 @@ export default function Main() {
             {/* 이미지는 관리자 페이지에서 넣기로 약속 */}
             <CardMedia
               component="img"
-              image="/app/images/logo.png"
+              image="/app/images/discount.jpg"
               alt="discount"
             />
           </Card>
@@ -53,7 +53,7 @@ export default function Main() {
               component="img"
               width='100'
               height='210'
-              image="/app/images/logo.png"
+              image="/app/images/tomorrow.jpg"
               alt="discount"
             />
           </Card>

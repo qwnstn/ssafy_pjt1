@@ -25,11 +25,14 @@ export default function CardInfo() {
         setDefaultCardId(
           sessionStorage.getItem("data") ? session["defaultCardId"] : null
         );
-        setMainCard(cards.find((object) => object.cardId === defaultCardId));
       } catch (error) {
         console.error(error);
       }
     }
+  }, [defaultCardId]);
+
+  useEffect(() => {
+    setMainCard(cards.find((object) => object.cardId === defaultCardId));
   }, [cards, defaultCardId]);
 
   const cardImage = (data) => {
