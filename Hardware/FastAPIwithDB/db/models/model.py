@@ -19,6 +19,9 @@ class Product_Kiosk(Base):
     image: Mapped[str] = mapped_column(String, nullable=True)
     shopping = relationship("Shopping")
 
+    def __repr__(self) -> str:
+        return f"Product_Kiosk(id={self.id!r}, name={self.name!r}, productId={self.productId!r}), price={self.price!r}, rfid={self.rfid!r}, barcode={self.barcode!r}"
+
 
 class Shopping(Base):
     __tablename__ = "Shopping"
@@ -27,3 +30,6 @@ class Shopping(Base):
     price = Column(Integer)
     date = Column(DATE)
     productKioskId = Column(Integer, ForeignKey("Product_Kiosk.id"))
+
+    def __repr__(self) -> str:
+        return f"Shopping(id={self.id!r}, count={self.count!r}, price={self.price!r}, date={self.date!r}, productKioskId={self.productKioskId!r}"
