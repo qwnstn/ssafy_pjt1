@@ -5,7 +5,6 @@ import serial
 
 from core.config import SERIAL_PORT
 
-
 class RFID_Serial_Trans:
     PORT = SERIAL_PORT                               # 포트 번호
     baud = 9600                                 # 보드레이트

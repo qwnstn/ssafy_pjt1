@@ -5,10 +5,10 @@ from db.models.model import Product_Kiosk, Shopping
 
 
 def select_products_with_rfid(rfids: list, db: Session):
-    rlt = db.execute(select(Product_Kiosk).where(Product_Kiosk.rfid.in_(rfids)))
+    # rlt = db.execute(select(Product_Kiosk).where(Product_Kiosk.rfid.in_(rfids)))
+    rlt = db.query(Product_Kiosk).filter(Product_Kiosk.rfid.in_(rfids)).all()
 
-    print(rlt, rlt.all(), type(rlt.all()))
-    return rlt.all()
+    return rlt
 
 
 def copy_products(products: list, db: Session):
