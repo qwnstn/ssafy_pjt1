@@ -92,14 +92,12 @@ def 카드정보전송(request: Request, CardList: CardList):
 @router.get("/rfid")
 def RFID_리딩(request: Request, db: Session = Depends(get_db)):
     # RFID 시작
-    try:
-        rfid_uids = asyncio.run(RFID_Serial_Trans().main())
-    except:
-        rfid_udis = list()
+    rfid_uids = asyncio.run(RFID_Serial_Trans().main())
     # rfid 상품정보를 이용해서 DB 조회
     querys = select_products_with_rfid(rfid_uids, db)
     products = list()
     for q in querys:
+        print(q)
         prd = dict()
         prd['productId'] = q.product_id
         prd['name'] = q.name

@@ -7,7 +7,7 @@ from db.models.model import Product_Kiosk, Shopping
 def select_products_with_rfid(rfids: list, db: Session):
     # rlt = db.execute(select(Product_Kiosk).where(Product_Kiosk.rfid.in_(rfids)))
     rlt = db.query(Product_Kiosk).filter(Product_Kiosk.rfid.in_(rfids)).all()
-
+    print(rlt)
     return rlt
 
 
