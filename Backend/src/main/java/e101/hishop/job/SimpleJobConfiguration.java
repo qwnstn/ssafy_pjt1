@@ -1,5 +1,7 @@
 package e101.hishop.job;
 
+import e101.hishop.domain.entity.Branch;
+import e101.hishop.service.AdminService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
@@ -16,11 +18,13 @@ import org.springframework.context.annotation.Configuration;
 public class SimpleJobConfiguration {
     private final JobBuilderFactory jobBuilderFactory; // 생성자 DI 받음
     private final StepBuilderFactory stepBuilderFactory; // 생성자 DI 받음
+    private final AdminService adminService;
 
     @Bean
     public Job simpleJob() {
         return jobBuilderFactory.get("simpleJob")
                 .start(simpleStep1())
+//                .next(jpaTest())
                 .build();
     }
 
@@ -32,5 +36,18 @@ public class SimpleJobConfiguration {
                     return RepeatStatus.FINISHED;
                 })
                 .build();
+    }
+    @Bean
+    public Step jpaTest() {
+        return stepBuilderFactory.get("jpaTest")
+                .tasklet((contribution, chunkContext) -> {
+                    adminService.saveBranch(Branch.builder()
+                            .branchName("TTTTTTTTTT")
+                            .region("ZZZZZZZZZZZZZ")
+                            .build());
+                    return RepeatStatus.FINISHED;
+                })
+                        .build();
+
     }
 }

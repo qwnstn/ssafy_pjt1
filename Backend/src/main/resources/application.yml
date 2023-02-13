@@ -23,6 +23,12 @@ spring:
     password:
     driver-class-name: org.h2.Driver
 
+# Batch 테스트
+#      url: jdbc:mysql://localhost:3306/hishop?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+#      username: root
+#      password: e101ssafy!@
+#      driver-class-name: com.mysql.cj.jdbc.Driver
+
 # 배포용
 #    url: jdbc:mysql://13.125.42.187:3306/hishop?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
 #    username: e101
@@ -49,5 +55,7 @@ logging:
   level:
     org.hibernate.sql: debug
     org.hibernate.type: trace
+    com.zaxxer.hikari.HikariConfig: DEBUG
+    com.zaxxer.hikari: TRACE
 #    org.springframework : debug
 #    org.springframework.web : debug
