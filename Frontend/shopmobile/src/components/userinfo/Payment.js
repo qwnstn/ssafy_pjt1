@@ -21,7 +21,7 @@ export default function Payment() {
   }
 
   const convertDate = (date) => {
-    return date.split("T")[0];
+    return date.split("T")[1];
   };
 
   const [rows, setRows] = useState([]);

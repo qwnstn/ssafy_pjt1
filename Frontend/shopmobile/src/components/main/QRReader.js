@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import QrReader from "modern-react-qr-reader";
 import { Box, Card, Button } from "@mui/material";
 import { Grid } from "@mui/material";
@@ -9,57 +9,36 @@ import { useNavigate } from "react-router-dom";
 
 const QRReader = () => {
   const navigate = useNavigate();
-  const API_USERID = `${HOST}/user`;
 
   // 화면 전환 버튼
   const [cameraMode, setCameraMode] = useState("environment");
-  const [userId, setUserId] = useState("");
-
-  // 값 받아와야함
-  useEffect(() => {
-    (async () => {
-      let accesstoken = localStorage.getItem("accesstoken");
-      const { data } = await axios.get(API_USERID, {
-        headers: {
-          Authorization: `Bearer ${accesstoken}`,
-        },
-      });
-      setUserId(data.id);
-    })();
-  });
+  const accesstoken = localStorage.getItem("accesstoken");
 
   // qr값을 받으면 유저 정보, 시간, 키오스크 정보를 axios로 보냄
-  const API_URI = `${HOST}/iot/qr`;
-  const handleScan = (kioskInput) => {
-    console.log(kioskInput)
+  const API_URI = `${HOST}/user/qr`;
+  const handleScan = async (kioskInput) => {
+    console.log(kioskInput);
     if (kioskInput) {
       const kioskInputObject = JSON.parse(kioskInput);
-      const kioskTime = kioskInputObject["time"];
-      const kioskId = kioskInputObject["token"];
-      const timeCheck = Date.now() - kioskTime;
-
-      // console.log("kioskInputJson", typeof kioskInputJson, kioskInputJson);
-      // console.log("kioskTime", kioskTime);
-      // console.log("kioskId", kioskId);
-      // console.log("timeCheck", timeCheck);
-
-      // 70초, 키오스크qr은 59초마다 변경되게 설정됨
-      if (timeCheck < 70000) {
-        axios
-          .post(API_URI, {
-            userId: userId,
+      const kioskId = kioskInputObject["kioskId"];
+      try {
+        const res = await axios.post(
+          API_URI,
+          {
             kioskId: kioskId,
             datetime: Date.now(),
-          })
-          .then((res) => {
-            // 성공시 확인 메세지 표시 후 메인 페이지로
-            console.log(res);
-            alert("QR코드가 성공적으로 촬영되었습니다");
-            navigate("/app");
-          })
-          .catch((error) => {
-            console.error(error);
-          });
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${accesstoken}`,
+            },
+          }
+        );
+        console.log(res);
+        alert("QR code was successfully captured");
+        navigate("/app");
+      } catch (error) {
+        console.error(error);
       }
     }
   };

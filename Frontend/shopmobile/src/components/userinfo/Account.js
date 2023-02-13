@@ -167,7 +167,7 @@ export default function Account() {
         </Grid>
         <Grid container sx={{ mt: 2, mb: 2 }}>
           <Grid item xs>
-            <Link onClick={confirmDelete}>회원 탈퇴</Link>
+            <Link onClick={confirmDelete} variant="body2">회원 탈퇴</Link>
           </Grid>
           <Grid item>
             <Link href="/app/pwdchange" variant="body2">

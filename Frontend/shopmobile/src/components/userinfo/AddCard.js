@@ -75,35 +75,39 @@ const AddCard = () => {
         const API_URI = `${HOST}/user/card/`;
         // 카드 번호 형식에 맞게 변형
         let cardNo = cardNumber;
-        cardNo = cardNo.match(/.{1,4}/g).join('-');
+        cardNo = cardNo.match(/.{1,4}/g).join("-");
         // 카드 유효기간 맞는지 확인
         const currentYear = new Date().getFullYear().toString().substr(-2);
-        const currentMonth = new Date().getMonth() + 1;       
-        if (cardExpiration.match(/^\d{2}(0[1-9]|1[0-2])$/) 
-        && cardExpiration.substr(0, 2) >= currentYear 
-        && (parseInt(cardExpiration.substr(0, 2)) + parseInt(cardExpiration.substr(2))) >= (parseInt(currentYear) + currentMonth)) {
+        const currentMonth = new Date().getMonth() + 1;
+        if (
+          cardExpiration.match(/^\d{2}(0[1-9]|1[0-2])$/) &&
+          cardExpiration.substr(0, 2) >= currentYear &&
+          parseInt(cardExpiration.substr(0, 2)) +
+            parseInt(cardExpiration.substr(2)) >=
+            parseInt(currentYear) + currentMonth
+        ) {
           axios
-          .post(
-            API_URI,
-            {
-              cardNo: cardNo,
-              name: cardCompany,
-              validDate: cardExpiration,
-              cvc: cardCVC
-            },
-            {
-              headers: {
-                Authorization: `Bearer ${accesstoken}`,
+            .post(
+              API_URI,
+              {
+                cardNo: cardNo,
+                name: cardCompany,
+                validDate: cardExpiration,
+                cvc: cardCVC,
               },
-            }
-          )
-          .then((res) => {
-            alert("카드 등록이 완료되었습니다");
-            navigate("/app/mycard");
-          })
-          .catch((error) => {
-            console.error(error);
-          });
+              {
+                headers: {
+                  Authorization: `Bearer ${accesstoken}`,
+                },
+              }
+            )
+            .then((res) => {
+              alert("카드 등록이 완료되었습니다");
+              navigate("/app/mycard");
+            })
+            .catch((error) => {
+              console.error(error);
+            });
         } else {
           setError({ ...error, cardExpiration: true });
         }

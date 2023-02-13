@@ -21,7 +21,7 @@ export default function KioskMain() {
 
   function QRMake(kioskId) {
     const newTest = {
-      token: kioskId,
+      kioskId: kioskId,
       time: Date.now(),
     };
     const test1 = JSON.stringify(newTest);
@@ -82,7 +82,7 @@ export default function KioskMain() {
           >
             <Grid item xs={10} sx={{ mt: 5 }}>
               <CssBaseline />
-              <Card sx={{ border: 1, padding: 1, mt: 3 }}>
+              <Card sx={{ border: 1, padding: 1, mt: 3, borderRadius:3 }}>
                 <CardMedia
                   component="img"
                   alt="howtowuse"
