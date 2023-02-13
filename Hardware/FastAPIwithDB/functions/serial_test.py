@@ -32,6 +32,8 @@ class RFID_Serial_Trans:
                     if value > 3:
                         result.append(key)
                 return result
+            else:
+                time.time(0.2)
             # data = input().strip()
             # if data == "serial exit": # 종료 명령어
             #     break
