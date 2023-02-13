@@ -7,13 +7,14 @@ import Avatar from "@mui/material/Avatar";
 import LinearProgress from "@mui/material/LinearProgress";
 import { useNavigate } from "react-router-dom";
 import Nav from "./Nav";
+import axios from "axios";
 
 const theme = createTheme();
 
 export default function ResultPayment() {
   const navigate = useNavigate();
   const [redirect, setRedirect] = useState(false);
-  const [countdown, setCountdown] = useState(20);
+  const [countdown, setCountdown] = useState(50);
   const itemList = Nav();
 
   useEffect(() => {
@@ -41,6 +42,22 @@ export default function ResultPayment() {
   if (redirect) {
     navigate(countdown > 0 ? "/kiosk/itemlist" : "/kiosk");
   }
+
+  useEffect(() => {
+    (async () => {
+      console.log("통신");
+      await axios
+        .get("http://localhost:8888/api/kiosk/rfid")
+        .then((res) => {
+          console.log(res.data);
+          console.log("성공");
+        })
+        .catch((error) => {
+          console.log("RFID 리더 요청 에러");
+        });
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>

@@ -1,0 +1,7 @@
+userId,adSelect,birthDate,defaultCardId,email,gender,loginId,name,password,payPassword,phone,role
+1,TRUE,1964-11-26,1,email@email.com,MALE,user1234,이름,$2a$10$2UpDbuImNPv2UPjsgqTRJOl3.s7DY2zTJ28U0uiUNDqjxkLeFyID.,1445,010-4702-1492,ROLE_USER
+2,FALSE,1960-02-27,2,email@email.com,FEMALE,admin1234,이름,$2a$10$7x4hd/XrmPC97ya4/mbm/eEl3.tUfwP/xxLc6.MURw1G.5Ga.ueNi,5677,010-8104-4684,ROLE_ADMIN
+3,TRUE,1980-05-24,3,constant@hanamail.com,MALE,consult_user,이컨턴,$2a$10$z57kJ1dNDMMvjV/lTRoA3u8W5SBkP7DtSEIVzV4gEMvXE3Rn.L1aa,3565,010-0198-7303,ROLE_USER
+4,TRUE,1976-08-10,4,constant@hanmail.com,MALE,consult_admin,서컨턴,$2a$10$Rbq.vuWJPICsgBCdSUnX1OFTDrDLcq6vxiVJoqGuZOGnP.b91koca,3515,010-0629-8894,ROLE_ADMIN
+5,TRUE,1973-05-22,5,coach_park@gmail.com,MALE,coach_user,박코치,$2a$10$8O.iNTNZNcRfZY0mW3I7J.dOsUn1v6Ifq3schnwC9XCuX6hM.Of2a,796,010-7595-9768,ROLE_USER
+6,TRUE,1969-01-01,6,coach_kim@gmail.com,FEMALE,coach_admin,김코치,$2a$10$47wjMDNMybUWz.jVlKlsi.x2o7RswFxNnPNW0K0OeMbHBtTvsUxmG,2155,010-7265-6365,ROLE_ADMIN

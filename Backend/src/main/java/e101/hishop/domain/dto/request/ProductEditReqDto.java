@@ -22,5 +22,6 @@ public class ProductEditReqDto {
     @Pattern(regexp="^[0-9]{5,20}$", message="바코드 숫자 5~20자리여야 합니다.")
     private String barcode;
     private String image;
+    private boolean isAdult;
 
 }

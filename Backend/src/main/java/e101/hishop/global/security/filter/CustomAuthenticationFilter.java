@@ -34,8 +34,6 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         log.info("====attempting Authentication........");
-//        String username = request.getParameter("username");
-//        String password = request.getParameter("password");
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         log.info("username is : {}", username);

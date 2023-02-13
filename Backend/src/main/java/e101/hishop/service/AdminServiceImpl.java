@@ -24,6 +24,7 @@ public class AdminServiceImpl implements AdminService {
     private final PayJPARepository payJPARepository;
     private final PayDetailJPARepository payDetailJPARepository;
     private final StaffJPARepository staffJPARepository;
+    private final CardJPARepository cardJPARepository;
     private final KioskJPARepository kioskJPARepository;
     private final ProductJPARepository productJPARepository;
     private final BranchJPARepository branchJPARepository;
@@ -118,8 +119,18 @@ public class AdminServiceImpl implements AdminService {
     public List<UserInfoRespDto> getUsers() {
         List<User> users = userJPARepository.findAll();
         List<UserInfoRespDto> userList = new ArrayList<>();
+
         for (User p: users) {
-            userList.add(UserInfoRespDto.of(p));
+            UserInfoRespDto user = UserInfoRespDto.of(p);
+            List<String> cardNb = new ArrayList<>();
+            List<Card> list = cardJPARepository.findAllByUserId(user.getId());
+            for (Card c : list) {
+                log.info("CARD_INFO=========================================================");
+                log.info("{}", c);
+                cardNb.add(c.getCardNo());
+            }
+            user.setCards(cardNb);
+            userList.add(user);
         }
         return userList;
     }
@@ -128,7 +139,17 @@ public class AdminServiceImpl implements AdminService {
     public UserInfoRespDto getUser(Long userId) {
         User user = userJPARepository.findById(userId)
                 .orElseThrow(() -> new CommonException(2, "User가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
-        return UserInfoRespDto.of(user);
+        List<String> cardNb = new ArrayList<>();
+        List<Card> list = cardJPARepository.findAllByUserId(userId);
+        for (Card p : list) {
+            log.info("CARD_INFO=========================================================");
+            log.info("{}", p);
+            cardNb.add(p.getCardNo());
+        }
+        UserInfoRespDto resp = UserInfoRespDto.of(user);
+        resp.setCards(cardNb);
+
+        return resp;
     }
 
     @Override

@@ -4,11 +4,14 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import e101.hishop.domain.dto.request.NewPasswordReqDto;
 import e101.hishop.domain.dto.request.SignUpReqDto;
+import e101.hishop.domain.dto.response.UserIdRespDto;
 import e101.hishop.domain.entity.User;
 import e101.hishop.global.common.CommonResponse;
 import e101.hishop.repository.UserJPARepository;
 import e101.hishop.service.AuthService;
+import e101.hishop.service.MailService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -40,12 +43,22 @@ public class AuthController {
     private final AuthService authService;
     private final UserJPARepository userJPARepository;
     private final PasswordEncoder passwordEncoder;
+    private final MailService mailService;
 
     @PostMapping("/sign-up")
     public CommonResponse signup(@RequestBody @Validated SignUpReqDto dto) {
         return CommonResponse.builder()
                 .data(Map.of("userId", authService.signUp(dto.toUsersEntity())))
                 .build();
+    }
+
+    @PostMapping("/newPassword")
+    public ResponseEntity<UserIdRespDto> sendPwdEmail(@RequestBody NewPasswordReqDto dto) {
+
+        log.info("sendPwdEmail 진입");
+        UserIdRespDto resp = mailService.sendPwdEmail(dto);
+
+        return new ResponseEntity<>(resp, HttpStatus.OK);
     }
 
     @PostMapping("/refresh-token")

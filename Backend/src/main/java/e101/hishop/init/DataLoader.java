@@ -54,7 +54,7 @@ public class DataLoader {
 
         // id 2 : card
         userService.cardLoad(Card.builder()
-                .cardNo("1234121211111111")
+                .cardNo("1234-1212-1111-1111")
                 .name("신한")
                 .validDate("0121")
                 .cvc("123")
@@ -62,7 +62,7 @@ public class DataLoader {
 
         // id 3 : card
         userService.cardLoad(Card.builder()
-                .cardNo("555121211111111")
+                .cardNo("5551-2121-1111-5111")
                 .name("국민")
                 .validDate("0121")
                 .cvc("654")
@@ -119,6 +119,7 @@ public class DataLoader {
                 .rfid("FC4947AC500104E0")
                 .barcode("01243252")
                 .image("")
+                .isAdult(false)
                 .build(), 6L, 8L);
 
         // id 11 : product
@@ -128,6 +129,7 @@ public class DataLoader {
                 .rfid("BB4247AC500104E0")
                 .barcode("14103252")
                 .image("")
+                .isAdult(false)
                 .build(), 7L, 8L);
 
         // id 12 : product
@@ -137,6 +139,7 @@ public class DataLoader {
                 .rfid("FE9146AC500104E0")
                 .barcode("44103222")
                 .image("")
+                .isAdult(false)
                 .build(), 6L, 9L);
 
         // id 13 : branch
@@ -174,11 +177,11 @@ public class DataLoader {
                 .build(), 4L, 11L, 13L);
 
         // id 18 : kiosk
-        adminService.saveKiosk(Kiosk.builder().url("http://i8e101.p.ssafy.io:7777").build(), 13L);
+        adminService.saveKiosk(Kiosk.builder().url("http://ssafy.duckdns.org:8888").build(), 13L);
 
         // id 19 : card
         userService.cardLoad(Card.builder()
-                .cardNo("1968267535975189")
+                .cardNo("1968-2675-3597-5189")
                 .name("사사")
                 .validDate("2221")
                 .build(), 5L);

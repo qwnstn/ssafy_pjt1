@@ -1,6 +1,7 @@
 package e101.hishop.domain.dto.response;
 
 
+import e101.hishop.domain.entity.CardCategory;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,4 +17,5 @@ public class CardInfoRespDto {
     private String cardNo;
     private String name;
     private String validDate;
+    private CardCategory cardCategory;
 }

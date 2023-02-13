@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Builder
-@ToString(exclude = {"cards", "pays"})
+//@ToString(exclude = {"cards", "pays"})
 @Entity
 @Getter
 @Table(name = "users")
@@ -86,7 +86,9 @@ public class User {
         return this;
     }
 
-
+    public void changeTmpPassword(String tmpPwd) {
+        password = StringUtils.hasText(tmpPwd) ? AppConfig.testPasswordEncoder().encode(tmpPwd) : password;
+    }
 
     public void changePayPassword(PayPasswordReqDto dto) {
         this.payPassword = dto.getPayPassword();

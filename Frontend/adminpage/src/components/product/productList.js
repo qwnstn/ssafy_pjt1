@@ -54,27 +54,6 @@ export default function ProductList() {
   const [rows, setRows] = useState([]);
   const [payload, setPayload] = useState({});
 
-  const refreshAccessToken = async () => {
-    try {
-      // Get the refresh token from localStorage
-      const refreshToken = localStorage.getItem("refreshtoken");
-
-      // Make a POST request to the refresh token endpoint
-      const response = await axios.post(`${HOST}/refresh-token`, null, {
-        headers: {
-          Authorization: `Bearer ${refreshToken}`,
-        },
-      });
-
-      // Update the access token in localStorage
-      localStorage.setItem("accesstoken", response.headers["accesstoken"]);
-
-      return response.headers["accesstoken"];
-    } catch (error) {
-      // Handle the error
-    }
-  };
-
   useEffect(() => {
     const accessToken = localStorage.getItem("accesstoken");
     axios

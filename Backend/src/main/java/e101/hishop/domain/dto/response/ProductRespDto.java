@@ -17,6 +17,7 @@ public class ProductRespDto {
     private Long price;
     private String rfid;
     private String barcode;
+    private boolean isAdult;
     private String image;
 
     public static ProductRespDto of (Product product) {
@@ -27,6 +28,7 @@ public class ProductRespDto {
                 .rfid(product.getRfid())
                 .barcode(product.getBarcode())
                 .image(product.getImage())
+                .isAdult(product.isAdult())
                 .build();
     }
 

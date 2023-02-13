@@ -46,7 +46,7 @@ public class SignUpReqDto {
     @Pattern(regexp = "^01([0|1|6|7|8|9])-([0-9]{3,4})-([0-9]{4})$", message = "000-0000-0000형식")
     private String phone;
 
-    @Email
+    @Email(message = "유효한이메일이 아님")
     @NotBlank
     private String email;
 

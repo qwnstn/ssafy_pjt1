@@ -35,6 +35,15 @@ const Boxs = styled(Box)`
   padding-bottom: 40px !important;
 `;
 
+//이메일 정규식 체크
+function email_check(email){
+  var regExp = /\w+([-+.]\w+)*@\w+([-.]\w+)*\.[a-zA-Z]{2,4}$/;
+  if(!regExp.test(email)){
+    return false;
+  }
+  return true;
+}
+
 function isBirthday(dateStr) {
   var year = Number(dateStr.substr(0, 4)); // 입력한 값의 0~4자리까지 (연)
   var month = Number(dateStr.substr(4, 2)); // 입력한 값의 4번째 자리부터 2자리 숫자 (월)
@@ -84,6 +93,7 @@ const Register = () => {
   const [genderError, setGenderError] = useState("");
   const [phoneError, setPhoneError] = useState("");
   const [birthError, setBirthError] = useState("");
+  const [emailError, setEmailError] = useState("");
   const [passwordState, setPasswordState] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [nameError, setNameError] = useState("");
@@ -113,7 +123,7 @@ const Register = () => {
       .post(API_URI, jsonData)
       .then(function (response) {
         console.log(response, "성공");
-        movePage("/app");
+        movePage("/app/login");
       })
       .catch(function (err) {
         console.log(err.response.status);
@@ -138,10 +148,17 @@ const Register = () => {
       mail: data.get("mail"),
       adSelect: true,
     };
-    const { id, password, rePassword, name, gender, phone, birthday } =
+    const { id, password, rePassword, name, gender, phone, birthday, mail } =
       joinData;
 
     let flag = true;
+    // 이메일 유효성 검사
+    if (!email_check(mail) || mail.length < 1) {
+      console.log("이메일입력");
+      setEmailError("이메일을 입력하세요");
+      flag = false;
+    } else setEmailError("");
+
     // 아이디 입력 체크
     const idRegax = /^(?=.*[a-zA-Z])(?=.*[0-9]).{4,15}$/;
     if (!idRegax.test(id)) {
@@ -330,14 +347,17 @@ const Register = () => {
                   <FormHelperTexts>{birthError}</FormHelperTexts>
                   <Grid item xs={12}>
                     <TextField
+                      required
                       fullWidth
-                      name="mail"
-                      label="이메일"
-                      type="email"
                       id="mail"
+                      label="이메일"
+                      name="mail"
+                      type="email"
                       autoComplete="new-email"
+                      error={emailError !== "" || false}
                     />
                   </Grid>
+                  <FormHelperTexts>{emailError}</FormHelperTexts>
                   <Grid item xs={12}>
                     <FormControlLabel
                       control={
