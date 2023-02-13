@@ -62,7 +62,7 @@ class RFID_Serial_Trans:
                             data = data[x:]
                             continue
                         else:
-                            print(data.decode())
+                            # print(data.decode())
                             break
                     if received_command[1] == 0x3B:             # RFID UID 1개 읽기
                         for byte in data_now[3:-1]:
@@ -87,7 +87,7 @@ class RFID_Serial_Trans:
                         uid = data_now[5:13]
                         bd = data_now[13:-1]
                     else:
-                        print(data_now.decode(), end=" ")
+                        # print(data_now.decode(), end=" ")
                         print("Unknown Request")
                         continue
                     if data_now[-1] == 0x99:                    # 종료 바이트
