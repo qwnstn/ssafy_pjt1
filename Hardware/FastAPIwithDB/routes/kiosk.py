@@ -88,27 +88,28 @@ def 카드정보전송(request: Request, CardList: CardList):
 @router.get("/rfid")
 def RFID_리딩(request: Request, db: Session = Depends(get_db)):
     # RFID 시작
-	rfid_uids = asyncio.run(RFID_Serial_Trans().main())
+    rfid_uids = asyncio.run(RFID_Serial_Trans().main())
     # rfid 상품정보를 이용해서 DB 조회
-	querys = select_products_with_rfid(rfid_uids, db)
-	products = list()
-	for q in querys:
-		prd = dict()
-		prd['productId'] = q.product_id
-		prd['name'] = q.name
-		prd['price'] = q.price
-		# prd['rfid'] = q.rfid
-		# prd['barcode'] = q.barcode
-		# prd['image'] = q.image
-		products.append(prd)
-	global productInfo
-	productInfo = products
-	asyncio.run(send(json.dumps({
-		"userId": cardInfo["userId"],
-		"defaultCardId": cardInfo["defaultCardId"],
-		"cardList": cardInfo["cardList"],
-		"itemList": products,
-	})))
+    querys = select_products_with_rfid(rfid_uids, db)
+    products = list()
+    for q in querys:
+        print(q)
+        prd = dict()
+        prd['productId'] = q.product_id
+        prd['name'] = q.name
+        prd['price'] = q.price
+        # prd['rfid'] = q.rfid
+        # prd['barcode'] = q.barcode
+        # prd['image'] = q.image
+        products.append(prd)
+    global productInfo
+    productInfo = products
+    asyncio.run(send(json.dumps({
+        "userId": cardInfo["userId"],
+        "defaultCardId": cardInfo["defaultCardId"],
+        "cardList": cardInfo["cardList"],
+        "itemList": products,
+    })))
 
 
 
