@@ -90,7 +90,7 @@ def RFID_리딩(request: Request, db: Session = Depends(get_db)):
     # RFID 시작
 	rfid_uids = asyncio.run(RFID_Serial_Trans().main())
     # rfid 상품정보를 이용해서 DB 조회
-	querys = select_products_with_rfid(rfid_uids, db)
+	querys = asyncio.run(select_products_with_rfid(rfid_uids, db))
 	products = list()
 	for q in querys:
 		prd = dict()
