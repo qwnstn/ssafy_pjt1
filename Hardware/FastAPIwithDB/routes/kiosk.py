@@ -1,20 +1,17 @@
 import asyncio
 import json
+
 import requests
 from fastapi import APIRouter, Depends, Request
 from sqlalchemy.orm import Session
+
 from core.config import BASE_URL, KIOSK_ID
 from crud.crud import select_products_with_rfid
 from db.connection import get_db
 from functions.barcode_test import SessionStorage
+from functions.serial_test import RFID_Serial_Trans
 from routes.models import BarcodeList, CardId, CardList, RFIDList
 from routes.websocket import send
-
-try:
-    from functions.serial_test import RFID_Serial_Trans
-except:
-    pass
-
 
 sessionStore = SessionStorage()
 
