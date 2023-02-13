@@ -20,7 +20,7 @@ class Product_Kiosk(Base):
     shopping = relationship("Shopping")
 
     def __repr__(self) -> str:
-        return f"Product_Kiosk(id={self.id!r}, name={self.name!r}, productId={self.productId!r}), price={self.price!r}, rfid={self.rfid!r}, barcode={self.barcode!r}"
+        return {"id": self.id, "name": self.name, "productId": self.productId, "price": self.price, "rfid":self.rfid, "barcode": self.barcode}
 
 
 class Shopping(Base):
