@@ -1,72 +1,26 @@
-{
+[
     {
-        "kioskId" : 1,
         "url" : "http://i8e101.p.ssafy.io:7777",
-        "branchId" : 1,
-        "" : "",
-        "" : ""
+        "branchId" : 1
     },
     {
-        "kioskId" : 2,
         "url" : "http://i8e101.p.ssafy.io:7788",
-        "branchId" : 1,
-        "" : "",
-        "" : ""
+        "branchId" : 1
     },
     {
-        "kioskId" : 3,
         "url" : "http://i8e101.p.ssafy.io:9911",
-        "branchId" : 1,
-        "" : "",
-        "" : ""
+        "branchId" : 1
     },
     {
-        "kioskId" : 4,
         "url" : "http://i7e101.p.ssafy.io:7777",
-        "branchId" : 2,
-        "" : "",
-        "" : ""
+        "branchId" : 2
     },
     {
-        "kioskId" : 5,
         "url" : "http://i7e101.p.ssafy.io:7887",
-        "branchId" : 2,
-        "" : "",
-        "" : ""
+        "branchId" : 2
     },
     {
-        "kioskId" : 6,
         "url" : "http://i7e101.p.ssafy.io:9977",
-        "branchId" : 2,
-        "" : "",
-        "" : ""
-    },
-    {
-        "kioskId" : "",
-        "url" : "",
-        "branchId" : "",
-        "" : "",
-        "" : ""
-    },
-    {
-        "kioskId" : "",
-        "url" : "",
-        "branchId" : "",
-        "" : "",
-        "" : ""
-    },
-    {
-        "kioskId" : "",
-        "url" : "",
-        "branchId" : "",
-        "" : "",
-        "" : ""
-    },
-    {
-        "kioskId" : "",
-        "url" : "",
-        "branchId" : "",
-        "" : "",
-        "" : ""
+        "branchId" : 2
     }
-}
+]

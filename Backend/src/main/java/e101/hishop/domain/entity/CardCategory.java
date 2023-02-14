@@ -17,7 +17,8 @@ import java.util.List;
 public class CardCategory {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "entity_card_category")
+    @TableGenerator(name = "entity_card_category", initialValue=0, allocationSize=1)
     @Column(name = "card_category_id")
     private Long id;
 

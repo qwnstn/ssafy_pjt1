@@ -17,7 +17,8 @@ import java.util.List;
 public class Kiosk {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "entity_kiosk")
+    @TableGenerator(name = "entity_kiosk", initialValue=0, allocationSize=1)
     @Column(name = "kiosk_id")
     private Long id;
 

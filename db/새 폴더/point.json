@@ -1,0 +1,86 @@
+[
+    {
+        "category" : "적립",
+        "description" : "구매 적립",
+        "endDate" : "2024-01-01 23:59",
+        "point" : 4000,
+        "userid" : 1
+    },
+    {
+        "category" : "소비",
+        "description" : "사용",
+        "endDate" : "null",
+        "point" : "-2000",
+        "userid" : 1
+    },
+    {
+        "category" : "적립",
+        "description" : "이벤트 적립",
+        "endDate" : "2024-01-01 23:59",
+        "point" : 500,
+        "userid" : 1
+    },
+    {
+        "category" : "적립",
+        "description" : "구매 적립",
+        "endDate" : "2024-01-01 23:59",
+        "point" : 4000,
+        "userid" : 3
+    },
+    {
+        "category" : "소비",
+        "description" : "사용",
+        "endDate" : "null",
+        "point" : "-2000",
+        "userid" : 3
+    },
+    {
+        "category" : "적립",
+        "description" : "이벤트 적립",
+        "endDate" : "2024-01-01 23:59",
+        "point" : 500,
+        "userid" : 3
+    },
+    {
+        "category" : "적립",
+        "description" : "구매 적립",
+        "endDate" : "2024-01-01 23:59",
+        "point" : 4000,
+        "userid" : 5
+    },
+    {
+        "category" : "소비",
+        "description" : "사용",
+        "endDate" : "null",
+        "point" : "-2000",
+        "userid" : 5
+    },
+    {
+        "category" : "적립",
+        "description" : "이벤트 적립",
+        "endDate" : "2024-01-01 23:59",
+        "point" : 500,
+        "userid" : 5
+    },
+    {
+        "category" : "적립",
+        "description" : "구매 적립",
+        "endDate" : "2024-01-01 23:59",
+        "point" : 4000,
+        "userid" : 7
+    },
+    {
+        "category" : "소비",
+        "description" : "사용",
+        "endDate" : "null",
+        "point" : "-2000",
+        "userid" : 7
+    },
+    {
+        "category" : "적립",
+        "description" : "이벤트 적립",
+        "endDate" : "2024-01-01 23:59",
+        "point" : 500,
+        "userid" : 7
+    }
+]

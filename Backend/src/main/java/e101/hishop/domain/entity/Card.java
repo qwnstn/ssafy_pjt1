@@ -17,7 +17,8 @@ public class Card {
     //유효기간
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "entity_card")
+    @TableGenerator(name = "entity_card", initialValue=0, allocationSize=1)
     @Column(name = "card_id")
     private Long id;
 

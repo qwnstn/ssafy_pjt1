@@ -55,6 +55,8 @@ dependencies {
         exclude group: "org.hamcrest", module: "hamcrest-core"
     }
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
+
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
 }
 
 tasks.named('test') {

@@ -1,0 +1,212 @@
+[
+    {
+        "cardNo" : 2414205801195050,
+        "cvc" : 386,
+        "validDate" : 626,
+        "cardCategoryId" : 5,
+        "userId" : 1
+    },
+    {
+        "cardNo" : 7993374958738410,
+        "cvc" : 824,
+        "validDate" : 523,
+        "cardCategoryId" : 3,
+        "userId" : 2
+    },
+    {
+        "cardNo" : 1410581807633662,
+        "cvc" : 668,
+        "validDate" : 923,
+        "cardCategoryId" : 1,
+        "userId" : 3
+    },
+    {
+        "cardNo" : 2380070209663210,
+        "cvc" : 888,
+        "validDate" : 1223,
+        "cardCategoryId" : 3,
+        "userId" : 4
+    },
+    {
+        "cardNo" : 3451768289942445,
+        "cvc" : 288,
+        "validDate" : 624,
+        "cardCategoryId" : 4,
+        "userId" : 5
+    },
+    {
+        "cardNo" : 8311070603638130,
+        "cvc" : 566,
+        "validDate" : 227,
+        "cardCategoryId" : 1,
+        "userId" : 6
+    },
+    {
+        "cardNo" : 6375629972214559,
+        "cvc" : 999,
+        "validDate" : 425,
+        "cardCategoryId" : 1,
+        "userId" : 1
+    },
+    {
+        "cardNo" : 9479883537900938,
+        "cvc" : 839,
+        "validDate" : 1024,
+        "cardCategoryId" : 3,
+        "userId" : 2
+    },
+    {
+        "cardNo" : 6329532524589881,
+        "cvc" : 828,
+        "validDate" : 423,
+        "cardCategoryId" : 3,
+        "userId" : 3
+    },
+    {
+        "cardNo" : 7626363565897910,
+        "cvc" : 668,
+        "validDate" : 1025,
+        "cardCategoryId" : 4,
+        "userId" : 4
+    },
+    {
+        "cardNo" : 9798428635617156,
+        "cvc" : 686,
+        "validDate" : 523,
+        "cardCategoryId" : 2,
+        "userId" : 5
+    },
+    {
+        "cardNo" : 0590105972562884,
+        "cvc" : 584,
+        "validDate" : 126,
+        "cardCategoryId" : 4,
+        "userId" : 6
+    },
+    {
+        "cardNo" : 4888845947578930,
+        "cvc" : 27,
+        "validDate" : 1024,
+        "cardCategoryId" : 2,
+        "userId" : 1
+    },
+    {
+        "cardNo" : 1049467159006130,
+        "cvc" : 422,
+        "validDate" : 424,
+        "cardCategoryId" : 4,
+        "userId" : 2
+    },
+    {
+        "cardNo" : 4958133643455160,
+        "cvc" : 216,
+        "validDate" : 127,
+        "cardCategoryId" : 1,
+        "userId" : 3
+    },
+    {
+        "cardNo" : 9836736660568950,
+        "cvc" : 728,
+        "validDate" : 227,
+        "cardCategoryId" : 3,
+        "userId" : 4
+    },
+    {
+        "cardNo" : 1499993178709470,
+        "cvc" : 182,
+        "validDate" : 826,
+        "cardCategoryId" : 4,
+        "userId" : 5
+    },
+    {
+        "cardNo" : 4813290523323360,
+        "cvc" : 385,
+        "validDate" : 827,
+        "cardCategoryId" : 3,
+        "userId" : 6
+    },
+    {
+        "cardNo" : 2701570121933820,
+        "cvc" : 276,
+        "validDate" : 123,
+        "cardCategoryId" : 5,
+        "userId" : 1
+    },
+    {
+        "cardNo" : 8725084086611470,
+        "cvc" : 537,
+        "validDate" : 324,
+        "cardCategoryId" : 4,
+        "userId" : 2
+    },
+    {
+        "cardNo" : 0038515647626122,
+        "cvc" : 525,
+        "validDate" : 227,
+        "cardCategoryId" : 3,
+        "userId" : 3
+    },
+    {
+        "cardNo" : 1511197271959630,
+        "cvc" : 776,
+        "validDate" : 223,
+        "cardCategoryId" : 1,
+        "userId" : 4
+    },
+    {
+        "cardNo" : 3316549313500083,
+        "cvc" : 984,
+        "validDate" : 625,
+        "cardCategoryId" : 3,
+        "userId" : 5
+    },
+    {
+        "cardNo" : 1003056423555720,
+        "cvc" : 508,
+        "validDate" : 725,
+        "cardCategoryId" : 2,
+        "userId" : 6
+    },
+    {
+        "cardNo" : 5331858921535228,
+        "cvc" : 247,
+        "validDate" : 427,
+        "cardCategoryId" : 4,
+        "userId" : 1
+    },
+    {
+        "cardNo" : 8474441244856597,
+        "cvc" : 158,
+        "validDate" : 425,
+        "cardCategoryId" : 5,
+        "userId" : 2
+    },
+    {
+        "cardNo" : 2790445180044990,
+        "cvc" : 427,
+        "validDate" : 1225,
+        "cardCategoryId" : 3,
+        "userId" : 3
+    },
+    {
+        "cardNo" : 5514519860178236,
+        "cvc" : 276,
+        "validDate" : 427,
+        "cardCategoryId" : 4,
+        "userId" : 4
+    },
+    {
+        "cardNo" : 5735932797912370,
+        "cvc" : 495,
+        "validDate" : 923,
+        "cardCategoryId" : 5,
+        "userId" : 5
+    },
+    {
+        "cardNo" : 4123381304269930,
+        "cvc" : 185,
+        "validDate" : 1127,
+        "cardCategoryId" : 5,
+        "userId" : 6
+    }
+]

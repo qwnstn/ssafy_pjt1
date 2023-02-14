@@ -1,92 +1,77 @@
-{
+[
     {
-        "id" : 1,
         "classification" : "카드",
         "paymentName" : "하나",
         "img" : "hana.jpg"
     },
     {
-        "id" : 2,
         "classification" : "카드",
         "paymentName" : "현대",
         "img" : "hyundae.jpg"
     },
     {
-        "id" : 3,
         "classification" : "카드",
         "paymentName" : "IBK",
         "img" : "ibk..jpg"
     },
     {
-        "id" : 4,
         "classification" : "카드",
         "paymentName" : "신한",
         "img" : "sinhan.jpg"
     },
     {
-        "id" : 5,
         "classification" : "카드",
         "paymentName" : "삼성",
         "img" : "samsung.jpg"
     },
     {
-        "id" : 6,
         "classification" : "카드",
         "paymentName" : "우리",
         "img" : "uri.jpg"
     },
     {
-        "id" : 7,
         "classification" : "카드",
         "paymentName" : "BC",
         "img" : "bc.jpg"
     },
     {
-        "id" : 8,
         "classification" : "카드",
         "paymentName" : "KB",
         "img" : "kb.jpg"
     },
     {
-        "id" : 9,
         "classification" : "카드",
         "paymentName" : "시티",
         "img" : "city.jpg"
     },
     {
-        "id" : 10,
         "classification" : "카드",
         "paymentName" : "K-Bank",
         "img" : "kbank.jpg"
     },
     {
-        "id" : 11,
         "classification" : "카드",
         "paymentName" : "토스",
         "img" : "toss.jpg"
     },
     {
-        "id" : 12,
         "classification" : "카드",
         "paymentName" : "NH농협",
         "img" : "nh.jpg"
     },
     {
-        "id" : 13,
         "classification" : "카드",
         "paymentName" : "기업",
         "img" : "kiup.jpg"
     },
     {
-        "id" : 14,
         "classification" : "카드",
         "paymentName" : "롯데",
         "img" : "lotte.jpg"
     },
     {
-        "id" : 15,
         "classification" : "카드",
         "paymentName" : "수협",
         "img" : "soohyup.jpg"
     }
-}
+]

@@ -20,7 +20,8 @@ import java.util.List;
 public class Manufacturer {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "entity_manufacturer")
+    @TableGenerator(name = "entity_manufacturer", initialValue=0, allocationSize=1)
     @Column(name = "manu_id")
     private Long id;
 

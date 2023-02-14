@@ -1,4 +1,5 @@
 package e101.hishop.domain.dto.request;
+import e101.hishop.global.enumeration.Role;
 
 
 import e101.hishop.global.enumeration.Gender;
@@ -31,6 +32,12 @@ public class UserInfoReqDto {
 
     private String email;
 
+    private String payPassword;
+
     private Boolean adSelect;
+
+    private Long defaultCardId;
+
+    private Role role;
 
 }

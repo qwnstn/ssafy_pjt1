@@ -1,0 +1,82 @@
+[
+    {
+        "barcode" : "",
+        "image" : "poker.jpg",
+        "name" : "바퀴벌레 포커",
+        "price" : 14900,
+        "rfid" : "",
+        "isAdult" : "FALSE",
+        "manuId" : "null",
+        "categoryId" : 3
+    },
+    {
+        "barcode" : "",
+        "image" : "tisue.jpg",
+        "name" : "살균티슈",
+        "price" : 8500,
+        "rfid" : "",
+        "isAdult" : "FALSE",
+        "manuId" : "null",
+        "categoryId" : 9
+    },
+    {
+        "barcode" : "",
+        "image" : "mouse.jpg",
+        "name" : "단단한 파이썬",
+        "price" : 130000,
+        "rfid" : "",
+        "isAdult" : "FALSE",
+        "manuId" : 4,
+        "categoryId" : 2
+    },
+    {
+        "barcode" : "",
+        "image" : "drink.jpg",
+        "name" : "Crystal Light",
+        "price" : 1500,
+        "rfid" : "",
+        "isAdult" : "FALSE",
+        "manuId" : 1,
+        "categoryId" : 4
+    },
+    {
+        "barcode" : "",
+        "image" : "dambae.jpg",
+        "name" : "담배",
+        "price" : 4500,
+        "rfid" : "",
+        "isAdult" : "TRUE",
+        "manuId" : "null",
+        "categoryId" : 5
+    },
+    {
+        "barcode" : "",
+        "image" : "tumbler.jpg",
+        "name" : "텀블러",
+        "price" : 19900,
+        "rfid" : "",
+        "isAdult" : "FALSE",
+        "manuId" : 4,
+        "categoryId" : 10
+    },
+    {
+        "barcode" : "",
+        "image" : "board.jpg",
+        "name" : "보드마카",
+        "price" : 2000,
+        "rfid" : "",
+        "isAdult" : "FALSE",
+        "manuId" : 3,
+        "categoryId" : 8
+    },
+    {
+        "barcode" : "",
+        "image" : "drink.jpg",
+        "name" : "할인쿠폰",
+        "price" : "-500",
+        "rfid" : "",
+        "isAdult" : "FALSE",
+        "manuId" : "null",
+        "categoryId" : "null"
+    }
+]
