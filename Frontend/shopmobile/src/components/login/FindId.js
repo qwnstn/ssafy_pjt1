@@ -16,6 +16,7 @@ import {
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import styled from "styled-components";
 import HOST from "../../Host";
+import { useNavigate } from "react-router-dom";
 
 const FormHelperTexts = styled(FormHelperText)`
   width: 100%;
@@ -70,6 +71,7 @@ const FindId = () => {
   const [phoneError, setPhoneError] = useState("");
   const [birthError, setBirthError] = useState("");
   const [findIdError, setFindIdError] = useState("");
+  const navigate = useNavigate();
 
   const API_URI = `${HOST}/newPassword`;
   const onhandleGet = async (data) => {
@@ -83,8 +85,8 @@ const FindId = () => {
       .post(API_URI, jsonData)
       .then(function (response) {
         console.log(response, "성공");
-        setFindIdError(`고객님의 아이디는 ${response.data.loginId}입니다 
-        이메일로 임시비밀번호 전송되었습니다.`);
+        alert(`고객님의 아이디는 ${response.data.loginId}입니다 회원가입시 등록한 이메일로 임시비밀번호가 전송되었습니다.`);
+        navigate("/app/login");
       })
       .catch(function (err) {
         console.log(err);
