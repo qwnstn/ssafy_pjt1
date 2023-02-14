@@ -174,7 +174,7 @@ export default function ItemList() {
                 </TableBody>
               </Table>
             </TableContainer>
-            <Box sx={{ borderTop: 1 }}>
+            {/* <Box sx={{ borderTop: 1 }}>
               <Typography
                 sx={{
                   fontSize: 33,
@@ -185,7 +185,7 @@ export default function ItemList() {
               >
                 다음 상품은 바코드로 결제해주세요
               </Typography>
-            </Box>
+            </Box> */}
             <CardActions sx={{ borderTop: 1 }}>
               <Typography sx={{ fontSize: 35, fontWeight: "bold", margin: 1 }}>
                 총 결제금액

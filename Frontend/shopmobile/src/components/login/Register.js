@@ -123,6 +123,7 @@ const Register = () => {
       .post(API_URI, jsonData)
       .then(function (response) {
         console.log(response, "성공");
+        alert("회원가입 성공");
         movePage("/app/login");
       })
       .catch(function (err) {

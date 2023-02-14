@@ -71,7 +71,7 @@ const FindId = () => {
   const [birthError, setBirthError] = useState("");
   const [findIdError, setFindIdError] = useState("");
 
-  const API_URI = `${HOST}/user/newpassword`;
+  const API_URI = `${HOST}/newPassword`;
   const onhandleGet = async (data) => {
     const jsonData = {
       name: data.name,
@@ -83,6 +83,8 @@ const FindId = () => {
       .post(API_URI, jsonData)
       .then(function (response) {
         console.log(response, "성공");
+        setFindIdError(`고객님의 아이디는 ${response.data.loginId}입니다 
+        이메일로 임시비밀번호 전송되었습니다.`);
       })
       .catch(function (err) {
         console.log(err);
