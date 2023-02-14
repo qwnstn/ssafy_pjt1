@@ -57,7 +57,7 @@ public class Product {
         rfid = StringUtils.hasText(dto.getRfid()) ? dto.getRfid() : rfid;
         barcode = StringUtils.hasText(dto.getBarcode()) ? dto.getBarcode() : barcode;
         image = StringUtils.hasText(dto.getImage()) ? dto.getImage() : image;
-        isAdult = isAdult;
+        isAdult = dto.isAdult();
         return this;
     }
 

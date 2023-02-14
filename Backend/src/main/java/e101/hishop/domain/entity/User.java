@@ -82,7 +82,7 @@ public class User {
         password = StringUtils.hasText(dto.getPassword()) ? AppConfig.testPasswordEncoder().encode(dto.getPassword()) : password;
         phone = StringUtils.hasText(dto.getPhone()) ? dto.getPhone() : phone;
         email = StringUtils.hasText(dto.getEmail()) ? dto.getEmail() : email;
-        adSelect = dto.getAdSelect() != null ? dto.getAdSelect() : adSelect;
+        adSelect = dto.getAdSelect();
         return this;
     }
 
