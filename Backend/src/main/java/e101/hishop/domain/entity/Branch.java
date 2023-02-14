@@ -20,7 +20,8 @@ import java.util.List;
 public class Branch {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "entity_branch")
+    @TableGenerator(name = "entity_branch", initialValue=0, allocationSize=1)
     @Column(name = "branch_id")
     private Long id;
 

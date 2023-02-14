@@ -1,0 +1,2 @@
+-- insert into users values (1, false, "2023-01-23", 2, "ssafy@ssafy.com", "MALE", "user1234", "ssafy", "user1234!", "0894", "010-1234-1234", "ROLE_USER");
+INSERT INTO branch (BRANCH_ID, BRANCH_NAME, REGION) VALUES (1, "Test", "test");

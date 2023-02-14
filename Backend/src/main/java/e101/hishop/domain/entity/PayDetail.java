@@ -11,7 +11,8 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class PayDetail {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "entity_pay_detail")
+    @TableGenerator(name = "entity_pay_detail", initialValue=0, allocationSize=1)
     @Column(name = "pay_detail_id")
     private Long id;
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)

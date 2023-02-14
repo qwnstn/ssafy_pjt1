@@ -18,7 +18,8 @@ import javax.validation.constraints.NotBlank;
 public class Staff {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "entity_staff")
+    @TableGenerator(name = "entity_staff", initialValue=0, allocationSize=1)
     @Column(name = "staff_id")
     private Long id;
 

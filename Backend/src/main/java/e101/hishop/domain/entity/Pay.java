@@ -21,7 +21,8 @@ import java.util.List;
 public class Pay {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "entity_pay")
+    @TableGenerator(name = "entity_pay", initialValue=0, allocationSize=1)
     @Column(name = "pay_id")
     private Long id;
 

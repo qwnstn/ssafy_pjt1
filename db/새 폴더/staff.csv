@@ -1,11 +1,4 @@
-staffId,name,part,position,staffLoginId,branchId
-1,이름,관리,대리,user1234,1
-2,서컨턴,지점장,지점장,consult_admin,1
-3,김코치,캐셔,직원,coach_admin,1
-,,,,,
-,,,,,
-,,,,,
-,,,,,
-,,,,,
-,,,,,
-,,,,,
+name,part,position,staffLoginId,branchId
+이름,관리,대리,user1234,1
+서컨턴,지점장,지점장,consult_admin,1
+김코치,캐셔,직원,coach_admin,1

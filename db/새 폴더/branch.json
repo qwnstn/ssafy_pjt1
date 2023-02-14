@@ -1,55 +1,22 @@
-{
+[
     {
-        "branchId" : 1,
-        "region" : "부산광역시 강서구 송정동
-녹산산업중로 333",
+        "region" : "부산광역시 강서구 송정동 녹산산업중로 333",
         "branchName" : "부산점"
     },
     {
-        "branchId" : 2,
-        "region" : "대전광역시 유성구 동서대로
-98-39",
+        "region" : "대전광역시 유성구 동서대로 98-39",
         "branchName" : "대전점"
     },
     {
-        "branchId" : 3,
-        "region" : "광주광역시 광산구 하남산단
-6번로 107",
+        "region" : "광주광역시 광산구 하남산단 6번로 107",
         "branchName" : "광주점"
     },
     {
-        "branchId" : 4,
         "region" : "서울시 강남구 테헤란로 212",
         "branchName" : "서울점"
     },
     {
-        "branchId" : 5,
         "region" : "경북 구미시 3공단 3로 302",
         "branchName" : "구미점"
-    },
-    {
-        "branchId" : "",
-        "region" : "",
-        "branchName" : ""
-    },
-    {
-        "branchId" : "",
-        "region" : "",
-        "branchName" : ""
-    },
-    {
-        "branchId" : "",
-        "region" : "",
-        "branchName" : ""
-    },
-    {
-        "branchId" : "",
-        "region" : "",
-        "branchName" : ""
-    },
-    {
-        "branchId" : "",
-        "region" : "",
-        "branchName" : ""
     }
-}
+]

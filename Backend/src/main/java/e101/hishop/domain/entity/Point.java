@@ -18,7 +18,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Point {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "entity_point")
+    @TableGenerator(name = "entity_point", initialValue=0, allocationSize=1)
     @Column(name = "point_id")
     private Long id;
 

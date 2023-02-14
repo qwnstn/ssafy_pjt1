@@ -20,7 +20,8 @@ import java.util.List;
 public class ProductCategory {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "entity_product_category")
+    @TableGenerator(name = "entity_product_category", initialValue=0, allocationSize=1)
     @Column(name = "category_id")
     private Long id;
 
