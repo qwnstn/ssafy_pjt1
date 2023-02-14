@@ -5,22 +5,21 @@ from db.models.model import Product_Kiosk, Shopping
 
 
 def select_products_with_rfid(rfids: list, db: Session):
+    rlt = list()
     # rlt = db.execute(select(Product_Kiosk).where(Product_Kiosk.rfid.in_(rfids)))
     # rlt = db.query(Product_Kiosk).filter(Product_Kiosk.rfid.in_(rfids)).all()
-    stmt = select(Product_Kiosk).where(Product_Kiosk.rfid.in_(rfids))
-    rlt = list()
     # q = db.query(Product_Kiosk).filter(Product_Kiosk.rfid==rid).first()
     # q = db.scalars(select(Product_Kiosk).where(Product_Kiosk.rfid.in_(rfids)))
-    # for rid in rfids:
-    #     db.query(Product_Kiosk).get({"rfid": rid})
-    #     q = db.query(Product_Kiosk).filter_by(rfid=rid).all()
-    #     print(rid, q, db.query(Product_Kiosk).get({"rfid": rid}))
-    #     rlt.append(q) if q else None
+    for rid in rfids:
+        q = db.query(Product_Kiosk).filter_by(rfid=rid)
+        print("db.query filter_by[str]", rid, q)
+    stmt = select(Product_Kiosk).where(Product_Kiosk.rfid.in_(rfids))
     for prd in db.scalars(stmt):
-        print(prd)
-    for i in range(3):
-        q = db.query(Product_Kiosk).filter_by(id=i).all()
-        rlt += q
+        print("db.scalars", prd)
+    for prd in db.query(Product_Kiosk).filter(Product_Kiosk.rfid.in_(rfids)).all():
+        print("db.query filter[list]", prd)
+    rlt = db.query(Product_Kiosk).filter(Product_Kiosk.id.in_([1, 2, 3])).all()
+
     return rlt
 
 
