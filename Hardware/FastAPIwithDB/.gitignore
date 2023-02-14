@@ -1,6 +1,6 @@
 APIvenv/
 __pycache__/
 *.pyc
-*.cpython-311
+*.cpython-311.pyc
 *.sqlite
 test.py
