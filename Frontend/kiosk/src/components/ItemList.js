@@ -79,6 +79,11 @@ export default function ItemList() {
   const user = sessionStorage.getItem("user");
   const [rows, setRows] = useState([]);
 
+  const ReadRFID = () => {
+    sessionStorage.removeItem("data");
+    navigate("/kiosk/rfidread");
+  }
+
   // 품명, 단가, 수량을 받고, 총액은 계산해서 넣기
   useEffect(() => {
     const data = sessionStorage.getItem("data");
@@ -213,7 +218,7 @@ export default function ItemList() {
           <Button
             variant="outlined"
             sx={{ fontSize: 30, margin: 1 }}
-            onClick={() => navigate("/kiosk/rfidread")}
+            onClick={ReadRFID}
           >
             물품 다시찍기
           </Button>
