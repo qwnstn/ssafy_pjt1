@@ -83,9 +83,9 @@ export default function KioskMain() {
               <Card sx={{ border: 1, padding: 1, mt: 3, borderRadius:3 }}>
                 <CardMedia
                   component="img"
-                  alt="kioskMain"
+                  alt="kioskmain"
                   height="600"
-                  image="/kiosk/images/kioskMain.png"
+                  image="/kiosk/images/kioskmain.png"
                 />
               </Card>
             </Grid>

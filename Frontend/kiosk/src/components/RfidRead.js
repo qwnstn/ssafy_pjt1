@@ -6,16 +6,53 @@ import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import LinearProgress from "@mui/material/LinearProgress";
 import { useNavigate } from "react-router-dom";
-import Nav from "./Nav";
 import axios from "axios";
 
 const theme = createTheme();
+
+const useWebSocket = (url) => {
+  const [messages, setMessages] = useState([]);
+
+  useEffect(() => {
+    const socket = new WebSocket(url);
+
+    socket.onopen = () => {
+      console.log("WebSocket connection opened:", url);
+    };
+
+    socket.onmessage = (event) => {
+      if (event.data instanceof Blob) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          setMessages((prevMessages) => [...prevMessages, reader.result]);
+        };
+        reader.readAsText(event.data);
+      } else {
+        setMessages((prevMessages) => [...prevMessages, event.data]);
+      }
+    };
+
+    socket.onerror = (error) => {
+      console.error(`WebSocket error: ${error}`);
+    };
+
+    socket.onclose = () => {
+      console.log("WebSocket connection closed:", url);
+    };
+
+    return () => {
+      socket.close();
+    };
+  }, [url]);
+
+  return messages;
+};
 
 export default function ResultPayment() {
   const navigate = useNavigate();
   const [redirect, setRedirect] = useState(false);
   const [countdown, setCountdown] = useState(50);
-  const itemList = Nav();
+  const itemList = useWebSocket("ws://localhost:3333");
 
   useEffect(() => {
     if (countdown > 0) {
@@ -51,7 +88,7 @@ export default function ResultPayment() {
           console.log("RFID 리더 요청 성공");
         })
         .catch((error) => {
-          alert("RFID 요청에러발생")
+          console.log("RFID 요청에러발생");
           // sessionStorage.removeItem("data");
           // navigate("/kiosk");
           // window.location.reload();

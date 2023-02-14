@@ -82,7 +82,7 @@ export default function ItemList() {
   const ReadRFID = () => {
     sessionStorage.removeItem("data");
     navigate("/kiosk/rfidread");
-  }
+  };
 
   // 품명, 단가, 수량을 받고, 총액은 계산해서 넣기
   useEffect(() => {
