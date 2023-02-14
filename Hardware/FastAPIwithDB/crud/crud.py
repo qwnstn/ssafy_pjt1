@@ -1,30 +1,34 @@
-from sqlalchemy import select
-from sqlalchemy.orm import Session
+import sqlite3
 
 from db.models.model import Product_Kiosk, Shopping
+from sqlalchemy.orm import Session
 
 
 def select_products_with_rfid(rfids: list, db: Session):
     rlt = list()
-    # rlt = db.execute(select(Product_Kiosk).where(Product_Kiosk.rfid.in_(rfids)))
-    # rlt = db.query(Product_Kiosk).filter(Product_Kiosk.rfid.in_(rfids)).all()
-    # q = db.query(Product_Kiosk).filter(Product_Kiosk.rfid==rid).first()
-    # q = db.scalars(select(Product_Kiosk).where(Product_Kiosk.rfid.in_(rfids)))
-    for rid in rfids:
-        print("db.query filter_by[str]", rid)
-        q = db.query(Product_Kiosk).filter_by(rfid=rid).all()
-    stmt = select(Product_Kiosk).where(Product_Kiosk.rfid.in_(rfids))
-    scl = db.scalars(stmt)
-    print("db scalar", scl, type(scl))
-    for prd in scl:
-        print("db.scalars", prd)
-    for prd in db.query(Product_Kiosk).filter(Product_Kiosk.rfid.in_(rfids)).all():
-        print("db.query filter[list]", prd)
-    for i in range(1, 4):
-        val = db.query(Product_Kiosk).get(i)
-        print(type(val), val)
-        rlt.append(val)
 
+    # SQLite DB 연결
+    conn = sqlite3.connect("db.sqlite")
+    
+    # Connection 으로부터 Cursor 생성
+    cur = conn.cursor()
+
+    # SQL 쿼리 실행
+    cur.execute("select * from Product_Kiosk")
+    
+    # 데이타 Fetch
+    rows = cur.fetchall()
+    for row in rows:
+        product = {
+            "productId": row[1],
+            "name": row[2],
+            "price": row[3],
+            "rfid": row[4],
+            "barcode": row[5],
+            "img": row[6]
+        }
+        rlt.append(product)
+        print(row)
     return rlt
 
 
