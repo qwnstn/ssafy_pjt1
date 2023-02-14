@@ -55,6 +55,7 @@ logging:
   level:
     org.hibernate.sql: debug
     org.hibernate.type: trace
+    org.springframework.batch: debug
     com.zaxxer.hikari.HikariConfig: DEBUG
     com.zaxxer.hikari: TRACE
 #    org.springframework : debug
