@@ -48,7 +48,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         //Security User Class
         User user = (User)authentication.getPrincipal();
         //TODO 추후 key 따로저장
-        Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
+        Algorithm algorithm = Algorithm.HMAC256("e101ssafy!@".getBytes());
         // repository에서 id검색
         e101.hishop.domain.entity.User jpaUser = userJPARepository.findByLoginId(user.getUsername())
                 .orElseThrow(() -> new CommonException(2, "User객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));

@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '2.7.7'
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+    id "org.sonarqube" version "3.0"
 }
 
 group = 'e101'
@@ -16,6 +17,15 @@ configurations {
 
 repositories {
     mavenCentral()
+}
+
+sonarqube {
+    properties {
+        property "sonar.projectKey", "goat"
+        property "sonar.organization", "goat"
+        property "sonar.host.url", "https://sonarqube.ssafy.com"
+        property "sonar.login", "7ee1b9772fe0ebe9ac2e4362782b981c2996c6e3"
+    }
 }
 
 dependencies {
