@@ -60,6 +60,7 @@ const handleLogout = () => {
   localStorage.removeItem("accesstoken");
   window.location.reload();
 };
+
 const decodedPayload = getPayloadFromToken(accesstoken);
 const obj = JSON.stringify(decodedPayload, ["roles"], 1);
 let loginCheck = false;
