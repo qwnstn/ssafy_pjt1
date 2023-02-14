@@ -11,8 +11,6 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Nav from "./Nav";
 
-// 웹소켓의 통신이 오면 rfid read 페이지로 넘어간뒤,
-
 export default function KioskMain() {
   const navigate = useNavigate();
   const [kioskId, setKioskId] = useState();
@@ -85,7 +83,7 @@ export default function KioskMain() {
               <Card sx={{ border: 1, padding: 1, mt: 3, borderRadius:3 }}>
                 <CardMedia
                   component="img"
-                  alt="howtowuse"
+                  alt="kioskMain"
                   height="600"
                   image="/kiosk/images/kioskMain.png"
                 />
