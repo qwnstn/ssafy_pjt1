@@ -11,7 +11,7 @@ from db.connection import get_db
 from functions.barcode_test import SessionStorage
 from functions.serial_test import RFID_Serial_Trans
 from routes.models import BarcodeList, CardId, CardList, RFIDList
-from routes.websocket import send
+from routes.websocket import sendMsg
 
 sessionStore = SessionStorage()
 
@@ -94,7 +94,7 @@ def RFID_리딩(request: Request, db: Session = Depends(get_db)):
     products = select_products_with_rfid(rfid_uids, db)
     global productInfo
     productInfo = products
-    asyncio.run(send(json.dumps({
+    asyncio.run(sendMsg(json.dumps({
         "userId": cardInfo["userId"],
         "defaultCardId": cardInfo["defaultCardId"],
         "cardList": cardInfo["cardList"],

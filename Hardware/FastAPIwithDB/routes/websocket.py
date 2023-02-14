@@ -5,7 +5,7 @@ import websockets
 from core.config import WEBSOCKET_URL
 
 
-async def send(message: str):
+async def sendMsg(message: str):
     async with websockets.connect(WEBSOCKET_URL) as websocket:
         await websocket.send(message)
     await websocket.close()
