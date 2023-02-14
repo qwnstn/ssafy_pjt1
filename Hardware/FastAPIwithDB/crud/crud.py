@@ -11,8 +11,10 @@ def select_products_with_rfid(rfids: list, db: Session):
     # q = db.query(Product_Kiosk).filter(Product_Kiosk.rfid==rid).first()
     # q = db.scalars(select(Product_Kiosk).where(Product_Kiosk.rfid.in_(rfids)))
     for rid in rfids:
-        q = db.execute(db.query(Product_Kiosk).filter_by(rfid=rid)).all()
-        print("db.query filter_by[str]", rid, q)
+        print("db.query filter_by[str]", rid)
+        q = db.query(Product_Kiosk).filter_by(rfid=rid).all()
+        print(q)
+        print(q.rfid)
     stmt = select(Product_Kiosk).where(Product_Kiosk.rfid.in_(rfids))
     for prd in db.scalars(stmt):
         print("db.scalars", prd)
