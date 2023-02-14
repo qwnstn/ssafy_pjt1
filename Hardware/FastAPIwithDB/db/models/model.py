@@ -1,5 +1,5 @@
 from typing import Optional
-
+import json
 from sqlalchemy import DATE, Column, ForeignKey, Integer, String
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
@@ -20,7 +20,7 @@ class Product_Kiosk(Base):
     shopping = relationship("Shopping")
 
     def __repr__(self) -> str:
-        return {"id": self.id, "name": self.name, "productId": self.productId, "price": self.price, "rfid":self.rfid, "barcode": self.barcode}
+        return json.dumps({"id": self.id, "name": self.name, "productId": self.productId, "price": self.price, "rfid":self.rfid, "barcode": self.barcode})
 
 
 class Shopping(Base):
