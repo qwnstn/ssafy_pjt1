@@ -9,13 +9,50 @@ import { Grid } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import Nav from "./Nav";
+
+const useWebSocket = (url) => {
+  const [messages, setMessages] = useState([]);
+
+  useEffect(() => {
+    const socket = new WebSocket(url);
+
+    socket.onopen = () => {
+      console.log("WebSocket connection opened:", url);
+    };
+
+    socket.onmessage = (event) => {
+      if (event.data instanceof Blob) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          setMessages((prevMessages) => [...prevMessages, reader.result]);
+        };
+        reader.readAsText(event.data);
+      } else {
+        setMessages((prevMessages) => [...prevMessages, event.data]);
+      }
+    };
+
+    socket.onerror = (error) => {
+      console.error(`WebSocket error: ${error}`);
+    };
+
+    socket.onclose = () => {
+      console.log("WebSocket connection closed:", url);
+    };
+
+    return () => {
+      socket.close();
+    };
+  }, [url]);
+
+  return messages;
+};
 
 export default function KioskMain() {
   const navigate = useNavigate();
   const [kioskId, setKioskId] = useState();
   const [value, setValue] = useState("");
-  const messages = Nav();
+  const messages = useWebSocket("ws://localhost:3333");
 
   function QRMake(kioskId) {
     const newTest = {
@@ -29,7 +66,7 @@ export default function KioskMain() {
   // 키오스크 아이디는 Python과 통신으로 받아옴
   useEffect(() => {
     (async () => {
-      console.log("통신")
+      console.log("통신");
       const { data } = await axios.get("http://localhost:8888/api/kiosk");
       const kiosk = data["kioskId"];
       console.log(kiosk);
@@ -80,7 +117,7 @@ export default function KioskMain() {
           >
             <Grid item xs={10} sx={{ mt: 5 }}>
               <CssBaseline />
-              <Card sx={{ border: 1, padding: 1, mt: 3, borderRadius:3 }}>
+              <Card sx={{ border: 1, padding: 1, mt: 3, borderRadius: 3 }}>
                 <CardMedia
                   component="img"
                   alt="kioskmain"
