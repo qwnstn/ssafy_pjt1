@@ -5,7 +5,6 @@ import serial
 
 from core.config import SERIAL_PORT
 
-
 class RFID_Serial_Trans:
     PORT = SERIAL_PORT                               # 포트 번호
     baud = 9600                                 # 보드레이트
@@ -26,12 +25,15 @@ class RFID_Serial_Trans:
         # data = 0x3304B299 # Reading Nonstop
         while True:
             if self.tag_uid and max(list(self.tag_uid.values())) > 10:
-                self.read_flag = False
                 result = list()
-                for key, value in self.tag_uid:
+                for key, value in self.tag_uid.items():
                     if value > 3:
-                        result.append(key)
+                        result.append(str(key).upper())
+                self.read_flag = False
+
                 return result
+            else:
+                time.sleep(0.2)
             # data = input().strip()
             # if data == "serial exit": # 종료 명령어
             #     break
@@ -60,7 +62,7 @@ class RFID_Serial_Trans:
                             data = data[x:]
                             continue
                         else:
-                            print(data.decode())
+                            # print(data.decode())
                             break
                     if received_command[1] == 0x3B:             # RFID UID 1개 읽기
                         for byte in data_now[3:-1]:
@@ -85,7 +87,7 @@ class RFID_Serial_Trans:
                         uid = data_now[5:13]
                         bd = data_now[13:-1]
                     else:
-                        print(data_now.decode(), end=" ")
+                        # print(data_now.decode(), end=" ")
                         print("Unknown Request")
                         continue
                     if data_now[-1] == 0x99:                    # 종료 바이트

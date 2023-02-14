@@ -34,6 +34,7 @@ void execute_commandline(String message, uint8_t* cl) {
   delay(2000);
   i = 0;
   while (mySerial.available() > 0) {
+
     c[i] = mySerial.read();
     // Serial.print(c[i], HEX);
     i++;
@@ -97,7 +98,7 @@ void loop() {
   // execute_commandline("RF carrier on", set_RF_request_on);
   int count = 0;
   char data;
-  while (count < 50) {
+  while (count < 20) {
     if (mySerial.available() > 0) {
       while (mySerial.available() > 0) {
         data = mySerial.read();
@@ -109,5 +110,4 @@ void loop() {
     delay(100);
   }
   // execute_commandline("RF carrier off", set_RF_request_off);
-  delay(500);
 }
