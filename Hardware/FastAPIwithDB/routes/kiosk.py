@@ -103,7 +103,7 @@ def 키오스크_QR읽기(request: Request):
 def 카드정보전송(request: Request, CardList: CardList):
     global cardInfo
     cardInfo = asyncio.run(request.json())
-    sendMsg("next")
+    asyncio.run(sendMsg("next"))
     return {"message": "OK"}
 
 
