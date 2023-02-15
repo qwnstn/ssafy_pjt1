@@ -1,14 +1,5 @@
 package e101.hishop.init;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.type.TypeFactory;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import e101.hishop.AppConfig;
-import e101.hishop.domain.dto.request.*;
-import e101.hishop.domain.entity.*;
-import e101.hishop.global.common.CommonException;
-import e101.hishop.global.enumeration.Gender;
-import e101.hishop.global.enumeration.Role;
 import e101.hishop.repository.*;
 import e101.hishop.service.AdminService;
 import e101.hishop.service.AuthService;
@@ -16,18 +7,9 @@ import e101.hishop.service.DataInit;
 import e101.hishop.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import javax.transaction.Transactional;
-import java.io.File;
-import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 @Component
 @Slf4j

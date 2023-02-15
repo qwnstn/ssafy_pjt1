@@ -1,5 +1,6 @@
 package e101.hishop.service;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import e101.hishop.AppConfig;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
 
@@ -44,7 +46,8 @@ public class DataInitmpl implements DataInit {
         ClassLoader classLoader = getClass().getClassLoader();
 
         try {
-            List<UserInfoReqDto> list = Arrays.asList(objectMapper.readValue(new File(classLoader.getResource("json/users.json").getFile()), UserInfoReqDto[].class));
+            InputStream inputStream = classLoader.getResourceAsStream("json/users.json");
+            List<UserInfoReqDto> list = objectMapper.readValue(inputStream, new TypeReference<List<UserInfoReqDto>>(){});
             for (UserInfoReqDto u : list) {
                 User user = User.builder()
                         .loginId(u.getLoginId())
