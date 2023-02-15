@@ -15,7 +15,7 @@ def select_products_with_rfid(rfids: list, db: Session):
     cur = conn.cursor()
     query = "select * from Product_Kiosk where rfid in ("
     query += ", ".join([f"'{rid}'" for rid in rfids])
-    query += ")"
+    query += ");"
     print(query)
     # 데이타 Fetch
     rows = cur.fetchall()
