@@ -26,7 +26,6 @@ public class PayDetailInfoRespDto {
                 .payId(payDetail.getPay().getId())
                 .branchId(payDetail.getBranch().getId())
                 .productName(payDetail.getProductName())
-                .couponName(payDetail.getCouponName())
                 .count(payDetail.getCount())
                 .price(payDetail.getPrice())
                 .build();

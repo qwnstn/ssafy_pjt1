@@ -30,7 +30,7 @@ public class CardCategory {
 
     @JsonIgnore
     @Builder.Default
-    @OneToMany(mappedBy = "cardCategory", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "cardCategory", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<Card> cards = new ArrayList<>();
 
 }

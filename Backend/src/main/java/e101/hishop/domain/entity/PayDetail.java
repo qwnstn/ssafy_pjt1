@@ -29,7 +29,6 @@ public class PayDetail {
     @JsonIgnore
     private Branch branch;
     private String productName;
-    private String couponName;
     private Long count;
     private Long price;
 
@@ -48,10 +47,9 @@ public class PayDetail {
     }
 
     @Builder
-    public PayDetail(Long id, String productName, String couponName, Long count, Long price) {
+    public PayDetail(Long id, String productName, Long count, Long price) {
         this.id = id;
         this.productName = productName;
-        this.couponName = couponName;
         this.count = count;
         this.price = price;
     }

@@ -4,24 +4,23 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import e101.hishop.AppConfig;
-import e101.hishop.domain.dto.request.BranchReqDto;
-import e101.hishop.domain.dto.request.ManufacturerReqDto;
-import e101.hishop.domain.dto.request.UserInfoReqDto;
+import e101.hishop.domain.dto.request.*;
 import e101.hishop.domain.entity.*;
+import e101.hishop.global.common.CommonException;
 import e101.hishop.global.enumeration.Gender;
 import e101.hishop.global.enumeration.Role;
-import e101.hishop.repository.BranchJPARepository;
-import e101.hishop.repository.CardJPARepository;
-import e101.hishop.repository.ManufacturerJPARepository;
-import e101.hishop.repository.UserJPARepository;
+import e101.hishop.repository.*;
 import e101.hishop.service.AdminService;
 import e101.hishop.service.AuthService;
+import e101.hishop.service.DataInit;
 import e101.hishop.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import javax.transaction.Transactional;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -49,57 +48,33 @@ public class DataLoader {
     private BranchJPARepository branchJPARepository;
     @Autowired
     private ManufacturerJPARepository manufacturerJPARepository;
+    @Autowired
+    private CardCategoryJPARepository cardCategoryJPARepository;
+    @Autowired
+    private PointJPARepository pointJPARepository;
 
     @Autowired
     private AdminService adminService;
+
+    @Autowired
+    private DataInit dataInit;
 
     //method invoked during the startup
     @PostConstruct
     public void loadData(){
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.registerModule(new JavaTimeModule());
-        try{
-            List<UserInfoReqDto> list = Arrays.asList(objectMapper.readValue(new File("C:/Users/SSAFY/Documents/ssafy/S08P12E101/db/새 폴더/users.json"), UserInfoReqDto[].class));
-            for (UserInfoReqDto u: list) {
-                User user = User.builder()
-                        .loginId(u.getLoginId())
-                        .gender(u.getGender())
-                        .birthDate(u.getBirthdate())
-                        .adSelect(u.getAdSelect())
-                        .email(u.getEmail())
-                        .name(u.getName())
-                        .password(AppConfig.testPasswordEncoder().encode(u.getPassword()))
-                        .payPassword(u.getPayPassword())
-                        .phone(u.getPhone())
-                        .defaultCardId(u.getDefaultCardId())
-                        .build();
-                userJPARepository.save(user);
-            }
-        }catch (IOException e) {e.printStackTrace();}
-
-        try{
-            List<BranchReqDto> list = Arrays.asList(objectMapper.readValue(new File("C:/Users/SSAFY/Documents/ssafy/S08P12E101/db/새 폴더/branch.json"), BranchReqDto[].class));
-            for (BranchReqDto b: list) {
-                Branch branch = Branch.builder()
-                        .branchName(b.getBranchName())
-                        .region(b.getRegion())
-                        .build();
-                branchJPARepository.save(branch);
-            }
-        }catch (IOException e) {e.printStackTrace();}
-
-        try{
-            List<ManufacturerReqDto> list = Arrays.asList(objectMapper.readValue(new File("C:/Users/SSAFY/Documents/ssafy/S08P12E101/db/새 폴더/manufacturer.json"), ManufacturerReqDto[].class));
-            for (ManufacturerReqDto m: list) {
-                Manufacturer manufacturer = Manufacturer.builder()
-                        .name(m.getName())
-                        .address(m.getAddress())
-                        .tel(m.getTel())
-                        .build();
-                manufacturerJPARepository.save(manufacturer);
-            }
-        }catch (IOException e) {e.printStackTrace();}
+        dataInit.initUser();
+        dataInit.initCardCategory();
+        dataInit.initCard();
+        dataInit.initPoint();
+        dataInit.initPay();
+        dataInit.initBranch();
+        dataInit.initStaff();
+        dataInit.initKiosk();
+        dataInit.initManufacturer();
+        dataInit.initProductCategory();
+        dataInit.initProduct();
+        dataInit.initPayDetail();
 
 //        authService.signUp(User.builder()
 //                .loginId("user1234")

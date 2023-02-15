@@ -27,6 +27,9 @@ public class CardSaveReqDto {
     @Pattern(regexp="^[0-9]{3}$", message="CVC는 3자리여야 합니다.")
     private String cvc;
 
+    private Long cardCategoryId;
+    private Long userId;
+
     public Card toCardEntity(){
         return Card.builder()
                 .cardNo(cardNo)

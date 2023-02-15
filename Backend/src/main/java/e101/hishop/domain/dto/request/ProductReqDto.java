@@ -26,6 +26,8 @@ public class ProductReqDto {
     private String barcode;
     private String image;
 
+    private Boolean isAdult;
+
     public Product toProductEntity(){
         return Product.builder()
                 .name(name)
@@ -33,6 +35,7 @@ public class ProductReqDto {
                 .rfid(rfid)
                 .barcode(barcode)
                 .image(image)
+                .isAdult(isAdult)
                 .build();
     }
 }
