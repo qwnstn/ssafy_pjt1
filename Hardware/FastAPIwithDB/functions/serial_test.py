@@ -32,10 +32,10 @@ class RFID_Serial_Trans:
         # data = 0x3304B199 # Reading Stay
         # data = 0x3304B299 # Reading Nonstop
         while True:
-            if self.tag_uid and max(list(self.tag_uid.values())) > 10:
+            if self.tag_uid and max(list(self.tag_uid.values())) > 5:
                 result = list()
                 for key, value in self.tag_uid.items():
-                    if value > 3:
+                    if value > 2:
                         result.append(str(key).upper())
                 self.read_flag = False
 
@@ -101,6 +101,7 @@ class RFID_Serial_Trans:
                         # print(data_now.decode(), end=" ")
                         print("Unknown Request")
                         continue
+                    uid = uid.upper()
                     if data_now[-1] == 0x99:                    # 종료 바이트
                         print(self.tag_uid.keys(), self.tag_uid.values())
                         if uid in self.tag_uid.keys():
