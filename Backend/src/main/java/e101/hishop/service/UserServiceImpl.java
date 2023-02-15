@@ -20,6 +20,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -191,37 +192,48 @@ public class UserServiceImpl implements UserService {
 //        webClient = WebClient.create("http://192.168.40.111:8888");
 //        webClient = WebClient.create("https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=861");
 //    }
+
+    @Override
+    public Long sendTime() {
+        return System.currentTimeMillis() / 1000;
+    }
+
     @Override
     public String qrRead(QrReqDto dto) {
-        Long userId = getUserId();
-        Long kioskId = dto.getKioskId();
-        User user = userJPARepository.findById(userId)
-                .orElseThrow(() -> new CommonException(2, "User객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
-        Long defaultCardId = user.getDefaultCardId();
-        List<Card> cards = cardJPARepository.findAllByUserId(userId);
-        List<Object> cardList = new ArrayList<>();
-        for (Card c: cards) {
-            HashMap hashMap = new HashMap<String, Optional>();
-            hashMap.put("cardId", c.getId());
-            hashMap.put("cardName", c.getName());
-            hashMap.put("cardNo", c.getCardNo().substring(0, 4));
-            cardList.add(hashMap);
+        Long dateTime = dto.getDatetime();
+        if (System.currentTimeMillis() / 1000 - dateTime > 100000) {
+            return "Fail";
+        } else {
+            Long userId = getUserId();
+            Long kioskId = dto.getKioskId();
+            User user = userJPARepository.findById(userId)
+                    .orElseThrow(() -> new CommonException(2, "User객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
+            Long defaultCardId = user.getDefaultCardId();
+            List<Card> cards = cardJPARepository.findAllByUserId(userId);
+            List<Object> cardList = new ArrayList<>();
+            for (Card c : cards) {
+                HashMap hashMap = new HashMap<String, Optional>();
+                hashMap.put("cardId", c.getId());
+                hashMap.put("cardName", c.getName());
+                hashMap.put("cardNo", c.getCardNo().substring(0, 4));
+                cardList.add(hashMap);
+            }
+            CardSendRespDto cardSendRespDto = CardSendRespDto.builder()
+                    .userId(userId)
+                    .defaultCardId(defaultCardId)
+                    .cardList(cardList)
+                    .build();
+            Kiosk kiosk = kioskJPARepository.findById(kioskId)
+                    .orElseThrow(() -> new CommonException(2, "Kiosk객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
+            webClient = WebClient.create(kiosk.getUrl());
+            Mono<String> response = webClient.post()
+                    .uri("/api/kiosk/cardinfo")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(BodyInserters.fromObject(cardSendRespDto))
+                    .retrieve()
+                    .bodyToMono(String.class);
+            return response.block();
         }
-        CardSendRespDto cardSendRespDto = CardSendRespDto.builder()
-                .userId(userId)
-                .defaultCardId(defaultCardId)
-                .cardList(cardList)
-                .build();
-        Kiosk kiosk = kioskJPARepository.findById(kioskId)
-                .orElseThrow(() -> new CommonException(2, "Kiosk객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
-        webClient = WebClient.create(kiosk.getUrl());
-        Mono<String> response = webClient.post()
-                .uri("/api/kiosk/cardinfo")
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(BodyInserters.fromObject(cardSendRespDto))
-                .retrieve()
-                .bodyToMono(String.class);
-        return response.block();
     }
 
     @Override

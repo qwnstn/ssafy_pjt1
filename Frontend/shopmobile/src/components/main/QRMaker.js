@@ -3,12 +3,36 @@ import QRCode from "react-qr-code";
 import { Box, Button, Card } from "@mui/material";
 import { Grid } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
+import HOST from "../../Host";
+import axios from "axios";
+
 
 
 
 function QRMaker() {
   const accesstoken = localStorage.getItem("accesstoken");
-  const [time, setTime] = useState(Date.now());
+
+  function getTime() {
+    axios
+      .get(`${HOST}/user/time`,{
+        headers: {
+          Authorization: `Bearer ${accesstoken}`,
+        },
+      })
+      .then(function (response) {
+        console.log(response, "성공");
+        setTime(response.data.datetime);
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+  }
+
+  const [time, setTime] = useState(null);
+  useEffect(() => {
+    getTime(); // 컴포넌트가 처음 렌더링될 때 getTime 함수 호출
+  }, []);
+
   const test = {
     token: accesstoken,
     time: time,
@@ -19,7 +43,7 @@ function QRMaker() {
 
   useEffect(() => {
     if (countdown === 0) {
-      setTime(Date.now());
+      getTime()
       const newTest = {
         token: accesstoken,
         time: time,
@@ -49,7 +73,6 @@ function QRMaker() {
   };
 
   return (
-
     <Box sx={{ pb: 7 }} ref={ref}>
       <Card
         sx={{
@@ -60,7 +83,7 @@ function QRMaker() {
           fontWeight: "bold",
         }}
       >
-        QR생성  
+        QR생성
       </Card>
       <Grid
         style={{

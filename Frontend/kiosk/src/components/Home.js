@@ -51,7 +51,7 @@ const useWebSocket = (url) => {
 
 const handleScan = async (kioskInput) => {
   if (kioskInput) {
-    const kioskInputObject = JSON.parse(kioskInput)
+    const kioskInputObject = JSON.parse(kioskInput);
     const token = kioskInputObject.token;
     const datetime = kioskInputObject.time;
     console.log(kioskInputObject);
@@ -137,6 +137,7 @@ export default function KioskMain() {
               justifyContent: "center",
               alignItems: "center",
             }}
+            sx={{mb: 5}}
           >
             <Grid item xs={10} sx={{ mt: 5 }}>
               <CssBaseline />
@@ -151,24 +152,26 @@ export default function KioskMain() {
             </Grid>
           </Grid>
           <Grid
+            container
             style={{
               display: "flex",
               justifyContent: "center",
+              alignItems: "center",
             }}
           >
-            <Grid>
-              <Card sx={{ my: 5, padding: 1 }}>
+            <Grid item xs={4} sx={{ m: 1 }}>
+              <Card sx={{ padding: 1 }}>
                 <QRCode value={value} size={200} />
               </Card>
-              <Card>
+            </Grid>
+            <Grid item xs={4} sx={{ m: 1 }}>
+              <Card sx={{ padding: 1 }}>
                 <QrReader
-                  delay={500}
-                  // 기본적으로 후방카메라인 user모드가 되도록 설정
+                  delay={2000}
                   onError={handleError}
                   onScan={handleScan}
                 />
               </Card>
-              {messages}
             </Grid>
           </Grid>
           <Grid

@@ -96,10 +96,18 @@ public class UserController {
         return new ResponseEntity<>(userService.getPayDetail(purchaseId), HttpStatus.OK);
     }
 
+    @GetMapping("/time")
+    public ResponseEntity<Long> sendTime() {
+        return new ResponseEntity<>(userService.sendTime(), HttpStatus.OK);
+    }
+
     @PostMapping("/qr")
     public ResponseEntity<String> qrRead(@RequestBody QrReqDto dto) {
-        userService.qrRead(dto);
-        return new ResponseEntity<>("전달 완료", HttpStatus.OK);
+        if ("Fail".equals(userService.qrRead(dto))) {
+            return new ResponseEntity<>("유효기간 만료", HttpStatus.BAD_REQUEST);
+        } else {
+            return new ResponseEntity<>("전달 완료", HttpStatus.OK);
+        }
     }
 
     @GetMapping("/point")

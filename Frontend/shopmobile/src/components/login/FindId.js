@@ -80,7 +80,7 @@ const FindId = () => {
       phone: data.phone,
       birthDate: data.birth.replace(/^(\d{4})(\d{2})(\d{2})$/, `$1-$2-$3`),
     };
-    // get
+    // post
     await axios
       .post(API_URI, jsonData)
       .then(function (response) {
