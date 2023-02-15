@@ -3,7 +3,7 @@ import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import Box from "@mui/material/Box";
-import { Grid, Button } from "@mui/material";
+import { Grid, Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -81,6 +81,18 @@ export default function CardInfo() {
             }}
           >
             <CardMedia component="img" image={cardImage(card["cardName"])} />
+            <Typography
+              sx={{
+                color: "black",
+                position: "absolute",
+                bottom: 40,
+                left: 100,
+                fontWeight: "bold",
+                fontSize: 28,
+              }}
+            >
+              {card["cardNo"]}
+            </Typography>
           </Button>
         </Grid>
       );
