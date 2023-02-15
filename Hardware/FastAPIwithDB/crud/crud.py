@@ -17,22 +17,22 @@ def select_products_with_rfid(rfids: list, db: Session):
         query += f"{rid} and "
     else:
         query.rstrip(" and ")
-    # SQL 쿼리 실행
-    cur.execute(query)
-    
-    # 데이타 Fetch
-    rows = cur.fetchall()
-    for row in rows:
-        product = {
-            "productId": row[1],
-            "name": row[2],
-            "price": row[3],
-            "rfid": row[4],
-            "barcode": row[5],
-            "img": row[6]
-        }
-        rlt.append(product)
-        print(row)
+        # SQL 쿼리 실행
+        cur.execute(query)
+        
+        # 데이타 Fetch
+        rows = cur.fetchall()
+        for row in rows:
+            product = {
+                "productId": row[1],
+                "name": row[2],
+                "price": row[3],
+                "rfid": row[4],
+                "barcode": row[5],
+                "img": row[6]
+            }
+            rlt.append(product)
+            print(row)
     return rlt
 
 
