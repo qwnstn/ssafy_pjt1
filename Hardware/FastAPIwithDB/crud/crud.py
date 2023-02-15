@@ -17,6 +17,7 @@ def select_products_with_rfid(rfids: list, db: Session):
     query += ", ".join([f"'{rid}'" for rid in rfids])
     query += ");"
     print(query)
+    cur.execute(query)
     # 데이타 Fetch
     rows = cur.fetchall()
     for row in rows:
