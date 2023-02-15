@@ -3,7 +3,7 @@ import sqlite3
 from db.models.model import Product_Kiosk, Shopping
 from sqlalchemy.orm import Session
 
-
+[str, str, str]
 def select_products_with_rfid(rfids: list, db: Session):
     rlt = list()
 
@@ -12,9 +12,13 @@ def select_products_with_rfid(rfids: list, db: Session):
     
     # Connection 으로부터 Cursor 생성
     cur = conn.cursor()
-
+    query = "select * from Product_Kiosk where rfid="
+    for rid in rfids:
+        query += f"{rid} and "
+    else:
+        query.rstrip(" and ")
     # SQL 쿼리 실행
-    cur.execute("select * from Product_Kiosk")
+    cur.execute(query)
     
     # 데이타 Fetch
     rows = cur.fetchall()
