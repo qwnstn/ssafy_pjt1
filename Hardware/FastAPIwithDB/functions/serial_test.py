@@ -14,6 +14,7 @@ class RFID_Serial_Trans:
         self.ser = serial.Serial(self.PORT, self.baud, timeout=0.1)  # serial 통신 세팅
         self.tag_uid = dict()
         self.read_flag = True
+        return self
 
     async def main(self):
         read_flag = True
@@ -109,7 +110,7 @@ class RFID_Serial_Trans:
                         print("Error Request")
         ser.close()
     
-    def __exit__(self):
+    def __exit__(self, exc_type, exc_val, exc_tb):
         self.ser.close()
 
 
