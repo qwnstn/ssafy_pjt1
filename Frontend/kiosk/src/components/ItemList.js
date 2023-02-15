@@ -13,6 +13,8 @@ import CardActions from "@mui/material/CardActions";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+// import Modal from "@mui/material/Modal";
+// import ReactRouterPrompt from "react-router-prompt";
 
 const columns = [
   { id: "name", label: "품명", minWidth: 140 },
@@ -74,6 +76,43 @@ function UserFalse() {
 }
 
 export default function ItemList() {
+  // const [historyLength, setHistoryLength] = useState(window.history.length);
+  // const [showPrompt, setShowPrompt] = useState(false);
+
+  // useEffect(() => {
+  //   const handlePopstate = () => {
+  //     if (window.history.length < historyLength) {
+  //       setShowPrompt(true);
+  //     }
+  //     setHistoryLength(window.history.length);
+  //   };
+
+  //   window.addEventListener("popstate", handlePopstate);
+
+  //   return () => {
+  //     window.removeEventListener("popstate", handlePopstate);
+  //   };
+  // }, [historyLength]);
+
+  // <ReactRouterPrompt when={showPrompt}>
+  //   {({ isActive, onConfirm, onCancel }) => (
+  //     <Modal show={isActive}>
+  //       <div>
+  //         <p>Do you really want to leave?</p>
+  //         <button onClick={onCancel}>Cancel</button>
+  //         <button
+  //           onClick={() => {
+  //             setShowPrompt(false);
+  //             onConfirm();
+  //           }}
+  //         >
+  //           Ok
+  //         </button>
+  //       </div>
+  //     </Modal>
+  //   )}
+  // </ReactRouterPrompt>;
+
   var paymentAll = 0;
   const navigate = useNavigate();
   const user = sessionStorage.getItem("user");

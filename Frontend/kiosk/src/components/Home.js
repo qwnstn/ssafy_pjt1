@@ -56,7 +56,7 @@ const handleScan = async (kioskInput) => {
     const datetime = kioskInputObject.time;
     console.log(kioskInputObject);
     try {
-      const res = await axios.post("http://localhost:8888/api/kiosk", {
+      const res = await axios.post("http://localhost:8888/api/kiosk/qr", {
         token: token,
         datetime: datetime,
       });
