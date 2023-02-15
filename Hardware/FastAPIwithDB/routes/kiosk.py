@@ -79,10 +79,31 @@ def 키오스크_아이디(request: Request):
     return {"kioskId": KIOSK_ID}
 
 
+@router.post("/qr")
+def 키오스크_QR읽기(request: Request):
+    userInfo = asyncio.run(request.json())
+    url = f"{BASE_URL}/api/user/qr"
+    headers = {
+        "Authorization": f"Bearer {userInfo['token']}",
+        # "Content-Type": "applicaation/json"
+    }
+    payload = {
+        "kioskId": KIOSK_ID,
+        "datetime": int(userInfo["datetime"])
+    }
+    r = requests.post(url=url, headers=headers, json=payload, )
+    if r.status_code == 200:
+        print("정상적인 QR코드")
+        asyncio.run(sendMsg("next"))
+    else:
+        print("이딴걸 QR이라고 보냈냐", r.status_code)
+
+
 @router.post("/cardinfo")
 def 카드정보전송(request: Request, CardList: CardList):
     global cardInfo
     cardInfo = asyncio.run(request.json())
+    sendMsg("next")
     return {"message": "OK"}
 
 

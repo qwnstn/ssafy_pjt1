@@ -3,7 +3,7 @@ import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import Box from "@mui/material/Box";
-import { Grid, Button } from "@mui/material";
+import { Grid, Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -12,6 +12,7 @@ export default function CardInfo() {
   const [cards, setCards] = useState([]);
   const [defaultCardId, setDefaultCardId] = useState([]);
   const [mainCard, setMainCard] = useState();
+  const [cardId, setCardId] = useState();
 
   useEffect(() => {
     // 세션 데이터
@@ -32,7 +33,11 @@ export default function CardInfo() {
   }, [defaultCardId]);
 
   useEffect(() => {
-    setMainCard(cards.find((object) => object.cardId === defaultCardId));
+    const card = cards.find((object) => object.cardId === defaultCardId);
+    if (card) {
+      setCardId(card.cardNo);
+      setMainCard(card);
+    }
   }, [cards, defaultCardId]);
 
   const cardImage = (data) => {
@@ -78,9 +83,22 @@ export default function CardInfo() {
             onClick={() => {
               // console.log("클릭");
               setMainCard(card);
+              setCardId(card.cardNo);
             }}
           >
             <CardMedia component="img" image={cardImage(card["cardName"])} />
+            <Typography
+              sx={{
+                color: "black",
+                position: "absolute",
+                bottom: 40,
+                left: 100,
+                fontWeight: "bold",
+                fontSize: 28,
+              }}
+            >
+              {card["cardNo"]}
+            </Typography>
           </Button>
         </Grid>
       );
@@ -124,6 +142,18 @@ export default function CardInfo() {
               image={mainCard ? cardImage(mainCard["cardName"]) : null}
               style={{ width: "100%", height: "auto" }}
             />
+            <Typography
+              sx={{
+                color: "black",
+                position: "absolute",
+                top: 265,
+                left: 244,
+                fontWeight: "bold",
+                fontSize: 28,
+              }}
+            >
+              {cardId}
+            </Typography>
           </Grid>
         </Card>
 

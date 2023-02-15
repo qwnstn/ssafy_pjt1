@@ -9,6 +9,7 @@ import { Grid } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import QrReader from "modern-react-qr-reader";
 
 const useWebSocket = (url) => {
   const [messages, setMessages] = useState([]);
@@ -48,11 +49,33 @@ const useWebSocket = (url) => {
   return messages;
 };
 
+const handleScan = async (kioskInput) => {
+  if (kioskInput) {
+    const kioskInputObject = JSON.parse(kioskInput)
+    const token = kioskInputObject.token;
+    const datetime = kioskInputObject.time;
+    console.log(kioskInputObject);
+    try {
+      const res = await axios.post("http://localhost:8888/api/kiosk/qr", {
+        token: token,
+        datetime: datetime,
+      });
+      console.log(res);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+};
+
 export default function KioskMain() {
   const navigate = useNavigate();
   const [kioskId, setKioskId] = useState();
   const [value, setValue] = useState("");
   const messages = useWebSocket("ws://localhost:3333");
+
+  const handleError = (err) => {
+    console.error(err);
+  };
 
   function QRMake(kioskId) {
     const newTest = {
@@ -131,12 +154,19 @@ export default function KioskMain() {
             style={{
               display: "flex",
               justifyContent: "center",
-              alignItems: "center",
             }}
           >
-            <Grid item xs={50}>
+            <Grid>
               <Card sx={{ my: 5, padding: 1 }}>
                 <QRCode value={value} size={200} />
+              </Card>
+              <Card>
+                <QrReader
+                  delay={500}
+                  // 기본적으로 후방카메라인 user모드가 되도록 설정
+                  onError={handleError}
+                  onScan={handleScan}
+                />
               </Card>
               {messages}
             </Grid>

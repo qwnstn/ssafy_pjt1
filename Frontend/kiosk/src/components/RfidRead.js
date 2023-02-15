@@ -68,8 +68,10 @@ export default function ResultPayment() {
   useEffect(() => {
     if (itemList.length > 0) {
       sessionStorage.setItem("data", itemList);
-      console.log(itemList);
-      setRedirect(true);
+      if (sessionStorage.getItem("data") !== "next") {
+        console.log(itemList);
+        setRedirect(true);
+      }
     } else {
       console.log("itemlist가 비어있음");
     }

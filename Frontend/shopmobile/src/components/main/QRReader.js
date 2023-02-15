@@ -35,7 +35,7 @@ const QRReader = () => {
           }
         );
         console.log(res);
-        alert("QR code was successfully captured");
+        // alert("QR code was successfully captured");
         navigate("/app");
       } catch (error) {
         console.error(error);
@@ -66,7 +66,7 @@ const QRReader = () => {
           <CssBaseline />
           <Card sx={{ border: 1, padding: 1 }}>
             <QrReader
-              delay={500}
+              delay={2000}
               // 기본적으로 후방카메라인 user모드가 되도록 설정
               facingMode={cameraMode}
               onError={handleError}
