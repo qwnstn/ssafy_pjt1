@@ -1,7 +1,8 @@
 import sqlite3
 
-from db.models.model import Product_Kiosk, Shopping
 from sqlalchemy.orm import Session
+
+from db.models.model import Product_Kiosk, Shopping
 
 [str, str, str]
 def select_products_with_rfid(rfids: list, db: Session):
