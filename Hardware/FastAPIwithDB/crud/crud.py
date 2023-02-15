@@ -18,16 +18,21 @@ def select_products_with_rfid(rfids: list, db: Session):
     query = "select * from Product_Kiosk where rfid in ("
     query += ", ".join([f"'{rid}'" for rid in rfids])
     query += ");"
-    cur.execute(query)
-    # 테스트 2
-    # for rid in rfids:
-        # query = "select * from Product_Kiosk where rfid like " + f"'{rid}';"
-        # cur.execute(query)
-    
     # 쿼리 확인
     print(query)
+    cur.execute(query)
     # 데이타 Fetch
     rows = cur.fetchall()
+    # 테스트 2
+    # rows = list
+    # for rid in rfids:
+    #     query = "select * from Product_Kiosk where rfid like " + f"'{rid}';"
+    #     # 쿼리 확인
+    #     print(query)
+    #     cur.execute(query)
+    #     # 데이터 Fetch 후 저장
+    #     rows.append(cur.fetchall())
+    
     # 결과 확인
     print(rows)
     for row in rows:

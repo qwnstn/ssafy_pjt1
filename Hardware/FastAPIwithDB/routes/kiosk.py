@@ -1,5 +1,6 @@
 import asyncio
 import json
+
 import requests
 from fastapi import APIRouter, Depends, Request
 from sqlalchemy.orm import Session
@@ -123,7 +124,6 @@ def RFID_리딩(request: Request, db: Session = Depends(get_db)):
         "cardList": cardInfo["cardList"],
         "itemList": products,
     })))
-
 
 
 # @router.post("/rfid")
