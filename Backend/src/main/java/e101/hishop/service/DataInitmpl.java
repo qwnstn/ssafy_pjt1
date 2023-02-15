@@ -14,10 +14,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -74,7 +72,8 @@ public class DataInitmpl implements DataInit {
         ClassLoader classLoader = getClass().getClassLoader();
 
         try {
-            List<CardCategoryReqDto> list = Arrays.asList(objectMapper.readValue(new File(classLoader.getResource("json/cardCategory.json").getFile()), CardCategoryReqDto[].class));
+            InputStream inputStream = classLoader.getResourceAsStream("json/cardCategory.json");
+            List<CardCategoryReqDto> list = objectMapper.readValue(inputStream, new TypeReference<List<CardCategoryReqDto>>(){});
             for (CardCategoryReqDto d : list) {
                 CardCategory cardCategory = CardCategory.builder()
                         .classification(d.getClassification())
@@ -94,7 +93,8 @@ public class DataInitmpl implements DataInit {
         ClassLoader classLoader = getClass().getClassLoader();
 
         try {
-            List<CardSaveReqDto> list = Arrays.asList(objectMapper.readValue(new File(classLoader.getResource("json/card.json").getFile()), CardSaveReqDto[].class));
+            InputStream inputStream = classLoader.getResourceAsStream("json/card.json");
+            List<CardSaveReqDto> list = objectMapper.readValue(inputStream, new TypeReference<List<CardSaveReqDto>>(){});
             for (CardSaveReqDto d : list) {
                 User user = userJPARepository.findById(d.getUserId())
                         .orElseThrow(() -> new CommonException(2, "User객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
@@ -121,7 +121,8 @@ public class DataInitmpl implements DataInit {
         ClassLoader classLoader = getClass().getClassLoader();
 
         try {
-            List<PointReqDto> list = Arrays.asList(objectMapper.readValue(new File(classLoader.getResource("json/point.json").getFile()), PointReqDto[].class));
+            InputStream inputStream = classLoader.getResourceAsStream("json/point.json");
+            List<PointReqDto> list = objectMapper.readValue(inputStream, new TypeReference<List<PointReqDto>>(){});
             for (PointReqDto d : list) {
                 User user = userJPARepository.findById(d.getUserId())
                         .orElseThrow(() -> new CommonException(2, "User객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
@@ -145,7 +146,8 @@ public class DataInitmpl implements DataInit {
         ClassLoader classLoader = getClass().getClassLoader();
 
         try {
-            List<PayInfoReqDto> list = Arrays.asList(objectMapper.readValue(new File(classLoader.getResource("json/pay.json").getFile()), PayInfoReqDto[].class));
+            InputStream inputStream = classLoader.getResourceAsStream("json/pay.json");
+            List<PayInfoReqDto> list = objectMapper.readValue(inputStream, new TypeReference<List<PayInfoReqDto>>(){});
             for (PayInfoReqDto d : list) {
                 User user = userJPARepository.findById(d.getUserId())
                         .orElseThrow(() -> new CommonException(2, "User객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
@@ -169,7 +171,8 @@ public class DataInitmpl implements DataInit {
         ClassLoader classLoader = getClass().getClassLoader();
 
         try {
-            List<BranchReqDto> list = Arrays.asList(objectMapper.readValue(new File(classLoader.getResource("json/branch.json").getFile()), BranchReqDto[].class));
+            InputStream inputStream = classLoader.getResourceAsStream("json/branch.json");
+            List<BranchReqDto> list = objectMapper.readValue(inputStream, new TypeReference<List<BranchReqDto>>(){});
             for (BranchReqDto b : list) {
                 Branch branch = Branch.builder()
                         .branchName(b.getBranchName())
@@ -188,7 +191,8 @@ public class DataInitmpl implements DataInit {
         ClassLoader classLoader = getClass().getClassLoader();
 
         try {
-            List<StaffReqDto> list = Arrays.asList(objectMapper.readValue(new File(classLoader.getResource("json/staff.json").getFile()), StaffReqDto[].class));
+            InputStream inputStream = classLoader.getResourceAsStream("json/staff.json");
+            List<StaffReqDto> list = objectMapper.readValue(inputStream, new TypeReference<List<StaffReqDto>>(){});
             for (StaffReqDto d : list) {
                 Branch branch = branchJPARepository.findById(d.getBranchId())
                         .orElseThrow(() -> new CommonException(2, "Branch객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
@@ -210,7 +214,8 @@ public class DataInitmpl implements DataInit {
         ClassLoader classLoader = getClass().getClassLoader();
 
         try {
-            List<KioskReqDto> list = Arrays.asList(objectMapper.readValue(new File(classLoader.getResource("json/kiosk.json").getFile()), KioskReqDto[].class));
+            InputStream inputStream = classLoader.getResourceAsStream("json/kiosk.json");
+            List<KioskReqDto> list = objectMapper.readValue(inputStream, new TypeReference<List<KioskReqDto>>(){});
             for (KioskReqDto d : list) {
                 Branch branch = branchJPARepository.findById(d.getBranchId())
                         .orElseThrow(() -> new CommonException(2, "Branch객체가 존재하지 않습니다.", HttpStatus.INTERNAL_SERVER_ERROR));
@@ -229,7 +234,8 @@ public class DataInitmpl implements DataInit {
         ClassLoader classLoader = getClass().getClassLoader();
 
         try{
-            List<ManufacturerReqDto> list = Arrays.asList(objectMapper.readValue(new File(classLoader.getResource("json/manufacturer.json").getFile()), ManufacturerReqDto[].class));
+            InputStream inputStream = classLoader.getResourceAsStream("json/manufacturer.json");
+            List<ManufacturerReqDto> list = objectMapper.readValue(inputStream, new TypeReference<List<ManufacturerReqDto>>(){});
             for (ManufacturerReqDto m: list) {
                 Manufacturer manufacturer = Manufacturer.builder()
                         .name(m.getName())
@@ -247,7 +253,8 @@ public class DataInitmpl implements DataInit {
         ClassLoader classLoader = getClass().getClassLoader();
 
         try{
-            List<ProductCategoryReqDto> list = Arrays.asList(objectMapper.readValue(new File(classLoader.getResource("json/productCategory.json").getFile()), ProductCategoryReqDto[].class));
+            InputStream inputStream = classLoader.getResourceAsStream("json/productCategory.json");
+            List<ProductCategoryReqDto> list = objectMapper.readValue(inputStream, new TypeReference<List<ProductCategoryReqDto>>(){});
             for (ProductCategoryReqDto m: list) {
                 ProductCategory productCategory = ProductCategory.builder()
                         .category(m.getCategory())
@@ -263,7 +270,8 @@ public class DataInitmpl implements DataInit {
         ClassLoader classLoader = getClass().getClassLoader();
 
         try {
-            List<ProductReqDto> list = Arrays.asList(objectMapper.readValue(new File(classLoader.getResource("json/product.json").getFile()), ProductReqDto[].class));
+            InputStream inputStream = classLoader.getResourceAsStream("json/product.json");
+            List<ProductReqDto> list = objectMapper.readValue(inputStream, new TypeReference<List<ProductReqDto>>(){});
             for (ProductReqDto d : list) {
                 Product product = Product.builder()
                         .name(d.getName())
@@ -295,7 +303,8 @@ public class DataInitmpl implements DataInit {
         objectMapper.registerModule(new JavaTimeModule());
         ClassLoader classLoader = getClass().getClassLoader();
         try {
-            List<PayDetailReqDto> list = Arrays.asList(objectMapper.readValue(new File(classLoader.getResource("json/payDetail.json").getFile()), PayDetailReqDto[].class));
+            InputStream inputStream = classLoader.getResourceAsStream("json/payDetail.json");
+            List<PayDetailReqDto> list = objectMapper.readValue(inputStream, new TypeReference<List<PayDetailReqDto>>(){});
             for (PayDetailReqDto d : list) {
                 PayDetail payDetail = PayDetail.builder()
                         .count(d.getCount())
