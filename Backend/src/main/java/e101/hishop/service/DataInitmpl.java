@@ -53,6 +53,7 @@ public class DataInitmpl implements DataInit {
                         .birthDate(u.getBirthdate())
                         .adSelect(u.getAdSelect())
                         .email(u.getEmail())
+                        .role(u.getRole())
                         .name(u.getName())
                         .password(AppConfig.testPasswordEncoder().encode(u.getPassword()))
                         .payPassword(u.getPayPassword())
