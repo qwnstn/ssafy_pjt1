@@ -13,10 +13,10 @@ def select_products_with_rfid(rfids: list, db: Session):
     
     # Connection 으로부터 Cursor 생성
     cur = conn.cursor()
-    query = "select * from Product_Kiosk where rfid IN ("
+    query = "select * from Product_Kiosk where rfid in ("
     query += ", ".join([f"'{rid}'" for rid in rfids])
     query += ")"
-        
+    print(query)
     # 데이타 Fetch
     rows = cur.fetchall()
     for row in rows:
