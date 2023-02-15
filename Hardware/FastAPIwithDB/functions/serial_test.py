@@ -74,7 +74,10 @@ class RFID_Serial_Trans:
                             break
                     if received_command[1] == 0x3B:             # RFID UID 1개 읽기
                         for byte in data_now[3:-1]:
-                            uid += hex(byte)[2:]
+                            if byte < 16:
+                                uid += "0" + hex(byte)[2:]
+                            else:
+                                uid += hex(byte)[2:]
                     elif received_command[1] == 0x1B:           # 읽기 Stay 모드
                         print("Reading Stay Mode ON")
                         continue
