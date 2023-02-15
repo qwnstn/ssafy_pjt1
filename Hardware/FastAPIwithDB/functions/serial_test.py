@@ -5,6 +5,7 @@ import serial
 
 from core.config import SERIAL_PORT
 
+
 class RFID_Serial_Trans:
     PORT = SERIAL_PORT                               # 포트 번호
     baud = 9600                                 # 보드레이트
@@ -14,6 +15,11 @@ class RFID_Serial_Trans:
     read_flag = True
 
     async def main(self):
+        read_flag = True
+        self.tag_uid = dict()
+        if not self.ser.is_open:
+            self.ser.open()
+            self.ser.reset_input_buffer()
         thread = threading.Thread(target=self.readthread, args=(
             self.ser,), daemon=True)   # 통신을 다른 코드와 병렬처리 하기 위한 스레드 생성
         thread.start()                                              # 스레드 시작
