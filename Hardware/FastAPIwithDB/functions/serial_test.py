@@ -10,11 +10,11 @@ class RFID_Serial_Trans:
     PORT = SERIAL_PORT                               # 포트 번호
     baud = 9600                                 # 보드레이트
     # baud = 115200                             # RFID 보드레이트 115200 기본값
-    def __enter__(self):
-        self.ser = serial.Serial(self.PORT, self.baud, timeout=0.1)  # serial 통신 세팅
-        self.tag_uid = dict()
-        self.read_flag = True
-        return self
+    # def __enter__(self):
+    #     self.ser = serial.Serial(self.PORT, self.baud, timeout=0.1)  # serial 통신 세팅
+    #     self.tag_uid = dict()
+    #     self.read_flag = True
+    #     return self
 
     async def main(self):
         read_flag = True
@@ -110,8 +110,8 @@ class RFID_Serial_Trans:
                         print("Error Request")
         ser.close()
     
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        self.ser.close()
+    # def __exit__(self, exc_type, exc_val, exc_tb):
+    #     self.ser.close()
 
 
 if __name__ == "__main__":
