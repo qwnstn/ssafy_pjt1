@@ -57,6 +57,8 @@ public class DataLoader {
         dataInit.initProductCategory();
         dataInit.initProduct();
         dataInit.initPayDetail();
+        dataInit.inituserReport();
+        dataInit.initsaleReport();
 
 //        authService.signUp(User.builder()
 //                .loginId("user1234")

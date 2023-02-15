@@ -14,4 +14,6 @@ public interface DataInit {
     public void initProductCategory();
     public void initProduct();
     public void initPayDetail();
+    public void inituserReport();
+    public void initsaleReport();
 }

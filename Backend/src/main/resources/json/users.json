@@ -60,7 +60,7 @@
         "loginId" : "coach_user",
         "name" : "박코치",
         "password" : "pass1234!",
-        "payPassword" : "796",
+        "payPassword" : "0796",
         "phone" : "010-7595-9768",
         "role" : "ROLE_USER"
     },

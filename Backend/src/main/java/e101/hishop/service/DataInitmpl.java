@@ -14,8 +14,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -36,6 +38,8 @@ public class DataInitmpl implements DataInit {
     private final ProductCategoryJPARepository productCategoryJPARepository;
     private final ProductJPARepository productJPARepository;
     private final PayDetailJPARepository payDetailJPARepository;
+    private final UserReportJPARepository userReportJPARepository;
+    private final SaleReportJPARepository saleReportJPARepository;
 
     @Override
     public void initUser() {
@@ -328,6 +332,51 @@ public class DataInitmpl implements DataInit {
                     payDetail.setProductAndPayDetail(product);
                 }
                 payDetailJPARepository.save(payDetail);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @Override
+    public void inituserReport() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+        ClassLoader classLoader = getClass().getClassLoader();
+        try {
+            InputStream inputStream = classLoader.getResourceAsStream("json/userReport.json");
+            List<UserReportReqDto> list = objectMapper.readValue(inputStream, new TypeReference<List<UserReportReqDto>>(){});
+            for (UserReportReqDto d : list) {
+                UserReport userReport = UserReport.builder()
+                        .date(d.getDate())
+                        .gender(d.getGender())
+                        .age(d.getAge())
+                        .region(d.getRegion())
+                        .population(d.getPopulation())
+                        .sales(d.getSales())
+                        .build();
+                userReportJPARepository.save(userReport);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @Override
+    public void initsaleReport() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+        ClassLoader classLoader = getClass().getClassLoader();
+        try {
+            InputStream inputStream = classLoader.getResourceAsStream("json/saleReport.json");
+            List<SaleReportReqDto> list = objectMapper.readValue(inputStream, new TypeReference<List<SaleReportReqDto>>(){});
+            for (SaleReportReqDto d : list) {
+                SaleReport saleReport = SaleReport.builder()
+                        .date(d.getDate())
+                        .category(d.getCategory())
+                        .region(d.getRegion())
+                        .kiosk(d.getKiosk())
+                        .sales(d.getSales())
+                        .build();
+                saleReportJPARepository.save(saleReport);
             }
         } catch (IOException e) {
             e.printStackTrace();

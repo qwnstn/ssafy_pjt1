@@ -47,4 +47,6 @@ public interface AdminService {
     ProductCategory saveProductCategory(ProductCategory productCategory);
     Long modifyProductCategory(ProductCategoryReqDto dto, Long categoryId);
     void deleteProductCategory(Long categoryId);
+    public List<SaleReportRespDto> saleReport();
+    public List<UserReportRespDto> userReport();
 }

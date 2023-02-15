@@ -31,6 +31,8 @@ public class AdminServiceImpl implements AdminService {
     private final PointJPARepository pointJPARepository;
     private final ManufacturerJPARepository manufacturerJPARepository;
     private final ProductCategoryJPARepository productCategoryJPARepository;
+    private final SaleReportJPARepository saleReportJPARepository;
+    private final UserReportJPARepository userReportJPARepository;
 
     @Override
     public Pay savePay(Pay pays, Long userId) {
@@ -382,6 +384,23 @@ public class AdminServiceImpl implements AdminService {
         }
         productCategoryJPARepository.deleteById(categoryId);
     }
-
+    @Override
+    public List<SaleReportRespDto> saleReport() {
+        List<SaleReport> saleReports = saleReportJPARepository.findAll();
+        List<SaleReportRespDto> saleReportList = new ArrayList<>();
+        for (SaleReport p: saleReports) {
+            saleReportList.add(SaleReportRespDto.of(p));
+        }
+        return saleReportList;
+    }
+    @Override
+    public List<UserReportRespDto> userReport() {
+        List<UserReport> userReports = userReportJPARepository.findAll();
+        List<UserReportRespDto> userReportList = new ArrayList<>();
+        for (UserReport p: userReports) {
+            userReportList.add(UserReportRespDto.of(p));
+        }
+        return userReportList;
+    }
 
 }

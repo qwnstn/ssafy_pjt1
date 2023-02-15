@@ -3,16 +3,16 @@
         "category" : "과일"
     },
     {
-        "category" : "채소"
+        "category" : "도서"
     },
     {
-        "category" : "유제품"
+        "category" : "게임"
     },
     {
         "category" : "음료"
     },
     {
-        "category" : "면류"
+        "category" : "제한물품"
     },
     {
         "category" : "간식"
@@ -21,12 +21,12 @@
         "category" : "건강식품"
     },
     {
-        "category" : "수산물"
+        "category" : "문구"
     },
     {
-        "category" : "정육"
+        "category" : "위생용품"
     },
     {
-        "category" : "간편식"
+        "category" : "주방용품"
     }
 ]

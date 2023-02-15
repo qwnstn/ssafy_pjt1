@@ -1,0 +1,2340 @@
+[
+    {
+        "date" : "2023-02-08",
+        "category" : "도서",
+        "region" : "부산",
+        "kiosk" : 1,
+        "sales" : 3599210
+    },
+    {
+        "date" : "2023-02-08",
+        "category" : "게임",
+        "region" : "부산",
+        "kiosk" : 1,
+        "sales" : 8684884
+    },
+    {
+        "date" : "2023-02-08",
+        "category" : "음료",
+        "region" : "부산",
+        "kiosk" : 1,
+        "sales" : 2179907
+    },
+    {
+        "date" : "2023-02-08",
+        "category" : "제한물품",
+        "region" : "부산",
+        "kiosk" : 1,
+        "sales" : 473797
+    },
+    {
+        "date" : "2023-02-08",
+        "category" : "문구",
+        "region" : "부산",
+        "kiosk" : 1,
+        "sales" : 7410376
+    },
+    {
+        "date" : "2023-02-08",
+        "category" : "위생용품",
+        "region" : "부산",
+        "kiosk" : 1,
+        "sales" : 3285200
+    },
+    {
+        "date" : "2023-02-08",
+        "category" : "주방용품",
+        "region" : "부산",
+        "kiosk" : 1,
+        "sales" : 3575063
+    },
+    {
+        "date" : "2023-02-08",
+        "category" : "도서",
+        "region" : "서울",
+        "kiosk" : 1,
+        "sales" : 3678128
+    },
+    {
+        "date" : "2023-02-08",
+        "category" : "게임",
+        "region" : "서울",
+        "kiosk" : 1,
+        "sales" : 8629084
+    },
+    {
+        "date" : "2023-02-08",
+        "category" : "음료",
+        "region" : "서울",
+        "kiosk" : 1,
+        "sales" : 2186602
+    },
+    {
+        "date" : "2023-02-08",
+        "category" : "제한물품",
+        "region" : "서울",
+        "kiosk" : 1,
+        "sales" : 560826
+    },
+    {
+        "date" : "2023-02-08",
+        "category" : "문구",
+        "region" : "서울",
+        "kiosk" : 1,
+        "sales" : 7478436
+    },
+    {
+        "date" : "2023-02-08",
+        "category" : "위생용품",
+        "region" : "서울",
+        "kiosk" : 1,
+        "sales" : 3192766
+    },
+    {
+        "date" : "2023-02-08",
+        "category" : "주방용품",
+        "region" : "서울",
+        "kiosk" : 1,
+        "sales" : 3581205
+    },
+    {
+        "date" : "2023-02-08",
+        "category" : "도서",
+        "region" : "부산",
+        "kiosk" : 2,
+        "sales" : 3599155
+    },
+    {
+        "date" : "2023-02-08",
+        "category" : "게임",
+        "region" : "부산",
+        "kiosk" : 2,
+        "sales" : 8529638
+    },
+    {
+        "date" : "2023-02-08",
+        "category" : "음료",
+        "region" : "부산",
+        "kiosk" : 2,
+        "sales" : 2125993
+    },
+    {
+        "date" : "2023-02-08",
+        "category" : "제한물품",
+        "region" : "부산",
+        "kiosk" : 2,
+        "sales" : 516383
+    },
+    {
+        "date" : "2023-02-08",
+        "category" : "문구",
+        "region" : "부산",
+        "kiosk" : 2,
+        "sales" : 7401870
+    },
+    {
+        "date" : "2023-02-08",
+        "category" : "위생용품",
+        "region" : "부산",
+        "kiosk" : 2,
+        "sales" : 3252425
+    },
+    {
+        "date" : "2023-02-08",
+        "category" : "주방용품",
+        "region" : "부산",
+        "kiosk" : 2,
+        "sales" : 3588627
+    },
+    {
+        "date" : "2023-02-08",
+        "category" : "도서",
+        "region" : "서울",
+        "kiosk" : 2,
+        "sales" : 3509603
+    },
+    {
+        "date" : "2023-02-08",
+        "category" : "게임",
+        "region" : "서울",
+        "kiosk" : 2,
+        "sales" : 8595932
+    },
+    {
+        "date" : "2023-02-08",
+        "category" : "음료",
+        "region" : "서울",
+        "kiosk" : 2,
+        "sales" : 2138538
+    },
+    {
+        "date" : "2023-02-08",
+        "category" : "제한물품",
+        "region" : "서울",
+        "kiosk" : 2,
+        "sales" : 553865
+    },
+    {
+        "date" : "2023-02-08",
+        "category" : "문구",
+        "region" : "서울",
+        "kiosk" : 2,
+        "sales" : 7379583
+    },
+    {
+        "date" : "2023-02-08",
+        "category" : "위생용품",
+        "region" : "서울",
+        "kiosk" : 2,
+        "sales" : 3186309
+    },
+    {
+        "date" : "2023-02-08",
+        "category" : "주방용품",
+        "region" : "서울",
+        "kiosk" : 2,
+        "sales" : 3652914
+    },
+    {
+        "date" : "2023-02-08",
+        "category" : "도서",
+        "region" : "부산",
+        "kiosk" : 3,
+        "sales" : 3497610
+    },
+    {
+        "date" : "2023-02-08",
+        "category" : "게임",
+        "region" : "부산",
+        "kiosk" : 3,
+        "sales" : 8613993
+    },
+    {
+        "date" : "2023-02-08",
+        "category" : "음료",
+        "region" : "부산",
+        "kiosk" : 3,
+        "sales" : 2097457
+    },
+    {
+        "date" : "2023-02-08",
+        "category" : "제한물품",
+        "region" : "부산",
+        "kiosk" : 3,
+        "sales" : 537006
+    },
+    {
+        "date" : "2023-02-08",
+        "category" : "문구",
+        "region" : "부산",
+        "kiosk" : 3,
+        "sales" : 7308450
+    },
+    {
+        "date" : "2023-02-08",
+        "category" : "위생용품",
+        "region" : "부산",
+        "kiosk" : 3,
+        "sales" : 3225828
+    },
+    {
+        "date" : "2023-02-08",
+        "category" : "주방용품",
+        "region" : "부산",
+        "kiosk" : 4,
+        "sales" : 3586648
+    },
+    {
+        "date" : "2023-02-08",
+        "category" : "도서",
+        "region" : "서울",
+        "kiosk" : 4,
+        "sales" : 3575016
+    },
+    {
+        "date" : "2023-02-08",
+        "category" : "게임",
+        "region" : "서울",
+        "kiosk" : 4,
+        "sales" : 8594780
+    },
+    {
+        "date" : "2023-02-08",
+        "category" : "음료",
+        "region" : "서울",
+        "kiosk" : 4,
+        "sales" : 2050276
+    },
+    {
+        "date" : "2023-02-08",
+        "category" : "제한물품",
+        "region" : "서울",
+        "kiosk" : 4,
+        "sales" : 625966
+    },
+    {
+        "date" : "2023-02-08",
+        "category" : "문구",
+        "region" : "서울",
+        "kiosk" : 4,
+        "sales" : 7407859
+    },
+    {
+        "date" : "2023-02-08",
+        "category" : "위생용품",
+        "region" : "서울",
+        "kiosk" : 4,
+        "sales" : 3265907
+    },
+    {
+        "date" : "2023-02-08",
+        "category" : "주방용품",
+        "region" : "서울",
+        "kiosk" : 4,
+        "sales" : 3617439
+    },
+    {
+        "date" : "2023-02-09",
+        "category" : "도서",
+        "region" : "부산",
+        "kiosk" : 1,
+        "sales" : 3581530
+    },
+    {
+        "date" : "2023-02-09",
+        "category" : "게임",
+        "region" : "부산",
+        "kiosk" : 1,
+        "sales" : 8527439
+    },
+    {
+        "date" : "2023-02-09",
+        "category" : "음료",
+        "region" : "부산",
+        "kiosk" : 1,
+        "sales" : 2129152
+    },
+    {
+        "date" : "2023-02-09",
+        "category" : "제한물품",
+        "region" : "부산",
+        "kiosk" : 1,
+        "sales" : 586816
+    },
+    {
+        "date" : "2023-02-09",
+        "category" : "문구",
+        "region" : "부산",
+        "kiosk" : 1,
+        "sales" : 7457206
+    },
+    {
+        "date" : "2023-02-09",
+        "category" : "위생용품",
+        "region" : "부산",
+        "kiosk" : 1,
+        "sales" : 3182024
+    },
+    {
+        "date" : "2023-02-09",
+        "category" : "주방용품",
+        "region" : "부산",
+        "kiosk" : 1,
+        "sales" : 3572525
+    },
+    {
+        "date" : "2023-02-09",
+        "category" : "도서",
+        "region" : "서울",
+        "kiosk" : 1,
+        "sales" : 3583811
+    },
+    {
+        "date" : "2023-02-09",
+        "category" : "게임",
+        "region" : "서울",
+        "kiosk" : 1,
+        "sales" : 8609277
+    },
+    {
+        "date" : "2023-02-09",
+        "category" : "음료",
+        "region" : "서울",
+        "kiosk" : 1,
+        "sales" : 2062754
+    },
+    {
+        "date" : "2023-02-09",
+        "category" : "제한물품",
+        "region" : "서울",
+        "kiosk" : 1,
+        "sales" : 686541
+    },
+    {
+        "date" : "2023-02-09",
+        "category" : "문구",
+        "region" : "서울",
+        "kiosk" : 1,
+        "sales" : 7386374
+    },
+    {
+        "date" : "2023-02-09",
+        "category" : "위생용품",
+        "region" : "서울",
+        "kiosk" : 1,
+        "sales" : 3182695
+    },
+    {
+        "date" : "2023-02-09",
+        "category" : "주방용품",
+        "region" : "서울",
+        "kiosk" : 1,
+        "sales" : 3486862
+    },
+    {
+        "date" : "2023-02-09",
+        "category" : "도서",
+        "region" : "부산",
+        "kiosk" : 2,
+        "sales" : 3628032
+    },
+    {
+        "date" : "2023-02-09",
+        "category" : "게임",
+        "region" : "부산",
+        "kiosk" : 2,
+        "sales" : 8617705
+    },
+    {
+        "date" : "2023-02-09",
+        "category" : "음료",
+        "region" : "부산",
+        "kiosk" : 2,
+        "sales" : 1993873
+    },
+    {
+        "date" : "2023-02-09",
+        "category" : "제한물품",
+        "region" : "부산",
+        "kiosk" : 2,
+        "sales" : 744066
+    },
+    {
+        "date" : "2023-02-09",
+        "category" : "문구",
+        "region" : "부산",
+        "kiosk" : 2,
+        "sales" : 7372115
+    },
+    {
+        "date" : "2023-02-09",
+        "category" : "위생용품",
+        "region" : "부산",
+        "kiosk" : 2,
+        "sales" : 3125138
+    },
+    {
+        "date" : "2023-02-09",
+        "category" : "주방용품",
+        "region" : "부산",
+        "kiosk" : 2,
+        "sales" : 3497980
+    },
+    {
+        "date" : "2023-02-09",
+        "category" : "도서",
+        "region" : "서울",
+        "kiosk" : 2,
+        "sales" : 3601047
+    },
+    {
+        "date" : "2023-02-09",
+        "category" : "게임",
+        "region" : "서울",
+        "kiosk" : 2,
+        "sales" : 8695020
+    },
+    {
+        "date" : "2023-02-09",
+        "category" : "음료",
+        "region" : "서울",
+        "kiosk" : 2,
+        "sales" : 1924299
+    },
+    {
+        "date" : "2023-02-09",
+        "category" : "제한물품",
+        "region" : "서울",
+        "kiosk" : 2,
+        "sales" : 657016
+    },
+    {
+        "date" : "2023-02-09",
+        "category" : "문구",
+        "region" : "서울",
+        "kiosk" : 2,
+        "sales" : 7466138
+    },
+    {
+        "date" : "2023-02-09",
+        "category" : "위생용품",
+        "region" : "서울",
+        "kiosk" : 2,
+        "sales" : 3088320
+    },
+    {
+        "date" : "2023-02-09",
+        "category" : "주방용품",
+        "region" : "서울",
+        "kiosk" : 2,
+        "sales" : 3478115
+    },
+    {
+        "date" : "2023-02-09",
+        "category" : "도서",
+        "region" : "부산",
+        "kiosk" : 3,
+        "sales" : 3648666
+    },
+    {
+        "date" : "2023-02-09",
+        "category" : "게임",
+        "region" : "부산",
+        "kiosk" : 3,
+        "sales" : 8772031
+    },
+    {
+        "date" : "2023-02-09",
+        "category" : "음료",
+        "region" : "부산",
+        "kiosk" : 3,
+        "sales" : 1923930
+    },
+    {
+        "date" : "2023-02-09",
+        "category" : "제한물품",
+        "region" : "부산",
+        "kiosk" : 3,
+        "sales" : 690796
+    },
+    {
+        "date" : "2023-02-09",
+        "category" : "문구",
+        "region" : "부산",
+        "kiosk" : 3,
+        "sales" : 7556061
+    },
+    {
+        "date" : "2023-02-09",
+        "category" : "위생용품",
+        "region" : "부산",
+        "kiosk" : 3,
+        "sales" : 3105188
+    },
+    {
+        "date" : "2023-02-09",
+        "category" : "주방용품",
+        "region" : "부산",
+        "kiosk" : 4,
+        "sales" : 3427181
+    },
+    {
+        "date" : "2023-02-09",
+        "category" : "도서",
+        "region" : "서울",
+        "kiosk" : 4,
+        "sales" : 3747268
+    },
+    {
+        "date" : "2023-02-09",
+        "category" : "게임",
+        "region" : "서울",
+        "kiosk" : 4,
+        "sales" : 8853319
+    },
+    {
+        "date" : "2023-02-09",
+        "category" : "음료",
+        "region" : "서울",
+        "kiosk" : 4,
+        "sales" : 1898278
+    },
+    {
+        "date" : "2023-02-09",
+        "category" : "제한물품",
+        "region" : "서울",
+        "kiosk" : 4,
+        "sales" : 638918
+    },
+    {
+        "date" : "2023-02-09",
+        "category" : "문구",
+        "region" : "서울",
+        "kiosk" : 4,
+        "sales" : 7577470
+    },
+    {
+        "date" : "2023-02-09",
+        "category" : "위생용품",
+        "region" : "서울",
+        "kiosk" : 4,
+        "sales" : 3152997
+    },
+    {
+        "date" : "2023-02-09",
+        "category" : "주방용품",
+        "region" : "서울",
+        "kiosk" : 4,
+        "sales" : 3403409
+    },
+    {
+        "date" : "2023-02-10",
+        "category" : "도서",
+        "region" : "부산",
+        "kiosk" : 1,
+        "sales" : 3737564
+    },
+    {
+        "date" : "2023-02-10",
+        "category" : "게임",
+        "region" : "부산",
+        "kiosk" : 1,
+        "sales" : 8785995
+    },
+    {
+        "date" : "2023-02-10",
+        "category" : "음료",
+        "region" : "부산",
+        "kiosk" : 1,
+        "sales" : 1842294
+    },
+    {
+        "date" : "2023-02-10",
+        "category" : "제한물품",
+        "region" : "부산",
+        "kiosk" : 1,
+        "sales" : 589168
+    },
+    {
+        "date" : "2023-02-10",
+        "category" : "문구",
+        "region" : "부산",
+        "kiosk" : 1,
+        "sales" : 7657570
+    },
+    {
+        "date" : "2023-02-10",
+        "category" : "위생용품",
+        "region" : "부산",
+        "kiosk" : 1,
+        "sales" : 3182548
+    },
+    {
+        "date" : "2023-02-10",
+        "category" : "주방용품",
+        "region" : "부산",
+        "kiosk" : 1,
+        "sales" : 3486981
+    },
+    {
+        "date" : "2023-02-10",
+        "category" : "도서",
+        "region" : "서울",
+        "kiosk" : 1,
+        "sales" : 3651938
+    },
+    {
+        "date" : "2023-02-10",
+        "category" : "게임",
+        "region" : "서울",
+        "kiosk" : 1,
+        "sales" : 8845508
+    },
+    {
+        "date" : "2023-02-10",
+        "category" : "음료",
+        "region" : "서울",
+        "kiosk" : 1,
+        "sales" : 1787434
+    },
+    {
+        "date" : "2023-02-10",
+        "category" : "제한물품",
+        "region" : "서울",
+        "kiosk" : 1,
+        "sales" : 565637
+    },
+    {
+        "date" : "2023-02-10",
+        "category" : "문구",
+        "region" : "서울",
+        "kiosk" : 1,
+        "sales" : 7586955
+    },
+    {
+        "date" : "2023-02-10",
+        "category" : "위생용품",
+        "region" : "서울",
+        "kiosk" : 1,
+        "sales" : 3277381
+    },
+    {
+        "date" : "2023-02-10",
+        "category" : "주방용품",
+        "region" : "서울",
+        "kiosk" : 1,
+        "sales" : 3583918
+    },
+    {
+        "date" : "2023-02-10",
+        "category" : "도서",
+        "region" : "부산",
+        "kiosk" : 2,
+        "sales" : 3564343
+    },
+    {
+        "date" : "2023-02-10",
+        "category" : "게임",
+        "region" : "부산",
+        "kiosk" : 2,
+        "sales" : 8766953
+    },
+    {
+        "date" : "2023-02-10",
+        "category" : "음료",
+        "region" : "부산",
+        "kiosk" : 2,
+        "sales" : 1866638
+    },
+    {
+        "date" : "2023-02-10",
+        "category" : "제한물품",
+        "region" : "부산",
+        "kiosk" : 2,
+        "sales" : 574357
+    },
+    {
+        "date" : "2023-02-10",
+        "category" : "문구",
+        "region" : "부산",
+        "kiosk" : 2,
+        "sales" : 7494509
+    },
+    {
+        "date" : "2023-02-10",
+        "category" : "위생용품",
+        "region" : "부산",
+        "kiosk" : 2,
+        "sales" : 3337812
+    },
+    {
+        "date" : "2023-02-10",
+        "category" : "주방용품",
+        "region" : "부산",
+        "kiosk" : 2,
+        "sales" : 3622241
+    },
+    {
+        "date" : "2023-02-10",
+        "category" : "도서",
+        "region" : "서울",
+        "kiosk" : 2,
+        "sales" : 3610182
+    },
+    {
+        "date" : "2023-02-10",
+        "category" : "게임",
+        "region" : "서울",
+        "kiosk" : 2,
+        "sales" : 8772295
+    },
+    {
+        "date" : "2023-02-10",
+        "category" : "음료",
+        "region" : "서울",
+        "kiosk" : 2,
+        "sales" : 1803104
+    },
+    {
+        "date" : "2023-02-10",
+        "category" : "제한물품",
+        "region" : "서울",
+        "kiosk" : 2,
+        "sales" : 596420
+    },
+    {
+        "date" : "2023-02-10",
+        "category" : "문구",
+        "region" : "서울",
+        "kiosk" : 2,
+        "sales" : 7593085
+    },
+    {
+        "date" : "2023-02-10",
+        "category" : "위생용품",
+        "region" : "서울",
+        "kiosk" : 2,
+        "sales" : 3372871
+    },
+    {
+        "date" : "2023-02-10",
+        "category" : "주방용품",
+        "region" : "서울",
+        "kiosk" : 2,
+        "sales" : 3553020
+    },
+    {
+        "date" : "2023-02-10",
+        "category" : "도서",
+        "region" : "부산",
+        "kiosk" : 3,
+        "sales" : 3644438
+    },
+    {
+        "date" : "2023-02-10",
+        "category" : "게임",
+        "region" : "부산",
+        "kiosk" : 3,
+        "sales" : 8676962
+    },
+    {
+        "date" : "2023-02-10",
+        "category" : "음료",
+        "region" : "부산",
+        "kiosk" : 3,
+        "sales" : 1832614
+    },
+    {
+        "date" : "2023-02-10",
+        "category" : "제한물품",
+        "region" : "부산",
+        "kiosk" : 3,
+        "sales" : 627409
+    },
+    {
+        "date" : "2023-02-10",
+        "category" : "문구",
+        "region" : "부산",
+        "kiosk" : 3,
+        "sales" : 7635010
+    },
+    {
+        "date" : "2023-02-10",
+        "category" : "위생용품",
+        "region" : "부산",
+        "kiosk" : 3,
+        "sales" : 3283585
+    },
+    {
+        "date" : "2023-02-10",
+        "category" : "주방용품",
+        "region" : "부산",
+        "kiosk" : 4,
+        "sales" : 3505062
+    },
+    {
+        "date" : "2023-02-10",
+        "category" : "도서",
+        "region" : "서울",
+        "kiosk" : 4,
+        "sales" : 3723027
+    },
+    {
+        "date" : "2023-02-10",
+        "category" : "게임",
+        "region" : "서울",
+        "kiosk" : 4,
+        "sales" : 8707008
+    },
+    {
+        "date" : "2023-02-10",
+        "category" : "음료",
+        "region" : "서울",
+        "kiosk" : 4,
+        "sales" : 1893191
+    },
+    {
+        "date" : "2023-02-10",
+        "category" : "제한물품",
+        "region" : "서울",
+        "kiosk" : 4,
+        "sales" : 650415
+    },
+    {
+        "date" : "2023-02-10",
+        "category" : "문구",
+        "region" : "서울",
+        "kiosk" : 4,
+        "sales" : 7654721
+    },
+    {
+        "date" : "2023-02-10",
+        "category" : "위생용품",
+        "region" : "서울",
+        "kiosk" : 4,
+        "sales" : 3322704
+    },
+    {
+        "date" : "2023-02-10",
+        "category" : "주방용품",
+        "region" : "서울",
+        "kiosk" : 4,
+        "sales" : 3596669
+    },
+    {
+        "date" : "2023-02-11",
+        "category" : "도서",
+        "region" : "부산",
+        "kiosk" : 1,
+        "sales" : 3695166
+    },
+    {
+        "date" : "2023-02-11",
+        "category" : "게임",
+        "region" : "부산",
+        "kiosk" : 1,
+        "sales" : 8665780
+    },
+    {
+        "date" : "2023-02-11",
+        "category" : "음료",
+        "region" : "부산",
+        "kiosk" : 1,
+        "sales" : 1815310
+    },
+    {
+        "date" : "2023-02-11",
+        "category" : "제한물품",
+        "region" : "부산",
+        "kiosk" : 1,
+        "sales" : 617885
+    },
+    {
+        "date" : "2023-02-11",
+        "category" : "문구",
+        "region" : "부산",
+        "kiosk" : 1,
+        "sales" : 7696627
+    },
+    {
+        "date" : "2023-02-11",
+        "category" : "위생용품",
+        "region" : "부산",
+        "kiosk" : 1,
+        "sales" : 3229697
+    },
+    {
+        "date" : "2023-02-11",
+        "category" : "주방용품",
+        "region" : "부산",
+        "kiosk" : 1,
+        "sales" : 3508209
+    },
+    {
+        "date" : "2023-02-11",
+        "category" : "도서",
+        "region" : "서울",
+        "kiosk" : 1,
+        "sales" : 3713620
+    },
+    {
+        "date" : "2023-02-11",
+        "category" : "게임",
+        "region" : "서울",
+        "kiosk" : 1,
+        "sales" : 8696364
+    },
+    {
+        "date" : "2023-02-11",
+        "category" : "음료",
+        "region" : "서울",
+        "kiosk" : 1,
+        "sales" : 1738475
+    },
+    {
+        "date" : "2023-02-11",
+        "category" : "제한물품",
+        "region" : "서울",
+        "kiosk" : 1,
+        "sales" : 535344
+    },
+    {
+        "date" : "2023-02-11",
+        "category" : "문구",
+        "region" : "서울",
+        "kiosk" : 1,
+        "sales" : 7628089
+    },
+    {
+        "date" : "2023-02-11",
+        "category" : "위생용품",
+        "region" : "서울",
+        "kiosk" : 1,
+        "sales" : 3137609
+    },
+    {
+        "date" : "2023-02-11",
+        "category" : "주방용품",
+        "region" : "서울",
+        "kiosk" : 1,
+        "sales" : 3530945
+    },
+    {
+        "date" : "2023-02-11",
+        "category" : "도서",
+        "region" : "부산",
+        "kiosk" : 2,
+        "sales" : 3736945
+    },
+    {
+        "date" : "2023-02-11",
+        "category" : "게임",
+        "region" : "부산",
+        "kiosk" : 2,
+        "sales" : 8739792
+    },
+    {
+        "date" : "2023-02-11",
+        "category" : "음료",
+        "region" : "부산",
+        "kiosk" : 2,
+        "sales" : 1651688
+    },
+    {
+        "date" : "2023-02-11",
+        "category" : "제한물품",
+        "region" : "부산",
+        "kiosk" : 2,
+        "sales" : 506844
+    },
+    {
+        "date" : "2023-02-11",
+        "category" : "문구",
+        "region" : "부산",
+        "kiosk" : 2,
+        "sales" : 7550258
+    },
+    {
+        "date" : "2023-02-11",
+        "category" : "위생용품",
+        "region" : "부산",
+        "kiosk" : 2,
+        "sales" : 3106650
+    },
+    {
+        "date" : "2023-02-11",
+        "category" : "주방용품",
+        "region" : "부산",
+        "kiosk" : 2,
+        "sales" : 3542977
+    },
+    {
+        "date" : "2023-02-11",
+        "category" : "도서",
+        "region" : "서울",
+        "kiosk" : 2,
+        "sales" : 3672205
+    },
+    {
+        "date" : "2023-02-11",
+        "category" : "게임",
+        "region" : "서울",
+        "kiosk" : 2,
+        "sales" : 8829815
+    },
+    {
+        "date" : "2023-02-11",
+        "category" : "음료",
+        "region" : "서울",
+        "kiosk" : 2,
+        "sales" : 1659383
+    },
+    {
+        "date" : "2023-02-11",
+        "category" : "제한물품",
+        "region" : "서울",
+        "kiosk" : 2,
+        "sales" : 477446
+    },
+    {
+        "date" : "2023-02-11",
+        "category" : "문구",
+        "region" : "서울",
+        "kiosk" : 2,
+        "sales" : 7508999
+    },
+    {
+        "date" : "2023-02-11",
+        "category" : "위생용품",
+        "region" : "서울",
+        "kiosk" : 2,
+        "sales" : 3122289
+    },
+    {
+        "date" : "2023-02-11",
+        "category" : "주방용품",
+        "region" : "서울",
+        "kiosk" : 2,
+        "sales" : 3454823
+    },
+    {
+        "date" : "2023-02-11",
+        "category" : "도서",
+        "region" : "부산",
+        "kiosk" : 3,
+        "sales" : 3772153
+    },
+    {
+        "date" : "2023-02-11",
+        "category" : "게임",
+        "region" : "부산",
+        "kiosk" : 3,
+        "sales" : 8889245
+    },
+    {
+        "date" : "2023-02-11",
+        "category" : "음료",
+        "region" : "부산",
+        "kiosk" : 3,
+        "sales" : 1734824
+    },
+    {
+        "date" : "2023-02-11",
+        "category" : "제한물품",
+        "region" : "부산",
+        "kiosk" : 3,
+        "sales" : 382621
+    },
+    {
+        "date" : "2023-02-11",
+        "category" : "문구",
+        "region" : "부산",
+        "kiosk" : 3,
+        "sales" : 7471812
+    },
+    {
+        "date" : "2023-02-11",
+        "category" : "위생용품",
+        "region" : "부산",
+        "kiosk" : 3,
+        "sales" : 3205891
+    },
+    {
+        "date" : "2023-02-11",
+        "category" : "주방용품",
+        "region" : "부산",
+        "kiosk" : 4,
+        "sales" : 3520141
+    },
+    {
+        "date" : "2023-02-11",
+        "category" : "도서",
+        "region" : "서울",
+        "kiosk" : 4,
+        "sales" : 3715723
+    },
+    {
+        "date" : "2023-02-11",
+        "category" : "게임",
+        "region" : "서울",
+        "kiosk" : 4,
+        "sales" : 8913564
+    },
+    {
+        "date" : "2023-02-11",
+        "category" : "음료",
+        "region" : "서울",
+        "kiosk" : 4,
+        "sales" : 1685720
+    },
+    {
+        "date" : "2023-02-11",
+        "category" : "제한물품",
+        "region" : "서울",
+        "kiosk" : 4,
+        "sales" : 401396
+    },
+    {
+        "date" : "2023-02-11",
+        "category" : "문구",
+        "region" : "서울",
+        "kiosk" : 4,
+        "sales" : 7423672
+    },
+    {
+        "date" : "2023-02-11",
+        "category" : "위생용품",
+        "region" : "서울",
+        "kiosk" : 4,
+        "sales" : 3169237
+    },
+    {
+        "date" : "2023-02-11",
+        "category" : "주방용품",
+        "region" : "서울",
+        "kiosk" : 4,
+        "sales" : 3567574
+    },
+    {
+        "date" : "2023-02-12",
+        "category" : "도서",
+        "region" : "부산",
+        "kiosk" : 1,
+        "sales" : 3717391
+    },
+    {
+        "date" : "2023-02-12",
+        "category" : "게임",
+        "region" : "부산",
+        "kiosk" : 1,
+        "sales" : 8887698
+    },
+    {
+        "date" : "2023-02-12",
+        "category" : "음료",
+        "region" : "부산",
+        "kiosk" : 1,
+        "sales" : 1748957
+    },
+    {
+        "date" : "2023-02-12",
+        "category" : "제한물품",
+        "region" : "부산",
+        "kiosk" : 1,
+        "sales" : 355857
+    },
+    {
+        "date" : "2023-02-12",
+        "category" : "문구",
+        "region" : "부산",
+        "kiosk" : 1,
+        "sales" : 7439066
+    },
+    {
+        "date" : "2023-02-12",
+        "category" : "위생용품",
+        "region" : "부산",
+        "kiosk" : 1,
+        "sales" : 3121975
+    },
+    {
+        "date" : "2023-02-12",
+        "category" : "주방용품",
+        "region" : "부산",
+        "kiosk" : 1,
+        "sales" : 3609690
+    },
+    {
+        "date" : "2023-02-12",
+        "category" : "도서",
+        "region" : "서울",
+        "kiosk" : 1,
+        "sales" : 3735918
+    },
+    {
+        "date" : "2023-02-12",
+        "category" : "게임",
+        "region" : "서울",
+        "kiosk" : 1,
+        "sales" : 8807868
+    },
+    {
+        "date" : "2023-02-12",
+        "category" : "음료",
+        "region" : "서울",
+        "kiosk" : 1,
+        "sales" : 1830009
+    },
+    {
+        "date" : "2023-02-12",
+        "category" : "제한물품",
+        "region" : "서울",
+        "kiosk" : 1,
+        "sales" : 324127
+    },
+    {
+        "date" : "2023-02-12",
+        "category" : "문구",
+        "region" : "서울",
+        "kiosk" : 1,
+        "sales" : 7479377
+    },
+    {
+        "date" : "2023-02-12",
+        "category" : "위생용품",
+        "region" : "서울",
+        "kiosk" : 1,
+        "sales" : 3143164
+    },
+    {
+        "date" : "2023-02-12",
+        "category" : "주방용품",
+        "region" : "서울",
+        "kiosk" : 1,
+        "sales" : 3654910
+    },
+    {
+        "date" : "2023-02-12",
+        "category" : "도서",
+        "region" : "부산",
+        "kiosk" : 2,
+        "sales" : 3650169
+    },
+    {
+        "date" : "2023-02-12",
+        "category" : "게임",
+        "region" : "부산",
+        "kiosk" : 2,
+        "sales" : 8826958
+    },
+    {
+        "date" : "2023-02-12",
+        "category" : "음료",
+        "region" : "부산",
+        "kiosk" : 2,
+        "sales" : 1809083
+    },
+    {
+        "date" : "2023-02-12",
+        "category" : "제한물품",
+        "region" : "부산",
+        "kiosk" : 2,
+        "sales" : 257124
+    },
+    {
+        "date" : "2023-02-12",
+        "category" : "문구",
+        "region" : "부산",
+        "kiosk" : 2,
+        "sales" : 7522335
+    },
+    {
+        "date" : "2023-02-12",
+        "category" : "위생용품",
+        "region" : "부산",
+        "kiosk" : 2,
+        "sales" : 3223216
+    },
+    {
+        "date" : "2023-02-12",
+        "category" : "주방용품",
+        "region" : "부산",
+        "kiosk" : 2,
+        "sales" : 3650138
+    },
+    {
+        "date" : "2023-02-12",
+        "category" : "도서",
+        "region" : "서울",
+        "kiosk" : 2,
+        "sales" : 3599103
+    },
+    {
+        "date" : "2023-02-12",
+        "category" : "게임",
+        "region" : "서울",
+        "kiosk" : 2,
+        "sales" : 8811183
+    },
+    {
+        "date" : "2023-02-12",
+        "category" : "음료",
+        "region" : "서울",
+        "kiosk" : 2,
+        "sales" : 1775676
+    },
+    {
+        "date" : "2023-02-12",
+        "category" : "제한물품",
+        "region" : "서울",
+        "kiosk" : 2,
+        "sales" : 176851
+    },
+    {
+        "date" : "2023-02-12",
+        "category" : "문구",
+        "region" : "서울",
+        "kiosk" : 2,
+        "sales" : 7575158
+    },
+    {
+        "date" : "2023-02-12",
+        "category" : "위생용품",
+        "region" : "서울",
+        "kiosk" : 2,
+        "sales" : 3293224
+    },
+    {
+        "date" : "2023-02-12",
+        "category" : "주방용품",
+        "region" : "서울",
+        "kiosk" : 2,
+        "sales" : 3648873
+    },
+    {
+        "date" : "2023-02-12",
+        "category" : "도서",
+        "region" : "부산",
+        "kiosk" : 3,
+        "sales" : 3632435
+    },
+    {
+        "date" : "2023-02-12",
+        "category" : "게임",
+        "region" : "부산",
+        "kiosk" : 3,
+        "sales" : 8796541
+    },
+    {
+        "date" : "2023-02-12",
+        "category" : "음료",
+        "region" : "부산",
+        "kiosk" : 3,
+        "sales" : 1711984
+    },
+    {
+        "date" : "2023-02-12",
+        "category" : "제한물품",
+        "region" : "부산",
+        "kiosk" : 3,
+        "sales" : 184335
+    },
+    {
+        "date" : "2023-02-12",
+        "category" : "문구",
+        "region" : "부산",
+        "kiosk" : 3,
+        "sales" : 7575759
+    },
+    {
+        "date" : "2023-02-12",
+        "category" : "위생용품",
+        "region" : "부산",
+        "kiosk" : 3,
+        "sales" : 3330281
+    },
+    {
+        "date" : "2023-02-12",
+        "category" : "주방용품",
+        "region" : "부산",
+        "kiosk" : 4,
+        "sales" : 3617453
+    },
+    {
+        "date" : "2023-02-12",
+        "category" : "도서",
+        "region" : "서울",
+        "kiosk" : 4,
+        "sales" : 3560015
+    },
+    {
+        "date" : "2023-02-12",
+        "category" : "게임",
+        "region" : "서울",
+        "kiosk" : 4,
+        "sales" : 8744889
+    },
+    {
+        "date" : "2023-02-12",
+        "category" : "음료",
+        "region" : "서울",
+        "kiosk" : 4,
+        "sales" : 1654833
+    },
+    {
+        "date" : "2023-02-12",
+        "category" : "제한물품",
+        "region" : "서울",
+        "kiosk" : 4,
+        "sales" : 230850
+    },
+    {
+        "date" : "2023-02-12",
+        "category" : "문구",
+        "region" : "서울",
+        "kiosk" : 4,
+        "sales" : 7654883
+    },
+    {
+        "date" : "2023-02-12",
+        "category" : "위생용품",
+        "region" : "서울",
+        "kiosk" : 4,
+        "sales" : 3371542
+    },
+    {
+        "date" : "2023-02-12",
+        "category" : "주방용품",
+        "region" : "서울",
+        "kiosk" : 4,
+        "sales" : 3617939
+    },
+    {
+        "date" : "2023-02-13",
+        "category" : "게임",
+        "region" : "부산",
+        "kiosk" : 1,
+        "sales" : 3630944
+    },
+    {
+        "date" : "2023-02-13",
+        "category" : "음료",
+        "region" : "부산",
+        "kiosk" : 1,
+        "sales" : 8657971
+    },
+    {
+        "date" : "2023-02-13",
+        "category" : "제한물품",
+        "region" : "부산",
+        "kiosk" : 1,
+        "sales" : 1582948
+    },
+    {
+        "date" : "2023-02-13",
+        "category" : "문구",
+        "region" : "부산",
+        "kiosk" : 1,
+        "sales" : 284857
+    },
+    {
+        "date" : "2023-02-13",
+        "category" : "위생용품",
+        "region" : "부산",
+        "kiosk" : 1,
+        "sales" : 7603133
+    },
+    {
+        "date" : "2023-02-13",
+        "category" : "주방용품",
+        "region" : "부산",
+        "kiosk" : 1,
+        "sales" : 3413492
+    },
+    {
+        "date" : "2023-02-13",
+        "category" : "도서",
+        "region" : "서울",
+        "kiosk" : 1,
+        "sales" : 3650255
+    },
+    {
+        "date" : "2023-02-13",
+        "category" : "게임",
+        "region" : "서울",
+        "kiosk" : 1,
+        "sales" : 3584472
+    },
+    {
+        "date" : "2023-02-13",
+        "category" : "음료",
+        "region" : "서울",
+        "kiosk" : 1,
+        "sales" : 8691428
+    },
+    {
+        "date" : "2023-02-13",
+        "category" : "제한물품",
+        "region" : "서울",
+        "kiosk" : 1,
+        "sales" : 1603437
+    },
+    {
+        "date" : "2023-02-13",
+        "category" : "문구",
+        "region" : "서울",
+        "kiosk" : 1,
+        "sales" : 252096
+    },
+    {
+        "date" : "2023-02-13",
+        "category" : "위생용품",
+        "region" : "서울",
+        "kiosk" : 1,
+        "sales" : 7597436
+    },
+    {
+        "date" : "2023-02-13",
+        "category" : "주방용품",
+        "region" : "서울",
+        "kiosk" : 1,
+        "sales" : 3506888
+    },
+    {
+        "date" : "2023-02-13",
+        "category" : "도서",
+        "region" : "부산",
+        "kiosk" : 2,
+        "sales" : 3715836
+    },
+    {
+        "date" : "2023-02-13",
+        "category" : "게임",
+        "region" : "부산",
+        "kiosk" : 2,
+        "sales" : 3681853
+    },
+    {
+        "date" : "2023-02-13",
+        "category" : "음료",
+        "region" : "부산",
+        "kiosk" : 2,
+        "sales" : 8772332
+    },
+    {
+        "date" : "2023-02-13",
+        "category" : "제한물품",
+        "region" : "부산",
+        "kiosk" : 2,
+        "sales" : 1528630
+    },
+    {
+        "date" : "2023-02-13",
+        "category" : "문구",
+        "region" : "부산",
+        "kiosk" : 2,
+        "sales" : 342236
+    },
+    {
+        "date" : "2023-02-13",
+        "category" : "위생용품",
+        "region" : "부산",
+        "kiosk" : 2,
+        "sales" : 7503048
+    },
+    {
+        "date" : "2023-02-13",
+        "category" : "주방용품",
+        "region" : "부산",
+        "kiosk" : 2,
+        "sales" : 3594781
+    },
+    {
+        "date" : "2023-02-13",
+        "category" : "도서",
+        "region" : "서울",
+        "kiosk" : 2,
+        "sales" : 3709431
+    },
+    {
+        "date" : "2023-02-13",
+        "category" : "게임",
+        "region" : "서울",
+        "kiosk" : 2,
+        "sales" : 3596203
+    },
+    {
+        "date" : "2023-02-13",
+        "category" : "음료",
+        "region" : "서울",
+        "kiosk" : 2,
+        "sales" : 8715558
+    },
+    {
+        "date" : "2023-02-13",
+        "category" : "제한물품",
+        "region" : "서울",
+        "kiosk" : 2,
+        "sales" : 1624155
+    },
+    {
+        "date" : "2023-02-13",
+        "category" : "문구",
+        "region" : "서울",
+        "kiosk" : 2,
+        "sales" : 400758
+    },
+    {
+        "date" : "2023-02-13",
+        "category" : "위생용품",
+        "region" : "서울",
+        "kiosk" : 2,
+        "sales" : 7587175
+    },
+    {
+        "date" : "2023-02-13",
+        "category" : "주방용품",
+        "region" : "서울",
+        "kiosk" : 2,
+        "sales" : 3541697
+    },
+    {
+        "date" : "2023-02-13",
+        "category" : "도서",
+        "region" : "부산",
+        "kiosk" : 3,
+        "sales" : 3697601
+    },
+    {
+        "date" : "2023-02-13",
+        "category" : "게임",
+        "region" : "부산",
+        "kiosk" : 3,
+        "sales" : 3528418
+    },
+    {
+        "date" : "2023-02-13",
+        "category" : "음료",
+        "region" : "부산",
+        "kiosk" : 3,
+        "sales" : 8690060
+    },
+    {
+        "date" : "2023-02-13",
+        "category" : "제한물품",
+        "region" : "부산",
+        "kiosk" : 3,
+        "sales" : 1713221
+    },
+    {
+        "date" : "2023-02-13",
+        "category" : "문구",
+        "region" : "부산",
+        "kiosk" : 3,
+        "sales" : 444545
+    },
+    {
+        "date" : "2023-02-13",
+        "category" : "위생용품",
+        "region" : "부산",
+        "kiosk" : 3,
+        "sales" : 7659499
+    },
+    {
+        "date" : "2023-02-13",
+        "category" : "주방용품",
+        "region" : "부산",
+        "kiosk" : 4,
+        "sales" : 3461586
+    },
+    {
+        "date" : "2023-02-13",
+        "category" : "도서",
+        "region" : "서울",
+        "kiosk" : 4,
+        "sales" : 3712048
+    },
+    {
+        "date" : "2023-02-13",
+        "category" : "게임",
+        "region" : "서울",
+        "kiosk" : 4,
+        "sales" : 3563993
+    },
+    {
+        "date" : "2023-02-13",
+        "category" : "음료",
+        "region" : "서울",
+        "kiosk" : 4,
+        "sales" : 8624649
+    },
+    {
+        "date" : "2023-02-13",
+        "category" : "제한물품",
+        "region" : "서울",
+        "kiosk" : 4,
+        "sales" : 1618192
+    },
+    {
+        "date" : "2023-02-13",
+        "category" : "문구",
+        "region" : "서울",
+        "kiosk" : 4,
+        "sales" : 468317
+    },
+    {
+        "date" : "2023-02-13",
+        "category" : "위생용품",
+        "region" : "서울",
+        "kiosk" : 4,
+        "sales" : 7595834
+    },
+    {
+        "date" : "2023-02-13",
+        "category" : "주방용품",
+        "region" : "서울",
+        "kiosk" : 4,
+        "sales" : 3543555
+    },
+    {
+        "date" : "2023-02-14",
+        "category" : "게임",
+        "region" : "부산",
+        "kiosk" : 1,
+        "sales" : 3759758
+    },
+    {
+        "date" : "2023-02-14",
+        "category" : "음료",
+        "region" : "부산",
+        "kiosk" : 1,
+        "sales" : 3501037
+    },
+    {
+        "date" : "2023-02-14",
+        "category" : "제한물품",
+        "region" : "부산",
+        "kiosk" : 1,
+        "sales" : 8596937
+    },
+    {
+        "date" : "2023-02-14",
+        "category" : "문구",
+        "region" : "부산",
+        "kiosk" : 1,
+        "sales" : 1691375
+    },
+    {
+        "date" : "2023-02-14",
+        "category" : "위생용품",
+        "region" : "부산",
+        "kiosk" : 1,
+        "sales" : 468862
+    },
+    {
+        "date" : "2023-02-14",
+        "category" : "주방용품",
+        "region" : "부산",
+        "kiosk" : 1,
+        "sales" : 7653089
+    },
+    {
+        "date" : "2023-02-14",
+        "category" : "도서",
+        "region" : "서울",
+        "kiosk" : 1,
+        "sales" : 3564075
+    },
+    {
+        "date" : "2023-02-14",
+        "category" : "게임",
+        "region" : "서울",
+        "kiosk" : 1,
+        "sales" : 3673848
+    },
+    {
+        "date" : "2023-02-14",
+        "category" : "음료",
+        "region" : "서울",
+        "kiosk" : 1,
+        "sales" : 3567730
+    },
+    {
+        "date" : "2023-02-14",
+        "category" : "제한물품",
+        "region" : "서울",
+        "kiosk" : 1,
+        "sales" : 8690851
+    },
+    {
+        "date" : "2023-02-14",
+        "category" : "문구",
+        "region" : "서울",
+        "kiosk" : 1,
+        "sales" : 1663897
+    },
+    {
+        "date" : "2023-02-14",
+        "category" : "위생용품",
+        "region" : "서울",
+        "kiosk" : 1,
+        "sales" : 458975
+    },
+    {
+        "date" : "2023-02-14",
+        "category" : "주방용품",
+        "region" : "서울",
+        "kiosk" : 1,
+        "sales" : 7628319
+    },
+    {
+        "date" : "2023-02-14",
+        "category" : "도서",
+        "region" : "부산",
+        "kiosk" : 2,
+        "sales" : 3566837
+    },
+    {
+        "date" : "2023-02-14",
+        "category" : "게임",
+        "region" : "부산",
+        "kiosk" : 2,
+        "sales" : 3681350
+    },
+    {
+        "date" : "2023-02-14",
+        "category" : "음료",
+        "region" : "부산",
+        "kiosk" : 2,
+        "sales" : 3546694
+    },
+    {
+        "date" : "2023-02-14",
+        "category" : "제한물품",
+        "region" : "부산",
+        "kiosk" : 2,
+        "sales" : 8614899
+    },
+    {
+        "date" : "2023-02-14",
+        "category" : "문구",
+        "region" : "부산",
+        "kiosk" : 2,
+        "sales" : 1603236
+    },
+    {
+        "date" : "2023-02-14",
+        "category" : "위생용품",
+        "region" : "부산",
+        "kiosk" : 2,
+        "sales" : 486691
+    },
+    {
+        "date" : "2023-02-14",
+        "category" : "주방용품",
+        "region" : "부산",
+        "kiosk" : 2,
+        "sales" : 7586531
+    },
+    {
+        "date" : "2023-02-14",
+        "category" : "도서",
+        "region" : "서울",
+        "kiosk" : 2,
+        "sales" : 3653640
+    },
+    {
+        "date" : "2023-02-14",
+        "category" : "게임",
+        "region" : "서울",
+        "kiosk" : 2,
+        "sales" : 3659699
+    },
+    {
+        "date" : "2023-02-14",
+        "category" : "음료",
+        "region" : "서울",
+        "kiosk" : 2,
+        "sales" : 3628574
+    },
+    {
+        "date" : "2023-02-14",
+        "category" : "제한물품",
+        "region" : "서울",
+        "kiosk" : 2,
+        "sales" : 8711647
+    },
+    {
+        "date" : "2023-02-14",
+        "category" : "문구",
+        "region" : "서울",
+        "kiosk" : 2,
+        "sales" : 1675453
+    },
+    {
+        "date" : "2023-02-14",
+        "category" : "위생용품",
+        "region" : "서울",
+        "kiosk" : 2,
+        "sales" : 438291
+    },
+    {
+        "date" : "2023-02-14",
+        "category" : "주방용품",
+        "region" : "서울",
+        "kiosk" : 2,
+        "sales" : 7626604
+    },
+    {
+        "date" : "2023-02-14",
+        "category" : "도서",
+        "region" : "부산",
+        "kiosk" : 3,
+        "sales" : 3742949
+    },
+    {
+        "date" : "2023-02-14",
+        "category" : "게임",
+        "region" : "부산",
+        "kiosk" : 3,
+        "sales" : 3574248
+    },
+    {
+        "date" : "2023-02-14",
+        "category" : "음료",
+        "region" : "부산",
+        "kiosk" : 3,
+        "sales" : 3644846
+    },
+    {
+        "date" : "2023-02-14",
+        "category" : "제한물품",
+        "region" : "부산",
+        "kiosk" : 3,
+        "sales" : 8793090
+    },
+    {
+        "date" : "2023-02-14",
+        "category" : "문구",
+        "region" : "부산",
+        "kiosk" : 3,
+        "sales" : 1749065
+    },
+    {
+        "date" : "2023-02-14",
+        "category" : "위생용품",
+        "region" : "부산",
+        "kiosk" : 3,
+        "sales" : 373940
+    },
+    {
+        "date" : "2023-02-14",
+        "category" : "주방용품",
+        "region" : "부산",
+        "kiosk" : 4,
+        "sales" : 7656527
+    },
+    {
+        "date" : "2023-02-14",
+        "category" : "도서",
+        "region" : "서울",
+        "kiosk" : 4,
+        "sales" : 3699517
+    },
+    {
+        "date" : "2023-02-14",
+        "category" : "게임",
+        "region" : "서울",
+        "kiosk" : 4,
+        "sales" : 3545406
+    },
+    {
+        "date" : "2023-02-14",
+        "category" : "음료",
+        "region" : "서울",
+        "kiosk" : 4,
+        "sales" : 3657789
+    },
+    {
+        "date" : "2023-02-14",
+        "category" : "제한물품",
+        "region" : "서울",
+        "kiosk" : 4,
+        "sales" : 8853131
+    },
+    {
+        "date" : "2023-02-14",
+        "category" : "문구",
+        "region" : "서울",
+        "kiosk" : 4,
+        "sales" : 1733892
+    },
+    {
+        "date" : "2023-02-14",
+        "category" : "위생용품",
+        "region" : "서울",
+        "kiosk" : 4,
+        "sales" : 404791
+    },
+    {
+        "date" : "2023-02-14",
+        "category" : "주방용품",
+        "region" : "서울",
+        "kiosk" : 4,
+        "sales" : 7645683
+    },
+    {
+        "date" : "2023-02-15",
+        "category" : "게임",
+        "region" : "부산",
+        "kiosk" : 1,
+        "sales" : 3497493
+    },
+    {
+        "date" : "2023-02-15",
+        "category" : "음료",
+        "region" : "부산",
+        "kiosk" : 1,
+        "sales" : 3683121
+    },
+    {
+        "date" : "2023-02-15",
+        "category" : "제한물품",
+        "region" : "부산",
+        "kiosk" : 1,
+        "sales" : 8921215
+    },
+    {
+        "date" : "2023-02-15",
+        "category" : "문구",
+        "region" : "부산",
+        "kiosk" : 1,
+        "sales" : 1832319
+    },
+    {
+        "date" : "2023-02-15",
+        "category" : "위생용품",
+        "region" : "부산",
+        "kiosk" : 1,
+        "sales" : 383696
+    },
+    {
+        "date" : "2023-02-15",
+        "category" : "주방용품",
+        "region" : "부산",
+        "kiosk" : 1,
+        "sales" : 7721629
+    },
+    {
+        "date" : "2023-02-15",
+        "category" : "도서",
+        "region" : "서울",
+        "kiosk" : 1,
+        "sales" : "#REF!"
+    },
+    {
+        "date" : "2023-02-15",
+        "category" : "게임",
+        "region" : "서울",
+        "kiosk" : 1,
+        "sales" : 3510402
+    },
+    {
+        "date" : "2023-02-15",
+        "category" : "음료",
+        "region" : "서울",
+        "kiosk" : 1,
+        "sales" : 3658699
+    },
+    {
+        "date" : "2023-02-15",
+        "category" : "제한물품",
+        "region" : "서울",
+        "kiosk" : 1,
+        "sales" : 8905859
+    },
+    {
+        "date" : "2023-02-15",
+        "category" : "문구",
+        "region" : "서울",
+        "kiosk" : 1,
+        "sales" : 1776035
+    },
+    {
+        "date" : "2023-02-15",
+        "category" : "위생용품",
+        "region" : "서울",
+        "kiosk" : 1,
+        "sales" : 407403
+    },
+    {
+        "date" : "2023-02-15",
+        "category" : "주방용품",
+        "region" : "서울",
+        "kiosk" : 1,
+        "sales" : 7658913
+    },
+    {
+        "date" : "2023-02-15",
+        "category" : "도서",
+        "region" : "부산",
+        "kiosk" : 2,
+        "sales" : "#REF!"
+    },
+    {
+        "date" : "2023-02-15",
+        "category" : "게임",
+        "region" : "부산",
+        "kiosk" : 2,
+        "sales" : 3540008
+    },
+    {
+        "date" : "2023-02-15",
+        "category" : "음료",
+        "region" : "부산",
+        "kiosk" : 2,
+        "sales" : 3706347
+    },
+    {
+        "date" : "2023-02-15",
+        "category" : "제한물품",
+        "region" : "부산",
+        "kiosk" : 2,
+        "sales" : 8955252
+    },
+    {
+        "date" : "2023-02-15",
+        "category" : "문구",
+        "region" : "부산",
+        "kiosk" : 2,
+        "sales" : 1805245
+    },
+    {
+        "date" : "2023-02-15",
+        "category" : "위생용품",
+        "region" : "부산",
+        "kiosk" : 2,
+        "sales" : 400698
+    },
+    {
+        "date" : "2023-02-15",
+        "category" : "주방용품",
+        "region" : "부산",
+        "kiosk" : 2,
+        "sales" : 7615023
+    },
+    {
+        "date" : "2023-02-15",
+        "category" : "도서",
+        "region" : "서울",
+        "kiosk" : 2,
+        "sales" : "#REF!"
+    },
+    {
+        "date" : "2023-02-15",
+        "category" : "게임",
+        "region" : "서울",
+        "kiosk" : 2,
+        "sales" : 3639111
+    },
+    {
+        "date" : "2023-02-15",
+        "category" : "음료",
+        "region" : "서울",
+        "kiosk" : 2,
+        "sales" : 3713861
+    },
+    {
+        "date" : "2023-02-15",
+        "category" : "제한물품",
+        "region" : "서울",
+        "kiosk" : 2,
+        "sales" : 8983568
+    },
+    {
+        "date" : "2023-02-15",
+        "category" : "문구",
+        "region" : "서울",
+        "kiosk" : 2,
+        "sales" : 1817391
+    },
+    {
+        "date" : "2023-02-15",
+        "category" : "위생용품",
+        "region" : "서울",
+        "kiosk" : 2,
+        "sales" : 394626
+    },
+    {
+        "date" : "2023-02-15",
+        "category" : "주방용품",
+        "region" : "서울",
+        "kiosk" : 2,
+        "sales" : 7526895
+    },
+    {
+        "date" : "2023-02-15",
+        "category" : "도서",
+        "region" : "부산",
+        "kiosk" : 3,
+        "sales" : "#REF!"
+    },
+    {
+        "date" : "2023-02-15",
+        "category" : "게임",
+        "region" : "부산",
+        "kiosk" : 3,
+        "sales" : 3724772
+    },
+    {
+        "date" : "2023-02-15",
+        "category" : "음료",
+        "region" : "부산",
+        "kiosk" : 3,
+        "sales" : 3641717
+    },
+    {
+        "date" : "2023-02-15",
+        "category" : "제한물품",
+        "region" : "부산",
+        "kiosk" : 3,
+        "sales" : 9005892
+    },
+    {
+        "date" : "2023-02-15",
+        "category" : "문구",
+        "region" : "부산",
+        "kiosk" : 3,
+        "sales" : 1833836
+    },
+    {
+        "date" : "2023-02-15",
+        "category" : "위생용품",
+        "region" : "부산",
+        "kiosk" : 3,
+        "sales" : 434977
+    },
+    {
+        "date" : "2023-02-15",
+        "category" : "주방용품",
+        "region" : "부산",
+        "kiosk" : 4,
+        "sales" : 7579184
+    },
+    {
+        "date" : "2023-02-15",
+        "category" : "도서",
+        "region" : "서울",
+        "kiosk" : 4,
+        "sales" : "#REF!"
+    },
+    {
+        "date" : "2023-02-15",
+        "category" : "게임",
+        "region" : "서울",
+        "kiosk" : 4,
+        "sales" : 3720215
+    },
+    {
+        "date" : "2023-02-15",
+        "category" : "음료",
+        "region" : "서울",
+        "kiosk" : 4,
+        "sales" : 3616057
+    },
+    {
+        "date" : "2023-02-15",
+        "category" : "제한물품",
+        "region" : "서울",
+        "kiosk" : 4,
+        "sales" : 9004084
+    },
+    {
+        "date" : "2023-02-15",
+        "category" : "문구",
+        "region" : "서울",
+        "kiosk" : 4,
+        "sales" : 1854543
+    },
+    {
+        "date" : "2023-02-15",
+        "category" : "위생용품",
+        "region" : "서울",
+        "kiosk" : 4,
+        "sales" : 392419
+    },
+    {
+        "date" : "2023-02-15",
+        "category" : "주방용품",
+        "region" : "서울",
+        "kiosk" : 4,
+        "sales" : 7485931
+    },
+    {
+        "date" : "2023-02-15",
+        "category" : "",
+        "region" : "",
+        "kiosk" : "",
+        "sales" : "#REF!"
+    }
+]

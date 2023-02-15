@@ -223,4 +223,14 @@ public class AdminController {
         adminService.deleteProductCategory(categoryId);
         return new ResponseEntity<>("제거완료", HttpStatus.OK);
     }
+
+    @GetMapping("/report/sale")
+    public ResponseEntity<List<SaleReportRespDto>> saleReport() {
+        return new ResponseEntity<>(adminService.saleReport(), HttpStatus.OK);
+    }
+
+    @GetMapping("/report/user")
+    public ResponseEntity<List<UserReportRespDto>> userReport() {
+        return new ResponseEntity<>(adminService.userReport(), HttpStatus.OK);
+    }
 }
