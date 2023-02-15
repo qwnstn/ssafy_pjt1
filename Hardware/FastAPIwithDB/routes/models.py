@@ -44,6 +44,7 @@ class Product(BaseModel):
     rfid: Optional[str] = None
     barcode: Optional[str] = None
     image: Optional[str] = None
+    isAdult: bool = False
 
 
 class ProductList(BaseModel):

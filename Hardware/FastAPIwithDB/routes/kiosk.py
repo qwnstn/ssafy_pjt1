@@ -1,6 +1,5 @@
 import asyncio
 import json
-
 import requests
 from fastapi import APIRouter, Depends, Request
 from sqlalchemy.orm import Session
@@ -14,7 +13,6 @@ from routes.models import BarcodeList, CardId, CardList, RFIDList
 from routes.websocket import sendMsg
 
 sessionStore = SessionStorage()
-
 router = APIRouter(
     prefix="/api/kiosk",  # url 앞에 고정적으로 붙는 경로추가
 )  # Route 분리
@@ -104,7 +102,11 @@ def 카드정보전송(request: Request, CardList: CardList):
     global cardInfo
     cardInfo = asyncio.run(request.json())
     asyncio.run(sendMsg("next"))
-    return {"message": "OK"}
+    res = requests.Response()
+    res.status_code = 200
+    msg = '{"message": "OK"}'
+    res._content = msg.encode("utf-8")
+    return res
 
 
 @router.get("/rfid")

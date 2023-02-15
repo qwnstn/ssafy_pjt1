@@ -40,7 +40,8 @@ def copy_products(products: list, db: Session):
             price= prd['price'],
             rfid= prd['rfid'],
             barcode= prd['barcode'],
-            image= prd['image']
+            image= prd['image'],
+            isAdult=prd["isAdult"]
         )
         db.add(product)
     db.commit()
@@ -56,7 +57,8 @@ def create_product(products: list, db: Session):
             price= prd['price'],
             rfid= prd['rfid'],
             barcode= prd['barcode'],
-            image= prd['image']
+            image= prd['image'],
+            isAdult=prd["isAdult"]
         )
         db.add(product)
     i = len(products)
