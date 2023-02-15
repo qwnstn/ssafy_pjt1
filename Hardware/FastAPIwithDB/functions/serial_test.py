@@ -28,7 +28,7 @@ class RFID_Serial_Trans:
                 result = list()
                 for key, value in self.tag_uid.items():
                     if value > 3:
-                        result.append(str(key).upper())
+                        result.append(key.upper())
                 self.read_flag = False
 
                 return result
