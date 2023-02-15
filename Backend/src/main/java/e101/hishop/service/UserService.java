@@ -42,6 +42,7 @@ public interface UserService {
     List<PayDetailInfoRespDto> getPayDetail(Long purchaseId);
 
     Long getUserId();
+    public Long sendTime();
     public String qrRead(QrReqDto dto);
     List<PointRespDto> getPoint();
 }
