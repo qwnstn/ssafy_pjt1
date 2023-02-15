@@ -14,7 +14,6 @@ from routes.models import BarcodeList, CardId, CardList, RFIDList
 from routes.websocket import sendMsg
 
 sessionStore = SessionStorage()
-
 router = APIRouter(
     prefix="/api/kiosk",  # url 앞에 고정적으로 붙는 경로추가
 )  # Route 분리
@@ -103,8 +102,12 @@ def 키오스크_QR읽기(request: Request):
 def 카드정보전송(request: Request, CardList: CardList):
     global cardInfo
     cardInfo = asyncio.run(request.json())
-    sendMsg("next")
-    return {"message": "OK"}
+    asyncio.run(sendMsg("next"))
+    res = requests.Response()
+    res.status_code = 200
+    msg = '{"message": "OK"}'
+    res._content = msg.encode("utf-8")
+    return res
 
 
 @router.get("/rfid")
@@ -121,7 +124,6 @@ def RFID_리딩(request: Request, db: Session = Depends(get_db)):
         "cardList": cardInfo["cardList"],
         "itemList": products,
     })))
-
 
 
 # @router.post("/rfid")
