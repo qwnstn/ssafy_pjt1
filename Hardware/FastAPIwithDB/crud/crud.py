@@ -6,7 +6,8 @@ from sqlalchemy.orm import Session
 [str, str, str]
 def select_products_with_rfid(rfids: list, db: Session):
     rlt = list()
-
+    if not rfids:
+        return rlt
     # SQLite DB 연결
     conn = sqlite3.connect("db.sqlite")
     
