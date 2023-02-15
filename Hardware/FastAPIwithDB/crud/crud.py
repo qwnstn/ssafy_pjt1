@@ -1,20 +1,35 @@
-from sqlalchemy import select
-from sqlalchemy.orm import Session
+import sqlite3
 
 from db.models.model import Product_Kiosk, Shopping
+from sqlalchemy.orm import Session
 
-
+[str, str, str]
 def select_products_with_rfid(rfids: list, db: Session):
-    # rlt = db.execute(select(Product_Kiosk).where(Product_Kiosk.rfid.in_(rfids)))
-    # rlt = db.query(Product_Kiosk).filter(Product_Kiosk.rfid.in_(rfids)).all()
     rlt = list()
-    # q = db.query(Product_Kiosk).filter(Product_Kiosk.rfid==rid).first()
-    # q = db.scalars(select(Product_Kiosk).where(Product_Kiosk.rfid.in_(rfids)))
-    for rid in rfids:
-        db.query(Product_Kiosk).get({"rfid": rid})
-        q = db.query(Product_Kiosk).filter_by(rfid=rid).all()
-        print(rid, q, db.query(Product_Kiosk).get({"rfid": rid}))
-        rlt.append(q) if q else None
+    if not rfids:
+        return rlt
+    # SQLite DB 연결
+    conn = sqlite3.connect("db.sqlite")
+    
+    # Connection 으로부터 Cursor 생성
+    cur = conn.cursor()
+    query = "select * from Product_Kiosk where rfid in ("
+    query += ", ".join([f"'{rid}'" for rid in rfids])
+    query += ");"
+    print(query)
+    # 데이타 Fetch
+    rows = cur.fetchall()
+    for row in rows:
+        product = {
+            "productId": row[1],
+            "name": row[2],
+            "price": row[3],
+            "rfid": row[4],
+            "barcode": row[5],
+            "img": row[6]
+        }
+        rlt.append(product)
+        print(row)
     return rlt
 
 
@@ -26,7 +41,8 @@ def copy_products(products: list, db: Session):
             price= prd['price'],
             rfid= prd['rfid'],
             barcode= prd['barcode'],
-            image= prd['image']
+            image= prd['image'],
+            isAdult=prd["isAdult"]
         )
         db.add(product)
     db.commit()
@@ -42,7 +58,8 @@ def create_product(products: list, db: Session):
             price= prd['price'],
             rfid= prd['rfid'],
             barcode= prd['barcode'],
-            image= prd['image']
+            image= prd['image'],
+            isAdult=prd["isAdult"]
         )
         db.add(product)
     i = len(products)
@@ -59,7 +76,6 @@ def delete_product(ids: list, db: Session):
 
 
 def create_shopping(shoppings: list, date, db: Session):
-    byingdict = dict()
     for shp in shoppings:
         shopping = Shopping(
             count=shp["count"],

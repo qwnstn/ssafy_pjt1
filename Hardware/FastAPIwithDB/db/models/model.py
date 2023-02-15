@@ -1,6 +1,6 @@
 from typing import Optional
-
-from sqlalchemy import DATE, Column, ForeignKey, Integer, String
+import json
+from sqlalchemy import DATE, Column, ForeignKey, Integer, String, Boolean
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
 
@@ -17,10 +17,11 @@ class Product_Kiosk(Base):
     rfid: Mapped[str] = mapped_column(String, nullable=True)
     barcode: Mapped[str] = mapped_column(String, nullable=True)
     image: Mapped[str] = mapped_column(String, nullable=True)
+    isAdult: Mapped[bool] = mapped_column(Boolean)
     shopping = relationship("Shopping")
 
     def __repr__(self) -> str:
-        return {"id": self.id, "name": self.name, "productId": self.productId, "price": self.price, "rfid":self.rfid, "barcode": self.barcode}
+        return json.dumps({"id": self.id, "name": self.name, "productId": self.productId, "price": self.price, "rfid":self.rfid, "barcode": self.barcode})
 
 
 class Shopping(Base):

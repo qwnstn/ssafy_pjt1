@@ -1,6 +1,5 @@
 import asyncio
 import json
-
 import requests
 from fastapi import APIRouter, Depends, Request
 from sqlalchemy.orm import Session
@@ -11,10 +10,9 @@ from db.connection import get_db
 from functions.barcode_test import SessionStorage
 from functions.serial_test import RFID_Serial_Trans
 from routes.models import BarcodeList, CardId, CardList, RFIDList
-from routes.websocket import send
+from routes.websocket import sendMsg
 
 sessionStore = SessionStorage()
-
 router = APIRouter(
     prefix="/api/kiosk",  # url 앞에 고정적으로 붙는 경로추가
 )  # Route 분리
@@ -79,11 +77,36 @@ def 키오스크_아이디(request: Request):
     return {"kioskId": KIOSK_ID}
 
 
+@router.post("/qr")
+def 키오스크_QR읽기(request: Request):
+    userInfo = asyncio.run(request.json())
+    url = f"{BASE_URL}/api/user/qr"
+    headers = {
+        "Authorization": f"Bearer {userInfo['token']}",
+        # "Content-Type": "applicaation/json"
+    }
+    payload = {
+        "kioskId": KIOSK_ID,
+        "datetime": int(userInfo["datetime"])
+    }
+    r = requests.post(url=url, headers=headers, json=payload, )
+    if r.status_code == 200:
+        print("정상적인 QR코드")
+        asyncio.run(sendMsg("next"))
+    else:
+        print("이딴걸 QR이라고 보냈냐", r.status_code)
+
+
 @router.post("/cardinfo")
 def 카드정보전송(request: Request, CardList: CardList):
     global cardInfo
     cardInfo = asyncio.run(request.json())
-    return {"message": "OK"}
+    asyncio.run(sendMsg("next"))
+    res = requests.Response()
+    res.status_code = 200
+    msg = '{"message": "OK"}'
+    res._content = msg.encode("utf-8")
+    return res
 
 
 @router.get("/rfid")
@@ -91,21 +114,10 @@ def RFID_리딩(request: Request, db: Session = Depends(get_db)):
     # RFID 시작
     rfid_uids = asyncio.run(RFID_Serial_Trans().main())
     # rfid 상품정보를 이용해서 DB 조회
-    querys = select_products_with_rfid(rfid_uids, db)
-    products = list()
-    for q in querys:
-        print(q)
-        prd = dict()
-        prd['productId'] = q.product_id
-        prd['name'] = q.name
-        prd['price'] = q.price
-        # prd['rfid'] = q.rfid
-        # prd['barcode'] = q.barcode
-        # prd['image'] = q.image
-        products.append(prd)
+    products = select_products_with_rfid(rfid_uids, db)
     global productInfo
     productInfo = products
-    asyncio.run(send(json.dumps({
+    asyncio.run(sendMsg(json.dumps({
         "userId": cardInfo["userId"],
         "defaultCardId": cardInfo["defaultCardId"],
         "cardList": cardInfo["cardList"],
