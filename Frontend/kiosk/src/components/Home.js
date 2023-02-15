@@ -167,7 +167,7 @@ export default function KioskMain() {
             <Grid item xs={4} sx={{ m: 1 }}>
               <Card sx={{ padding: 1 }}>
                 <QrReader
-                  delay={500}
+                  delay={2000}
                   onError={handleError}
                   onScan={handleScan}
                 />

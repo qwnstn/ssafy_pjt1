@@ -7,12 +7,18 @@ import HOST from "../../Host";
 import axios from "axios";
 
 
+
+
 function QRMaker() {
   const accesstoken = localStorage.getItem("accesstoken");
 
   function getTime() {
     axios
-      .get(`${HOST}/user/time`)
+      .get(`${HOST}/user/time`,{
+        headers: {
+          Authorization: `Bearer ${accesstoken}`,
+        },
+      })
       .then(function (response) {
         console.log(response, "성공");
         setTime(response.data.datetime);
