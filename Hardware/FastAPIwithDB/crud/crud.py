@@ -13,27 +13,23 @@ def select_products_with_rfid(rfids: list, db: Session):
     
     # Connection 으로부터 Cursor 생성
     cur = conn.cursor()
-    query = "select * from Product_Kiosk where rfid="
-    for rid in rfids:
-        query += f"{rid} and "
-    else:
-        query.rstrip(" and ")
-        # SQL 쿼리 실행
-        cur.execute(query)
+    query = "select * from Product_Kiosk where rfid IN ("
+    query += ", ".join([f"'{rid}'" for rid in rfids])
+    query += ")"
         
-        # 데이타 Fetch
-        rows = cur.fetchall()
-        for row in rows:
-            product = {
-                "productId": row[1],
-                "name": row[2],
-                "price": row[3],
-                "rfid": row[4],
-                "barcode": row[5],
-                "img": row[6]
-            }
-            rlt.append(product)
-            print(row)
+    # 데이타 Fetch
+    rows = cur.fetchall()
+    for row in rows:
+        product = {
+            "productId": row[1],
+            "name": row[2],
+            "price": row[3],
+            "rfid": row[4],
+            "barcode": row[5],
+            "img": row[6]
+        }
+        rlt.append(product)
+        print(row)
     return rlt
 
 
