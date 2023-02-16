@@ -12,6 +12,7 @@ class BarcodeList(BaseModel):
     kioskId: int
     barcode: str
 
+
 class Card(BaseModel):
     cardId: int
     cardName: str
