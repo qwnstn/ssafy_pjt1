@@ -179,36 +179,6 @@ const SignIn = () => {
                 </Link>
               </Grid>
             </Grid>
-            <Button
-              color="kakao"
-              fullWidth
-              startIcon={
-                <img
-                  src="./images/kakao_login.png"
-                  width={"28"}
-                  alt="kakao_login"
-                />
-              }
-              variant="contained"
-              sx={{ mt: 3 }}
-            >
-              카카오 로그인
-            </Button>
-            <Button
-              color="naver"
-              fullWidth
-              variant="contained"
-              startIcon={
-                <img
-                  src="./images/login_naver_w.png"
-                  width={"28"}
-                  alt="naver_login"
-                />
-              }
-              sx={{ mt: 3, mb: 2 }}
-            >
-              네이버 로그인
-            </Button>
           </Box>
         </Box>
       </Container>

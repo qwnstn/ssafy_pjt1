@@ -83,4 +83,8 @@ public class IotServicelmpl implements IotService{
         return pay.getId();
     }
 
+    @Override
+    public Long sendTime() {
+        return System.currentTimeMillis() / 1000;
+    }
 }

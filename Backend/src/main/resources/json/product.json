@@ -4,7 +4,7 @@
         "image" : "poker.jpg",
         "name" : "바퀴벌레 포커",
         "price" : 14900,
-        "rfid" : "",
+        "rfid" : "BB4247AC500104E0",
         "isAdult" : "FALSE",
         "manuId" : null,
         "categoryId" : 3
@@ -24,7 +24,7 @@
         "image" : "mouse.jpg",
         "name" : "단단한 파이썬",
         "price" : 130000,
-        "rfid" : "",
+        "rfid" : "FE9146AC500104E0",
         "isAdult" : "FALSE",
         "manuId" : 4,
         "categoryId" : 2
@@ -34,7 +34,7 @@
         "image" : "drink.jpg",
         "name" : "Crystal Light",
         "price" : 1500,
-        "rfid" : "",
+        "rfid" : "FC4947AC500104E0",
         "isAdult" : "FALSE",
         "manuId" : 1,
         "categoryId" : 4

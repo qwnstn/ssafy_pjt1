@@ -162,7 +162,8 @@ export default function ItemList() {
             fontSize: 40,
             padding: 1,
             textAlign: "center",
-            backgroundColor: "#ff8c8c",
+            backgroundColor: "#ed1c23",
+            color:'white',
             fontWeight: "bold",
             width: "97vw",
           }}

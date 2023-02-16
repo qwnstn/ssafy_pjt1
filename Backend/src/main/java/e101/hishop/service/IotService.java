@@ -7,4 +7,5 @@ import e101.hishop.domain.dto.request.RfidReqDto;
 public interface IotService {
     Long memberPay(MemberReqDto dto);
     Long guestPay(GuestReqDto dto);
+    public Long sendTime();
 }

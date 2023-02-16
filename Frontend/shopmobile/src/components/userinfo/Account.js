@@ -121,45 +121,45 @@ export default function Account() {
         >
           내 정보 수정
         </Card>
-        <Grid container spacing={2} sx={{ mt: 1, mb: 1 }}>
+        <Grid container spacing={2} sx={{ mt: 1, mb: 1}}>
           <Grid item xs={4}>
-            <Item>아이디</Item>
+            <Item sx={{fontWeight:'bold'}}>아이디</Item>
           </Grid>
           <Grid item xs={8}>
             <Item>{userId}</Item>
           </Grid>
           <Grid item xs={4}>
-            <Item>패스워드</Item>
+            <Item sx={{fontWeight:'bold'}}>패스워드</Item>
           </Grid>
           <Grid item xs={8}>
             <Item>●●●●●●●●●●●●</Item>
           </Grid>
           <Grid item xs={4}>
-            <Item>이름</Item>
+            <Item sx={{fontWeight:'bold'}}>이름</Item>
           </Grid>
           <Grid item xs={8}>
             <Item>{name}</Item>
           </Grid>
           <Grid item xs={4}>
-            <Item>휴대전화</Item>
+            <Item sx={{fontWeight:'bold'}}>휴대전화</Item>
           </Grid>
           <Grid item xs={8}>
             <Item>{phone ? phone : "."}</Item>
           </Grid>
           <Grid item xs={4}>
-            <Item>성별</Item>
+            <Item sx={{fontWeight:'bold'}}>성별</Item>
           </Grid>
           <Grid item xs={8}>
             <Item>{gender}</Item>
           </Grid>
           <Grid item xs={4}>
-            <Item>생년월일</Item>
+            <Item sx={{fontWeight:'bold'}}>생년월일</Item>
           </Grid>
           <Grid item xs={8}>
             <Item>{birthDate}</Item>
           </Grid>
           <Grid item xs={4}>
-            <Item>이메일</Item>
+            <Item sx={{fontWeight:'bold'}}>이메일</Item>
           </Grid>
           <Grid item xs={8}>
             <Item>{email ? email : "."}</Item>
