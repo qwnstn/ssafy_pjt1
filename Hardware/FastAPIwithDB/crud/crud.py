@@ -1,7 +1,8 @@
 import sqlite3
 
-from db.models.model import Product_Kiosk, Shopping
 from sqlalchemy.orm import Session
+
+from db.models.model import Product_Kiosk, Shopping
 
 [str, str, str]
 def select_products_with_rfid(rfids: list, db: Session):
@@ -13,12 +14,27 @@ def select_products_with_rfid(rfids: list, db: Session):
     
     # Connection 으로부터 Cursor 생성
     cur = conn.cursor()
+    # 테스트 1
     query = "select * from Product_Kiosk where rfid in ("
     query += ", ".join([f'"{rid}"' for rid in rfids])
     query += ");"
+    # 쿼리 확인
     print(query)
+    cur.execute(query)
     # 데이타 Fetch
     rows = cur.fetchall()
+    # 테스트 2
+    # rows = list
+    # for rid in rfids:
+    #     query = "select * from Product_Kiosk where rfid like " + f"'{rid}';"
+    #     # 쿼리 확인
+    #     print(query)
+    #     cur.execute(query)
+    #     # 데이터 Fetch 후 저장
+    #     rows.append(cur.fetchall())
+    
+    # 결과 확인
+    print(rows)
     for row in rows:
         product = {
             "productId": row[1],
@@ -26,10 +42,10 @@ def select_products_with_rfid(rfids: list, db: Session):
             "price": row[3],
             "rfid": row[4],
             "barcode": row[5],
-            "img": row[6]
+            "img": row[6],
+            "isAdult": row[7]
         }
         rlt.append(product)
-        print(row)
     return rlt
 
 
