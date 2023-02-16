@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Builder
-@ToString(exclude = {"user, pays"})
 @Entity
 @Getter
 @Setter

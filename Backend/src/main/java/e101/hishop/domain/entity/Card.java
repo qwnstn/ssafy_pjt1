@@ -4,7 +4,6 @@ import lombok.*;
 
 import javax.persistence.*;
 
-@ToString(exclude = {"user, cardCategory"})
 @Entity
 @Getter
 @Setter
