@@ -22,6 +22,11 @@ export default function CardInfo() {
     if (typeof data === "string") {
       try {
         session = JSON.parse(data);
+        console.log(session);
+        if(session["cardList"].length < 1){
+          alert("등록된 카드가 존재하지 않습니다.");
+          navigate("/kiosk")
+        }
         setCards(sessionStorage.getItem("data") ? session["cardList"] : null);
         setDefaultCardId(
           sessionStorage.getItem("data") ? session["defaultCardId"] : null
