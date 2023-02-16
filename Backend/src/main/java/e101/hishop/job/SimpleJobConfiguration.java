@@ -1,18 +1,11 @@
 //package e101.hishop.job;
 //
-//import e101.hishop.domain.entity.Branch;
 //import e101.hishop.service.AdminService;
 //import lombok.RequiredArgsConstructor;
 //import lombok.extern.slf4j.Slf4j;
-//import org.springframework.batch.core.Job;
-//import org.springframework.batch.core.Step;
 //import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 //import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 //import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
-//import org.springframework.batch.core.launch.support.RunIdIncrementer;
-//import org.springframework.batch.item.database.JdbcBatchItemWriter;
-//import org.springframework.batch.item.database.JdbcCursorItemReader;
-//import org.springframework.context.annotation.Bean;
 //import org.springframework.context.annotation.Configuration;
 //
 //@Slf4j // log 사용을 위한 lombok 어노테이션
@@ -25,9 +18,9 @@
 //    private final AdminService adminService;
 //    private JdbcCursorItemReader<Branch> mysqlReader;
 //    private JdbcBatchItemWriter<Branch> sqliteWriter;
-//
-//
-//
+
+
+
 //    @Bean
 //    public Step migrationStep() {
 //        return stepBuilderFactory.get("migrationStep")
@@ -36,13 +29,22 @@
 //                .writer(sqliteWriter)
 //                .build();
 //    }
-//
+
 //    @Bean
 //    public Job simpleJob() {
 //        return jobBuilderFactory.get("simpleJob")
 //                .incrementer(new RunIdIncrementer())
-//                .start(migrationStep())
+//                .start(jpaTest())
 ////                .next(jpaTest())
+//                .build();
+//    }
+//    @Bean
+//    public Step jpaTest() {
+//        return stepBuilderFactory.get("jpaTest")
+//                .tasklet((contribution, chunkContext) -> {
+//                    adminService.migration();
+//                    return RepeatStatus.FINISHED;
+//                })
 //                .build();
 //    }
 //}

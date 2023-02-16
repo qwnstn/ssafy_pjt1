@@ -110,6 +110,8 @@ public class UserController {
         }
     }
 
+
+
     @GetMapping("/point")
     public ResponseEntity<List<PointRespDto>> getPoint() {
         return new ResponseEntity<>(userService.getPoint(), HttpStatus.OK);

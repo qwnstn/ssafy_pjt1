@@ -49,4 +49,5 @@ public interface AdminService {
     void deleteProductCategory(Long categoryId);
     public List<SaleReportRespDto> saleReport();
     public List<UserReportRespDto> userReport();
+    public String migration();
 }

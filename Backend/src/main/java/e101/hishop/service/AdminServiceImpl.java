@@ -8,7 +8,11 @@ import e101.hishop.repository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.BodyInserters;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
@@ -33,6 +37,7 @@ public class AdminServiceImpl implements AdminService {
     private final ProductCategoryJPARepository productCategoryJPARepository;
     private final SaleReportJPARepository saleReportJPARepository;
     private final UserReportJPARepository userReportJPARepository;
+    private WebClient webClient;
 
     @Override
     public Pay savePay(Pay pays, Long userId) {
@@ -401,6 +406,26 @@ public class AdminServiceImpl implements AdminService {
             userReportList.add(UserReportRespDto.of(p));
         }
         return userReportList;
+    }
+
+    @Override
+    public String migration() {
+        List<Product> products = productJPARepository.findAll();
+        List<MigrationProductRespDto> productList = new ArrayList<>();
+        for (Product p : products) {
+            productList.add(MigrationProductRespDto.of(p));
+        }
+        MigrationRespDto migrationRespDto = MigrationRespDto.builder()
+                .productList(productList)
+                .build();
+        webClient = WebClient.create("http://i8e101.p.ssafy.io:7777");
+        Mono<String> response = webClient.post()
+                .uri("/api/db")
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(BodyInserters.fromObject(migrationRespDto))
+                .retrieve()
+                .bodyToMono(String.class);
+        return response.block();
     }
 
 }

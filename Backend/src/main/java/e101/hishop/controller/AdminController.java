@@ -233,4 +233,9 @@ public class AdminController {
     public ResponseEntity<List<UserReportRespDto>> userReport() {
         return new ResponseEntity<>(adminService.userReport(), HttpStatus.OK);
     }
+
+    @PostMapping("/migration")
+    public ResponseEntity<String> migration() {
+        return new ResponseEntity<>(adminService.migration(), HttpStatus.OK);
+    }
 }
