@@ -156,7 +156,7 @@ export default function ItemList() {
         alignItems: "center",
       }}
     >
-      <Box sx={{ maxWidth: 720, minHeight: 1280 }}>
+      <Box sx={{ maxWidth: 720, maxHeight: 1200 }}>
         <Card
           sx={{
             fontSize: 40,
@@ -164,14 +164,14 @@ export default function ItemList() {
             textAlign: "center",
             backgroundColor: "#ff8c8c",
             fontWeight: "bold",
-            width: "100vw",
+            width: "97vw",
           }}
         >
           장바구니
         </Card>
-        <Card sx={{ border: 1, width: "100vw" }}>
+        <Card sx={{ border: 1, width: "99vw" }}>
           <Paper sx={{ width: "100%", overflow: "hidden" }}>
-            <TableContainer sx={{ minHeight: `77vh`, maxHeight: `70vh` }}>
+            <TableContainer sx={{ minHeight: `81vh`, maxHeight: `70vh` }}>
               <Table stickyHeader aria-label="sticky table">
                 <TableHead>
                   <TableRow>
