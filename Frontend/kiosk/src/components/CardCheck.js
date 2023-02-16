@@ -35,7 +35,7 @@ export default function CardInfo() {
         console.error(error);
       }
     }
-  }, [defaultCardId]);
+  }, [defaultCardId, navigate]);
 
   useEffect(() => {
     const card = cards.find((object) => object.cardId === defaultCardId);
