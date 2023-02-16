@@ -17,22 +17,20 @@ class RFID_Serial_Trans:
     #     return self
 
     async def main(self):
-        self.tag_uid = dict()
         self.read_flag = True
+        self.tag_uid = dict()
+        if not self.ser.is_open:
+            self.ser.open()
+            self.ser.reset_input_buffer()
         thread = threading.Thread(target=self.readthread, args=(
             self.ser,), daemon=True)   # 통신을 다른 코드와 병렬처리 하기 위한 스레드 생성
         thread.start()                                              # 스레드 시작
-        # if not self.ser.is_open:
-        #     self.read_flag = True
-        #     self.tag_uid = dict()
-        #     self.ser.open()
+
         # 0.5초마다 데이터 전송
         # RFID 통신 바이트 정리
         # data = 0x3304C299 # RFID 확인 -> 0x33052C0199 정상응답
         # data = 0x3304B199 # Reading Stay
         # data = 0x3304B299 # Reading Nonstop
-        # 시리얼 RX 버퍼 비우기(이전의 가비지데이터 삭제)
-        self.ser.reset_input_buffer()
         while True:
             if self.tag_uid and max(list(self.tag_uid.values())) > 5:
                 result = list()
@@ -113,9 +111,9 @@ class RFID_Serial_Trans:
                             self.tag_uid[uid] = 1
                             print("new tag")
                     else:
-                        print("Error Request") 
-                ser.close()
-
+                        print("Error Request")
+        ser.close()
+    
     # def __exit__(self, exc_type, exc_val, exc_tb):
     #     self.ser.close()
 
