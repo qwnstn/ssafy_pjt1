@@ -17,6 +17,8 @@ class RFID_Serial_Trans:
     #     return self
 
     async def main(self):
+        self.tag_uid = dict()
+        self.read_flag = True
         thread = threading.Thread(target=self.readthread, args=(
             self.ser,), daemon=True)   # 통신을 다른 코드와 병렬처리 하기 위한 스레드 생성
         thread.start()                                              # 스레드 시작
