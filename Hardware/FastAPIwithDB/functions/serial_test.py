@@ -35,7 +35,7 @@ class RFID_Serial_Trans:
             if self.tag_uid and max(list(self.tag_uid.values())) > 3:
                 result = list()
                 for key, value in self.tag_uid.items():
-                    if len(value) == 16:
+                    if len(key) == 16:
                         result.append(str(key).upper())
                 self.read_flag = False
 
