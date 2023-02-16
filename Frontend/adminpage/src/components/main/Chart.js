@@ -1,71 +1,103 @@
-import * as React from 'react';
-import { useTheme } from '@mui/material/styles';
-import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts';
-import Title from './Title';
+import * as React from "react";
+import { useState, useEffect } from "react";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
+import HOST from "../../Host";
+import getPayloadFromToken from "../../getPayloadFromToken";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import Typography from "@mui/material/Typography";
 
-// Generate Sales Data
-function createData(time, amount) {
-  return { time, amount };
+function countByCategory(data) {
+  const count = {};
+  data.forEach((item) => {
+    if (item.category in count) {
+      count[item.category]++;
+    } else {
+      count[item.category] = 1;
+    }
+  });
+  return count;
 }
 
-const data = [
-  createData('00:00', 0),
-  createData('03:00', 300),
-  createData('06:00', 600),
-  createData('09:00', 800),
-  createData('12:00', 1500),
-  createData('15:00', 2000),
-  createData('18:00', 2400),
-  createData('21:00', 2400),
-  createData('24:00', undefined),
-];
+const API_URI = `${HOST}/admin/report/sale`;
 
 export default function Chart() {
-  const theme = useTheme();
+  const [chartData, setChartData] = useState([]);
+  const [payload, setPayload] = useState({});
+  const navigate = useNavigate();
+
+  const handleChartData = (data) => {
+    const count = countByCategory(data);
+    const chartData = Object.keys(count).map((category) => ({
+      name: category,
+      count: count[category],
+    }));
+    setChartData(chartData);
+  };
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem("accesstoken");
+    axios
+      .get(API_URI, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+      .then((res) => {
+        handleChartData(res.data);
+        console.log(res.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    const decodedPayload = getPayloadFromToken(accessToken);
+    setPayload(decodedPayload);
+  }, []);
+
+  const obj = JSON.stringify(payload, ["roles"], 1);
+  if (obj !== null) {
+    const parsedObj = JSON.parse(obj);
+    if (parsedObj && parsedObj.hasOwnProperty("roles")) {
+      const adminCheck = parsedObj["roles"][0];
+      if (adminCheck === "ROLE_ADMIN") {
+        console.log("AdminLogin");
+      } else {
+        navigate("/admin/login");
+      }
+    } else {
+      navigate("/admin/login");
+    }
+  } else {
+    navigate("/admin/login");
+  }
 
   return (
     <React.Fragment>
-      <Title>Today</Title>
-      <ResponsiveContainer>
-        <LineChart
-          data={data}
-          margin={{
-            top: 16,
-            right: 16,
-            bottom: 0,
-            left: 24,
-          }}
-        >
-          <XAxis
-            dataKey="time"
-            stroke={theme.palette.text.secondary}
-            style={theme.typography.body2}
-          />
-          <YAxis
-            stroke={theme.palette.text.secondary}
-            style={theme.typography.body2}
+      <div>
+        <Typography component="h2" variant="h6" color="primary" gutterBottom>
+          카테고리 별 판매 수
+        </Typography>
+        <ResponsiveContainer width="100%" height={240}>
+          <BarChart
+            data={chartData}
+            margin={{ top: 5, right: 50, left: 15, bottom: 5 }}
           >
-            <Label
-              angle={270}
-              position="left"
-              style={{
-                textAnchor: 'middle',
-                fill: theme.palette.text.primary,
-                ...theme.typography.body1,
-              }}
-            >
-              Sales ($)
-            </Label>
-          </YAxis>
-          <Line
-            isAnimationActive={false}
-            type="monotone"
-            dataKey="amount"
-            stroke={theme.palette.primary.main}
-            dot={false}
-          />
-        </LineChart>
-      </ResponsiveContainer>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" />
+            <YAxis />
+            <Tooltip />
+            <Bar dataKey="count" fill="#8884d8" />
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
     </React.Fragment>
   );
 }

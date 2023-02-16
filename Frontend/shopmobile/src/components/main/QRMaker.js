@@ -6,51 +6,52 @@ import CssBaseline from "@mui/material/CssBaseline";
 import HOST from "../../Host";
 import axios from "axios";
 
-
-
-
 function QRMaker() {
   const accesstoken = localStorage.getItem("accesstoken");
+  const [value, setValue] = useState([]);
+  const [countdown, setCountdown] = useState(59);
+  const ref = React.useRef(null);
+
+  function QRMake(token, time) {
+    const newTest = {
+      token: token,
+      time: time,
+    };
+    const test1 = JSON.stringify(newTest);
+    setValue(test1);
+  }
 
   function getTime() {
     axios
-      .get(`${HOST}/user/time`,{
+      .get(`${HOST}/user/time`, {
         headers: {
           Authorization: `Bearer ${accesstoken}`,
         },
       })
       .then(function (response) {
-        console.log(response, "성공");
-        setTime(response.data.datetime);
+        console.log(response.data, "성공");
+        QRMake(accesstoken, response.data);
       })
       .catch(function (err) {
         console.log(err);
       });
   }
 
-  const [time, setTime] = useState(null);
-  useEffect(() => {
-    getTime(); // 컴포넌트가 처음 렌더링될 때 getTime 함수 호출
-  }, []);
-
-  const test = {
-    token: accesstoken,
-    time: time,
-  };
-  const [value, setValue] = useState(JSON.stringify(test));
-  const [countdown, setCountdown] = useState(59);
-  const ref = React.useRef(null);
-
   useEffect(() => {
     if (countdown === 0) {
-      getTime()
-      const newTest = {
-        token: accesstoken,
-        time: time,
-      };
-      const test1 = JSON.stringify(newTest);
-      // console.log(typeof test1)
-      setValue(test1);
+      axios
+      .get(`${HOST}/user/time`, {
+        headers: {
+          Authorization: `Bearer ${accesstoken}`,
+        },
+      })
+      .then(function (response) {
+        console.log(response.data, "성공");
+        QRMake(accesstoken, response.data);
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
       setCountdown(59);
     } else {
       const intervalId = setInterval(() => {
@@ -58,17 +59,30 @@ function QRMaker() {
       }, 1000);
       return () => clearInterval(intervalId);
     }
-  }, [countdown, accesstoken, time]);
+  }, [countdown, accesstoken]);
+
+  // 키오스크 아이디는 Python과 통신으로 받아옴
+  useEffect(() => {
+    (async () => {
+      await axios
+        .get(`${HOST}/user/time`, {
+          headers: {
+            Authorization: `Bearer ${accesstoken}`,
+          },
+        })
+        .then(function (response) {
+          console.log(response.data, "성공");
+          QRMake(accesstoken, response.data);
+        })
+        .catch(function (err) {
+          console.log(err);
+        });
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleButtonClick = () => {
-    setTime(Date.now());
-    const newTest = {
-      token: accesstoken,
-      time: time,
-    };
-    const test1 = JSON.stringify(newTest);
-    setValue(test1);
-    // console.log(typeof test1)
+    getTime();
     setCountdown(59);
   };
 

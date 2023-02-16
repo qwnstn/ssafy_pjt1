@@ -55,6 +55,7 @@ export default function PayList() {
     const decodedPayload = getPayloadFromToken(accessToken);
     setPayload(decodedPayload);
   }, []);
+  
   const obj = JSON.stringify(payload, ["roles"], 1);
   if (obj !== null) {
     const parsedObj = JSON.parse(obj);

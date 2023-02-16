@@ -21,6 +21,7 @@ const QRReader = () => {
     if (kioskInput) {
       const kioskInputObject = JSON.parse(kioskInput);
       const kioskId = kioskInputObject["kioskId"];
+      console.log(kioskInputObject);
       try {
         const res = await axios.post(
           API_URI,
