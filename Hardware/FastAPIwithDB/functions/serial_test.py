@@ -21,7 +21,7 @@ class RFID_Serial_Trans:
         self.tag_uid = dict()
         if not self.ser.is_open:
             self.ser.open()
-            self.ser.reset_input_buffer()
+        self.ser.reset_input_buffer()
         thread = threading.Thread(target=self.readthread, args=(
             self.ser,), daemon=True)   # 통신을 다른 코드와 병렬처리 하기 위한 스레드 생성
         thread.start()                                              # 스레드 시작
