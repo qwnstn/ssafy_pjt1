@@ -49,23 +49,6 @@ def select_products_with_rfid(rfids: list, db: Session):
     return rlt
 
 
-def copy_products(products: list, db: Session):
-    for prd in products:
-        product = Product_Kiosk(
-            productId= prd['productId'],
-            name= prd['name'],
-            price= prd['price'],
-            rfid= prd['rfid'],
-            barcode= prd['barcode'],
-            image= prd['image'],
-            isAdult=prd["isAdult"]
-        )
-        db.add(product)
-    db.commit()
-    i = len(db.query(Product_Kiosk).all())
-    return i
-
-
 def create_product(products: list, db: Session):
     for prd in products:
         product = Product_Kiosk(

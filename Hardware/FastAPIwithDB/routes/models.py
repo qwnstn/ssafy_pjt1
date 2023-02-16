@@ -48,8 +48,8 @@ class Product(BaseModel):
 
 
 class ProductList(BaseModel):
-    product: List[Product]
+    List[Product]
 
 
 class ProductIds(BaseModel):
-    productId: List[int]
+    List[int]
