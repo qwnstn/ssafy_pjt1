@@ -20,7 +20,6 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 import javax.transaction.Transactional;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -201,9 +200,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public String qrRead(QrReqDto dto) {
         Long dateTime = dto.getDatetime();
-        if (System.currentTimeMillis() / 1000 - dateTime > 100000) {
-            return "Fail";
-        } else {
+//        if (System.currentTimeMillis() / 1000 - dateTime > 100000) {
+//            return "Fail";
+//        } else {
             Long userId = getUserId();
             Long kioskId = dto.getKioskId();
             User user = userJPARepository.findById(userId)
@@ -233,7 +232,7 @@ public class UserServiceImpl implements UserService {
                     .retrieve()
                     .bodyToMono(String.class);
             return response.block();
-        }
+//        }
     }
 
     @Override
