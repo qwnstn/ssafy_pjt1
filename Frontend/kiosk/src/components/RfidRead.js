@@ -105,7 +105,6 @@ export default function ResultPayment() {
         <Box
           sx={{
             height: "100vh",
-            width: "1",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",

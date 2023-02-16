@@ -131,10 +131,12 @@ export default function CardInfo() {
             flexShrink: 0,
             maxWidth: "500px",
           }}
+          sx={{borderRadius:3}}
         >
           <CardHeader
             title="결제 카드"
             style={{ textAlign: "center", borderBottom: 1 }}
+            sx={{backgroundColor:'#ff8c8c'}}
           />
           <Grid item margin={1}>
             <CardMedia
@@ -164,6 +166,7 @@ export default function CardInfo() {
             textAlign: "center",
             maxWidth: "500px",
           }}
+          sx={{borderRadius:3}}
         >
           <CardHeader
             title="바꿀 카드를 선택하세요"
@@ -172,6 +175,7 @@ export default function CardInfo() {
               borderBottom: 1,
               wordWrap: "break-word",
             }}
+            sx={{backgroundColor:"#90caf9"}}
           />
           <div
             style={{

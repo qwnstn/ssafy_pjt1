@@ -123,13 +123,18 @@ export default function KioskMain() {
           <Card
             sx={{
               fontSize: 40,
-              padding: 2,
+              
               textAlign: "center",
               backgroundColor: "#ff8c8c",
               fontWeight: "bold",
             }}
           >
-            하이쇼핑
+            <CardMedia
+              component="img"
+              alt="kioskmain"
+              height="94"
+              image="/kiosk/images/hishop.png"
+            />
           </Card>
           <Grid
             style={{
@@ -137,7 +142,7 @@ export default function KioskMain() {
               justifyContent: "center",
               alignItems: "center",
             }}
-            sx={{mb: 5}}
+            sx={{ mb: 5 }}
           >
             <Grid item xs={10} sx={{ mt: 5 }}>
               <CssBaseline />
@@ -159,7 +164,7 @@ export default function KioskMain() {
               alignItems: "center",
             }}
           >
-            <Grid item xs={4} sx={{ m: 1 }}>
+            <Grid sx={{ m: 1 }}>
               <Card sx={{ padding: 1 }}>
                 <QRCode value={value} size={200} />
               </Card>
