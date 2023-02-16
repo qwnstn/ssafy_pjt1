@@ -24,7 +24,7 @@ def 상품_DB_추가(request: Request, product: ProductList, db: Session = Depen
 
 @router.delete("")
 def 상품_db_삭제(request: Request, ProductIds: ProductIds, db: Session = Depends(get_db)):
-    data = run(request.json())
+    data = run(request.json())["productId"]
     count = delete_product(data, db)
     return {
         "message": f"{count} data deleted",

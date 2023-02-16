@@ -112,6 +112,7 @@ class RFID_Serial_Trans:
                             print("new tag")
                     else:
                         print("Error Request") 
+                ser.close()
 
     # def __exit__(self, exc_type, exc_val, exc_tb):
     #     self.ser.close()

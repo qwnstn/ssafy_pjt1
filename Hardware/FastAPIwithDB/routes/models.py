@@ -12,7 +12,6 @@ class BarcodeList(BaseModel):
     kioskId: int
     barcode: str
 
-
 class Card(BaseModel):
     cardId: int
     cardName: str
@@ -49,8 +48,8 @@ class Product(BaseModel):
 
 
 class ProductList(BaseModel):
-    List[Product]
+    product: List[Product]
 
 
 class ProductIds(BaseModel):
-    List[int]
+    productId: List[int]
