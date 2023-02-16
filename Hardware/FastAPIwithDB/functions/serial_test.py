@@ -32,10 +32,10 @@ class RFID_Serial_Trans:
         # data = 0x3304B199 # Reading Stay
         # data = 0x3304B299 # Reading Nonstop
         while True:
-            if self.tag_uid and max(list(self.tag_uid.values())) > 5:
+            if self.tag_uid and max(list(self.tag_uid.values())) > 3:
                 result = list()
                 for key, value in self.tag_uid.items():
-                    if value > 2:
+                    if len(value) == 16:
                         result.append(str(key).upper())
                 self.read_flag = False
 
