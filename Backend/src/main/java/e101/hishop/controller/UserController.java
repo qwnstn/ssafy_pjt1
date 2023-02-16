@@ -96,10 +96,6 @@ public class UserController {
         return new ResponseEntity<>(userService.getPayDetail(purchaseId), HttpStatus.OK);
     }
 
-    @GetMapping("/time")
-    public ResponseEntity<Long> sendTime() {
-        return new ResponseEntity<>(userService.sendTime(), HttpStatus.OK);
-    }
 
     @PostMapping("/qr")
     public ResponseEntity<String> qrRead(@RequestBody QrReqDto dto) {

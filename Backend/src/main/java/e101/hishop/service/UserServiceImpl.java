@@ -192,10 +192,6 @@ public class UserServiceImpl implements UserService {
 //        webClient = WebClient.create("https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=861");
 //    }
 
-    @Override
-    public Long sendTime() {
-        return System.currentTimeMillis() / 1000;
-    }
 
     @Override
     public String qrRead(QrReqDto dto) {

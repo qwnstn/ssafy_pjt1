@@ -59,4 +59,9 @@ public class IotController {
     public String init() {
         return "init";
     }
+
+    @GetMapping("/time")
+    public ResponseEntity<Long> sendTime() {
+        return new ResponseEntity<>(iotService.sendTime(), HttpStatus.OK);
+    }
 }
