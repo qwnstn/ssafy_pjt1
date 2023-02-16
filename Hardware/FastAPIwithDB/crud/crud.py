@@ -5,18 +5,20 @@ from sqlalchemy.orm import Session
 from db.models.model import Product_Kiosk, Shopping
 
 [str, str, str]
+
+
 def select_products_with_rfid(rfids: list, db: Session):
     rlt = list()
     if not rfids:
         return rlt
     # SQLite DB 연결
     conn = sqlite3.connect("db.sqlite")
-    
+
     # Connection 으로부터 Cursor 생성
     cur = conn.cursor()
     # 테스트 1
     query = "select * from Product_Kiosk where rfid in ("
-    query += ", ".join([f"'{rid}'" for rid in rfids])
+    query += ", ".join([f'"{rid}"' for rid in rfids])
     query += ");"
     # 쿼리 확인
     print(query)
@@ -32,7 +34,7 @@ def select_products_with_rfid(rfids: list, db: Session):
     #     cur.execute(query)
     #     # 데이터 Fetch 후 저장
     #     rows.append(cur.fetchall())
-    
+
     # 결과 확인
     print(rows)
     for row in rows:
@@ -49,32 +51,15 @@ def select_products_with_rfid(rfids: list, db: Session):
     return rlt
 
 
-def copy_products(products: list, db: Session):
-    for prd in products:
-        product = Product_Kiosk(
-            productId= prd['productId'],
-            name= prd['name'],
-            price= prd['price'],
-            rfid= prd['rfid'],
-            barcode= prd['barcode'],
-            image= prd['image'],
-            isAdult=prd["isAdult"]
-        )
-        db.add(product)
-    db.commit()
-    i = len(db.query(Product_Kiosk).all())
-    return i
-
-
 def create_product(products: list, db: Session):
     for prd in products:
         product = Product_Kiosk(
-            productId= prd['productId'],
-            name= prd['name'],
-            price= prd['price'],
-            rfid= prd['rfid'],
-            barcode= prd['barcode'],
-            image= prd['image'],
+            productId=prd['productId'],
+            name=prd['name'],
+            price=prd['price'],
+            rfid=prd['rfid'],
+            barcode=prd['barcode'],
+            image=prd['image'],
             isAdult=prd["isAdult"]
         )
         db.add(product)
@@ -101,4 +86,3 @@ def create_shopping(shoppings: list, date, db: Session):
         )
         db.add(shopping)
     db.commit()
-

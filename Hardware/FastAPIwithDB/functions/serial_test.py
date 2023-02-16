@@ -21,7 +21,7 @@ class RFID_Serial_Trans:
         self.tag_uid = dict()
         if not self.ser.is_open:
             self.ser.open()
-            self.ser.reset_input_buffer()
+        self.ser.reset_input_buffer()
         thread = threading.Thread(target=self.readthread, args=(
             self.ser,), daemon=True)   # 통신을 다른 코드와 병렬처리 하기 위한 스레드 생성
         thread.start()                                              # 스레드 시작
@@ -32,10 +32,10 @@ class RFID_Serial_Trans:
         # data = 0x3304B199 # Reading Stay
         # data = 0x3304B299 # Reading Nonstop
         while True:
-            if self.tag_uid and max(list(self.tag_uid.values())) > 5:
+            if self.tag_uid and max(list(self.tag_uid.values())) > 3:
                 result = list()
                 for key, value in self.tag_uid.items():
-                    if value > 2:
+                    if len(key) == 16:
                         result.append(str(key).upper())
                 self.read_flag = False
 
