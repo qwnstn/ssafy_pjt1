@@ -19,9 +19,9 @@ function countByCategory(data) {
   const count = {};
   data.forEach((item) => {
     if (item.category in count) {
-      count[item.category]++;
+      count[item.category] += item.sales;
     } else {
-      count[item.category] = 1;
+      count[item.category] = item.sales;
     }
   });
   return count;
@@ -38,7 +38,7 @@ export default function Chart() {
     const count = countByCategory(data);
     const chartData = Object.keys(count).map((category) => ({
       name: category,
-      count: count[category],
+      sales: count[category],
     }));
     setChartData(chartData);
   };
@@ -53,7 +53,6 @@ export default function Chart() {
       })
       .then((res) => {
         handleChartData(res.data);
-        console.log(res.data);
       })
       .catch((error) => {
         console.error(error);
@@ -83,18 +82,18 @@ export default function Chart() {
     <React.Fragment>
       <div>
         <Typography component="h2" variant="h6" color="primary" gutterBottom>
-          카테고리 별 판매 수
+          카테고리 별 판매액
         </Typography>
         <ResponsiveContainer width="100%" height={240}>
           <BarChart
             data={chartData}
-            margin={{ top: 5, right: 50, left: 15, bottom: 5 }}
+            margin={{ top: 5, right: 50, left: 50, bottom: 5 }}
           >
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="name" />
             <YAxis />
             <Tooltip />
-            <Bar dataKey="count" fill="#8884d8" />
+            <Bar dataKey="sales" fill="#8884d8" />
           </BarChart>
         </ResponsiveContainer>
       </div>
