@@ -2329,12 +2329,5 @@
         "region" : "서울",
         "kiosk" : 4,
         "sales" : 7485931
-    },
-    {
-        "date" : "2023-02-15",
-        "category" : "",
-        "region" : "",
-        "kiosk" : "",
-        "sales" : 5348126
     }
 ]
