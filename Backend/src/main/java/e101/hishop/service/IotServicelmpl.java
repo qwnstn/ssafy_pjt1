@@ -1,6 +1,7 @@
 package e101.hishop.service;
 
 import e101.hishop.domain.dto.request.GuestReqDto;
+import e101.hishop.domain.dto.request.MemberProductReqDto;
 import e101.hishop.domain.dto.request.MemberReqDto;
 import e101.hishop.domain.entity.*;
 import e101.hishop.global.common.CommonException;
@@ -46,14 +47,15 @@ public class IotServicelmpl implements IotService{
                 .buyTotal(dto.getPriceSum())
                 .build();
         adminService.savePay(pay, dto.getUserId());
-        List<Map<String, Object>> shoppingList = (List<Map<String, Object>>) dto.getShopping();
-        log.info("{}",shoppingList);
-        for (Map<String, Object> item: shoppingList) {
+//        List<Map<String, Object>> shoppingList = (List<Map<String, Object>>) dto.getShopping();
+//        log.info("{}",shoppingList);
+        log.info("SHOPPING LIST");
+        for (MemberProductReqDto item: dto.getShopping()) {
             adminService.savePayDetail(PayDetail.builder()
-                    .productName(item.get("itemName").toString())
-                    .count(Long.parseLong(item.get("count").toString()))
-                    .price(Long.parseLong(item.get("price").toString()))
-                    .build(), pay.getId(), Long.parseLong(item.get("productId").toString()), branchId);
+                    .productName(item.getItemName())
+                    .count(item.getCount())
+                    .price(item.getPrice())
+                    .build(), pay.getId(), item.getProductId(), branchId);
         }
         return pay.getId();
     }
