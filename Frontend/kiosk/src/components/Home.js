@@ -81,7 +81,6 @@ export default function KioskMain() {
   const QRMake = async (kioskId) => {
     await axios.get(`${HOST}/iot/time`).then((res) => {
       console.log(res.data);
-      console.log(kioskId);
       const time = res.data;
       const newTest = {
         kioskId: kioskId,
