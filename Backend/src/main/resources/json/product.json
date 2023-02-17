@@ -24,7 +24,7 @@
         "image" : "mouse.jpg",
         "name" : "단단한 파이썬",
         "price" : 130000,
-        "rfid" : "FE9146AC500104E0",
+        "rfid" : "",
         "isAdult" : "FALSE",
         "manuId" : 4,
         "categoryId" : 2
@@ -44,7 +44,7 @@
         "image" : "dambae.jpg",
         "name" : "담배",
         "price" : 4500,
-        "rfid" : "",
+        "rfid" : "FE9146AC500104E0",
         "isAdult" : "TRUE",
         "manuId" : null,
         "categoryId" : 5
