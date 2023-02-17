@@ -94,7 +94,7 @@ export default function KioskMain() {
   // 키오스크 아이디는 Python과 통신으로 받아옴
   useEffect(() => {
     (async () => {
-      const { data } = await axios.get("http://192.168.40.111:8888/api/kiosk");
+      const { data } = await axios.get("http://localhost:8888/api/kiosk");
       const kiosk = data["kioskId"];
       QRMake(kiosk);
       console.log(kiosk);
