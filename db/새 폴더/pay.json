@@ -1,0 +1,65 @@
+[
+    {
+        "buyDate" : "12:12.0",
+        "buyTotal" : 49800,
+        "payImg" : "img.jpg",
+        "payName" : "삼성",
+        "userId" : 1
+    },
+    {
+        "buyDate" : "2022-12-15  15:13:22 PM",
+        "buyTotal" : 39900,
+        "payImg" : "img.jpg",
+        "payName" : "하나",
+        "userId" : 1
+    },
+    {
+        "buyDate" : "2023-01-12  20:23:12 PM",
+        "buyTotal" : 4500,
+        "payImg" : "img.jpg",
+        "payName" : "삼성",
+        "userId" : 1
+    },
+    {
+        "buyDate" : "12:12.0",
+        "buyTotal" : 159800,
+        "payImg" : "img.jpg",
+        "payName" : "현대",
+        "userId" : 3
+    },
+    {
+        "buyDate" : "2022-12-15  15:13:22 PM",
+        "buyTotal" : 2000,
+        "payImg" : "img.jpg",
+        "payName" : "신한",
+        "userId" : 3
+    },
+    {
+        "buyDate" : "2023-01-12  20:23:12 PM",
+        "buyTotal" : 79600,
+        "payImg" : "img.jpg",
+        "payName" : "삼성",
+        "userId" : 3
+    },
+    {
+        "buyDate" : "12:12.0",
+        "buyTotal" : 10000,
+        "payImg" : "img.jpg",
+        "payName" : "현대",
+        "userId" : 5
+    },
+    {
+        "buyDate" : "2022-12-15  15:13:22 PM",
+        "buyTotal" : 130000,
+        "payImg" : "img.jpg",
+        "payName" : "하나",
+        "userId" : 5
+    },
+    {
+        "buyDate" : "2023-01-12  20:23:12 PM",
+        "buyTotal" : 50000,
+        "payImg" : "img.jpg",
+        "payName" : "IBK",
+        "userId" : 5
+    }
+]

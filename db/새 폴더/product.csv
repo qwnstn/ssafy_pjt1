@@ -1,0 +1,9 @@
+barcode,image,name,price,rfid,isAdult,manuId,categoryId
+,poker.jpg,바퀴벌레 포커,14900,,FALSE,null,3
+,tisue.jpg,살균티슈,8500,,FALSE,null,9
+,mouse.jpg,단단한 파이썬,130000,,FALSE,4,2
+,drink.jpg,Crystal Light,1500,,FALSE,1,4
+,dambae.jpg,담배,4500,,TRUE,null,5
+,tumbler.jpg,텀블러,19900,,FALSE,4,10
+,board.jpg,보드마카,2000,,FALSE,3,8
+,drink.jpg,할인쿠폰,-500,,FALSE,null,null

@@ -1,7 +1,10 @@
 package e101.hishop.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import e101.hishop.domain.dto.request.BranchReqDto;
+import e101.hishop.domain.dto.request.StaffReqDto;
 import lombok.*;
+import org.springframework.util.StringUtils;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -17,7 +20,8 @@ import java.util.List;
 public class Branch {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "entity_branch")
+    @TableGenerator(name = "entity_branch", initialValue=0, allocationSize=1)
     @Column(name = "branch_id")
     private Long id;
 
@@ -28,11 +32,21 @@ public class Branch {
     private String region;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "branch", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "branch", cascade = CascadeType.PERSIST)
     private List<Staff> staff = new ArrayList<>();
 
     @JsonIgnore
-    @OneToMany(mappedBy = "branch", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "branch", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Kiosk> kiosks = new ArrayList<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "branch", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<PayDetail> payDetails = new ArrayList<>();
     //지점장 아이디 어떻게 하지
+
+    public Branch updateBranch(BranchReqDto dto) {
+        branchName = StringUtils.hasText(dto.getBranchName()) ? dto.getBranchName() : branchName;
+        region = StringUtils.hasText(dto.getRegion()) ? dto.getRegion() : region;
+        return this;
+    }
 }

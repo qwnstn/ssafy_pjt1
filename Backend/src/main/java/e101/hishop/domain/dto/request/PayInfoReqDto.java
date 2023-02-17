@@ -5,14 +5,17 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
 public class PayInfoReqDto {
 
     @NotBlank
-    private String buy_date;
-
-    @NotNull
-    private Long buy_total;
+    private LocalDateTime buyDate;
+    private Long buyTotal;
+    private String payImg;
+    private String payName;
+    private Long userId;
 }

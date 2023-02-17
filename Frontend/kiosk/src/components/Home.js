@@ -1,77 +1,212 @@
 import * as React from "react";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-import styled from "styled-components";
-import Modal from '@mui/material/Modal';
+import { useEffect, useState } from "react";
+import QRCode from "react-qr-code";
+import { Grid } from "@mui/material";
+import CssBaseline from "@mui/material/CssBaseline";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import QrReader from "modern-react-qr-reader";
+import HOST from "../Host";
 
-const Buttons = styled(Button)`
-  width: 100%;
-  font-weight: 700 !important;
-`;
+const useWebSocket = (url) => {
+  const [messages, setMessages] = useState([]);
 
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  pt: 2,
-  px: 4,
-  pb: 3,
+  useEffect(() => {
+    const socket = new WebSocket(url);
+
+    socket.onopen = () => {
+      console.log("WebSocket connection opened:", url);
+    };
+
+    socket.onmessage = (event) => {
+      if (event.data instanceof Blob) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          setMessages((prevMessages) => [...prevMessages, reader.result]);
+        };
+        reader.readAsText(event.data);
+      } else {
+        setMessages((prevMessages) => [...prevMessages, event.data]);
+      }
+    };
+
+    socket.onerror = (error) => {
+      console.error(`WebSocket error: ${error}`);
+    };
+
+    socket.onclose = () => {
+      console.log("WebSocket connection closed:", url);
+    };
+
+    return () => {
+      socket.close();
+    };
+  }, [url]);
+
+  return messages;
 };
 
-export default function ImgMediaCard() {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
+const handleScan = async (kioskInput) => {
+  if (kioskInput) {
+    const kioskInputObject = JSON.parse(kioskInput);
+    const token = kioskInputObject.token;
+    const datetime = kioskInputObject.time;
+    console.log(kioskInputObject);
+    try {
+      const res = await axios.post("http://localhost:8888/api/kiosk/qr", {
+        token: token,
+        datetime: datetime,
+      });
+      console.log(res);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+};
+
+export default function KioskMain() {
+  const navigate = useNavigate();
+  const [kioskId, setKioskId] = useState();
+  const [value, setValue] = useState("");
+  const messages = useWebSocket("ws://localhost:3333");
+
+  const handleError = (err) => {
+    console.error(err);
   };
 
+  const QRMake = async (kioskId) => {
+    await axios.get(`${HOST}/iot/time`).then((res) => {
+      console.log(res.data);
+      const time = res.data;
+      const newTest = {
+        kioskId: kioskId,
+        time: time,
+      };
+      const test1 = JSON.stringify(newTest);
+      setValue(test1);
+    });
+  };
+
+  // 키오스크 아이디는 Python과 통신으로 받아옴
+  useEffect(() => {
+    (async () => {
+      const { data } = axios.get("http://localhost:8888/api/kiosk");
+      const kiosk = data["kioskId"];
+      QRMake(kiosk);
+      console.log(kiosk);
+      setKioskId(kiosk);
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      QRMake(kioskId);
+    }, 59000);
+    // 59초
+    return () => clearInterval(interval);
+  }, [kioskId, messages, navigate]);
+
+  useEffect(() => {
+    sessionStorage.removeItem("data");
+    sessionStorage.removeItem("user");
+    if (messages[0] === "next") {
+      sessionStorage.setItem("user", "user");
+      navigate("/kiosk/rfidread");
+    }
+  }, [messages, navigate]);
+
   return (
-    <Box
-      sx={{
-        marginTop: 2,
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-      }}
-    >
-      <Modal
-        hideBackdrop
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="child-modal-title"
-        aria-describedby="child-modal-description"
-      >
-        <Box sx={{ ...style, width: 400 }}>
-          <h2 id="child-modal-title">인식중</h2>
-          <p id="child-modal-description">
-            결제하려면 카트를 RFID태그에 갖다대세요
-          </p>
-          <Buttons onClick={handleClose}>결제 취소</Buttons>
+    <Box>
+      <Card sx={{ maxWidth: 720, minHeight: 1280 }}>
+        <Box sx={{ pb: 7 }}>
+          <Card
+            sx={{
+              fontSize: 40,
+
+              textAlign: "center",
+              backgroundColor: "#ff8c8c",
+              fontWeight: "bold",
+            }}
+          >
+            <CardMedia
+              component="img"
+              alt="kioskmain"
+              height="94"
+              image="/kiosk/images/hishop.png"
+            />
+          </Card>
+          <Grid
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+            sx={{ mb: 5 }}
+          >
+            <Grid item xs={10} sx={{ mt: 5 }}>
+              <CssBaseline />
+              <Card sx={{ border: 1, padding: 1, mt: 3, borderRadius: 3 }}>
+                <CardMedia
+                  component="img"
+                  alt="kioskmain"
+                  height="600"
+                  image="/kiosk/images/kioskmain.png"
+                />
+              </Card>
+            </Grid>
+          </Grid>
+          <Grid
+            container
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Grid sx={{ m: 1 }}>
+              <Card sx={{ padding: 1 }}>
+                <QRCode value={value} size={200} />
+              </Card>
+            </Grid>
+            <Grid item xs={4} sx={{ m: 1 }}>
+              <Card sx={{ padding: 1 }}>
+                <QrReader
+                  delay={2000}
+                  onError={handleError}
+                  onScan={handleScan}
+                />
+              </Card>
+            </Grid>
+          </Grid>
+          <Grid
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+            sx={{ mt: 5, fontSize: 22, fontWeight: "bold", color: "blue" }}
+          >
+            회원결제를 위해 바코드에 QR을 찍거나 앱으로 QR스캔하세요
+          </Grid>
+          <Grid container sx={{ mt: 2, mb: 2 }}>
+            <Grid item xs />
+            <Grid item>
+              <Button
+                sx={{ fontSize: 20, mr: 2 }}
+                variant="contained"
+                onClick={() => navigate("/kiosk/rfidread")}
+              >
+                비회원결제
+              </Button>
+            </Grid>
+          </Grid>
         </Box>
-      </Modal>
-      <Button onClick={handleOpen}>
-        <Card sx={{ maxWidth: 600, minHeight: 1240}}>
-          <CardMedia
-            component="img"
-            alt="howtowuse"
-            height="1100"
-            image="./images/howtouse.jpg"
-          />
-          <CardActions>
-            <Buttons size="large">결제하려면 화면을 터치하세요</Buttons>
-          </CardActions>
-        </Card>
-      </Button>
+      </Card>
     </Box>
   );
 }

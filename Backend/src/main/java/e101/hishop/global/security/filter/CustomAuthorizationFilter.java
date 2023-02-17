@@ -27,14 +27,14 @@ import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 public class CustomAuthorizationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        if (request.getServletPath().equals("/api/login") || request.getServletPath().equals("/api/refresh_token")) {
+        if (request.getServletPath().equals("/api/login") || request.getServletPath().equals("/api/refresh-token")) {
             filterChain.doFilter(request, response);
         } else {
             String authorizationHeader = request.getHeader(AUTHORIZATION);
             if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
                 try {
                     String token = authorizationHeader.substring("Bearer ".length());
-                    Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
+                    Algorithm algorithm = Algorithm.HMAC256("e101ssafy!@".getBytes());
                     JWTVerifier verifier = JWT.require(algorithm).build();
                     DecodedJWT decodedJWT = verifier.verify(token);
 
@@ -55,12 +55,13 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
                     SecurityContextHolder.getContext().setAuthentication(authenticationToken);
                     filterChain.doFilter(request, response);
                 } catch (JWTVerificationException e) {
-                    e.printStackTrace();
+//                    e.printStackTrace();
 //                    log.error("=== {}", e.printStackTrace());
                     //TODO 적합한 예외처리 클래스 구현
                     log.error("Error login in: {} ", e.getMessage());
                     //header에 error 존재하면 login창으로 redirect
                     response.setHeader("error", e.getMessage());
+                    response.setHeader("error-type", e.getClass().getSimpleName());
                     response.setStatus(HttpStatus.FORBIDDEN.value());
 //                    response.sendError(HttpStatus.FORBIDDEN.value());
 

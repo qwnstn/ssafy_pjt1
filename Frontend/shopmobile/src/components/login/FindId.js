@@ -15,6 +15,8 @@ import {
 } from "@mui/material/";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import styled from "styled-components";
+import HOST from "../../Host";
+import { useNavigate } from "react-router-dom";
 
 const FormHelperTexts = styled(FormHelperText)`
   width: 100%;
@@ -69,17 +71,22 @@ const FindId = () => {
   const [phoneError, setPhoneError] = useState("");
   const [birthError, setBirthError] = useState("");
   const [findIdError, setFindIdError] = useState("");
+  const navigate = useNavigate();
 
+  const API_URI = `${HOST}/newPassword`;
   const onhandleGet = async (data) => {
-    const { name, phone, birth } = data;
-    birth.replace(/^(\d{4})(\d{2})(\d{2})$/, `$1-$2-$3`);
-    const getData = { name, phone, birth };
-    console.log(getData);
-    // get
+    const jsonData = {
+      name: data.name,
+      phone: data.phone,
+      birthDate: data.birth.replace(/^(\d{4})(\d{2})(\d{2})$/, `$1-$2-$3`),
+    };
+    // post
     await axios
-      .get("/findid", getData)
+      .post(API_URI, jsonData)
       .then(function (response) {
         console.log(response, "성공");
+        alert(`고객님의 아이디는 ${response.data.loginId}입니다 회원가입시 등록한 이메일로 임시비밀번호가 전송되었습니다.`);
+        navigate("/app/login");
       })
       .catch(function (err) {
         console.log(err);
@@ -128,88 +135,88 @@ const FindId = () => {
   };
   return (
     <ThemeProvider theme={theme}>
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <Box
-        sx={{
-          marginTop: 8,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <Avatar src="./images/logo.png" sx={{ mb: 2 }} />
-        <Typography component="h1" variant="h5">
-          아이디/비밀번호 찾기
-        </Typography>
-        <Boxs
-          component="form"
-          noValidate
-          onSubmit={handleSubmit}
-          sx={{ mt: 3 }}
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Box
+          sx={{
+            marginTop: 8,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
         >
-          <FormControl component="fieldset" variant="standard">
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="name"
-                  name="name"
-                  label="이름"
-                  error={nameError !== "" || false}
-                />
+          <Avatar src="./images/logo.png" variant="square" sx={{ mb: 2 }} />
+          <Typography component="h1" variant="h5">
+            비밀번호 찾기
+          </Typography>
+          <Boxs
+            component="form"
+            noValidate
+            onSubmit={handleSubmit}
+            sx={{ mt: 3 }}
+          >
+            <FormControl component="fieldset" variant="standard">
+              <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <TextField
+                    required
+                    fullWidth
+                    id="name"
+                    name="name"
+                    label="이름"
+                    error={nameError !== "" || false}
+                  />
+                </Grid>
+                <FormHelperTexts>{nameError}</FormHelperTexts>
+                <Grid item xs={12}>
+                  <TextField
+                    required
+                    fullWidth
+                    inputProps={{ maxLength: 11 }}
+                    id="phone"
+                    label="휴대폰(-없이 11자리)"
+                    name="phone"
+                    autoComplete="new-phone"
+                    error={phoneError !== "" || false}
+                  />
+                </Grid>
+                <FormHelperTexts>{phoneError}</FormHelperTexts>
+                <Grid item xs={12}>
+                  <TextField
+                    required
+                    fullWidth
+                    inputProps={{ maxLength: 8 }}
+                    id="birth"
+                    label="생년월일(-없이 8자리)"
+                    name="birth"
+                    autoComplete="new-birth"
+                    error={birthError !== "" || false}
+                  />
+                </Grid>
+                <FormHelperTexts>{birthError}</FormHelperTexts>
               </Grid>
-              <FormHelperTexts>{nameError}</FormHelperTexts>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  inputProps={{ maxLength: 11 }}
-                  id="phone"
-                  label="휴대폰(-없이 11자리)"
-                  name="phone"
-                  autoComplete="new-phone"
-                  error={phoneError !== "" || false}
-                />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+                size="large"
+              >
+                아이디/비밀번호 찾기
+              </Button>
+            </FormControl>
+            <FormHelperTexts>{findIdError}</FormHelperTexts>
+            <Grid container justifyContent="flex-end">
+              <Grid item>
+                <Link href="/app/login" variant="body2">
+                  로그인으로
+                </Link>
               </Grid>
-              <FormHelperTexts>{phoneError}</FormHelperTexts>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  inputProps={{ maxLength: 8 }}
-                  id="birth"
-                  label="생년월일(-없이 8자리)"
-                  name="birth"
-                  autoComplete="new-birth"
-                  error={birthError !== "" || false}
-                />
-              </Grid>
-              <FormHelperTexts>{birthError}</FormHelperTexts>
             </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-              size="large"
-            >
-              아이디/비밀번호 찾기
-            </Button>
-          </FormControl>
-          <FormHelperTexts>{findIdError}</FormHelperTexts>
-          <Grid container justifyContent="flex-end">
-            <Grid item>
-              <Link href="/" variant="body2">
-                로그인으로
-              </Link>
-            </Grid>
-          </Grid>
-        </Boxs>
-      </Box>
-    </Container>
-  </ThemeProvider>
+          </Boxs>
+        </Box>
+      </Container>
+    </ThemeProvider>
   );
 };
 

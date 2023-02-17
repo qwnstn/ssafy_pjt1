@@ -1,24 +1,24 @@
 {
-  "short_name": "Mobile App",
-  "name": "Create Mobile App Sample",
+  "short_name": "Hishopping App",
+  "name": "Hishopping",
   "icons": [
     {
-      "src": "/images/logo.png",
+      "src": "/app/images/logo.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "/images/logo.png",
+      "src": "/app/images/logo.png",
       "type": "image/png",
       "sizes": "512x512"
     },
     {
-      "src": "/images/logo.png",
+      "src": "/app/images/logo.png",
       "type": "image/png",
       "sizes": "1024x1024"
     }
   ],
-  "start_url": ".",
+  "start_url": "/app/index.html",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff"

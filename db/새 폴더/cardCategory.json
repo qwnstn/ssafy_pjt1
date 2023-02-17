@@ -1,0 +1,77 @@
+[
+    {
+        "classification" : "카드",
+        "paymentName" : "하나",
+        "img" : "hana.jpg"
+    },
+    {
+        "classification" : "카드",
+        "paymentName" : "현대",
+        "img" : "hyundae.jpg"
+    },
+    {
+        "classification" : "카드",
+        "paymentName" : "IBK",
+        "img" : "ibk..jpg"
+    },
+    {
+        "classification" : "카드",
+        "paymentName" : "신한",
+        "img" : "sinhan.jpg"
+    },
+    {
+        "classification" : "카드",
+        "paymentName" : "삼성",
+        "img" : "samsung.jpg"
+    },
+    {
+        "classification" : "카드",
+        "paymentName" : "우리",
+        "img" : "uri.jpg"
+    },
+    {
+        "classification" : "카드",
+        "paymentName" : "BC",
+        "img" : "bc.jpg"
+    },
+    {
+        "classification" : "카드",
+        "paymentName" : "KB",
+        "img" : "kb.jpg"
+    },
+    {
+        "classification" : "카드",
+        "paymentName" : "시티",
+        "img" : "city.jpg"
+    },
+    {
+        "classification" : "카드",
+        "paymentName" : "K-Bank",
+        "img" : "kbank.jpg"
+    },
+    {
+        "classification" : "카드",
+        "paymentName" : "토스",
+        "img" : "toss.jpg"
+    },
+    {
+        "classification" : "카드",
+        "paymentName" : "NH농협",
+        "img" : "nh.jpg"
+    },
+    {
+        "classification" : "카드",
+        "paymentName" : "기업",
+        "img" : "kiup.jpg"
+    },
+    {
+        "classification" : "카드",
+        "paymentName" : "롯데",
+        "img" : "lotte.jpg"
+    },
+    {
+        "classification" : "카드",
+        "paymentName" : "수협",
+        "img" : "soohyup.jpg"
+    }
+]

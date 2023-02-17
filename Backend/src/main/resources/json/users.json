@@ -1,0 +1,80 @@
+[
+    {
+        "adSelect" : "TRUE",
+        "birthdate" : "1964-11-26",
+        "defaultCardId" : 1,
+        "email" : "email@email.com",
+        "gender" : "MALE",
+        "loginId" : "user1234",
+        "name" : "이름",
+        "password" : "user1234!",
+        "payPassword" : "1445",
+        "phone" : "010-4702-1492",
+        "role" : "ROLE_USER"
+    },
+    {
+        "adSelect" : "FALSE",
+        "birthdate" : "1960-02-27",
+        "defaultCardId" : 2,
+        "email" : "email@email.com",
+        "gender" : "FEMALE",
+        "loginId" : "admin1234",
+        "name" : "이름",
+        "password" : "admin1234!",
+        "payPassword" : "5677",
+        "phone" : "010-8104-4684",
+        "role" : "ROLE_ADMIN"
+    },
+    {
+        "adSelect" : "TRUE",
+        "birthdate" : "1980-05-24",
+        "defaultCardId" : 3,
+        "email" : "constant@hanamail.com",
+        "gender" : "MALE",
+        "loginId" : "consult_user",
+        "name" : "이컨턴",
+        "password" : "pass1234!",
+        "payPassword" : "3565",
+        "phone" : "010-0198-7303",
+        "role" : "ROLE_USER"
+    },
+    {
+        "adSelect" : "TRUE",
+        "birthdate" : "1976-08-10",
+        "defaultCardId" : 4,
+        "email" : "constant@hanmail.com",
+        "gender" : "MALE",
+        "loginId" : "consult_admin",
+        "name" : "서컨턴",
+        "password" : "pass1234!",
+        "payPassword" : "3515",
+        "phone" : "010-0629-8894",
+        "role" : "ROLE_ADMIN"
+    },
+    {
+        "adSelect" : "TRUE",
+        "birthdate" : "1973-05-22",
+        "defaultCardId" : 5,
+        "email" : "coach_park@gmail.com",
+        "gender" : "MALE",
+        "loginId" : "coach_user",
+        "name" : "박코치",
+        "password" : "pass1234!",
+        "payPassword" : "0796",
+        "phone" : "010-7595-9768",
+        "role" : "ROLE_USER"
+    },
+    {
+        "adSelect" : "TRUE",
+        "birthdate" : "1969-01-01",
+        "defaultCardId" : 6,
+        "email" : "coach_kim@gmail.com",
+        "gender" : "FEMALE",
+        "loginId" : "coach_admin",
+        "name" : "김코치",
+        "password" : "pass1234!",
+        "payPassword" : "2155",
+        "phone" : "010-7265-6365",
+        "role" : "ROLE_ADMIN"
+    }
+]

@@ -1,0 +1,212 @@
+[
+    {
+        "cardNo" : "2414-2058-0119-5050",
+        "cvc" : "386",
+        "validDate" : "0626",
+        "cardCategoryId" : 5,
+        "userId" : 1
+    },
+    {
+        "cardNo" : "7993-3749-5873-8410",
+        "cvc" : "824",
+        "validDate" : "0523",
+        "cardCategoryId" : 3,
+        "userId" : 2
+    },
+    {
+        "cardNo" : "1410-5818-0763-3662",
+        "cvc" : "668",
+        "validDate" : "0923",
+        "cardCategoryId" : 1,
+        "userId" : 3
+    },
+    {
+        "cardNo" : "2380-0702-0966-3210",
+        "cvc" : "888",
+        "validDate" : "1223",
+        "cardCategoryId" : 3,
+        "userId" : 4
+    },
+    {
+        "cardNo" : "3451-7682-8994-2445",
+        "cvc" : "288",
+        "validDate" : "0624",
+        "cardCategoryId" : 4,
+        "userId" : 5
+    },
+    {
+        "cardNo" : "8311-0706-0363-8130",
+        "cvc" : "566",
+        "validDate" : "0227",
+        "cardCategoryId" : 1,
+        "userId" : 6
+    },
+    {
+        "cardNo" : "6375-6299-7221-4559",
+        "cvc" : "999",
+        "validDate" : "0425",
+        "cardCategoryId" : 1,
+        "userId" : 1
+    },
+    {
+        "cardNo" : "9479-8835-3790-0938",
+        "cvc" : "839",
+        "validDate" : "1024",
+        "cardCategoryId" : 3,
+        "userId" : 2
+    },
+    {
+        "cardNo" : "6329-5325-2458-9881",
+        "cvc" : "828",
+        "validDate" : "0423",
+        "cardCategoryId" : 3,
+        "userId" : 3
+    },
+    {
+        "cardNo" : "7626-3635-6589-7910",
+        "cvc" : "668",
+        "validDate" : "1025",
+        "cardCategoryId" : 4,
+        "userId" : 4
+    },
+    {
+        "cardNo" : "9798-4286-3561-7156",
+        "cvc" : "686",
+        "validDate" : "0523",
+        "cardCategoryId" : 2,
+        "userId" : 5
+    },
+    {
+        "cardNo" : "0590-1059-7256-2884",
+        "cvc" : "584",
+        "validDate" : "0126",
+        "cardCategoryId" : 4,
+        "userId" : 6
+    },
+    {
+        "cardNo" : "4888-8459-4757-8930",
+        "cvc" : "027",
+        "validDate" : "1024",
+        "cardCategoryId" : 2,
+        "userId" : 1
+    },
+    {
+        "cardNo" : "1049-4671-5900-6130",
+        "cvc" : "422",
+        "validDate" : "0424",
+        "cardCategoryId" : 4,
+        "userId" : 2
+    },
+    {
+        "cardNo" : "4958-1336-4345-5160",
+        "cvc" : "216",
+        "validDate" : "0127",
+        "cardCategoryId" : 1,
+        "userId" : 3
+    },
+    {
+        "cardNo" : "9836-7366-6056-8950",
+        "cvc" : "728",
+        "validDate" : "0227",
+        "cardCategoryId" : 3,
+        "userId" : 4
+    },
+    {
+        "cardNo" : "1499-9931-7870-9470",
+        "cvc" : "182",
+        "validDate" : "0826",
+        "cardCategoryId" : 4,
+        "userId" : 5
+    },
+    {
+        "cardNo" : "4813-2905-2332-3360",
+        "cvc" : "385",
+        "validDate" : "0827",
+        "cardCategoryId" : 3,
+        "userId" : 6
+    },
+    {
+        "cardNo" : "2701-5701-2193-3820",
+        "cvc" : "276",
+        "validDate" : "0123",
+        "cardCategoryId" : 5,
+        "userId" : 1
+    },
+    {
+        "cardNo" : "8725-0840-8661-1470",
+        "cvc" : "537",
+        "validDate" : "0324",
+        "cardCategoryId" : 4,
+        "userId" : 2
+    },
+    {
+        "cardNo" : "0038-5156-4762-6122",
+        "cvc" : "525",
+        "validDate" : "0227",
+        "cardCategoryId" : 3,
+        "userId" : 3
+    },
+    {
+        "cardNo" : "1511-1972-7195-9630",
+        "cvc" : "776",
+        "validDate" : "0223",
+        "cardCategoryId" : 1,
+        "userId" : 4
+    },
+    {
+        "cardNo" : "3316-5493-1350-0083",
+        "cvc" : "984",
+        "validDate" : "0625",
+        "cardCategoryId" : 3,
+        "userId" : 5
+    },
+    {
+        "cardNo" : "1003-0564-2355-5720",
+        "cvc" : "508",
+        "validDate" : "0725",
+        "cardCategoryId" : 2,
+        "userId" : 6
+    },
+    {
+        "cardNo" : "5331-8589-2153-5228",
+        "cvc" : "247",
+        "validDate" : "0427",
+        "cardCategoryId" : 4,
+        "userId" : 1
+    },
+    {
+        "cardNo" : "8474-4412-4485-6597",
+        "cvc" : "158",
+        "validDate" : "0425",
+        "cardCategoryId" : 5,
+        "userId" : 2
+    },
+    {
+        "cardNo" : "2790-4451-8004-4990",
+        "cvc" : "427",
+        "validDate" : "1225",
+        "cardCategoryId" : 3,
+        "userId" : 3
+    },
+    {
+        "cardNo" : "5514-5198-6017-8236",
+        "cvc" : "276",
+        "validDate" : "0427",
+        "cardCategoryId" : 4,
+        "userId" : 4
+    },
+    {
+        "cardNo" : "5735-9327-9791-2370",
+        "cvc" : "495",
+        "validDate" : "0923",
+        "cardCategoryId" : 5,
+        "userId" : 5
+    },
+    {
+        "cardNo" : "4123-3813-0426-9930",
+        "cvc" : "185",
+        "validDate" : "1127",
+        "cardCategoryId" : 5,
+        "userId" : 6
+    }
+]

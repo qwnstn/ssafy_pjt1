@@ -2,6 +2,8 @@ package e101.hishop.global.security;
 
 import e101.hishop.global.security.filter.CustomAuthenticationFilter;
 import e101.hishop.global.security.filter.CustomAuthorizationFilter;
+import e101.hishop.repository.UserJPARepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,12 +20,14 @@ import java.util.List;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final String LOGIN_URL = "/api/login";
+    private final UserJPARepository userJPARepository;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        CustomAuthenticationFilter customAuthenticationFilter = new CustomAuthenticationFilter(authenticationManagerBean());
+        CustomAuthenticationFilter customAuthenticationFilter = new CustomAuthenticationFilter(authenticationManagerBean(), userJPARepository);
         //url로 들어왔을떄 해당필터를 실행
         customAuthenticationFilter.setFilterProcessesUrl(LOGIN_URL);
         CustomAuthorizationFilter customAuthorizationFilter = new CustomAuthorizationFilter();
@@ -37,12 +41,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 //        http.authorizeRequests().antMatchers(HttpMethod.OPTIONS,"/**/*").permitAll();
         //TODO 개발용 추후 삭제
-        http.authorizeRequests().anyRequest().permitAll();
-//        http.authorizeRequests().antMatchers("/api/login/**", "/api/refresh_token/**", "/api/logout/**", "/api/sign-up").permitAll();
-//        http.authorizeRequests().antMatchers("*").permitAll();
-//        http.authorizeRequests().antMatchers("/api/user/**").hasAnyRole("USER", "ADMIN");
-//        http.authorizeRequests().antMatchers("/api/admin/**").hasAnyRole("ADMIN");
-//        http.authorizeRequests().anyRequest().authenticated();
+//        http.authorizeRequests().anyRequest().permitAll();
+        http.authorizeRequests().antMatchers("/api/login/**", "/api/refresh-token/**", "/api/logout/**", "/api/sign-up/**", "/api/newPassword/**","/api/iot/**").permitAll();
+        http.authorizeRequests().antMatchers("*").permitAll();
+        http.authorizeRequests().antMatchers("/api/user/**").hasAnyRole("USER", "ADMIN");
+        http.authorizeRequests().antMatchers("/api/admin/**").hasAnyRole("ADMIN");
+        http.authorizeRequests().anyRequest().authenticated();
         http.addFilterBefore(customAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         http.addFilterAfter(customAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);
     }
@@ -75,8 +79,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         configuration.setAllowCredentials(true); // 내 서버가 응답을 할 때 응답해준 json을 자바스크립트에서 처리할 수 있게 할지를 설정
         //TODO HTTPS React, IOT Origin 변경
 //        configuration.setAllowedOrigins(List.of("http://localhost"));
-        configuration.setAllowedOriginPatterns(List.of("http://localhost*", "http://192.168.*"));
+//        configuration.setAllowedOriginPatterns(List.of("http://localhost*", "http://192.168.*"));
+        configuration.setAllowedOriginPatterns(List.of("*"));
         configuration.setAllowedMethods(List.of("GET","POST", "PATCH", "DELETE", "PUT", "OPTIONS"));
+        configuration.setExposedHeaders(List.of("accessToken", "refreshToken", "error", "error-type")); //리액트에서 헤더 값 받을수있게 설정
         // setAllowedHeaders is important! Without it, OPTIONS preflight request
         // will fail with 403 Invalid CORS request
         configuration.setAllowedHeaders(List.of("*"));

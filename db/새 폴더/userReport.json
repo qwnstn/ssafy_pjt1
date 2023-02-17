@@ -1,0 +1,1538 @@
+[
+    {
+        "date" : "2023-02-08",
+        "gender" : "MALE",
+        "age" : 10,
+        "region" : "부산",
+        "population" : 930,
+        "sales" : 8907521
+    },
+    {
+        "date" : "2023-02-08",
+        "gender" : "MALE",
+        "age" : 10,
+        "region" : "서울",
+        "population" : 832,
+        "sales" : 7999851
+    },
+    {
+        "date" : "2023-02-08",
+        "gender" : "MALE",
+        "age" : 20,
+        "region" : "부산",
+        "population" : 644,
+        "sales" : 6838447
+    },
+    {
+        "date" : "2023-02-08",
+        "gender" : "MALE",
+        "age" : 20,
+        "region" : "서울",
+        "population" : 221,
+        "sales" : 9020928
+    },
+    {
+        "date" : "2023-02-08",
+        "gender" : "MALE",
+        "age" : 30,
+        "region" : "부산",
+        "population" : 14,
+        "sales" : 4073833
+    },
+    {
+        "date" : "2023-02-08",
+        "gender" : "MALE",
+        "age" : 30,
+        "region" : "서울",
+        "population" : 358,
+        "sales" : 7411347
+    },
+    {
+        "date" : "2023-02-08",
+        "gender" : "MALE",
+        "age" : 40,
+        "region" : "부산",
+        "population" : 527,
+        "sales" : 7515337
+    },
+    {
+        "date" : "2023-02-08",
+        "gender" : "MALE",
+        "age" : 40,
+        "region" : "서울",
+        "population" : 720,
+        "sales" : 606254
+    },
+    {
+        "date" : "2023-02-08",
+        "gender" : "MALE",
+        "age" : 50,
+        "region" : "부산",
+        "population" : 896,
+        "sales" : 5301939
+    },
+    {
+        "date" : "2023-02-08",
+        "gender" : "MALE",
+        "age" : 50,
+        "region" : "서울",
+        "population" : 520,
+        "sales" : 182922
+    },
+    {
+        "date" : "2023-02-08",
+        "gender" : "MALE",
+        "age" : 60,
+        "region" : "부산",
+        "population" : 512,
+        "sales" : 1962398
+    },
+    {
+        "date" : "2023-02-08",
+        "gender" : "MALE",
+        "age" : 60,
+        "region" : "서울",
+        "population" : 232,
+        "sales" : 5809852
+    },
+    {
+        "date" : "2023-02-08",
+        "gender" : "FEMALE",
+        "age" : 10,
+        "region" : "부산",
+        "population" : 914,
+        "sales" : 8835006
+    },
+    {
+        "date" : "2023-02-08",
+        "gender" : "FEMALE",
+        "age" : 10,
+        "region" : "서울",
+        "population" : 870,
+        "sales" : 8018071
+    },
+    {
+        "date" : "2023-02-08",
+        "gender" : "FEMALE",
+        "age" : 20,
+        "region" : "부산",
+        "population" : 641,
+        "sales" : 6916889
+    },
+    {
+        "date" : "2023-02-08",
+        "gender" : "FEMALE",
+        "age" : 20,
+        "region" : "서울",
+        "population" : 218,
+        "sales" : 8948532
+    },
+    {
+        "date" : "2023-02-08",
+        "gender" : "FEMALE",
+        "age" : 30,
+        "region" : "부산",
+        "population" : "-15",
+        "sales" : 4124339
+    },
+    {
+        "date" : "2023-02-08",
+        "gender" : "FEMALE",
+        "age" : 30,
+        "region" : "서울",
+        "population" : 365,
+        "sales" : 7446717
+    },
+    {
+        "date" : "2023-02-08",
+        "gender" : "FEMALE",
+        "age" : 40,
+        "region" : "부산",
+        "population" : 541,
+        "sales" : 7493126
+    },
+    {
+        "date" : "2023-02-08",
+        "gender" : "FEMALE",
+        "age" : 40,
+        "region" : "서울",
+        "population" : 735,
+        "sales" : 667915
+    },
+    {
+        "date" : "2023-02-08",
+        "gender" : "FEMALE",
+        "age" : 50,
+        "region" : "부산",
+        "population" : 946,
+        "sales" : 5299784
+    },
+    {
+        "date" : "2023-02-08",
+        "gender" : "FEMALE",
+        "age" : 50,
+        "region" : "서울",
+        "population" : 488,
+        "sales" : 231554
+    },
+    {
+        "date" : "2023-02-08",
+        "gender" : "FEMALE",
+        "age" : 60,
+        "region" : "부산",
+        "population" : 536,
+        "sales" : 2059055
+    },
+    {
+        "date" : "2023-02-08",
+        "gender" : "FEMALE",
+        "age" : 60,
+        "region" : "서울",
+        "population" : 260,
+        "sales" : 5725116
+    },
+    {
+        "date" : "2023-02-09",
+        "gender" : "MALE",
+        "age" : 10,
+        "region" : "부산",
+        "population" : 974,
+        "sales" : 434056
+    },
+    {
+        "date" : "2023-02-09",
+        "gender" : "MALE",
+        "age" : 10,
+        "region" : "서울",
+        "population" : 627,
+        "sales" : 144789
+    },
+    {
+        "date" : "2023-02-09",
+        "gender" : "MALE",
+        "age" : 20,
+        "region" : "부산",
+        "population" : 648,
+        "sales" : 218426
+    },
+    {
+        "date" : "2023-02-09",
+        "gender" : "MALE",
+        "age" : 20,
+        "region" : "서울",
+        "population" : 269,
+        "sales" : 6068618
+    },
+    {
+        "date" : "2023-02-09",
+        "gender" : "MALE",
+        "age" : 30,
+        "region" : "부산",
+        "population" : 625,
+        "sales" : 1364466
+    },
+    {
+        "date" : "2023-02-09",
+        "gender" : "MALE",
+        "age" : 30,
+        "region" : "서울",
+        "population" : 678,
+        "sales" : 6638954
+    },
+    {
+        "date" : "2023-02-09",
+        "gender" : "MALE",
+        "age" : 40,
+        "region" : "부산",
+        "population" : 757,
+        "sales" : 6590672
+    },
+    {
+        "date" : "2023-02-09",
+        "gender" : "MALE",
+        "age" : 40,
+        "region" : "서울",
+        "population" : 313,
+        "sales" : 8642622
+    },
+    {
+        "date" : "2023-02-09",
+        "gender" : "MALE",
+        "age" : 50,
+        "region" : "부산",
+        "population" : 246,
+        "sales" : 9356735
+    },
+    {
+        "date" : "2023-02-09",
+        "gender" : "MALE",
+        "age" : 50,
+        "region" : "서울",
+        "population" : 688,
+        "sales" : 2765052
+    },
+    {
+        "date" : "2023-02-09",
+        "gender" : "MALE",
+        "age" : 60,
+        "region" : "부산",
+        "population" : 993,
+        "sales" : 5104841
+    },
+    {
+        "date" : "2023-02-09",
+        "gender" : "MALE",
+        "age" : 60,
+        "region" : "서울",
+        "population" : 490,
+        "sales" : 8698323
+    },
+    {
+        "date" : "2023-02-09",
+        "gender" : "FEMALE",
+        "age" : 10,
+        "region" : "부산",
+        "population" : 931,
+        "sales" : 520552
+    },
+    {
+        "date" : "2023-02-09",
+        "gender" : "FEMALE",
+        "age" : 10,
+        "region" : "서울",
+        "population" : 666,
+        "sales" : 63311
+    },
+    {
+        "date" : "2023-02-09",
+        "gender" : "FEMALE",
+        "age" : 20,
+        "region" : "부산",
+        "population" : 611,
+        "sales" : 258373
+    },
+    {
+        "date" : "2023-02-09",
+        "gender" : "FEMALE",
+        "age" : 20,
+        "region" : "서울",
+        "population" : 247,
+        "sales" : 6043281
+    },
+    {
+        "date" : "2023-02-09",
+        "gender" : "FEMALE",
+        "age" : 30,
+        "region" : "부산",
+        "population" : 613,
+        "sales" : 1282459
+    },
+    {
+        "date" : "2023-02-09",
+        "gender" : "FEMALE",
+        "age" : 30,
+        "region" : "서울",
+        "population" : 640,
+        "sales" : 6594013
+    },
+    {
+        "date" : "2023-02-09",
+        "gender" : "FEMALE",
+        "age" : 40,
+        "region" : "부산",
+        "population" : 782,
+        "sales" : 6670218
+    },
+    {
+        "date" : "2023-02-09",
+        "gender" : "FEMALE",
+        "age" : 40,
+        "region" : "서울",
+        "population" : 321,
+        "sales" : 8574762
+    },
+    {
+        "date" : "2023-02-09",
+        "gender" : "FEMALE",
+        "age" : 50,
+        "region" : "부산",
+        "population" : 205,
+        "sales" : 9412602
+    },
+    {
+        "date" : "2023-02-09",
+        "gender" : "FEMALE",
+        "age" : 50,
+        "region" : "서울",
+        "population" : 687,
+        "sales" : 2731415
+    },
+    {
+        "date" : "2023-02-09",
+        "gender" : "FEMALE",
+        "age" : 60,
+        "region" : "부산",
+        "population" : 1015,
+        "sales" : 5019485
+    },
+    {
+        "date" : "2023-02-09",
+        "gender" : "FEMALE",
+        "age" : 60,
+        "region" : "서울",
+        "population" : 504,
+        "sales" : 8720573
+    },
+    {
+        "date" : "2023-02-10",
+        "gender" : "MALE",
+        "age" : 10,
+        "region" : "부산",
+        "population" : 770,
+        "sales" : 4548593
+    },
+    {
+        "date" : "2023-02-10",
+        "gender" : "MALE",
+        "age" : 10,
+        "region" : "서울",
+        "population" : 788,
+        "sales" : 1435782
+    },
+    {
+        "date" : "2023-02-10",
+        "gender" : "MALE",
+        "age" : 20,
+        "region" : "부산",
+        "population" : 449,
+        "sales" : 8681395
+    },
+    {
+        "date" : "2023-02-10",
+        "gender" : "MALE",
+        "age" : 20,
+        "region" : "서울",
+        "population" : 68,
+        "sales" : 9549966
+    },
+    {
+        "date" : "2023-02-10",
+        "gender" : "MALE",
+        "age" : 30,
+        "region" : "부산",
+        "population" : 71,
+        "sales" : 5150101
+    },
+    {
+        "date" : "2023-02-10",
+        "gender" : "MALE",
+        "age" : 30,
+        "region" : "서울",
+        "population" : 64,
+        "sales" : 9050132
+    },
+    {
+        "date" : "2023-02-10",
+        "gender" : "MALE",
+        "age" : 40,
+        "region" : "부산",
+        "population" : 333,
+        "sales" : 4470021
+    },
+    {
+        "date" : "2023-02-10",
+        "gender" : "MALE",
+        "age" : 40,
+        "region" : "서울",
+        "population" : 306,
+        "sales" : 6484384
+    },
+    {
+        "date" : "2023-02-10",
+        "gender" : "MALE",
+        "age" : 50,
+        "region" : "부산",
+        "population" : 988,
+        "sales" : 8671586
+    },
+    {
+        "date" : "2023-02-10",
+        "gender" : "MALE",
+        "age" : 50,
+        "region" : "서울",
+        "population" : 859,
+        "sales" : 8480147
+    },
+    {
+        "date" : "2023-02-10",
+        "gender" : "MALE",
+        "age" : 60,
+        "region" : "부산",
+        "population" : 182,
+        "sales" : 9197519
+    },
+    {
+        "date" : "2023-02-10",
+        "gender" : "MALE",
+        "age" : 60,
+        "region" : "서울",
+        "population" : 263,
+        "sales" : 8577005
+    },
+    {
+        "date" : "2023-02-10",
+        "gender" : "FEMALE",
+        "age" : 10,
+        "region" : "부산",
+        "population" : 725,
+        "sales" : 4480916
+    },
+    {
+        "date" : "2023-02-10",
+        "gender" : "FEMALE",
+        "age" : 10,
+        "region" : "서울",
+        "population" : 766,
+        "sales" : 1398396
+    },
+    {
+        "date" : "2023-02-10",
+        "gender" : "FEMALE",
+        "age" : 20,
+        "region" : "부산",
+        "population" : 422,
+        "sales" : 8696916
+    },
+    {
+        "date" : "2023-02-10",
+        "gender" : "FEMALE",
+        "age" : 20,
+        "region" : "서울",
+        "population" : 33,
+        "sales" : 9610724
+    },
+    {
+        "date" : "2023-02-10",
+        "gender" : "FEMALE",
+        "age" : 30,
+        "region" : "부산",
+        "population" : 65,
+        "sales" : 5098976
+    },
+    {
+        "date" : "2023-02-10",
+        "gender" : "FEMALE",
+        "age" : 30,
+        "region" : "서울",
+        "population" : 104,
+        "sales" : 8998740
+    },
+    {
+        "date" : "2023-02-10",
+        "gender" : "FEMALE",
+        "age" : 40,
+        "region" : "부산",
+        "population" : 354,
+        "sales" : 4489526
+    },
+    {
+        "date" : "2023-02-10",
+        "gender" : "FEMALE",
+        "age" : 40,
+        "region" : "서울",
+        "population" : 262,
+        "sales" : 6491921
+    },
+    {
+        "date" : "2023-02-10",
+        "gender" : "FEMALE",
+        "age" : 50,
+        "region" : "부산",
+        "population" : 1027,
+        "sales" : 8757223
+    },
+    {
+        "date" : "2023-02-10",
+        "gender" : "FEMALE",
+        "age" : 50,
+        "region" : "서울",
+        "population" : 846,
+        "sales" : 8579235
+    },
+    {
+        "date" : "2023-02-10",
+        "gender" : "FEMALE",
+        "age" : 60,
+        "region" : "부산",
+        "population" : 219,
+        "sales" : 9250844
+    },
+    {
+        "date" : "2023-02-10",
+        "gender" : "FEMALE",
+        "age" : 60,
+        "region" : "서울",
+        "population" : 236,
+        "sales" : 8523447
+    },
+    {
+        "date" : "2023-02-11",
+        "gender" : "MALE",
+        "age" : 10,
+        "region" : "부산",
+        "population" : 800,
+        "sales" : 5515755
+    },
+    {
+        "date" : "2023-02-11",
+        "gender" : "MALE",
+        "age" : 10,
+        "region" : "서울",
+        "population" : 601,
+        "sales" : 5792118
+    },
+    {
+        "date" : "2023-02-11",
+        "gender" : "MALE",
+        "age" : 20,
+        "region" : "부산",
+        "population" : 649,
+        "sales" : 5991910
+    },
+    {
+        "date" : "2023-02-11",
+        "gender" : "MALE",
+        "age" : 20,
+        "region" : "서울",
+        "population" : 417,
+        "sales" : 2622145
+    },
+    {
+        "date" : "2023-02-11",
+        "gender" : "MALE",
+        "age" : 30,
+        "region" : "부산",
+        "population" : 817,
+        "sales" : 4138095
+    },
+    {
+        "date" : "2023-02-11",
+        "gender" : "MALE",
+        "age" : 30,
+        "region" : "서울",
+        "population" : 79,
+        "sales" : 1507783
+    },
+    {
+        "date" : "2023-02-11",
+        "gender" : "MALE",
+        "age" : 40,
+        "region" : "부산",
+        "population" : 727,
+        "sales" : 1486528
+    },
+    {
+        "date" : "2023-02-11",
+        "gender" : "MALE",
+        "age" : 40,
+        "region" : "서울",
+        "population" : 930,
+        "sales" : 6446842
+    },
+    {
+        "date" : "2023-02-11",
+        "gender" : "MALE",
+        "age" : 50,
+        "region" : "부산",
+        "population" : 42,
+        "sales" : 1076633
+    },
+    {
+        "date" : "2023-02-11",
+        "gender" : "MALE",
+        "age" : 50,
+        "region" : "서울",
+        "population" : 751,
+        "sales" : 5180198
+    },
+    {
+        "date" : "2023-02-11",
+        "gender" : "MALE",
+        "age" : 60,
+        "region" : "부산",
+        "population" : 505,
+        "sales" : 9000408
+    },
+    {
+        "date" : "2023-02-11",
+        "gender" : "MALE",
+        "age" : 60,
+        "region" : "서울",
+        "population" : 787,
+        "sales" : 8228389
+    },
+    {
+        "date" : "2023-02-11",
+        "gender" : "FEMALE",
+        "age" : 10,
+        "region" : "부산",
+        "population" : 765,
+        "sales" : 5522040
+    },
+    {
+        "date" : "2023-02-11",
+        "gender" : "FEMALE",
+        "age" : 10,
+        "region" : "서울",
+        "population" : 562,
+        "sales" : 5700650
+    },
+    {
+        "date" : "2023-02-11",
+        "gender" : "FEMALE",
+        "age" : 20,
+        "region" : "부산",
+        "population" : 697,
+        "sales" : 5898688
+    },
+    {
+        "date" : "2023-02-11",
+        "gender" : "FEMALE",
+        "age" : 20,
+        "region" : "서울",
+        "population" : 417,
+        "sales" : 2638130
+    },
+    {
+        "date" : "2023-02-11",
+        "gender" : "FEMALE",
+        "age" : 30,
+        "region" : "부산",
+        "population" : 850,
+        "sales" : 4085801
+    },
+    {
+        "date" : "2023-02-11",
+        "gender" : "FEMALE",
+        "age" : 30,
+        "region" : "서울",
+        "population" : 55,
+        "sales" : 1599016
+    },
+    {
+        "date" : "2023-02-11",
+        "gender" : "FEMALE",
+        "age" : 40,
+        "region" : "부산",
+        "population" : 718,
+        "sales" : 1413500
+    },
+    {
+        "date" : "2023-02-11",
+        "gender" : "FEMALE",
+        "age" : 40,
+        "region" : "서울",
+        "population" : 966,
+        "sales" : 6392627
+    },
+    {
+        "date" : "2023-02-11",
+        "gender" : "FEMALE",
+        "age" : 50,
+        "region" : "부산",
+        "population" : 77,
+        "sales" : 1140552
+    },
+    {
+        "date" : "2023-02-11",
+        "gender" : "FEMALE",
+        "age" : 50,
+        "region" : "서울",
+        "population" : 792,
+        "sales" : 5190434
+    },
+    {
+        "date" : "2023-02-11",
+        "gender" : "FEMALE",
+        "age" : 60,
+        "region" : "부산",
+        "population" : 512,
+        "sales" : 8978566
+    },
+    {
+        "date" : "2023-02-11",
+        "gender" : "FEMALE",
+        "age" : 60,
+        "region" : "서울",
+        "population" : 781,
+        "sales" : 8324720
+    },
+    {
+        "date" : "2023-02-12",
+        "gender" : "MALE",
+        "age" : 10,
+        "region" : "부산",
+        "population" : 338,
+        "sales" : 8080496
+    },
+    {
+        "date" : "2023-02-12",
+        "gender" : "MALE",
+        "age" : 10,
+        "region" : "서울",
+        "population" : 141,
+        "sales" : 1669648
+    },
+    {
+        "date" : "2023-02-12",
+        "gender" : "MALE",
+        "age" : 20,
+        "region" : "부산",
+        "population" : 693,
+        "sales" : 2198490
+    },
+    {
+        "date" : "2023-02-12",
+        "gender" : "MALE",
+        "age" : 20,
+        "region" : "서울",
+        "population" : 389,
+        "sales" : 6541066
+    },
+    {
+        "date" : "2023-02-12",
+        "gender" : "MALE",
+        "age" : 30,
+        "region" : "부산",
+        "population" : 853,
+        "sales" : 1526352
+    },
+    {
+        "date" : "2023-02-12",
+        "gender" : "MALE",
+        "age" : 30,
+        "region" : "서울",
+        "population" : 525,
+        "sales" : 6115145
+    },
+    {
+        "date" : "2023-02-12",
+        "gender" : "MALE",
+        "age" : 40,
+        "region" : "부산",
+        "population" : 535,
+        "sales" : 4853749
+    },
+    {
+        "date" : "2023-02-12",
+        "gender" : "MALE",
+        "age" : 40,
+        "region" : "서울",
+        "population" : 353,
+        "sales" : 4796449
+    },
+    {
+        "date" : "2023-02-12",
+        "gender" : "MALE",
+        "age" : 50,
+        "region" : "부산",
+        "population" : 153,
+        "sales" : 4172069
+    },
+    {
+        "date" : "2023-02-12",
+        "gender" : "MALE",
+        "age" : 50,
+        "region" : "서울",
+        "population" : 860,
+        "sales" : 6724440
+    },
+    {
+        "date" : "2023-02-12",
+        "gender" : "MALE",
+        "age" : 60,
+        "region" : "부산",
+        "population" : 665,
+        "sales" : 9824441
+    },
+    {
+        "date" : "2023-02-12",
+        "gender" : "MALE",
+        "age" : 60,
+        "region" : "서울",
+        "population" : 568,
+        "sales" : 2355198
+    },
+    {
+        "date" : "2023-02-12",
+        "gender" : "FEMALE",
+        "age" : 10,
+        "region" : "부산",
+        "population" : 380,
+        "sales" : 8030504
+    },
+    {
+        "date" : "2023-02-12",
+        "gender" : "FEMALE",
+        "age" : 10,
+        "region" : "서울",
+        "population" : 93,
+        "sales" : 1717094
+    },
+    {
+        "date" : "2023-02-12",
+        "gender" : "FEMALE",
+        "age" : 20,
+        "region" : "부산",
+        "population" : 690,
+        "sales" : 2256572
+    },
+    {
+        "date" : "2023-02-12",
+        "gender" : "FEMALE",
+        "age" : 20,
+        "region" : "서울",
+        "population" : 428,
+        "sales" : 6449008
+    },
+    {
+        "date" : "2023-02-12",
+        "gender" : "FEMALE",
+        "age" : 30,
+        "region" : "부산",
+        "population" : 866,
+        "sales" : 1612108
+    },
+    {
+        "date" : "2023-02-12",
+        "gender" : "FEMALE",
+        "age" : 30,
+        "region" : "서울",
+        "population" : 498,
+        "sales" : 6159034
+    },
+    {
+        "date" : "2023-02-12",
+        "gender" : "FEMALE",
+        "age" : 40,
+        "region" : "부산",
+        "population" : 557,
+        "sales" : 4863081
+    },
+    {
+        "date" : "2023-02-12",
+        "gender" : "FEMALE",
+        "age" : 40,
+        "region" : "서울",
+        "population" : 343,
+        "sales" : 4730219
+    },
+    {
+        "date" : "2023-02-12",
+        "gender" : "FEMALE",
+        "age" : 50,
+        "region" : "부산",
+        "population" : 201,
+        "sales" : 4077528
+    },
+    {
+        "date" : "2023-02-12",
+        "gender" : "FEMALE",
+        "age" : 50,
+        "region" : "서울",
+        "population" : 888,
+        "sales" : 6754973
+    },
+    {
+        "date" : "2023-02-12",
+        "gender" : "FEMALE",
+        "age" : 60,
+        "region" : "부산",
+        "population" : 704,
+        "sales" : 9726929
+    },
+    {
+        "date" : "2023-02-12",
+        "gender" : "FEMALE",
+        "age" : 60,
+        "region" : "서울",
+        "population" : 534,
+        "sales" : 2453648
+    },
+    {
+        "date" : "2023-02-13",
+        "gender" : "MALE",
+        "age" : 10,
+        "region" : "부산",
+        "population" : 449,
+        "sales" : 927416
+    },
+    {
+        "date" : "2023-02-13",
+        "gender" : "MALE",
+        "age" : 10,
+        "region" : "서울",
+        "population" : 707,
+        "sales" : 5669918
+    },
+    {
+        "date" : "2023-02-13",
+        "gender" : "MALE",
+        "age" : 20,
+        "region" : "부산",
+        "population" : 72,
+        "sales" : 9815421
+    },
+    {
+        "date" : "2023-02-13",
+        "gender" : "MALE",
+        "age" : 20,
+        "region" : "서울",
+        "population" : 832,
+        "sales" : 2205105
+    },
+    {
+        "date" : "2023-02-13",
+        "gender" : "MALE",
+        "age" : 30,
+        "region" : "부산",
+        "population" : 48,
+        "sales" : 4009262
+    },
+    {
+        "date" : "2023-02-13",
+        "gender" : "MALE",
+        "age" : 30,
+        "region" : "서울",
+        "population" : 931,
+        "sales" : 1907826
+    },
+    {
+        "date" : "2023-02-13",
+        "gender" : "MALE",
+        "age" : 40,
+        "region" : "부산",
+        "population" : 975,
+        "sales" : 8495905
+    },
+    {
+        "date" : "2023-02-13",
+        "gender" : "MALE",
+        "age" : 40,
+        "region" : "서울",
+        "population" : 237,
+        "sales" : 715195
+    },
+    {
+        "date" : "2023-02-13",
+        "gender" : "MALE",
+        "age" : 50,
+        "region" : "부산",
+        "population" : 566,
+        "sales" : 3276924
+    },
+    {
+        "date" : "2023-02-13",
+        "gender" : "MALE",
+        "age" : 50,
+        "region" : "서울",
+        "population" : 339,
+        "sales" : 7143799
+    },
+    {
+        "date" : "2023-02-13",
+        "gender" : "MALE",
+        "age" : 60,
+        "region" : "부산",
+        "population" : 233,
+        "sales" : 2438489
+    },
+    {
+        "date" : "2023-02-13",
+        "gender" : "MALE",
+        "age" : 60,
+        "region" : "서울",
+        "population" : 428,
+        "sales" : 8212645
+    },
+    {
+        "date" : "2023-02-13",
+        "gender" : "FEMALE",
+        "age" : 10,
+        "region" : "부산",
+        "population" : 446,
+        "sales" : 932682
+    },
+    {
+        "date" : "2023-02-13",
+        "gender" : "FEMALE",
+        "age" : 10,
+        "region" : "서울",
+        "population" : 687,
+        "sales" : 5765760
+    },
+    {
+        "date" : "2023-02-13",
+        "gender" : "FEMALE",
+        "age" : 20,
+        "region" : "부산",
+        "population" : 56,
+        "sales" : 9777130
+    },
+    {
+        "date" : "2023-02-13",
+        "gender" : "FEMALE",
+        "age" : 20,
+        "region" : "서울",
+        "population" : 799,
+        "sales" : 2252856
+    },
+    {
+        "date" : "2023-02-13",
+        "gender" : "FEMALE",
+        "age" : 30,
+        "region" : "부산",
+        "population" : 80,
+        "sales" : 4089559
+    },
+    {
+        "date" : "2023-02-13",
+        "gender" : "FEMALE",
+        "age" : 30,
+        "region" : "서울",
+        "population" : 891,
+        "sales" : 1849041
+    },
+    {
+        "date" : "2023-02-13",
+        "gender" : "FEMALE",
+        "age" : 40,
+        "region" : "부산",
+        "population" : 974,
+        "sales" : 8594449
+    },
+    {
+        "date" : "2023-02-13",
+        "gender" : "FEMALE",
+        "age" : 40,
+        "region" : "서울",
+        "population" : 232,
+        "sales" : 713456
+    },
+    {
+        "date" : "2023-02-13",
+        "gender" : "FEMALE",
+        "age" : 50,
+        "region" : "부산",
+        "population" : 559,
+        "sales" : 3280648
+    },
+    {
+        "date" : "2023-02-13",
+        "gender" : "FEMALE",
+        "age" : 50,
+        "region" : "서울",
+        "population" : 381,
+        "sales" : 7107663
+    },
+    {
+        "date" : "2023-02-13",
+        "gender" : "FEMALE",
+        "age" : 60,
+        "region" : "부산",
+        "population" : 217,
+        "sales" : 2418905
+    },
+    {
+        "date" : "2023-02-13",
+        "gender" : "FEMALE",
+        "age" : 60,
+        "region" : "서울",
+        "population" : 403,
+        "sales" : 8187635
+    },
+    {
+        "date" : "2023-02-14",
+        "gender" : "MALE",
+        "age" : 10,
+        "region" : "부산",
+        "population" : 779,
+        "sales" : 7763877
+    },
+    {
+        "date" : "2023-02-14",
+        "gender" : "MALE",
+        "age" : 10,
+        "region" : "서울",
+        "population" : 502,
+        "sales" : 6221819
+    },
+    {
+        "date" : "2023-02-14",
+        "gender" : "MALE",
+        "age" : 20,
+        "region" : "부산",
+        "population" : 841,
+        "sales" : 7909580
+    },
+    {
+        "date" : "2023-02-14",
+        "gender" : "MALE",
+        "age" : 20,
+        "region" : "서울",
+        "population" : 84,
+        "sales" : 8345016
+    },
+    {
+        "date" : "2023-02-14",
+        "gender" : "MALE",
+        "age" : 30,
+        "region" : "부산",
+        "population" : 125,
+        "sales" : 3045125
+    },
+    {
+        "date" : "2023-02-14",
+        "gender" : "MALE",
+        "age" : 30,
+        "region" : "서울",
+        "population" : 20,
+        "sales" : 2740780
+    },
+    {
+        "date" : "2023-02-14",
+        "gender" : "MALE",
+        "age" : 40,
+        "region" : "부산",
+        "population" : 770,
+        "sales" : 8552615
+    },
+    {
+        "date" : "2023-02-14",
+        "gender" : "MALE",
+        "age" : 40,
+        "region" : "서울",
+        "population" : 925,
+        "sales" : 3561855
+    },
+    {
+        "date" : "2023-02-14",
+        "gender" : "MALE",
+        "age" : 50,
+        "region" : "부산",
+        "population" : 870,
+        "sales" : 6124268
+    },
+    {
+        "date" : "2023-02-14",
+        "gender" : "MALE",
+        "age" : 50,
+        "region" : "서울",
+        "population" : 840,
+        "sales" : 9009859
+    },
+    {
+        "date" : "2023-02-14",
+        "gender" : "MALE",
+        "age" : 60,
+        "region" : "부산",
+        "population" : 845,
+        "sales" : 1857278
+    },
+    {
+        "date" : "2023-02-14",
+        "gender" : "MALE",
+        "age" : 60,
+        "region" : "서울",
+        "population" : 136,
+        "sales" : 5978801
+    },
+    {
+        "date" : "2023-02-14",
+        "gender" : "FEMALE",
+        "age" : 10,
+        "region" : "부산",
+        "population" : 770,
+        "sales" : 7806446
+    },
+    {
+        "date" : "2023-02-14",
+        "gender" : "FEMALE",
+        "age" : 10,
+        "region" : "서울",
+        "population" : 501,
+        "sales" : 6217667
+    },
+    {
+        "date" : "2023-02-14",
+        "gender" : "FEMALE",
+        "age" : 20,
+        "region" : "부산",
+        "population" : 795,
+        "sales" : 7857914
+    },
+    {
+        "date" : "2023-02-14",
+        "gender" : "FEMALE",
+        "age" : 20,
+        "region" : "서울",
+        "population" : 122,
+        "sales" : 8346803
+    },
+    {
+        "date" : "2023-02-14",
+        "gender" : "FEMALE",
+        "age" : 30,
+        "region" : "부산",
+        "population" : 107,
+        "sales" : 3012340
+    },
+    {
+        "date" : "2023-02-14",
+        "gender" : "FEMALE",
+        "age" : 30,
+        "region" : "서울",
+        "population" : 68,
+        "sales" : 2773542
+    },
+    {
+        "date" : "2023-02-14",
+        "gender" : "FEMALE",
+        "age" : 40,
+        "region" : "부산",
+        "population" : 744,
+        "sales" : 8464552
+    },
+    {
+        "date" : "2023-02-14",
+        "gender" : "FEMALE",
+        "age" : 40,
+        "region" : "서울",
+        "population" : 936,
+        "sales" : 3658672
+    },
+    {
+        "date" : "2023-02-14",
+        "gender" : "FEMALE",
+        "age" : 50,
+        "region" : "부산",
+        "population" : 903,
+        "sales" : 6066721
+    },
+    {
+        "date" : "2023-02-14",
+        "gender" : "FEMALE",
+        "age" : 50,
+        "region" : "서울",
+        "population" : 890,
+        "sales" : 8922216
+    },
+    {
+        "date" : "2023-02-14",
+        "gender" : "FEMALE",
+        "age" : 60,
+        "region" : "부산",
+        "population" : 875,
+        "sales" : 1778789
+    },
+    {
+        "date" : "2023-02-14",
+        "gender" : "FEMALE",
+        "age" : 60,
+        "region" : "서울",
+        "population" : 175,
+        "sales" : 5904533
+    },
+    {
+        "date" : "2023-02-15",
+        "gender" : "MALE",
+        "age" : 10,
+        "region" : "부산",
+        "population" : 140,
+        "sales" : 7353213
+    },
+    {
+        "date" : "2023-02-15",
+        "gender" : "MALE",
+        "age" : 10,
+        "region" : "서울",
+        "population" : 308,
+        "sales" : 6249064
+    },
+    {
+        "date" : "2023-02-15",
+        "gender" : "MALE",
+        "age" : 20,
+        "region" : "부산",
+        "population" : 196,
+        "sales" : 2500865
+    },
+    {
+        "date" : "2023-02-15",
+        "gender" : "MALE",
+        "age" : 20,
+        "region" : "서울",
+        "population" : 772,
+        "sales" : 1563048
+    },
+    {
+        "date" : "2023-02-15",
+        "gender" : "MALE",
+        "age" : 30,
+        "region" : "부산",
+        "population" : 135,
+        "sales" : 1676442
+    },
+    {
+        "date" : "2023-02-15",
+        "gender" : "MALE",
+        "age" : 30,
+        "region" : "서울",
+        "population" : 517,
+        "sales" : 2140405
+    },
+    {
+        "date" : "2023-02-15",
+        "gender" : "MALE",
+        "age" : 40,
+        "region" : "부산",
+        "population" : 822,
+        "sales" : 9950741
+    },
+    {
+        "date" : "2023-02-15",
+        "gender" : "MALE",
+        "age" : 40,
+        "region" : "서울",
+        "population" : 645,
+        "sales" : 4695007
+    },
+    {
+        "date" : "2023-02-15",
+        "gender" : "MALE",
+        "age" : 50,
+        "region" : "부산",
+        "population" : 586,
+        "sales" : 6097215
+    },
+    {
+        "date" : "2023-02-15",
+        "gender" : "MALE",
+        "age" : 50,
+        "region" : "서울",
+        "population" : 852,
+        "sales" : 4228496
+    },
+    {
+        "date" : "2023-02-15",
+        "gender" : "MALE",
+        "age" : 60,
+        "region" : "부산",
+        "population" : 731,
+        "sales" : 3394041
+    },
+    {
+        "date" : "2023-02-15",
+        "gender" : "MALE",
+        "age" : 60,
+        "region" : "서울",
+        "population" : 169,
+        "sales" : 4674587
+    },
+    {
+        "date" : "2023-02-15",
+        "gender" : "FEMALE",
+        "age" : 10,
+        "region" : "부산",
+        "population" : 120,
+        "sales" : 7292570
+    },
+    {
+        "date" : "2023-02-15",
+        "gender" : "FEMALE",
+        "age" : 10,
+        "region" : "서울",
+        "population" : 278,
+        "sales" : 6250459
+    },
+    {
+        "date" : "2023-02-15",
+        "gender" : "FEMALE",
+        "age" : 20,
+        "region" : "부산",
+        "population" : 194,
+        "sales" : 2571727
+    },
+    {
+        "date" : "2023-02-15",
+        "gender" : "FEMALE",
+        "age" : 20,
+        "region" : "서울",
+        "population" : 784,
+        "sales" : 1520298
+    },
+    {
+        "date" : "2023-02-15",
+        "gender" : "FEMALE",
+        "age" : 30,
+        "region" : "부산",
+        "population" : 173,
+        "sales" : 1709937
+    },
+    {
+        "date" : "2023-02-15",
+        "gender" : "FEMALE",
+        "age" : 30,
+        "region" : "서울",
+        "population" : 493,
+        "sales" : 2093378
+    },
+    {
+        "date" : "2023-02-15",
+        "gender" : "FEMALE",
+        "age" : 40,
+        "region" : "부산",
+        "population" : 848,
+        "sales" : 9915531
+    },
+    {
+        "date" : "2023-02-15",
+        "gender" : "FEMALE",
+        "age" : 40,
+        "region" : "서울",
+        "population" : 642,
+        "sales" : 4613231
+    },
+    {
+        "date" : "2023-02-15",
+        "gender" : "FEMALE",
+        "age" : 50,
+        "region" : "부산",
+        "population" : 609,
+        "sales" : 6026759
+    },
+    {
+        "date" : "2023-02-15",
+        "gender" : "FEMALE",
+        "age" : 50,
+        "region" : "서울",
+        "population" : 869,
+        "sales" : 4173000
+    },
+    {
+        "date" : "2023-02-15",
+        "gender" : "FEMALE",
+        "age" : 60,
+        "region" : "부산",
+        "population" : 732,
+        "sales" : 3361726
+    },
+    {
+        "date" : "2023-02-15",
+        "gender" : "FEMALE",
+        "age" : 60,
+        "region" : "서울",
+        "population" : 172,
+        "sales" : 4714745
+    }
+]

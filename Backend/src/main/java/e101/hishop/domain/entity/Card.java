@@ -1,13 +1,9 @@
 package e101.hishop.domain.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
-@ToString(exclude = {"user, pays"})
 @Entity
 @Getter
 @Setter
@@ -20,18 +16,19 @@ public class Card {
     //유효기간
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "entity_card")
+    @TableGenerator(name = "entity_card", initialValue=0, allocationSize=1)
     @Column(name = "card_id")
     private Long id;
 
     private String name;
 
-    private Boolean isDefault;
-
-//추후 암호와 필요
+    //TODO 추후 암호화 필요
     private String cardNo;
 
     private String validDate;
+
+    private String cvc;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
@@ -40,10 +37,6 @@ public class Card {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "card_category_id")
     private CardCategory cardCategory;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "card", cascade = CascadeType.REMOVE)
-    private List<Pay> pays = new ArrayList<>();
 
     //입력하지않으면 기본값 false
 //    @PrePersist
@@ -63,11 +56,11 @@ public class Card {
     }
 
     @Builder
-    public Card(String name, Boolean isDefault, String cardNo, String validDate) {
+    public Card(String name, String cardNo, String validDate, String cvc) {
         this.name = name;
-        this.isDefault = isDefault;
         this.cardNo = cardNo;
         this.validDate = validDate;
+        this.cvc = cvc;
     }
 }
 

@@ -1,0 +1,23 @@
+[
+    {
+        "name" : "이름",
+        "part" : "관리",
+        "position" : "대리",
+        "staffLoginId" : "user1234",
+        "branchId" : 1
+    },
+    {
+        "name" : "서컨턴",
+        "part" : "지점장",
+        "position" : "지점장",
+        "staffLoginId" : "consult_admin",
+        "branchId" : 1
+    },
+    {
+        "name" : "김코치",
+        "part" : "캐셔",
+        "position" : "직원",
+        "staffLoginId" : "coach_admin",
+        "branchId" : 1
+    }
+]
