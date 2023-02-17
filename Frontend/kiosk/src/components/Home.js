@@ -10,6 +10,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import QrReader from "modern-react-qr-reader";
+import HOST from "../Host";
 
 const useWebSocket = (url) => {
   const [messages, setMessages] = useState([]);
@@ -77,23 +78,26 @@ export default function KioskMain() {
     console.error(err);
   };
 
-  function QRMake(kioskId) {
-    const newTest = {
-      kioskId: kioskId,
-      time: Date.now(),
-    };
-    const test1 = JSON.stringify(newTest);
-    setValue(test1);
-  }
+  const QRMake = async (kioskId) => {
+    await axios.get(`${HOST}/iot/time`).then((res) => {
+      console.log(res.data);
+      const time = res.data;
+      const newTest = {
+        kioskId: kioskId,
+        time: time,
+      };
+      const test1 = JSON.stringify(newTest);
+      setValue(test1);
+    });
+  };
 
   // 키오스크 아이디는 Python과 통신으로 받아옴
   useEffect(() => {
     (async () => {
-      console.log("통신");
-      const { data } = await axios.get("http://localhost:8888/api/kiosk");
+      const { data } = axios.get("http://localhost:8888/api/kiosk");
       const kiosk = data["kioskId"];
-      console.log(kiosk);
       QRMake(kiosk);
+      console.log(kiosk);
       setKioskId(kiosk);
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -123,7 +127,7 @@ export default function KioskMain() {
           <Card
             sx={{
               fontSize: 40,
-              
+
               textAlign: "center",
               backgroundColor: "#ff8c8c",
               fontWeight: "bold",

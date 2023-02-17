@@ -23,11 +23,7 @@ function QRMaker() {
 
   function getTime() {
     axios
-      .get(`${HOST}/user/time`, {
-        headers: {
-          Authorization: `Bearer ${accesstoken}`,
-        },
-      })
+      .get(`${HOST}/iot/time`)
       .then(function (response) {
         console.log(response.data, "성공");
         QRMake(accesstoken, response.data);
@@ -40,11 +36,7 @@ function QRMaker() {
   useEffect(() => {
     if (countdown === 0) {
       axios
-      .get(`${HOST}/user/time`, {
-        headers: {
-          Authorization: `Bearer ${accesstoken}`,
-        },
-      })
+      .get(`${HOST}/iot/time`)
       .then(function (response) {
         console.log(response.data, "성공");
         QRMake(accesstoken, response.data);
@@ -65,11 +57,7 @@ function QRMaker() {
   useEffect(() => {
     (async () => {
       await axios
-        .get(`${HOST}/user/time`, {
-          headers: {
-            Authorization: `Bearer ${accesstoken}`,
-          },
-        })
+        .get(`${HOST}/iot/time`)
         .then(function (response) {
           console.log(response.data, "성공");
           QRMake(accesstoken, response.data);
