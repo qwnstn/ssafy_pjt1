@@ -8,6 +8,7 @@
 4. 담당: FrontEnd(정시언, 박준수), Backend(조용재, 이영재), Deploy(조용재, 최홍준), Iot(강동훈, 최홍준)
 
 ## 기획서
+<details>
 <summary>자세히</summary>
  
  1. 현황과 이슈
@@ -94,8 +95,14 @@ c. 부가기능
 </details>
 
 ## 기능 명세서
+[Link](https://docs.google.com/spreadsheets/d/10z_6CAAoNS_wLIKpQsJXNyHBNbho21VhaSlaCbY6lBA/edit?usp=sharing)
 
 ## API 명세서
 [Link](https://amused-whimsey-173.notion.site/61c5a9709a104cd0bc66c0d13bf0286e?v=74ef36de2b374c96af55e3ea3c4aa1ae)
 
 ## ERD
+![erd](./assets/erd.png)
+
+## Architecture
+![architecture](./assets/infra.png)
+
