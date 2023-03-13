@@ -68,7 +68,7 @@ public class AuthController {
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             try {
                 String refreshToken = authorizationHeader.substring("Bearer ".length());
-                Algorithm algorithm = Algorithm.HMAC256("e101ssafy!@".getBytes());
+                Algorithm algorithm = Algorithm.HMAC256(System.getenv(HISHOP_JWT_SIGNER).getBytes());
                 JWTVerifier verifier = JWT.require(algorithm).build();
                 DecodedJWT decodedJWT = verifier.verify(refreshToken);
                 String logindId = decodedJWT.getSubject();

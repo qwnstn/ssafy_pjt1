@@ -1,12 +1,9 @@
 spring:
-  batch:
-    job.enabled: true # true: 앱 구동시 job 실행 함
-    jdbc.initialize-schema: always
   mail:
     host: smtp.gmail.com
     port: 587
-    username: e101himart@gmail.com
-    password: crtaukwikljlamom
+    username: ${HISHOP_MAIL_ID}
+    password: ${HISHOP_MAIL_PASSWORD}
     properties:
       mail.smtp.auth: true
       mail.smtp.starttls.enable: true
@@ -17,27 +14,16 @@ spring:
         web-allow-others: true
   datasource:
   
-# 개발용
-    url: jdbc:h2:tcp://localhost/~/datajpa
-    username: sa
-    password:
-    driver-class-name: org.h2.Driver
-
-# Batch 테스트
-#      url: jdbc:mysql://localhost:3306/hishop?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
-#      username: root
-#      password: e101ssafy!@
-#      driver-class-name: com.mysql.cj.jdbc.Driver
 
 # 배포용
-#    url: jdbc:mysql://13.125.42.187:3306/hishop?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
-#    username: e101
-#    password: e101ssafy!@
-#    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://13.125.42.187:3306/hishop?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: ${HISHOP_DB_ID}
+    password: ${HISHOP_DB_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
-#    database: mysql
-#    database-platform: org.hibernate.dialect.MySQL8Dialect
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
       ddl-auto: create
     properties:
@@ -64,3 +50,7 @@ logging:
     com.zaxxer.hikari: TRACE
 #    org.springframework : debug
 #    org.springframework.web : debug
+
+global:
+  jwt-token:
+    signer: ${HISHOP_JWT_SIGNER}
