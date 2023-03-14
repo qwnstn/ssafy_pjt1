@@ -418,7 +418,7 @@ public class AdminServiceImpl implements AdminService {
         MigrationRespDto migrationRespDto = MigrationRespDto.builder()
                 .productList(productList)
                 .build();
-        webClient = WebClient.create("http://i8e101.p.ssafy.io:7777");
+        webClient = WebClient.create(sys.getEnv(url);
         Mono<String> response = webClient.post()
                 .uri("/api/db")
                 .contentType(MediaType.APPLICATION_JSON)

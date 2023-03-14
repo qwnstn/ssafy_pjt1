@@ -185,20 +185,11 @@ public class UserServiceImpl implements UserService {
         return user.getId();
     }
 
-//    @PostConstruct
-//    public void initWebClient() {
-//        webClient = WebClient.create("http://i8e101.p.ssafy.io:7777");
-//        webClient = WebClient.create("http://192.168.40.111:8888");
-//        webClient = WebClient.create("https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=861");
-//    }
 
 
     @Override
     public String qrRead(QrReqDto dto) {
         Long dateTime = dto.getDatetime();
-//        if (System.currentTimeMillis() / 1000 - dateTime > 100000) {
-//            return "Fail";
-//        } else {
             Long userId = getUserId();
             Long kioskId = dto.getKioskId();
             User user = userJPARepository.findById(userId)

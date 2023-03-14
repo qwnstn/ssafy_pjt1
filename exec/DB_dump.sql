@@ -690,7 +690,7 @@ CREATE TABLE `kiosk` (
 
 LOCK TABLES `kiosk` WRITE;
 /*!40000 ALTER TABLE `kiosk` DISABLE KEYS */;
-INSERT INTO `kiosk` VALUES (1,'http://i8e101.p.ssafy.io:7777',1),(2,'http://i8e101.p.ssafy.io:7788',1),(3,'http://i8e101.p.ssafy.io:9911',1),(4,'http://i7e101.p.ssafy.io:7777',2),(5,'http://i7e101.p.ssafy.io:7887',2),(6,'http://i7e101.p.ssafy.io:9977',2);
+INSERT INTO `kiosk` VALUES (1,'http://xxx:7777',1),(2,'http://xxx:7788',1);
 /*!40000 ALTER TABLE `kiosk` ENABLE KEYS */;
 UNLOCK TABLES;
 

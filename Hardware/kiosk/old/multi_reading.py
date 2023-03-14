@@ -7,8 +7,8 @@ import requests
 PORT = "COM6"                               # 포트 번호
 baud = 9600                                 # 보드레이트
 ser = serial.Serial(PORT, baud, timeout=0.1)  # serial 통신 세팅
-rfid_url = "ttp://i8e101.p.ssafy.io/api/iot/rfid"
-barcode_url = "http://i8e101.p.ssafy.io/api/iot/barcode"
+rfid_url = "http://xxx/api/iot/rfid"
+barcode_url = "http://xxx/api/iot/barcode"
 
 
 
